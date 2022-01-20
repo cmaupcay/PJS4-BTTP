@@ -6,15 +6,17 @@ __BTTP__ est un projet visant à faciliter l'_exécution de __tâches__ automati
 
 ## Lexique
 
-- __tâche :__
+- __tâche :__ un programme stocké sur un _appareil distant_, pouvant être exécuter et fournissant UN OU PLUSIEURS _résultats d'exécution_. 
+
+    > __Exemples :__ script shell ou Python, programme compilé...
 
 ### _Appareils_
 
-- __appareil distant :__ un système d'information capable d'annoncer son état à un _appareil de contrôle_, de lui notifier l'ajout ou la modification de _tâches_, d'exécuter des _tâches_ en réponse à une _requête d'exécution_, et de retourner les _résultats d'exécution_ à l'_appareil client_ ayant émis la requête. Il est lié à une _identité_ et NE DOIT PAS effectuer de _transactions_ avec quelconques appareils liés à une autre identité.
+- __appareil distant :__ un système d'information capable d'annoncer son _état_ à un _appareil de contrôle_, de lui notifier l'ajout ou la modification de _tâches_, d'exécuter des _tâches_ en réponse à une _requête d'exécution_, et de retourner les _résultats d'exécution_ à l'_appareil client_ ayant émis la requête.
 
-- __appareil client :__ un système d'information capable d'initier une _transaction_ avec un _appareil distant_ au travers d'un _appareil de contrôle_, d'émettre des _requêtes d'exécution_ et de traîter des _resultats d'exécutions_. Il est lié à une _identité_ et NE DOIT PAS effectuer de _transactions_ avec quelconques appareils liés à une autre identité.
+- __appareil client :__ un système d'information capable d'initier une _transaction_ avec un _appareil distant_ au travers d'un _appareil de contrôle_, d'émettre des _requêtes d'exécution_ et de traîter des _resultats d'exécutions_.
 
-- __appareil de contrôle :__
+- __appareil de contrôle :__ 
 
 ### _Sécurité_
 
@@ -22,8 +24,10 @@ __BTTP__ est un projet visant à faciliter l'_exécution de __tâches__ automati
 
 ### _Echanges_
 
-- __transaction :__
+- __transaction :__ 
 
 - __requête d'exécution :__
 
 - __résultats d'exécution :__
+
+- __état :__ une information binaire relative à un _appareil distant_, stockée sur un _appareil de contrôle_ et indiquant si l'appareil distant est ouvert à une transaction. Elle est partagée à tous les autres appareils de l'_identité_ propriétaire stockés sur l'appareil de contrôle.

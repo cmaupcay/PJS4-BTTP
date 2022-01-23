@@ -2,7 +2,7 @@
 #include "OpenPGP.h"
 #include <fstream>
 
-// Pour build les cocos : g++ -Wall -g -std=c++11 bttp.cpp -o bttp -L'CHEMIN BUILD OPENPGP' -lOpenPGP
+// Pour build les cocos : g++ bttp.cpp -o bttp -lOpenPGP 
 
 int generate_key(std::string user, std::string email);
 OpenPGP::Message encrypt (std::string message, OpenPGP::PublicKey public_key);

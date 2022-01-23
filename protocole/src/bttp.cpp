@@ -1,29 +1,28 @@
 #include <iostream>
 #include "OpenPGP.h"
 #include <fstream>
+#include <assert.h>
 
 // Pour build les cocos : g++ bttp.cpp -o bttp -lOpenPGP 
 
 int generate_key(std::string user, std::string email);
-OpenPGP::Message encrypt (std::string message, OpenPGP::PublicKey public_key);
-std::string decrypt(OpenPGP::Message encrypted, OpenPGP::SecretKey private_key);
+OpenPGP::Message encrypt_and_sign (std::string message, OpenPGP::PublicKey public_key, OpenPGP::SecretKey private_key);
+std::string decrypt_and_verify(OpenPGP::Message encrypted, OpenPGP::SecretKey private_key, OpenPGP::PublicKey public_key);
+bool verify(OpenPGP::Message decrypted, OpenPGP::PublicKey public_key);
 
 int main() {
 
     generate_key("test", "test@test.com");
 
-    std::ifstream pub_in("public_key", std::ios::binary);
-    if(!pub_in)
-        return -1;
-
     std::ifstream pri_in("private_key", std::ios::binary);
+
     if(!pri_in)
         return -1;
 
-
-    OpenPGP::PublicKey pub = OpenPGP::PublicKey(pub_in);
     OpenPGP::SecretKey pri = OpenPGP::SecretKey(pri_in);
+    OpenPGP::PublicKey pub = pri.get_public();
 
+    
     std::cout << "Entrez un message à chiffrer : ";
     std::string message;
 
@@ -33,17 +32,15 @@ int main() {
 
     message = (std::string) buffer;
 
-    OpenPGP::Message encrypted = encrypt(message, pub);
+    OpenPGP::Message encrypted = encrypt_and_sign(message, pub, pri);
 
-    std::cout << "Message chiffré : \n" << encrypted.write(OpenPGP::PGP::Armored::YES) << std::endl;
+    std::cout << "Message chiffré et signé : \n" << encrypted.write(OpenPGP::PGP::Armored::YES) << std::endl;
 
     std::cout << "Déchiffrer ?";
 
     std::cin.get();
 
-
-    std::cout << "Message déchiffré : " << decrypt(encrypted, pri);
-
+    std::cout << "Message déchiffré : " << decrypt_and_verify(encrypted, pri, pub);
 
     
 }
@@ -98,14 +95,16 @@ int generate_key(std::string user, std::string email){
 
 }
 
-OpenPGP::Message encrypt (std::string message, OpenPGP::PublicKey pub_key){
+OpenPGP::Message encrypt_and_sign (std::string message, OpenPGP::PublicKey pub_key, OpenPGP::SecretKey pri_key){
+
+    OpenPGP::SecretKey::Ptr signer = std::make_shared <OpenPGP::SecretKey>(pri_key);
 
     const OpenPGP::Encrypt::Args encryptargs("", 
                                         message,
                                         OpenPGP::Sym::NUMBER.at("AES256"),
                                         OpenPGP::Compression::NUMBER.at("ZLIB"),
                                         true,
-                                        nullptr,
+                                        signer,
                                         "",
                                         OpenPGP::Hash::NUMBER.at("SHA1")
     );
@@ -113,21 +112,26 @@ OpenPGP::Message encrypt (std::string message, OpenPGP::PublicKey pub_key){
 
     const OpenPGP::Message encrypted = OpenPGP::Encrypt::pka(encryptargs, pub_key);
 
-    /*
-
-    if(!encrypted.meaningful())
-        return -1;
-
-    */
+    assert (encrypted.meaningful());
 
     return encrypted;
 
 }
 
-std::string decrypt(OpenPGP::Message encrypted, OpenPGP::SecretKey pri_key){
+bool verify(OpenPGP::Message decrypted, OpenPGP::PublicKey pub_key){
+
+    OpenPGP::Key::Ptr signer = std::make_shared <OpenPGP::Key> (pub_key);
+
+    const int verified = OpenPGP::Verify::binary(*signer, decrypted);
+
+    return verified;
+
+}
+
+
+std::string decrypt_and_verify(OpenPGP::Message encrypted, OpenPGP::SecretKey pri_key, OpenPGP::PublicKey pub_key){
 
     const OpenPGP::Message decrypted = OpenPGP::Decrypt::pka(pri_key, "", encrypted);
-
 
     if(!decrypted.meaningful())
         return "";
@@ -150,6 +154,9 @@ std::string decrypt(OpenPGP::Message encrypted, OpenPGP::SecretKey pri_key){
 
 
     }
+  
+
+    message += "\n" + std::string((verify(decrypted, pub_key) == 1) ? "Signature vérifiée !" : "Signature invalide !") + "\n";
 
     return message;
 

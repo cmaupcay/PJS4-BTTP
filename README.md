@@ -1,12 +1,17 @@
 # __PJS4__ - BTTP
 
-COUCOUUUUUU LES AMIS
+Ce projet a été réalisé dans le cadre de notre 4ème semestre de DUT Informatique à l'IUT Rives de Seine de l'[Université de Paris](https://u-paris.fr).
 
-Bienvenue sur notre Github, on va faire un projet tah les ouf restez connectés
-Les vrais savent
+## Pour commencer
+Pour en apprendre plus sur l'objectif de ce projet, rendez-vous dans [projet](projet/).
 
-Menteur Agriculteur
+## Auteurs
+- __Sara ZAIBET__ ~ [sarazaibet](https://github.com/sarazaibet)
+- __Luca RANDAZZO__ ~ [likir09](https://github.com/likir09)
+- __Clément MAUPERON__ ~ [tensaiji](https://github.com/tensaiji)
+- __Clément PROST__ ~ [Arpharnator](https://github.com/Arpharnator)
+- __Robin LANDAIS__ ~ [Reelecks](https://github.com/Reelecks)
 
-MOTHAFUCK
+## License
 
-
+Ce projet est sous licence ``EUPL`` _- voir le fichier [LICENSE.md](LICENSE.md) pour plus d'informations_.

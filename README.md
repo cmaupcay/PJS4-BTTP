@@ -14,4 +14,4 @@ Pour en apprendre plus sur l'objectif de ce projet, rendez-vous dans [projet](pr
 
 ## License
 
-Ce projet est sous licence ``EUPL`` _- voir le fichier [LICENSE.md](LICENSE.md) pour plus d'informations_.
+Ce projet est sous licence ``EUPL`` _- voir le fichier [LICENCE.md](LICENCE.md) pour plus d'informations_.

@@ -82,21 +82,21 @@ namespace BTTP
             return message;
         }
 
-        OpenPGP::Message Identite::chiffrer(const std::string message, const ClePublique pub, const std::string mdp)
+        const std::string Identite::chiffrer(const std::string message, const ClePublique cle_publique, const std::string mdp)
         {
             OpenPGP::SecretKey::Ptr signataire = std::make_shared<OpenPGP::SecretKey>(_cle_privee);
             const OpenPGP::Encrypt::Args args("", message, SYM, COMP, true, signataire, mdp, HASH);
-            const OpenPGP::Message message_chiffre = OpenPGP::Encrypt::pka(args, pub);
+            const OpenPGP::Message message_chiffre = OpenPGP::Encrypt::pka(args, cle_publique);
 
             assert (message_chiffre.meaningful()); // TODO Exception
 
-            return message_chiffre; // TODO Traduction en string
+            return message_chiffre.raw();
 
         }
 
-        const std::string Identite::dechiffer(const OpenPGP::Message message_chiffre, const ClePublique cle_publique, const std::string mdp)
+        const std::string Identite::dechiffer(const std::string message, const ClePublique cle_publique, const std::string mdp)
         {
-            const OpenPGP::Message message_dechiffre = OpenPGP::Decrypt::pka(this->_cle_privee, mdp, message_chiffre);
+            const OpenPGP::Message message_dechiffre = OpenPGP::Decrypt::pka(this->_cle_privee, mdp, message);
 
             if(!message_dechiffre.meaningful()) return ""; // TODO Exception
 

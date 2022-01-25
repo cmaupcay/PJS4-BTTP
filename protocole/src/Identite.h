@@ -43,8 +43,8 @@ namespace BTTP
                 Identite(const std::string nom, const std::string email, const std::string mdp);
                 inline const ClePublique cle_publique() const { return this->_cle_publique; }
 
-                OpenPGP::Message chiffrer(const std::string message, const ClePublique pub, const std::string mdp);
-                const std::string dechiffer(const OpenPGP::Message message_chiffre, const ClePublique pub, const std::string mdp);
+                const std::string chiffrer(const std::string message, const ClePublique cle_publique, const std::string mdp);
+                const std::string dechiffer(const std::string message, const ClePublique cle_publique, const std::string mdp);
         };
     }
 }

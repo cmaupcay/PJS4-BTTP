@@ -26,9 +26,9 @@ int main()
 
     message = (std::string) buffer;
 
-    OpenPGP::Message message_chiffre = id->chiffrer(message, id->cle_publique(), mdp);
+    const std::string message_chiffre = id->chiffrer(message, id->cle_publique(), mdp);
 
-    std::cout << "Message chiffré et signé : \n" << message_chiffre.write(OpenPGP::PGP::Armored::YES) << std::endl;
+    std::cout << "Message chiffré et signé : \n" << message_chiffre << std::endl;
 
     std::cout << "Déchiffrer ?";
 

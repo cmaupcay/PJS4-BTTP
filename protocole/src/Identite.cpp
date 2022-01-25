@@ -1,15 +1,14 @@
 #include "Identite.h"
 
-OpenPGP::SecretKey BTTP::Protocole::Idendite::genererCles(std::string nom, std::string email){
-    
+OpenPGP::KeyGen::Config BTTP::Protocole::Idendite::config(std::string nom, std::string email, std::string mdp){
+
     OpenPGP::KeyGen::Config config;
     
-    config.passphrase = "";
+    config.passphrase = mdp;
     config.pka        = OpenPGP::PKA::NUMBER.at("RSA_ENCRYPT_OR_SIGN");
     config.bits       = 4096;
     config.sym        = OpenPGP::Sym::NUMBER.at("AES256");
     config.hash       = OpenPGP::Hash::NUMBER.at("SHA1");
-
 
     OpenPGP::KeyGen::Config::UserID uid;
     uid.user          = nom;
@@ -28,48 +27,56 @@ OpenPGP::SecretKey BTTP::Protocole::Idendite::genererCles(std::string nom, std::
     
     config.subkeys.push_back(subkey);
 
+    return config;
+
+}
+
+OpenPGP::SecretKey BTTP::Protocole::Idendite::genererCles(std::string nom, std::string email, std::string mdp){
+
+    OpenPGP::KeyGen::Config config = BTTP::Protocole::Idendite::config(nom, email, mdp);
+
     const OpenPGP::SecretKey privee = OpenPGP::KeyGen::generate_key(config);
 
     return privee;
+
+}
+
+BTTP::Protocole::Idendite::Idendite(std::string nom, std::string email, std::string mdp){
+
+    OpenPGP::SecretKey privee = BTTP::Protocole::Idendite::genererCles(nom, email, mdp);
+
+    const std::string fichier_privee = "cle_privee.asc";
+
+    std::ofstream pri_out(fichier_privee, std::ios::binary);
+    
+    assert(pri_out);
+
+    pri_out << privee.write(OpenPGP::PGP::Armored::YES) << std::flush;
+
+    pri_out.close();
+
+    Idendite();
 
 
 }
 
 
-
-
 BTTP::Protocole::Idendite::Idendite() {
 
-    OpenPGP::SecretKey privee;
+    std::ifstream pri_in("cle_privee.asc", std::ios::binary);
 
-    std::ifstream pri_in("private_key", std::ios::binary);
+    assert(pri_in);
 
-    if(!pri_in){
+    OpenPGP::SecretKey privee = OpenPGP::SecretKey(pri_in);
 
-        privee = genererCles("test", "test@test.com");
-
-        const std::string fichier_privee = "cle_privee.asc";
-
-        std::ofstream pri_out(fichier_privee, std::ios::binary);
-        
-        assert(pri_out);
-
-        pri_out << privee.write(OpenPGP::PGP::Armored::YES) << std::flush;
-
-
-    }
-    else {
-
-        privee = OpenPGP::SecretKey(pri_in);
-
-    }
+    pri_in.close();
 
     _cle_publique = privee.get_public();
     _cle_privee = privee;
         
 }
 
-OpenPGP::Message BTTP::Protocole::Idendite::chiffrer(std::string message, OpenPGP::PublicKey pub){
+OpenPGP::Message BTTP::Protocole::Idendite::chiffrer(std::string message, OpenPGP::PublicKey pub, std::string mdp){
 
     OpenPGP::SecretKey::Ptr signataire = std::make_shared <OpenPGP::SecretKey>(_cle_privee);
 
@@ -79,7 +86,7 @@ OpenPGP::Message BTTP::Protocole::Idendite::chiffrer(std::string message, OpenPG
                                         OpenPGP::Compression::NUMBER.at("ZLIB"),
                                         true,
                                         signataire,
-                                        "",
+                                        mdp,
                                         OpenPGP::Hash::NUMBER.at("SHA1")
     );
 
@@ -92,9 +99,9 @@ OpenPGP::Message BTTP::Protocole::Idendite::chiffrer(std::string message, OpenPG
 
 }
 
-std::string BTTP::Protocole::Idendite::dechiffer(OpenPGP::Message message_chiffre, OpenPGP::PublicKey pub){
+std::string BTTP::Protocole::Idendite::dechiffer(OpenPGP::Message message_chiffre, OpenPGP::PublicKey pub, std::string mdp){
 
-   const OpenPGP::Message message_dechiffre = OpenPGP::Decrypt::pka(_cle_privee, "", message_chiffre);
+   const OpenPGP::Message message_dechiffre = OpenPGP::Decrypt::pka(_cle_privee, mdp, message_chiffre);
 
     if(!message_dechiffre.meaningful())
         return "";

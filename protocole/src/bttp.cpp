@@ -5,7 +5,18 @@
 
 int main() {
 
-    BTTP::Protocole::Idendite id = BTTP::Protocole::Idendite();
+    BTTP::Protocole::Idendite id;  
+
+    // id = BTTP::Protocole::Idendite(nom, email, mdp); pour générer les clés
+
+    id = BTTP::Protocole::Idendite();
+
+    std::cout << "Entrez le mot de passe de la clé : ";
+    std::string mdp;
+
+    std::cin >> mdp;
+
+    std::cin.ignore();
     
     std::cout << "Entrez un message à chiffrer : ";
     std::string message;
@@ -16,7 +27,7 @@ int main() {
 
     message = (std::string) buffer;
 
-    OpenPGP::Message message_chiffre = id.chiffrer(message, id.cle_publique());
+    OpenPGP::Message message_chiffre = id.chiffrer(message, id.cle_publique(), mdp);
 
     std::cout << "Message chiffré et signé : \n" << message_chiffre.write(OpenPGP::PGP::Armored::YES) << std::endl;
 
@@ -24,7 +35,7 @@ int main() {
 
     std::cin.get();
 
-    std::cout << "Message déchiffré : " << id.dechiffer(message_chiffre, id.cle_publique());
+    std::cout << "Message déchiffré : " << id.dechiffer(message_chiffre, id.cle_publique(), mdp);
 
     
 }

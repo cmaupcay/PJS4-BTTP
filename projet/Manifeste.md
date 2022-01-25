@@ -20,7 +20,7 @@ __BTTP__ est un projet visant à faciliter l'_exécution de __tâches__ automati
 
 ### _Sécurité_
 
-- __identité :__
+- __identité :__ représentation d'un appareil et de ses clés privée et publique. Elle est capable de chiffrer, signer, déchiffrer et vérifier des messages.
 
 ### _Echanges_
 
@@ -30,4 +30,4 @@ __BTTP__ est un projet visant à faciliter l'_exécution de __tâches__ automati
 
 - __résultats d'exécution :__
 
-- __état :__ une information binaire relative à un _appareil distant_, stockée sur un _appareil de contrôle_ et indiquant si l'appareil distant est ouvert à une transaction. Elle est partagée à tous les autres appareils de l'_identité_ propriétaire stockés sur l'appareil de contrôle.
+- __état :__ une information binaire relative à un _appareil distant_, stockée sur un _appareil de contrôle_ et indiquant si l'appareil distant est ouvert à une _transaction_. Elle est partagée à tous les autres appareils de l'_identité_ propriétaire stockés sur l'appareil de contrôle.

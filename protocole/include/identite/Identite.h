@@ -1,13 +1,18 @@
-#ifndef H_IDENTITE
-#define H_IDENTITE
+#ifndef H_BTTP_IDENTITE
+#define H_BTTP_IDENTITE
 
-#ifndef IDENTITE_FICHIER
-    #define IDENTITE_FICHIER "cle_privee.asc"
+#ifndef BTTP_IDENTITE_FICHIER
+    #define BTTP_IDENTITE_FICHIER "cle_privee.asc"
 #endif
 
 #include "OpenPGP.h"
 #include <fstream>
-#include <assert.h>
+
+#include "erreur/Importation.h"
+#include "erreur/Exportation.h"
+#include "erreur/Chiffrement.h"
+#include "erreur/Dechiffrement.h"
+#include "erreur/Signature.h"
 
 namespace BTTP 
 {
@@ -26,7 +31,6 @@ namespace BTTP
                 static const uint8_t HASH = OpenPGP::Hash::ID::SHA1;
                 static const uint8_t COMP = OpenPGP::Compression::ID::ZLIB;
 
-                ClePublique _cle_publique;
                 ClePrivee _cle_privee;
 
                 static const std::string traduireMessage(const OpenPGP::Message message_pgp);
@@ -34,14 +38,13 @@ namespace BTTP
             protected:
                 static Config config(const std::string nom, const std::string email, const std::string mdp);
                 void genererClePrivee(const std::string nom, const std::string email, const std::string mdp);
-                void exporterClePrivee(const std::string fichier = IDENTITE_FICHIER) const;
-                void importerClePrivee(const std::string fichier = IDENTITE_FICHIER);
-                inline void definirClePublique() { this->_cle_publique = this->_cle_privee.get_public(); }
+                void exporterClePrivee(const std::string fichier = BTTP_IDENTITE_FICHIER) const;
+                void importerClePrivee(const std::string fichier = BTTP_IDENTITE_FICHIER);
             
             public:
                 Identite();
                 Identite(const std::string nom, const std::string email, const std::string mdp);
-                inline const ClePublique cle_publique() const { return this->_cle_publique; }
+                inline const ClePublique cle_publique() const { return this->_cle_privee.get_public(); }
 
                 const std::string chiffrer(const std::string message, const ClePublique cle_publique, const std::string mdp);
                 const std::string dechiffer(const std::string message, const ClePublique cle_publique, const std::string mdp);

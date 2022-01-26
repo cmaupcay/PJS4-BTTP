@@ -1,3 +1,5 @@
+#ifndef H_BTTP_MESSAGE
+#define H_BTTP_MESSAGE
 #include <string>
 
 namespace BTTP
@@ -23,3 +25,4 @@ namespace BTTP
         };
     }
 }
+#endif

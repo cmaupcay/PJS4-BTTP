@@ -1,7 +1,7 @@
 #ifndef H_BTTP_ERREUR
 #define H_BTTP_ERREUR
 
-#include <string>
+#include <iostream>
 #include <exception>
 
 namespace BTTP
@@ -18,10 +18,12 @@ namespace BTTP
         {}
 
         inline const std::string& nom() const { return this->_nom; }
-        inline const std::string& message() const { return this->_message; }
+        inline const std::string afficher() const { return "[BTTP/" + this->_nom + "] " + this->_message + '\n'; }
 
-        const char* what() const throw ()
-        { return ("[" + this->_nom + "] " + this->_message).c_str(); }
+        // TODO Utiliser la fonction afficher() (la conversion en const char* échoue)
+        const char* what() const throw () override { return this->_message.c_str(); }
+        
+        inline friend std::ostream& operator<<(std::ostream& os, const Erreur& err) { return (os << err.afficher()); }
     };
 }
 

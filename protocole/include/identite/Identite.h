@@ -1,29 +1,34 @@
 #ifndef H_BTTP_IDENTITE
 #define H_BTTP_IDENTITE
 
+#include "../Racine.h"
+
 #ifndef BTTP_IDENTITE_FICHIER
     #define BTTP_IDENTITE_FICHIER "cle_privee.asc"
 #endif
+#ifndef BTTP_IDENTITE_COMMENTAIRE
+    #define BTTP_IDENTITE_COMMENTAIRE "BTTP version " BTTP_VERSION " via calccrypto/OpenPGP"
+#endif
 
-#include "OpenPGP.h"
+#include <OpenPGP.h>
 #include <fstream>
 
 #include "erreur/Importation.h"
 #include "erreur/Exportation.h"
 #include "erreur/Chiffrement.h"
 #include "erreur/Dechiffrement.h"
-#include "erreur/Signature.h"
 
 namespace BTTP 
 {
     namespace Protocole 
     {
-        typedef OpenPGP::KeyGen::Config Config;
-        typedef OpenPGP::PublicKey ClePublique;
-        typedef OpenPGP::SecretKey ClePrivee;
-
         class Identite 
         {
+            public:
+                typedef OpenPGP::KeyGen::Config Config;
+                typedef OpenPGP::PublicKey ClePublique;
+                typedef OpenPGP::SecretKey ClePrivee;
+
             private:
                 static const uint8_t PKA = OpenPGP::PKA::ID::RSA_ENCRYPT_OR_SIGN;
                 static const std::size_t BITS = 4096;
@@ -38,7 +43,7 @@ namespace BTTP
             protected:
                 static Config config(const std::string nom, const std::string email, const std::string mdp);
                 void genererClePrivee(const std::string nom, const std::string email, const std::string mdp);
-                void exporterClePrivee(const std::string fichier = BTTP_IDENTITE_FICHIER) const;
+                void exporterClePrivee(const std::string fichier = BTTP_IDENTITE_FICHIER, const bool armor = true) const;
                 void importerClePrivee(const std::string fichier = BTTP_IDENTITE_FICHIER);
             
             public:

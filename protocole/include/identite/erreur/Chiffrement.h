@@ -14,8 +14,8 @@ namespace BTTP
             private:
                 const std::string& _message_echec;
             public:
-                Identite_Chiffrement(const std::string& message_echec)
-                    : Erreur("Identite/Chiffrement", "Le chiffrement du message a échoué."),
+                Identite_Chiffrement(const std::string details, const std::string& message_echec)
+                    : Erreur("Identite/Chiffrement", "Le chiffrement du message a échoué.\n\tDetails : " + details),
                     _message_echec{ message_echec }
                 {}
 

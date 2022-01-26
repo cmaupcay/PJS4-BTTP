@@ -12,8 +12,8 @@ namespace BTTP
             class Identite_Dechiffrement : public Erreur
             {
             public:
-                Identite_Dechiffrement()
-                    : Erreur("Identite/Dechiffrement", "Le déchiffrement du message à donné un résultat invalide.") {}
+                Identite_Dechiffrement(const std::string details)
+                    : Erreur("Identite/Dechiffrement", "Le déchiffrement du message à donné un résultat invalide.\n\tDétails : " + details) {}
             };
         }
     }

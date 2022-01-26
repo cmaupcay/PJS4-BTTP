@@ -4,7 +4,7 @@
 #include "../Racine.h"
 
 #ifndef BTTP_IDENTITE_FICHIER
-    #define BTTP_IDENTITE_FICHIER "cle_privee.asc"
+    #define BTTP_IDENTITE_FICHIER "cle.bttp.asc"
 #endif
 #ifndef BTTP_IDENTITE_COMMENTAIRE
     #define BTTP_IDENTITE_COMMENTAIRE "BTTP version " BTTP_VERSION " via calccrypto/OpenPGP"

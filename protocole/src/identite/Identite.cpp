@@ -94,7 +94,7 @@ namespace BTTP
             return message_chiffre.raw();
         }
 
-        const std::string Identite::dechiffer(const std::string message, const ClePublique cle_publique, const std::string mdp)
+        const std::string Identite::dechiffrer(const std::string message, const ClePublique cle_publique, const std::string mdp)
         {
             // Déchiffrement du message
             OpenPGP::Message message_dechiffre;

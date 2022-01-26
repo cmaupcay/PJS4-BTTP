@@ -52,7 +52,7 @@ namespace BTTP
                 inline const ClePublique cle_publique() const { return this->_cle_privee.get_public(); }
 
                 const std::string chiffrer(const std::string message, const ClePublique cle_publique, const std::string mdp);
-                const std::string dechiffer(const std::string message, const ClePublique cle_publique, const std::string mdp);
+                const std::string dechiffrer(const std::string message, const ClePublique cle_publique, const std::string mdp);
         };
     }
 }

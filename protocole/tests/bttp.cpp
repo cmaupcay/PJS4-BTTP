@@ -45,7 +45,7 @@ int main()
         // Corruption du message
         // message_chiffre += "ok";
 
-        const std::string message_dechiffre = id->dechiffer(message_chiffre, id->cle_publique(), mdp);
+        const std::string message_dechiffre = id->dechiffrer(message_chiffre, id->cle_publique(), mdp);
         std::cout << "Message déchiffré : " << message_dechiffre; 
 
         // remove(BTTP_IDENTITE_FICHIER);

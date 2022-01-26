@@ -1,7 +1,7 @@
 #ifndef H_BTTP_ERREUR
 #define H_BTTP_ERREUR
 
-#include <iostream>
+#include <iomanip>
 #include <exception>
 
 namespace BTTP

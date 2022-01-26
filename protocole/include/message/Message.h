@@ -1,28 +1,53 @@
 #ifndef H_BTTP_MESSAGE
 #define H_BTTP_MESSAGE
-#include <string>
+
+#include "../Racine.h"
+
+#include <iomanip>
 
 namespace BTTP
 {
     namespace Protocole
     {
-        class Message
+        namespace Messages
         {
-        private:
-            const char _type;
+            class IMessage
+            {
+            public:
+                virtual const std::string construire() const = 0;
 
-        protected:
-            Message(char type) : _type{ type } {}
+                inline friend std::ostream& operator<<(std::ostream& os, const IMessage& msg) { return (os << msg.construire()); }
+            };
 
-            virtual std::string construire_contenu() const = 0;
+            template <class T>
+            class TMessage : public IMessage
+            {
+            private:
+                const T _type;
+            protected:
+                TMessage(const T type) : _type{ type } {}
 
-        public:
-            inline const char type() const { return this->_type; }
+                virtual const std::string contenu() const = 0;
 
-            // @brief Construction du message depuis l'objet.
-            inline const std::string construire() const
-            { return this->_type + this->construire_contenu(); }
-        };
+            public:
+                inline const T& type() const { return this->_type; }
+
+                const std::string construire() const override;
+            };
+
+            enum class Type
+            {
+                CLE_PUBLIQUE = '!',
+                EXECUTION = '>',
+                RESULTAT = '<'
+            };
+
+            class Message : public TMessage<Type>
+            {
+            protected:
+                Message(const Type type) : TMessage(type) {}
+            };
+        }
     }
 }
 #endif

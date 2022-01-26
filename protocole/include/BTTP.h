@@ -4,7 +4,7 @@
 #include <segvcatch.h>
 
 #include "identite/Identite.h"
-// #include "message/Message.h"
+#include "message/Messages.h"
 
 namespace BTTP
 {

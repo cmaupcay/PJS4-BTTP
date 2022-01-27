@@ -1,9 +1,6 @@
 #include "../include/BTTP.h"
 #include <iostream>
 
-// Build : g++ src/identite/Identite.cpp src/message/Message.cpp src/BTTP.cpp tests/bttp.cpp -o bin/bttp -lOpenPGP -lsegvcatch
-// TODO Utiliser cmake
-
 const std::string demander(const std::string message)
 {
     std::string sortie;

@@ -3,8 +3,17 @@
 
 #include "../Racine.h"
 
-#ifndef BTTP_IDENTITE_FICHIER
-    #define BTTP_IDENTITE_FICHIER "cle.bttp.asc"
+#ifndef BTTP_IDENTITE_CHEMIN_DEFAUT
+    #define BTTP_IDENTITE_CHEMIN_DEFAUT BTTP_DOSSIER "/id"
+#endif
+#ifndef BTTP_IDENTITE_CHEMIN_CREER
+    #define BTTP_IDENTITE_CHEMIN_CREER true
+#endif
+#ifndef BTTP_IDENTITE_ARMOR
+    #define BTTP_IDENTITE_ARMOR false
+#endif
+#ifndef BTTP_IDENTITE_EXT
+    #define BTTP_IDENTITE_EXT "asc"
 #endif
 #ifndef BTTP_IDENTITE_COMMENTAIRE
     #define BTTP_IDENTITE_COMMENTAIRE "BTTP version " BTTP_VERSION " via calccrypto/OpenPGP"
@@ -12,6 +21,8 @@
 
 #include <OpenPGP.h>
 #include <fstream>
+#include <filesystem>
+#include <iostream>
 
 #include "erreur/Importation.h"
 #include "erreur/Exportation.h"
@@ -43,12 +54,18 @@ namespace BTTP
             protected:
                 static Config config(const std::string nom, const std::string email, const std::string mdp);
                 void genererClePrivee(const std::string nom, const std::string email, const std::string mdp);
-                void exporterClePrivee(const std::string fichier = BTTP_IDENTITE_FICHIER, const bool armor = true) const;
-                void importerClePrivee(const std::string fichier = BTTP_IDENTITE_FICHIER);
+                void exporterClePrivee(
+                    const std::string nom, const bool armor = BTTP_IDENTITE_ARMOR,
+                    const std::string chemin = BTTP_IDENTITE_CHEMIN_DEFAUT, const bool creer_chemin = BTTP_IDENTITE_CHEMIN_CREER
+                ) const;
+                void importerClePrivee(const std::string nom, const std::string chemin = BTTP_IDENTITE_CHEMIN_DEFAUT);
+
+                inline const std::string fichier(const std::string nom, const std::string chemin) const
+                { return (chemin != "" ? chemin + '/' : "") + nom + '.' + BTTP_IDENTITE_EXT; }
             
             public:
-                Identite();
-                Identite(const std::string nom, const std::string email, const std::string mdp);
+                Identite(const std::string nom, const std::string chemin = BTTP_IDENTITE_CHEMIN_DEFAUT);
+                Identite(const std::string nom, const std::string email, const std::string mdp, const std::string chemin = BTTP_IDENTITE_CHEMIN_DEFAUT);
                 inline const ClePublique cle_publique() const { return this->_cle_privee.get_public(); }
 
                 const std::string chiffrer(const std::string message, const ClePublique cle_publique, const std::string mdp);

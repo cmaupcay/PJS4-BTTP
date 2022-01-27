@@ -18,15 +18,15 @@ int main()
     { 
         BTTP::Protocole::Identite* id = nullptr;
         std::string mdp;
+        const std::string nom = demander("Nom : ");
     
         try
         {
-            id = new BTTP::Protocole::Identite();
+            id = new BTTP::Protocole::Identite(nom);
             mdp = demander("Mot de passe : ");
         }
         catch (BTTP::Protocole::Erreur::Identite_Importation& e)
         {
-            const std::string nom = demander("Nom : ");
             const std::string email = demander("E-mail : ");
             mdp = demander("Mot de passe : ");
             id = new BTTP::Protocole::Identite(nom, email, mdp);

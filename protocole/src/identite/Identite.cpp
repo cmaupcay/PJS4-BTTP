@@ -37,31 +37,39 @@ namespace BTTP
             this->_cle_privee = OpenPGP::KeyGen::generate_key(config);
         }
 
-        void Identite::exporterClePrivee(const std::string fichier, const bool armor) const
+        void Identite::exporterClePrivee(const std::string nom, const bool armor, const std::string chemin, const bool creer_chemin) const
         {
+            const std::string fichier = this->fichier(nom, chemin);
+            const std::string dossier = fichier.substr(0, fichier.find_last_of('/'));
+            if (!std::filesystem::is_directory(dossier))
+            {
+                if (creer_chemin) std::filesystem::create_directories(dossier);
+                else throw Erreur::Identite_Exportation(fichier);
+            }
             std::ofstream fichier_ex(fichier, std::ios::binary);
             if (!fichier_ex) throw Erreur::Identite_Exportation(fichier);
             fichier_ex << this->_cle_privee.write((armor ? OpenPGP::PGP::Armored::YES : OpenPGP::PGP::Armored::NO)) << std::flush;
             fichier_ex.close();
         }
 
-        void Identite::importerClePrivee(const std::string fichier)
+        void Identite::importerClePrivee(const std::string nom, const std::string chemin)
         {
+            const std::string fichier = this->fichier(nom, chemin);
             std::ifstream fichier_im(fichier, std::ios::binary);
             if (!fichier_im) throw Erreur::Identite_Importation(fichier);
             this->_cle_privee = OpenPGP::SecretKey(fichier_im);
             fichier_im.close();
         }
 
-        Identite::Identite(const std::string nom, const std::string email, const std::string mdp)
+        Identite::Identite(const std::string nom, const std::string email, const std::string mdp, const std::string chemin)
         {
             this->genererClePrivee(nom, email, mdp);
-            this->exporterClePrivee();
+            this->exporterClePrivee(nom, BTTP_IDENTITE_ARMOR, chemin);
         }
 
-        Identite::Identite() 
+        Identite::Identite(const std::string nom, const std::string chemin) 
         {
-            this->importerClePrivee();
+            this->importerClePrivee(nom, chemin);
         }
 
         const std::string Identite::traduireMessage(const OpenPGP::Message message_pgp)

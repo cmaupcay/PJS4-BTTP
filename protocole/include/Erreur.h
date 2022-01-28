@@ -20,8 +20,7 @@ namespace BTTP
         inline const std::string& nom() const { return this->_nom; }
         inline const std::string afficher() const { return "[BTTP/" + this->_nom + "] " + this->_message + '\n'; }
 
-        // TODO Utiliser la fonction afficher() (la conversion en const char* échoue)
-        const char* what() const throw () override { return this->_message.c_str(); }
+        const char* what() const noexcept override { return this->_nom.c_str(); }
         
         inline friend std::ostream& operator<<(std::ostream& os, const Erreur& err) { return (os << err.afficher()); }
     };

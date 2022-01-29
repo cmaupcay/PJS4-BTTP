@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 #include <iostream>
-#include "../identite/Identite.h"
+#include "../../include/identite/Identite.h"
 
 namespace BTTP 
 {

@@ -1,4 +1,4 @@
-#include "../include/tests/IdenditeTest.h"
+#include "../include/IdenditeTest.h"
 
 namespace BTTP 
 {
@@ -58,13 +58,3 @@ namespace BTTP
 
 
 }
-
-int main(int argc, char* argv[])
-{
-
-    ::testing::InitGoogleTest(&argc, argv);
-
-    return RUN_ALL_TESTS();
-
-}
-

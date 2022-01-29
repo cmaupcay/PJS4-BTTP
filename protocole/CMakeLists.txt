@@ -4,11 +4,6 @@ project(BTTP VERSION 0.0.2)
 
 set(CMAKE_CXX_STANDARD 17)
 
-set(BTTP_DEP OpenPGP segvcatch gtest)
-# find_package(OpenPGP REQUIRED)
-# find_package(segvcatch REQUIRED)
-# find_package(gtest REQUIRED)
-
 file(
     GLOB_RECURSE
     sources
@@ -26,17 +21,7 @@ add_library(
 )
 
 # Pour les tests unitaires
-add_subdirectory(googletest)
+add_subdirectory(lib/googletest)
+add_subdirectory(tests)
 
-# Executable de test
-set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/bin)
-set(EXECUTABLE IdentiteTest)
-add_executable(
-    ${EXECUTABLE}
-    tests/IdentiteTest.cpp
-)
-target_link_libraries(
-    ${EXECUTABLE} 
-    ${PROJECT_NAME}
-    ${BTTP_DEP}
-)
+add_subdirectory(cli)

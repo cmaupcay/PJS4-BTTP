@@ -1,3 +1,3 @@
 [submodule "protocole/googletest"]
-	path = protocole/googletest
+	path = protocole/lib/googletest
 	url = https://github.com/google/googletest.git

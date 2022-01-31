@@ -1,27 +1,38 @@
 cmake_minimum_required(VERSION 3.10)
-
-project(BTTP VERSION 0.0.2)
-
 set(CMAKE_CXX_STANDARD 17)
 
+# CONSTANTES
+set(BTTP_VERSION 0.0.2) # Version du protocole
+set(BTTP_DEP OpenPGP segvcatch) # Dépendances
+
+# PROJET
+project(BTTP VERSION ${BTTP_VERSION})
+set(BTTP_LIB ${PROJECT_NAME} ${BTTP_DEP})
+
+# DEPENDANCES
+# TODO Utiliser find_package
+
+# FICHIERS
+# Sources
 file(
     GLOB_RECURSE
-    sources
-    src/*
+    BTTP_SRC
+    src/*.cpp
 )
+# En-têtes
 file(
     GLOB_RECURSE
-    includes
-    include/*
+    BTTP_INCLUDES
+    include/*.h
 )
+
+# BIBLIOTHEQUE
 add_library(
     ${PROJECT_NAME}
-    ${sources}
-    ${includes}
+    ${BTTP_SRC}
+    ${BTTP_INCLUDES}
 )
 
-# Pour les tests unitaires
-add_subdirectory(lib/googletest)
-add_subdirectory(tests)
-
-add_subdirectory(cli)
+# COMPLEMENTS
+add_subdirectory(demo)
+add_subdirectory(test)

@@ -3,10 +3,10 @@
 
 #include <string>
 
-#define BTTP_VERSION "0.0.2"
+#define BTTP_VERSION "${BTTP_VERSION}"
 
 #ifndef BTTP_DOSSIER
-    #define BTTP_DOSSIER ".bttp"
+    #define BTTP_DOSSIER "${BTTP_DOSSIER}"
 #endif
 
 #endif

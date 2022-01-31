@@ -1,4 +1,12 @@
+# Editeurs
 .vscode/
+
+# Compilation
 cmake/
 bin/
+
+# Confidentiel
 *.asc
+
+# PROTOCOLE
+protocole/include/Racine.h

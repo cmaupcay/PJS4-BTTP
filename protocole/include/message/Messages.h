@@ -3,4 +3,17 @@
 
 #include "Execution.h"
 
+#include "erreur/type/Inconnu.h"
+
+namespace BTTP
+{
+    namespace Protocole
+    {
+        namespace Messages
+        {
+            Message* resoudre(const std::string paquet);
+        }
+    }
+}
+
 #endif

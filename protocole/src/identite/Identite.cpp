@@ -31,8 +31,8 @@ namespace BTTP
             return config;
         }
 
-        const std::string Identite::fichier(const std::string nom, const std::string chemin, const bool dossier_bttp)
-        { return (dossier_bttp ? Contexte::dossier() + '/' : "") + (chemin != "" ? chemin + '/' : "") + nom + '.' + BTTP_IDENTITE_EXT; }
+        const std::string Identite::fichier(const std::string nom, const std::string chemin, const bool dossier_contexte)
+        { return (dossier_contexte ? Contexte::dossier() + '/' : "") + (chemin != "" ? chemin + '/' : "") + nom + '.' + BTTP_IDENTITE_EXT; }
 
         void Identite::genererClePrivee(std::string nom, std::string email, std::string mdp)
         {
@@ -41,10 +41,10 @@ namespace BTTP
         }
 
         void Identite::exporterClePrivee(
-            const std::string nom, const bool armor, const std::string chemin, const bool creer_chemin, const bool dossier_bttp
+            const std::string nom, const bool armor, const std::string chemin, const bool creer_chemin, const bool dossier_contexte
         ) const
         {
-            const std::string fichier = Identite::fichier(nom, chemin, dossier_bttp);
+            const std::string fichier = Identite::fichier(nom, chemin, dossier_contexte);
             const std::string dossier = fichier.substr(0, fichier.find_last_of('/'));
             if (!std::filesystem::is_directory(dossier))
             {
@@ -57,9 +57,9 @@ namespace BTTP
             fichier_ex.close();
         }
 
-        void Identite::importerClePrivee(const std::string nom, const std::string chemin, const bool dossier_bttp)
+        void Identite::importerClePrivee(const std::string nom, const std::string chemin, const bool dossier_contexte)
         {
-            const std::string fichier = Identite::fichier(nom, chemin, dossier_bttp);
+            const std::string fichier = Identite::fichier(nom, chemin, dossier_contexte);
             std::ifstream fichier_im(fichier, std::ios::binary);
             if (!fichier_im) throw Erreur::Identite_Importation(fichier);
             this->_cle_privee = OpenPGP::SecretKey(fichier_im);
@@ -67,16 +67,16 @@ namespace BTTP
         }
 
         Identite::Identite(
-            const std::string nom, const std::string email, const std::string mdp, const std::string chemin, const bool dossier_bttp
+            const std::string nom, const std::string email, const std::string mdp, const std::string chemin, const bool dossier_contexte
         )
         {
             this->genererClePrivee(nom, email, mdp);
-            this->exporterClePrivee(nom, BTTP_IDENTITE_ARMOR, chemin, dossier_bttp);
+            this->exporterClePrivee(nom, BTTP_IDENTITE_ARMOR, chemin, dossier_contexte);
         }
 
-        Identite::Identite(const std::string nom, const std::string chemin, const bool dossier_bttp) 
+        Identite::Identite(const std::string nom, const std::string chemin, const bool dossier_contexte) 
         {
-            this->importerClePrivee(nom, chemin, dossier_bttp);
+            this->importerClePrivee(nom, chemin, dossier_contexte);
         }
 
         const std::string Identite::traduireMessage(const OpenPGP::Message message_pgp)
@@ -93,7 +93,7 @@ namespace BTTP
             return message;
         }
 
-        const std::string Identite::chiffrer(const std::string message, const ClePublique cle_publique, const std::string mdp)
+        const std::string Identite::chiffrer(const std::string message, const ClePublique cle_publique, const std::string mdp) const
         {
             // Configuration du chiffrement
             OpenPGP::SecretKey::Ptr signataire = std::make_shared<OpenPGP::SecretKey>(_cle_privee);
@@ -109,7 +109,7 @@ namespace BTTP
             return message_chiffre.raw();
         }
 
-        const std::string Identite::dechiffrer(const std::string message, const ClePublique cle_publique, const std::string mdp)
+        const std::string Identite::dechiffrer(const std::string message, const ClePublique cle_publique, const std::string mdp) const
         {
             // Déchiffrement du message
             OpenPGP::Message message_dechiffre;

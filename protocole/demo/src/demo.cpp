@@ -1,4 +1,4 @@
-#include "../../include/BTTP.h"
+#include "../include/MessageDemo.h"
 #include <iostream>
 
 const std::string demander(const std::string message)
@@ -39,21 +39,22 @@ int main(const int argc, const char** args)
             id = new BTTP::Protocole::Identite(nom, email, mdp);
         } 
         
-        const std::string message = demander("Entrez un message à chiffrer : ");
+        const std::string contenu = demander("Entrez un message à chiffrer : ");
+        MessageDemo msg{ contenu };
 
-        std::string message_chiffre = id->chiffrer(message, id->cle_publique(), mdp);
+        std::string paquet = msg.construire();
+        // paquet = "virus" + paquet; // Corruption du paquet
+        std::cout << "Paquet : " << paquet << std::endl;
 
-        // std::cout << "Message chiffré et signé : \n" << message_chiffre << std::endl;
-        // std::cout << "Déchiffrer ?";
-        // std::cin.get();
+        std::string paquet_chiffrer = id->chiffrer(paquet, id->cle_publique(), mdp);
+        // paquet_chiffrer += "virus"; // Corruption du paquet chiffré
 
-        // Corruption du message
-        // message_chiffre += "ok";
+        const std::string paquet_dechiffrer = id->dechiffrer(paquet_chiffrer, id->cle_publique(), mdp);
+        std::cout << "Paquet déchiffré : " << paquet_dechiffrer;
 
-        const std::string message_dechiffre = id->dechiffrer(message_chiffre, id->cle_publique(), mdp);
-        std::cout << "Message déchiffré : " << message_dechiffre; 
-
-        // remove(BTTP_IDENTITE_FICHIER);
+        MessageDemo msg_recu{ "" };
+        msg_recu.deconstruire(paquet_dechiffrer);
+        std::cout << "Message déchiffré : " << msg_recu.lire();
     }
     catch (BTTP::Erreur& err) { std::cout << err; }
 

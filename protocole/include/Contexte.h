@@ -1,3 +1,6 @@
+#ifndef H_BTTP_CONTEXTE
+#define H_BTTP_CONTEXTE
+
 #include <string>
 #include <segvcatch.h>
 
@@ -20,3 +23,5 @@ namespace BTTP
         };
     }
 }
+
+#endif

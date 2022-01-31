@@ -60,32 +60,32 @@ namespace BTTP
                 void exporterClePrivee(
                     const std::string nom, const bool armor = BTTP_IDENTITE_ARMOR,
                     const std::string chemin = BTTP_IDENTITE_CHEMIN_DEFAUT, const bool creer_chemin = BTTP_IDENTITE_CHEMIN_CREER,
-                    const bool dossier_bttp = BTTP_IDENTITE_CHEMIN_BTTP_DEFAUT
+                    const bool dossier_contexte = BTTP_IDENTITE_CHEMIN_BTTP_DEFAUT
                 ) const;
                 void importerClePrivee(
                     const std::string nom, const std::string chemin = BTTP_IDENTITE_CHEMIN_DEFAUT,
-                    const bool dossier_bttp = BTTP_IDENTITE_CHEMIN_BTTP_DEFAUT
+                    const bool dossier_contexte = BTTP_IDENTITE_CHEMIN_BTTP_DEFAUT
                 );
 
                 static inline const std::string fichier(
-                    const std::string nom, const std::string chemin, const bool dossier_bttp
+                    const std::string nom, const std::string chemin, const bool dossier_contexte
                 );
             
             public:
                 Identite(
                     const std::string nom, const std::string chemin = BTTP_IDENTITE_CHEMIN_DEFAUT,
-                    const bool dossier_bttp = BTTP_IDENTITE_CHEMIN_BTTP_DEFAUT
+                    const bool dossier_contexte = BTTP_IDENTITE_CHEMIN_BTTP_DEFAUT
                 );
                 Identite(
                     const std::string nom, const std::string email, const std::string mdp,
                     const std::string chemin = BTTP_IDENTITE_CHEMIN_DEFAUT,
-                    const bool dossier_bttp = BTTP_IDENTITE_CHEMIN_BTTP_DEFAUT
+                    const bool dossier_contexte = BTTP_IDENTITE_CHEMIN_BTTP_DEFAUT
                 );
                 
                 inline const ClePublique cle_publique() const { return this->_cle_privee.get_public(); }
 
-                const std::string chiffrer(const std::string message, const ClePublique cle_publique, const std::string mdp);
-                const std::string dechiffrer(const std::string message, const ClePublique cle_publique, const std::string mdp);
+                const std::string chiffrer(const std::string message, const ClePublique cle_publique, const std::string mdp) const;
+                const std::string dechiffrer(const std::string message, const ClePublique cle_publique, const std::string mdp) const;
 
                 inline friend std::ostream& operator<<(std::ostream& os, const Identite& id) { return (os << id.cle_publique().fingerprint()); }
         };

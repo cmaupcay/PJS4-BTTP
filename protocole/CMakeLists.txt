@@ -7,6 +7,7 @@ set(BTTP_VERSION 0.0.2) # Version du protocole
 set(BTTP_DEP OpenPGP segvcatch) # Dépendances
 set(BTTP_DOSSIER .bttp) # Dossier de travail par défaut
 set(BTTP_RACINE ${CMAKE_CURRENT_SOURCE_DIR}/include/Racine.h) # En-tête racine (fichier de configuration)
+set(BTTP_DOSSIER_LIB lib) # Dossier des bibliothèques
 
 # OPTIONS
 option(BTTP_DEMO "Compile la démonstration du protocole." ON)
@@ -49,5 +50,6 @@ if(BTTP_DEMO)
 endif()
 # Tests
 if(BTTP_TEST)
+    add_subdirectory(${BTTP_DOSSIER_LIB}/googletest)
     add_subdirectory(test)
 endif()

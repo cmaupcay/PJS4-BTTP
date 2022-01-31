@@ -1,14 +1,33 @@
 # BTTP - _Protocole_
 
 ## Démarrer
+Pour générer les scripts de compilation, suivez la procédure suivante :
+
 ```sh
     mkdir cmake
     cd cmake
     cmake ..
-    make
 ```
-> L'exécutable de test __bin/bttp__ sera généré.
+> Les générations de scripts pour la __démonstration__ et les __tests__ peuvent être désactivées grâce aux options ```BTTP_DEMO``` et ```BTTP_TEST```.
+
+### Démonstration
+Une __démonstration fonctionnelle__ du protocole est disponible pour exposer les fonctions principales du protocole. Elle peut être compilée et exécutée grâce aux commandes :
+```sh
+    make demo
+    ../bin/demo
+```
+> Le [code source](demo/demo.cpp) peut également vous servir d'exemple d'implémentation dans vos projets.
+
+### Tests
+Pour vérifier automatiquement l'état de fonctionnement du protocole, utilisez les __tests unitaires__ grâce aux commandes suivantes :
+```sh
+    make test
+    ../bin/test
+```
 
 ## Dépendances
 - __[OpenPGP](https://github.com/calccrypto/OpenPGP) :__ fonctions de cryptographie.
 - __[segvcatch](https://github.com/Plaristote/segvcatch) :__ prévenir des erreurs de type _Segmentation fault_.
+
+### Tests
+- __[googletest](https://github.com/google/googletest) :__ tests unitaires.

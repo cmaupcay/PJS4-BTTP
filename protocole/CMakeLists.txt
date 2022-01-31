@@ -3,7 +3,7 @@ set(CMAKE_CXX_STANDARD 17)
 
 # CONSTANTES
 set(BTTP BTTP) # Nom du projet CMake
-set(BTTP_VERSION 0.0.2) # Version du protocole
+set(BTTP_VERSION 0.0.3) # Version du protocole
 set(BTTP_DEP OpenPGP segvcatch) # Dépendances
 set(BTTP_DOSSIER .bttp) # Dossier de travail par défaut
 set(BTTP_RACINE ${CMAKE_CURRENT_SOURCE_DIR}/include/Racine.h) # En-tête racine (fichier de configuration)

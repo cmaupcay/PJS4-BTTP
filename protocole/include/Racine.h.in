@@ -1,12 +1,12 @@
 #ifndef H_BTTP_RACINE
 #define H_BTTP_RACINE
 
-#include <string>
-
 #define BTTP_VERSION "${BTTP_VERSION}"
 
 #ifndef BTTP_DOSSIER
     #define BTTP_DOSSIER "${BTTP_DOSSIER}"
 #endif
+
+#include "Contexte.h"
 
 #endif

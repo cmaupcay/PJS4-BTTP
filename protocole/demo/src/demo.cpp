@@ -9,10 +9,17 @@ const std::string demander(const std::string message)
     return sortie;
 }
 
-int main()
+const std::string dossier_depuis_fichier(const std::string fichier)
+{ return fichier.substr(0, fichier.length() - fichier.find_last_of('/') + 1); }
+
+int main(const int argc, const char** args)
 {
-    BTTP::Protocole::initialiser();
+    std::string dossier = dossier_depuis_fichier(args[0]);
+    if (!std::filesystem::is_directory(dossier))
+        dossier = std::filesystem::current_path();
+    BTTP::Protocole::Contexte::initialiser(dossier);
     std::cout << "bttp v" << BTTP_VERSION << " - dev" << std::endl;
+    std::cout << "Dossier de travail : " << BTTP::Protocole::Contexte::dossier() << std::endl;
 
     try 
     { 

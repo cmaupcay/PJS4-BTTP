@@ -3,6 +3,9 @@ set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/bin)
 set(BTTP_TEST_EXE test)
 set(BTTP_TEST_DEP gtest)
 
+# DEPENDANCES
+add_subdirectory(modules/googletest)
+
 # FICHIERS
 # Sources
 file(

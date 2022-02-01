@@ -22,6 +22,11 @@ namespace BTTP
                     { return this->_contenu; }
 
                 protected:
+                    TMessage(
+                        T type, 
+                        const IMessage& message, const Identite::ClePublique destinataire,
+                        const Identite* sigantaire = nullptr, const std::string mdp = ""
+                    );                
                     inline static const std::string charger_contenu(
                         const IMessage& message, const Identite::ClePublique destinataire,
                         const Identite* sigantaire, const std::string mdp = ""
@@ -30,12 +35,6 @@ namespace BTTP
                     virtual const std::string entete() const = 0;
 
                 public:
-                    TMessage(
-                        T type, 
-                        const IMessage& message, const Identite::ClePublique destinataire,
-                        const Identite* sigantaire = nullptr, const std::string mdp = ""
-                    );
-
                     const std::string construire() const override;
                 };
 

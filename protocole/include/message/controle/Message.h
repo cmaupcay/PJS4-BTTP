@@ -4,6 +4,10 @@
 #include "../Message.h"
 #include "../../identite/Identite.h"
 
+#ifndef BTTP_MESSAGE_CONTROLE_SEP
+    #define BTTP_MESSAGE_CONTROLE_SEP '@'
+#endif
+
 namespace BTTP
 {
     namespace Protocole

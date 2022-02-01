@@ -8,7 +8,7 @@ Pour générer les scripts de compilation, suivez la procédure suivante :
     cd cmake
     cmake ..
 ```
-> Les générations de scripts pour la __démonstration__ et les __tests__ peuvent être désactivées grâce aux options ```BTTP_DEMO``` et ```BTTP_TEST```.
+> Les générations de scripts pour la __démonstration__ et les __tests__ peuvent être activées grâce aux options ```BTTP_DEMO``` et ```BTTP_TEST```.
 
 ### Démonstration
 Une __démonstration fonctionnelle__ du protocole est disponible pour exposer les fonctions principales du protocole. Elle peut être compilée et exécutée grâce aux commandes :

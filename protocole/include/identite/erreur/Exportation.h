@@ -3,6 +3,10 @@
 
 #include "../../Erreur.h"
 
+#ifndef BTTP_IDENTITE_EXPORTATION_CODE
+    #define BTTP_IDENTITE_EXPORTATION_CODE -211
+#endif
+
 namespace BTTP
 {
     namespace Protocole
@@ -13,7 +17,10 @@ namespace BTTP
             {
             public:
                 Identite_Exportation(const std::string& fichier)
-                    : Erreur("Identite/Exportation", "L'exportation de la clé privée dans le fichier '" + fichier + "' a échoué.") {}
+                    : Erreur(
+                        "Identite/Exportation", "L'exportation de la clé privée dans le fichier '" + fichier + "' a échoué.",
+                        BTTP_IDENTITE_EXPORTATION_CODE
+                    ) {}
             };
         }
     }

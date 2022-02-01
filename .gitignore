@@ -4,9 +4,7 @@
 # Compilation
 cmake/
 bin/
+Racine.h
 
 # Confidentiel
 *.asc
-
-# PROTOCOLE
-protocole/include/Racine.h

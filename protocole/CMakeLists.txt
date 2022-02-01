@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.10)
 set(CMAKE_CXX_STANDARD 17)
 
 # CONSTANTES
-set(BTTP BTTP) # Nom du projet CMake
+set(BTTP bttp) # Nom du projet CMake
 set(BTTP_VERSION 0.0.4) # Version du protocole
 set(BTTP_DEP OpenPGP segvcatch) # Dépendances
 set(BTTP_DOSSIER .bttp) # Dossier de travail par défaut
@@ -13,7 +13,7 @@ option(BTTP_DEMO "Compile la démonstration du protocole." ON)
 option(BTTP_TEST "Compile les tests du protocole." ON)
 
 # PROJET
-project(${BTTP} VERSION ${BTTP_VERSION})
+project(${BTTP} LANGUAGES CXX VERSION ${BTTP_VERSION})
 set(BTTP_LIB ${PROJECT_NAME} ${BTTP_DEP})
 
 # DEPENDANCES

@@ -3,6 +3,10 @@
 
 #include "../../Erreur.h"
 
+#ifndef BTTP_IDENTITE_CHIFFREMENT_CODE
+    #define BTTP_IDENTITE_CHIFFREMENT_CODE -201
+#endif
+
 namespace BTTP
 {
     namespace Protocole
@@ -15,7 +19,7 @@ namespace BTTP
                 const std::string& _message_echec;
             public:
                 Identite_Chiffrement(const std::string details, const std::string& message_echec)
-                    : Erreur("Identite/Chiffrement", "Le chiffrement du message a échoué.\n\tDetails : " + details),
+                    : Erreur("Identite/Chiffrement", "Le chiffrement du message a échoué.\n\tDetails : " + details, BTTP_IDENTITE_CHIFFREMENT_CODE),
                     _message_echec{ message_echec }
                 {}
 

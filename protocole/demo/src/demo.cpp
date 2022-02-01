@@ -10,7 +10,7 @@ const std::string demander(const std::string message)
 }
 
 const std::string dossier_depuis_fichier(const std::string fichier)
-{ return fichier.substr(0, fichier.length() - fichier.find_last_of('/') + 1); }
+{ return fichier.substr(0, fichier.find_last_of('/')); }
 
 int main(const int argc, const char** args)
 {

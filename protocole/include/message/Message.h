@@ -37,7 +37,6 @@ namespace BTTP
             public:
                 inline const T& type() const { return this->_type; }
                 inline const char type_c() const override { return static_cast<char>(this->_type); }
-                virtual const T* type_reponse() const = 0;
 
                 inline const std::string construire() const override
                 { return this->type_c() + this->contenu(); }

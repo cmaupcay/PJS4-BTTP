@@ -14,9 +14,6 @@ public:
         ), _contenu{ "" }
     { this->construction(contenu); }
 
-    inline const BTTP::Protocole::Messages::Type* type_reponse() const override
-    { return nullptr; }
-
     inline void construction(const std::string contenu) override
     { 
         std::string _tmp = std::string(contenu.rbegin(), contenu.rend());

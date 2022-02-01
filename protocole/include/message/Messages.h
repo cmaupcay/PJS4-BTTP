@@ -2,6 +2,7 @@
 #define H_BTTP_MESSAGES
 
 #include "Execution.h"
+#include "ClePublique.h"
 
 #include "erreur/type/Inconnu.h"
 

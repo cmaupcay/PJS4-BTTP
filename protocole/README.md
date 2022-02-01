@@ -1,28 +1,27 @@
 # BTTP - _Protocole_
 
 ## Démarrer
-Pour générer les scripts de compilation, suivez la procédure suivante :
+Pour générer les scripts de compilation de la __librairie BTTP__, suivez la procédure suivante :
 
 ```sh
     mkdir cmake
     cd cmake
     cmake ..
 ```
-> Les générations de scripts pour la __démonstration__ et les __tests__ peuvent être activées grâce aux options ```BTTP_DEMO``` et ```BTTP_TEST```.
 
 ### Démonstration
 Une __démonstration fonctionnelle__ du protocole est disponible pour exposer les fonctions principales du protocole. Elle peut être compilée et exécutée grâce aux commandes :
 ```sh
-    make demo
-    ../bin/demo
+    cmake .. -DBTTP_DEMO=ON
+    ../bin/bttp-demo
 ```
 > Le [code source](demo/demo.cpp) peut également vous servir d'exemple d'implémentation dans vos projets.
 
 ### Tests
 Pour vérifier automatiquement l'état de fonctionnement du protocole, utilisez les __tests unitaires__ grâce aux commandes suivantes :
 ```sh
-    make test
-    ../bin/test
+    cmake .. -DBTTP_TEST=ON
+    ../bin/bttp-test
 ```
 
 ## Dépendances

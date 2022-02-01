@@ -28,7 +28,7 @@ namespace BTTP
 
                 template <class T>
                 const std::string TMessage<T>::construire() const
-                { return this->type_c() + this->entete() + this->_contenu; }
+                { return this->type_c() + this->entete() + BTTP_MESSAGE_CONTROLE_SEP + this->_contenu; }
             }
         }
     }

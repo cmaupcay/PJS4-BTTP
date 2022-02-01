@@ -10,7 +10,7 @@ Pour générer les scripts de compilation de la __librairie BTTP__, suivez la pr
 ```
 
 ### Démonstration
-Une __démonstration fonctionnelle__ du protocole est disponible pour exposer les fonctions principales du protocole. Elle peut être compilée et exécutée grâce aux commandes :
+Une __démonstration fonctionnelle__ du protocole est disponible pour en exposer les fonctions principales du protocole. Cette démonstration peut être compilée et exécutée grâce aux commandes :
 ```sh
     cmake .. -DBTTP_DEMO=ON
     ../bin/bttp-demo

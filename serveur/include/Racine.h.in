@@ -1,0 +1,8 @@
+#ifndef H_BTTP_SERVEUR_RACINE
+#define H_BTTP_SERVEUR_RACINE
+
+#define BTTP_SERVEUR_VERSION "${BTTP_SERVEUR_VERSION}"
+
+#include "../../protocole/include/BTTP.h"
+
+#endif

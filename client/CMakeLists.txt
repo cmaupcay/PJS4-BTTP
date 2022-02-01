@@ -31,6 +31,6 @@ if(BTTP_CLIENT_CLI)
 endif()
 # GUI
 if(BTTP_CLIENT_GUI)
-    set(BTTP_CLIENT_GUI_DOSSIER gui) # Dossier de référence du CLI
+    set(BTTP_CLIENT_GUI_DOSSIER gui) # Dossier de référence du GUI
     add_subdirectory(${BTTP_CLIENT_GUI_DOSSIER})
 endif()

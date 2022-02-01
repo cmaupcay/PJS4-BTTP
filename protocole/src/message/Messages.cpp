@@ -6,7 +6,7 @@ namespace BTTP
     {
         namespace Messages
         {
-            Message* nouveau(const std::string paquet)
+            Message* resoudre(const std::string paquet)
             {
                 Message* msg = nullptr;
                 

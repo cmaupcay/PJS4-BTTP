@@ -8,7 +8,7 @@ namespace BTTP
         {
             namespace Controle
             {
-                Message* nouveau(const std::string paquet)
+                Message* resoudre(const std::string paquet)
                 {
                     Message* msg = nullptr;
                     

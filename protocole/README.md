@@ -15,7 +15,7 @@ Une __démonstration fonctionnelle__ du protocole est disponible pour exposer le
     cmake .. -DBTTP_DEMO=ON
     ../bin/bttp-demo
 ```
-> Le [code source](demo/demo.cpp) peut également vous servir d'exemple d'implémentation dans vos projets.
+> Le [code source](demo/src/demo.cpp) peut également vous servir d'exemple d'implémentation dans vos projets.
 
 ### Tests
 Pour vérifier automatiquement l'état de fonctionnement du protocole, utilisez les __tests unitaires__ grâce aux commandes suivantes :

@@ -1,5 +1,5 @@
 # CONSTANTES
-set(BTTP_TEST_EXE bttp-test)
+set(BTTP_TEST_EXE ${BTTP}-test)
 set(BTTP_TEST_DEP gtest)
 
 # DEPENDANCES

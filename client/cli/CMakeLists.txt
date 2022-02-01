@@ -1,5 +1,5 @@
 # Constantes
-set(BTTP_CLIENT_CLI_EXE bttp-cli) # Dossier de référence du CLI
+set(BTTP_CLIENT_CLI_EXE ${BTTP_CLIENT}-cli) # Dossier de référence du CLI
 
 # Sources
 file(

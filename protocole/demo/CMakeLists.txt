@@ -1,6 +1,6 @@
 # CONSTANTES
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/bin) # Exécutables (../bin)
-set(BTTP_DEMO_EXE demo)
+set(BTTP_DEMO_EXE ${BTTP}-demo)
 
 # FICHIERS
 # Sources

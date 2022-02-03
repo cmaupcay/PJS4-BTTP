@@ -1,4 +1,4 @@
-#include "../include/Identite.h"
+#include "../../include/identite/Identite.h"
 
 namespace BTTP 
 {
@@ -89,6 +89,21 @@ namespace BTTP
                 const std::string message_chiffre = emissaire->chiffrer(message, destinataire->cle_publique(), mdp_emissaire);
                 EXPECT_THROW({
                     destinataire->dechiffrer(message_chiffre, destinataire->cle_publique(), mdp_destinataire);
+                }, BTTP::Protocole::Erreur::Identite_Dechiffrement);
+            }
+            TEST_F(Identite, ChiffrementCorrompu)
+            {
+                if (emissaire == nullptr || destinataire == nullptr) GTEST_SKIP();
+                const std::string message_chiffre = emissaire->chiffrer(message, destinataire->cle_publique(), mdp_emissaire);
+                EXPECT_THROW({ // Avant
+                    destinataire->dechiffrer("virus" + message_chiffre, emissaire->cle_publique(), mdp_destinataire);
+                }, BTTP::Protocole::Erreur::Identite_Dechiffrement);
+                const std::string message_corrompu = message_chiffre.substr(0, message_chiffre.size() / 2) + "virus" + message_chiffre.substr(message_chiffre.size() / 2 + 1);
+                EXPECT_THROW({ // Dedans
+                    destinataire->dechiffrer(message_corrompu, emissaire->cle_publique(), mdp_destinataire);
+                }, BTTP::Protocole::Erreur::Identite_Dechiffrement);
+                EXPECT_THROW({ // Après
+                    destinataire->dechiffrer(message_chiffre + "virus", emissaire->cle_publique(), mdp_destinataire);
                 }, BTTP::Protocole::Erreur::Identite_Dechiffrement);
             }
         }

@@ -1,4 +1,4 @@
-#include "../include/Identite.h"
+#include "../include/identite/Identite.h"
 #include "../../demo/include/Outils.h"
 
 int main(int argc, char* argv[])

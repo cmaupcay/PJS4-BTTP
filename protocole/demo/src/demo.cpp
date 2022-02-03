@@ -49,11 +49,11 @@ int main(const int argc, const char** args)
         std::cout << std::endl;
 
         const std::string paquet_dechiffre = id->dechiffrer(paquet_chiffre, id->cle_publique(), mdp);
-        std::cout << "Paquet déchiffré : " << paquet_dechiffre;
+        std::cout << "Paquet déchiffré : " << paquet_dechiffre << std::endl;
 
         MessageDemo msg_recu{ "" };
         msg_recu.deconstruire(paquet_dechiffre);
-        std::cout << "Message déchiffré : " << msg_recu.lire();
+        std::cout << "Message déchiffré : " << msg_recu.lire() << std::endl;
     }
     catch (BTTP::Erreur& err) { std::cout << err; }
 

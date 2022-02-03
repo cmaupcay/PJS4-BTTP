@@ -11,28 +11,23 @@ namespace BTTP
             const std::string Identite::suffixe_contact = "@test.fr";
 
             BTTP::Protocole::Identite* Identite::emissaire = nullptr;
-            std::string Identite::nom_emissaire = "emissaire";
-            std::string Identite::mdp_emissaire = "";
+            const std::string Identite::nom_emissaire = "emissaire";
+            const std::string Identite::mdp_emissaire = "p@ssw0rd";
          
             BTTP::Protocole::Identite* Identite::destinataire = nullptr;
-            std::string Identite::nom_destinataire = "destinataire";
-            std::string Identite::mdp_destinataire = "";
+            const std::string Identite::nom_destinataire = "destinataire";
+            const std::string Identite::mdp_destinataire = "123fourfivesix";
 
             Identite::Identite() {}
 
             void Identite::SetUpTestCase() 
             {
-                mdp_emissaire = "p@ssw0rd";
-                mdp_destinataire = "123fourfivesix";
-
                 destinataire = new BTTP::Protocole::Identite(nom_destinataire, nom_destinataire + suffixe_contact, mdp_destinataire, BTTP_TEST_DOSSIER_ID, true);
             }
 
             void Identite::TearDownTestCase() 
             {
                 delete emissaire, destinataire;
-                mdp_emissaire = "";
-                mdp_destinataire = "";
             }
 
             // CREATION

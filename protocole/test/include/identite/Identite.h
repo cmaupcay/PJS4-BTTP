@@ -19,12 +19,12 @@ namespace BTTP
                 static const std::string suffixe_contact;
 
                 static BTTP::Protocole::Identite* emissaire;
-                static std::string nom_emissaire;
-                static std::string mdp_emissaire;
+                static const std::string nom_emissaire;
+                static const std::string mdp_emissaire;
                 
                 static BTTP::Protocole::Identite* destinataire;
-                static std::string nom_destinataire;
-                static std::string mdp_destinataire;
+                static const std::string nom_destinataire;
+                static const std::string mdp_destinataire;
 
                 Identite();
                 static void SetUpTestCase();

@@ -13,17 +13,13 @@ namespace BTTP
 
             void Meta::SetUpTestCase()
             {
-                Identite::mdp_destinataire = "s3CuR3d";
                 Identite::destinataire = new BTTP::Protocole::Identite(Identite::nom_destinataire, BTTP_TEST_DOSSIER_ID, true);
                 contact = Identite::nom_destinataire + Identite::suffixe_contact;
             }
 
             void Meta::TearDownTestCase()
             {
-                Identite::mdp_destinataire = "";
                 delete meta, Identite::destinataire;
-                meta = nullptr;
-                Identite::destinataire = nullptr;
                 contact = "";
             }
 

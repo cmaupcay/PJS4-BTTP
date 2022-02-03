@@ -1,10 +1,10 @@
-#ifndef H_BTTP_MESSAGES_TYPE_INCOHERENT
-#define H_BTTP_MESSAGES_TYPE_INCOHERENT
+#ifndef H_BTTP_MESSAGE_TYPE_INCOHERENT
+#define H_BTTP_MESSAGE_TYPE_INCOHERENT
 
 #include "../../../Erreur.h"
 
-#ifndef BTTP_MESSAGES_TYPE_INCOHERENT_CODE
-    #define BTTP_MESSAGES_TYPE_INCOHERENT_CODE -111
+#ifndef BTTP_MESSAGE_TYPE_INCOHERENT_CODE
+    #define BTTP_MESSAGE_TYPE_INCOHERENT_CODE -111
 #endif
 
 namespace BTTP
@@ -20,7 +20,7 @@ namespace BTTP
                 const std::string& _paquet;
             public:
                 Messages_Type_Incoherent(const char type_c, const std::string& paquet)
-                    : Erreur("Messages/Type/Incohérent", "Le type du paquet n'est pas cohérent avec le type du message.", BTTP_MESSAGES_TYPE_INCOHERENT_CODE),
+                    : Erreur("Messages/Type/Incohérent", "Le type du paquet n'est pas cohérent avec le type du message.", BTTP_MESSAGE_TYPE_INCOHERENT_CODE),
                     _type_c{ type_c }, _paquet{ paquet }
                 {}
 

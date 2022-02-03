@@ -6,14 +6,7 @@ private:
     std::string _contenu;
     inline const std::string contenu() const override 
     { return this->_contenu; }
-
-public:
-    MessageDemo(const std::string contenu)
-        : BTTP::Protocole::Messages::Message(
-            BTTP::Protocole::Messages::Type::EXECUTION
-        ), _contenu{ "" }
-    { this->construction(contenu); }
-
+        
     inline void construction(const std::string contenu) override
     { 
         std::string _tmp = std::string(contenu.rbegin(), contenu.rend());
@@ -24,6 +17,13 @@ public:
         }
         this->_contenu = _tmp;
     }
+
+public:
+    MessageDemo(const std::string contenu)
+        : BTTP::Protocole::Messages::Message(
+            BTTP::Protocole::Messages::Type::EXECUTION
+        ), _contenu{ "" }
+    { this->construction(contenu); }
 
     inline const std::string& lire() const { return this->_contenu; }
 };

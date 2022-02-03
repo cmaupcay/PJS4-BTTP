@@ -18,7 +18,7 @@ int main(const int argc, const char** args)
     if (!std::filesystem::is_directory(dossier))
         dossier = std::filesystem::current_path();
     BTTP::Protocole::Contexte::initialiser(dossier);
-    std::cout << "bttp v" << BTTP_VERSION << " - dev" << std::endl;
+    std::cout << "bttp v" << BTTP_VERSION << " - demo" << std::endl;
     std::cout << "Dossier de travail : " << BTTP::Protocole::Contexte::dossier() << std::endl;
 
     try 
@@ -38,7 +38,10 @@ int main(const int argc, const char** args)
             mdp = demander("Mot de passe : ");
             id = new BTTP::Protocole::Identite(nom, email, mdp);
         } 
-        
+
+        const BTTP::Protocole::Meta meta{ id->cle_publique() };
+        std::cout << "Bienvenue " << meta.nom() << " !" << std::endl;
+
         const std::string contenu = demander("Entrez un message à chiffrer : ");
         MessageDemo msg{ contenu };
 

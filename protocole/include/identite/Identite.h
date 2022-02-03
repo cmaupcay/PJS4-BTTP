@@ -55,8 +55,8 @@ namespace BTTP
                 static const std::string traduireMessage(const OpenPGP::Message message_pgp);
 
             protected:
-                static Config config(const std::string nom, const std::string email, const std::string mdp);
-                void genererClePrivee(const std::string nom, const std::string email, const std::string mdp);
+                static Config config(const std::string nom, const std::string contact, const std::string mdp);
+                void genererClePrivee(const std::string nom, const std::string contact, const std::string mdp);
                 void exporterClePrivee(
                     const std::string nom, const bool armor = BTTP_IDENTITE_ARMOR,
                     const std::string chemin = BTTP_IDENTITE_CHEMIN_DEFAUT, const bool creer_chemin = BTTP_IDENTITE_CHEMIN_CREER,
@@ -77,7 +77,7 @@ namespace BTTP
                     const bool dossier_contexte = BTTP_IDENTITE_CHEMIN_BTTP_DEFAUT
                 );
                 Identite(
-                    const std::string nom, const std::string email, const std::string mdp,
+                    const std::string nom, const std::string contact, const std::string mdp,
                     const std::string chemin = BTTP_IDENTITE_CHEMIN_DEFAUT,
                     const bool dossier_contexte = BTTP_IDENTITE_CHEMIN_BTTP_DEFAUT
                 );
@@ -87,7 +87,8 @@ namespace BTTP
                 const std::string chiffrer(const std::string message, const ClePublique cle_publique, const std::string mdp) const;
                 const std::string dechiffrer(const std::string message, const ClePublique cle_publique, const std::string mdp) const;
 
-                inline friend std::ostream& operator<<(std::ostream& os, const Identite& id) { return (os << id.cle_publique().fingerprint()); }
+                inline friend std::ostream& operator<<(std::ostream& os, const Identite& id)
+                { return (os << id.cle_publique().write()); }
         };
     }
 }

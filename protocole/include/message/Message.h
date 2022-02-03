@@ -40,7 +40,7 @@ namespace BTTP
 
                 inline const std::string construire() const override
                 { return this->type_c() + this->contenu(); }
-                inline void deconstruire(const std::string paquet) override
+                void deconstruire(const std::string paquet) override
                 {
                     if (paquet.length() > 0 && paquet[0] == this->type_c())
                         this->construction(paquet.substr(1));

@@ -8,7 +8,7 @@ int main(const int argc, const char** argv)
     }
     catch (BTTP::Erreur& err) 
     {
-        std::cout << std::endl << err << std::endl;
+        std::cerr << err << std::endl;
         return err.code();
     }
 }

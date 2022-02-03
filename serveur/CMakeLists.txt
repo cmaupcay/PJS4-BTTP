@@ -7,7 +7,7 @@ set(LIBRARY_OUTPUT_PATH ${EXECUTABLE_OUTPUT_PATH}/lib)
 include(${CMAKE_CURRENT_LIST_DIR}/../protocole/CMakeLists.txt)
 
 # CONSTANTES
-set(BTTP_SERVEUR bttp-serveur) # Nom du projet CMake
+set(BTTP_SERVEUR ${BTTP}-srv) # Nom du projet CMake
 set(BTTP_SERVEUR_VERSION 0.0.1) # Version du serveur
 set(BTTP_SERVEUR_DEP ${BTTP_LIB}) # Dépendances
 set(BTTP_SERVEUR_RACINE ${CMAKE_CURRENT_LIST_DIR}//include/Racine.h) # En-tête racine (fichier de configuration)

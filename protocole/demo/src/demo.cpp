@@ -48,15 +48,20 @@ int main(const int argc, const char** args)
         std::string paquet = msg.construire();
         // paquet = "virus" + paquet; // Corruption du paquet
         std::cout << "Paquet : " << paquet << std::endl;
+        std::cout << "Longueur : " << paquet.size() << " octets" << std::endl;
 
-        std::string paquet_chiffrer = id->chiffrer(paquet, id->cle_publique(), mdp);
-        // paquet_chiffrer += "virus"; // Corruption du paquet chiffré
+        std::string paquet_chiffre = id->chiffrer(paquet, id->cle_publique(), mdp);
+        // paquet_chiffre += "virus"; // Corruption du paquet chiffré
+        std::cout << "Longueur (chiffré) : " << paquet_chiffre.size() << " octets" << std::endl;
+        std::cout << "Perte : " << (1.f - ((float)(paquet.size()) / paquet_chiffre.size())) * 100.f << " %" << std::endl;
 
-        const std::string paquet_dechiffrer = id->dechiffrer(paquet_chiffrer, id->cle_publique(), mdp);
-        std::cout << "Paquet déchiffré : " << paquet_dechiffrer;
+        std::cout << std::endl;
+
+        const std::string paquet_dechiffre = id->dechiffrer(paquet_chiffre, id->cle_publique(), mdp);
+        std::cout << "Paquet déchiffré : " << paquet_dechiffre;
 
         MessageDemo msg_recu{ "" };
-        msg_recu.deconstruire(paquet_dechiffrer);
+        msg_recu.deconstruire(paquet_dechiffre);
         std::cout << "Message déchiffré : " << msg_recu.lire();
     }
     catch (BTTP::Erreur& err) { std::cout << err; }

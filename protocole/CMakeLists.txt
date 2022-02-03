@@ -12,8 +12,12 @@ set(BTTP_RACINE ${CMAKE_CURRENT_LIST_DIR}/include/Racine.h) # En-tête racine (f
 set(BTTP_LIB ${BTTP} ${BTTP_DEP}) # Importation de la librairie et de ses dépendances
 
 # OPTIONS
-option(BTTP_DEMO "Compile la démonstration du protocole." OFF)
-option(BTTP_TEST "Compile les tests du protocole." OFF)
+if(NOT DEFINED BTTP_DEMO)
+    option(BTTP_DEMO "Compile la démonstration du protocole." ON)
+endif()
+if(NOT DEFINED BTTP_TEST)
+    option(BTTP_TEST "Compile les tests du protocole." ON)
+endif()
 
 # PROJET
 project(${BTTP} LANGUAGES CXX VERSION ${BTTP_VERSION})
@@ -47,11 +51,12 @@ add_library(
 # COMPLEMENTS
 # Démonstration
 if(BTTP_DEMO)
-    add_subdirectory(demo)
+    include(${CMAKE_CURRENT_LIST_DIR}/demo/CMakeLists.txt)
 endif()
 # Tests
 if(BTTP_TEST)
-    add_subdirectory(test)
+    set(BTTP_DEMO_OUTILS ${CMAKE_CURRENT_LIST_DIR}/demo/include/Outils.h)
+    include(${CMAKE_CURRENT_LIST_DIR}/test/CMakeLists.txt)
 endif()
 
 # CACHE

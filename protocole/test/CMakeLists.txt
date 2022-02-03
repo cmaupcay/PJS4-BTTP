@@ -1,11 +1,16 @@
 # CONSTANTES
 set(BTTP_TEST_EXE ${BTTP}-test)
 set(BTTP_TEST_DEP gtest)
+set(BTTP_TEST_RACINE ${CMAKE_CURRENT_LIST_DIR}/include/Racine.h) # En-tête racine (fichier de configuration)
+set(BTTP_TEST_DOSSIER .tests) # Dossier de travail pour les tests
+# DEBUG
+set(BTTP_TEST_DOSSIER_TMP true) # Défini si le dossier doit être effacer à la fin des tests
 
 # DEPENDANCES
-add_subdirectory(modules/googletest)
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/modules/googletest)
 
 # FICHIERS
+configure_file(${BTTP_TEST_RACINE}.in ${BTTP_TEST_RACINE})
 # Sources
 file(
     GLOB_RECURSE
@@ -24,6 +29,7 @@ add_executable(
     ${BTTP_TEST_EXE}
     ${BTTP_TEST_SRC}
     ${BTTP_TEST_INCLUDES}
+    ${BTTP_DEMO_OUTILS}
 )
 target_link_libraries(
     ${BTTP_TEST_EXE} 

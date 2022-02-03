@@ -45,6 +45,7 @@ namespace BTTP
         ) const
         {
             const std::string fichier = Identite::fichier(nom, chemin, dossier_contexte);
+            if (std::filesystem::exists(fichier)) throw Erreur::Identite_Doublon(fichier);
             const std::string dossier = fichier.substr(0, fichier.find_last_of('/'));
             if (!std::filesystem::is_directory(dossier))
             {
@@ -82,7 +83,7 @@ namespace BTTP
         const std::string Identite::traduireMessage(const OpenPGP::Message message_pgp)
         {
             std::string message = "";
-            bool saut = false;
+            bool saut = false; // On retire le premier saut à la ligne
             for(OpenPGP::Packet::Tag::Ptr const & p : message_pgp.get_packets())
             {
                 if (p->get_tag() == OpenPGP::Packet::LITERAL_DATA)
@@ -90,10 +91,11 @@ namespace BTTP
                 else if (saut) message += "\n";
                 else saut = true;
             }
+            message.pop_back(); // On retire le dernier saut à la ligne
             return message;
         }
 
-        const std::string Identite::chiffrer(const std::string message, const ClePublique cle_publique, const std::string mdp) const
+        const std::string Identite::chiffrer(const std::string message, const ClePublique destinataire, const std::string mdp) const
         {
             // Configuration du chiffrement
             OpenPGP::SecretKey::Ptr signataire = std::make_shared<OpenPGP::SecretKey>(_cle_privee);
@@ -102,14 +104,14 @@ namespace BTTP
             if (!args.valid()) throw Erreur::Identite_Chiffrement("Les arguments de chiffrement sont invalides.", message);
             // Chiffrement et signature du message
             OpenPGP::Message message_chiffre;
-            try { message_chiffre = OpenPGP::Encrypt::pka(args, cle_publique); }
+            try { message_chiffre = OpenPGP::Encrypt::pka(args, destinataire); }
             catch (std::exception& e) { throw Erreur::Identite_Chiffrement(e.what(), message); }
             if (!message_chiffre.meaningful()) throw Erreur::Identite_Chiffrement("L'intégrité du message n'a pu être vérifiée.", message);
             // Retour au format brut
             return message_chiffre.raw();
         }
 
-        const std::string Identite::dechiffrer(const std::string message, const ClePublique cle_publique, const std::string mdp) const
+        const std::string Identite::dechiffrer(const std::string message, const ClePublique emissaire, const std::string mdp) const
         {
             // Déchiffrement du message
             OpenPGP::Message message_dechiffre;
@@ -117,7 +119,7 @@ namespace BTTP
             catch (std::exception& err) { throw Erreur::Identite_Dechiffrement(err.what()); }
             if (!message_dechiffre.meaningful()) throw Erreur::Identite_Dechiffrement("L'intégrité du message n'a pu être vérifiée.");
             // Vérification de la signature
-            OpenPGP::Key::Ptr signataire = std::make_shared<OpenPGP::Key>(cle_publique);
+            OpenPGP::Key::Ptr signataire = std::make_shared<OpenPGP::Key>(emissaire);
             if (!signataire->meaningful()) throw Erreur::Identite_Dechiffrement("La clé publique est incohérente.");
             if (!OpenPGP::Verify::binary(*signataire, message_dechiffre))
                 throw Erreur::Identite_Dechiffrement("La vérification de la signature a échoué.");

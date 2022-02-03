@@ -4,13 +4,15 @@ set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${EXECUTABLE_OUTPUT_PATH}/lib)
 
 # DEPENDANCES
-include(${CMAKE_CURRENT_LIST_DIR}/../protocole/CMakeLists.txt)
+set(BTTP_CLIENT_CLI OFF)
+set(BTTP_CLIENT_GUI OFF)
+include(${CMAKE_CURRENT_LIST_DIR}/../client/CMakeLists.txt)
 
 # CONSTANTES
 set(BTTP_SERVEUR ${BTTP}-srv) # Nom du projet CMake
 set(BTTP_SERVEUR_VERSION 0.0.1) # Version du serveur
 set(BTTP_SERVEUR_DEP ${BTTP_LIB}) # Dépendances
-set(BTTP_SERVEUR_RACINE ${CMAKE_CURRENT_LIST_DIR}//include/Racine.h) # En-tête racine (fichier de configuration)
+set(BTTP_SERVEUR_RACINE ${CMAKE_CURRENT_LIST_DIR}/include/Racine.h) # En-tête racine (fichier de configuration)
 
 # PROJET
 project(${BTTP_SERVEUR} LANGUAGES CXX VERSION ${BTTP_SERVEUR_VERSION})
@@ -22,13 +24,13 @@ configure_file(${BTTP_SERVEUR_RACINE}.in ${BTTP_SERVEUR_RACINE})
 file(
     GLOB_RECURSE
     BTTP_SERVEUR_SRC
-    src/*.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp
 )
 # En-têtes
 file(
     GLOB_RECURSE
     BTTP_SERVEUR_INCLUDES
-    include/*.h
+    ${CMAKE_CURRENT_LIST_DIR}/include/*.h
 )
 
 # Bibliothèque

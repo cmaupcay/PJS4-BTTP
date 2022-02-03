@@ -1,0 +1,15 @@
+#ifndef H_BTTP_TEST_RACINE
+#define H_BTTP_TEST_RACINE
+
+#include <gtest/gtest.h>
+#include <iostream>
+#include "../../include/BTTP.h"
+
+#ifndef BTTP_TEST_DOSSIER
+    #define BTTP_TEST_DOSSIER "${BTTP_TEST_DOSSIER}"
+#endif
+#ifndef BTTP_TEST_DOSSIER_TMP
+    #define BTTP_TEST_DOSSIER_TMP ${BTTP_TEST_DOSSIER_TMP}
+#endif
+
+#endif

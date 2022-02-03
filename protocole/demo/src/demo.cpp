@@ -1,16 +1,5 @@
 #include "../include/MessageDemo.h"
-#include <iostream>
-
-const std::string demander(const std::string message)
-{
-    std::string sortie;
-    std::cout << message;
-    std::getline(std::cin, sortie);
-    return sortie;
-}
-
-const std::string dossier_depuis_fichier(const std::string fichier)
-{ return fichier.substr(0, fichier.find_last_of('/')); }
+#include "../include/Outils.h"
 
 int main(const int argc, const char** args)
 {
@@ -20,13 +9,13 @@ int main(const int argc, const char** args)
     BTTP::Protocole::Contexte::initialiser(dossier);
     std::cout << "bttp v" << BTTP_VERSION << " - demo" << std::endl;
     std::cout << "Dossier de travail : " << BTTP::Protocole::Contexte::dossier() << std::endl;
+    std::cout << std::endl;
 
     try 
     { 
         BTTP::Protocole::Identite* id = nullptr;
         std::string mdp;
-        const std::string nom = demander("Nom : ");
-    
+        const std::string nom = demander("Nom : ");    
         try
         {
             id = new BTTP::Protocole::Identite(nom);
@@ -38,12 +27,14 @@ int main(const int argc, const char** args)
             mdp = demander("Mot de passe : ");
             id = new BTTP::Protocole::Identite(nom, email, mdp);
         } 
+        std::cout << std::endl;
 
         const BTTP::Protocole::Meta meta{ id->cle_publique() };
         std::cout << "Bienvenue " << meta.nom() << " !" << std::endl;
 
         const std::string contenu = demander("Entrez un message à chiffrer : ");
         MessageDemo msg{ contenu };
+        std::cout << std::endl;
 
         std::string paquet = msg.construire();
         // paquet = "virus" + paquet; // Corruption du paquet
@@ -53,8 +44,8 @@ int main(const int argc, const char** args)
         std::string paquet_chiffre = id->chiffrer(paquet, id->cle_publique(), mdp);
         // paquet_chiffre += "virus"; // Corruption du paquet chiffré
         std::cout << "Longueur (chiffré) : " << paquet_chiffre.size() << " octets" << std::endl;
-        std::cout << "Perte : " << (1.f - ((float)(paquet.size()) / paquet_chiffre.size())) * 100.f << " %" << std::endl;
-
+        const float perte = (1.f - ((float)(paquet.size()) / paquet_chiffre.size())) * 100.f;
+        std::cout << "Perte : " << std::fixed << std::setprecision(3) << perte << " %" << std::endl;
         std::cout << std::endl;
 
         const std::string paquet_dechiffre = id->dechiffrer(paquet_chiffre, id->cle_publique(), mdp);

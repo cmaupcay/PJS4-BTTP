@@ -29,11 +29,16 @@ namespace BTTP
                 protected:
                     TMessage(
                         const T type, 
+                        const std::string contenu, const Identite::ClePublique destinataire,
+                        const Identite* signataire = nullptr, const std::string mdp = ""
+                    );    
+                    TMessage(
+                        const T type, 
                         const IMessage* message, const Identite::ClePublique destinataire,
                         const Identite* signataire = nullptr, const std::string mdp = ""
                     );                
-                    inline static const std::string charger_contenu(
-                        const IMessage* message, const Identite::ClePublique destinataire,
+                    inline void initialiser(
+                        const std::string contenu, const Identite::ClePublique destinataire,
                         const Identite* signataire, const std::string mdp = ""
                     );
 
@@ -51,7 +56,7 @@ namespace BTTP
 
                 enum class Type
                 {
-                    INITIALISATION = '*'
+                    EXECUTION = '>'
                 };
 
                 class Message : public TMessage<Type>

@@ -1,8 +1,8 @@
 #ifndef H_BTTP_MESSAGES
 #define H_BTTP_MESSAGES
 
-#include "Execution.h"
 #include "ClePublique.h"
+#include "Execution.h"
 
 #include "erreur/type/Inconnu.h"
 

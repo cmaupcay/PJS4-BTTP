@@ -11,23 +11,30 @@ namespace BTTP
                 template <class T>
                 TMessage<T>::TMessage(
                         T type, 
+                        const std::string contenu, const Identite::ClePublique destinataire,
+                        const Identite* signataire, const std::string mdp
+                    )
+                    : Messages::TMessage<T>(type)
+                { this->initialiser(contenu, destinataire, signataire, mdp); }
+                
+                template <class T>
+                TMessage<T>::TMessage(
+                        T type, 
                         const IMessage* message, const Identite::ClePublique destinataire,
                         const Identite* signataire, const std::string mdp
                     )
                     : Messages::TMessage<T>(type)
-                {
-                    this->_destinataire = destinataire.fingerprint();
-                    if (message != nullptr)
-                        this->_contenu = charger_contenu(message, destinataire, signataire, mdp);
-                    else this->_contenu = "";
-                }
+                { this->initialiser(message == nullptr ? "" : message->construire(), destinataire, signataire, mdp); }
 
                 template <class T>
-                const std::string TMessage<T>::charger_contenu(
-                    const IMessage* message, const Identite::ClePublique destinataire,
+                void TMessage<T>::initialiser(
+                    const std::string contenu, const Identite::ClePublique destinataire,
                     const Identite* signataire, const std::string mdp
                 )
-                { return signataire->chiffrer(message->construire(), destinataire, mdp); }
+                { 
+                    this->_destinataire = destinataire.fingerprint();
+                    this->_contenu = signataire->chiffrer(contenu, destinataire, mdp);
+                }
 
                 template <class T>
                 const std::string TMessage<T>::construire() const

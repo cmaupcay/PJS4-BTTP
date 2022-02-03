@@ -7,7 +7,7 @@ set(LIBRARY_OUTPUT_PATH ${EXECUTABLE_OUTPUT_PATH}/lib)
 include(${CMAKE_CURRENT_LIST_DIR}/../protocole/CMakeLists.txt)
 
 # CONSTANTES
-set(BTTP_CLIENT bttp-client) # Nom du projet CMake
+set(BTTP_CLIENT ${BTTP}-client) # Nom du projet CMake
 set(BTTP_CLIENT_VERSION 0.0.1) # Version du client
 set(BTTP_CLIENT_DEP ${BTTP_LIB}) # Dépendances
 set(BTTP_CLIENT_COEUR_DOSSIER coeur) # Dossier de référence du coeur

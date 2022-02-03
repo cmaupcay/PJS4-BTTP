@@ -1,3 +1,6 @@
+#ifndef H_BTTP_TEST_IDENTITE
+#define H_BTTP_TEST_IDENTITE
+
 #include "../Racine.h"
 
 #define BTTP_TEST_DOSSIER_ID BTTP_TEST_DOSSIER "/id"
@@ -13,6 +16,7 @@ namespace BTTP
             public:
                 static std::string dossier;
                 static const std::string message;
+                static const std::string suffixe_contact;
 
                 static BTTP::Protocole::Identite* emissaire;
                 static std::string nom_emissaire;
@@ -22,7 +26,6 @@ namespace BTTP
                 static std::string nom_destinataire;
                 static std::string mdp_destinataire;
 
-            public:
                 Identite();
                 static void SetUpTestCase();
                 static void TearDownTestCase();
@@ -30,3 +33,5 @@ namespace BTTP
         }
     }
 }
+
+#endif

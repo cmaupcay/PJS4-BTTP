@@ -8,6 +8,7 @@ namespace BTTP
         {
             std::string Identite::dossier = "";
             const std::string Identite::message = "message de la plus haute importance";
+            const std::string Identite::suffixe_contact = "@test.fr";
 
             BTTP::Protocole::Identite* Identite::emissaire = nullptr;
             std::string Identite::nom_emissaire = "emissaire";
@@ -24,7 +25,7 @@ namespace BTTP
                 mdp_emissaire = "p@ssw0rd";
                 mdp_destinataire = "123fourfivesix";
 
-                destinataire = new BTTP::Protocole::Identite(nom_destinataire, nom_destinataire + "@test.com", mdp_destinataire, BTTP_TEST_DOSSIER_ID, true);
+                destinataire = new BTTP::Protocole::Identite(nom_destinataire, nom_destinataire + suffixe_contact, mdp_destinataire, BTTP_TEST_DOSSIER_ID, true);
             }
 
             void Identite::TearDownTestCase() 
@@ -37,14 +38,14 @@ namespace BTTP
             // CREATION
             TEST_F(Identite, CreationDansContexte)
             {
-                emissaire = new BTTP::Protocole::Identite(nom_emissaire, nom_emissaire + "@test.com", mdp_emissaire, BTTP_TEST_DOSSIER_ID, true);
+                emissaire = new BTTP::Protocole::Identite(nom_emissaire, nom_emissaire + suffixe_contact, mdp_emissaire, BTTP_TEST_DOSSIER_ID, true);
                 ASSERT_TRUE(std::filesystem::exists(dossier + '/' + BTTP_TEST_DOSSIER_ID + '/' + nom_emissaire + '.' + BTTP_IDENTITE_EXT));
             }
             TEST_F(Identite, CreationDoublon)
             {
                 if (!std::filesystem::exists(dossier + '/' + BTTP_TEST_DOSSIER_ID + '/' + nom_emissaire + '.' + BTTP_IDENTITE_EXT)) GTEST_SKIP();
                 EXPECT_THROW({ // Création en double
-                    new BTTP::Protocole::Identite(nom_emissaire, "autre@test.com", mdp_emissaire, BTTP_TEST_DOSSIER_ID, true);
+                    new BTTP::Protocole::Identite(nom_emissaire, "autre" + suffixe_contact, mdp_emissaire, BTTP_TEST_DOSSIER_ID, true);
                 }, BTTP::Protocole::Erreur::Identite_Doublon);
             }
 

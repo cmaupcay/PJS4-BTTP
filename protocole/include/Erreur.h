@@ -23,7 +23,7 @@ namespace BTTP
         {}
 
         inline const std::string& nom() const { return this->_nom; }
-        inline const std::string afficher() const { return "[BTTP/" + this->_nom + "] " + this->_message + "\n\tCode : " + std::to_string(this->_code) + '\n'; }
+        inline const std::string afficher() const { return "[BTTP/" + this->_nom + ":" + std::to_string(this->_code) + "] " + this->_message + '\n'; }
 
         inline const int& code() const { return this->_code; }
 

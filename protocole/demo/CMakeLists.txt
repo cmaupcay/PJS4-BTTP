@@ -7,13 +7,13 @@ set(BTTP_DEMO_EXE ${BTTP}-demo)
 file(
     GLOB_RECURSE
     BTTP_DEMO_SRC
-    src/*.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp
 )
 # En-têtes
 file(
     GLOB_RECURSE
     BTTP_DEMO_INCLUDE
-    include/*.h
+    ${CMAKE_CURRENT_LIST_DIR}/include/*.h
 )
 
 # EXECUTABLE

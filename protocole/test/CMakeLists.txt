@@ -10,13 +10,13 @@ add_subdirectory(modules/googletest)
 file(
     GLOB_RECURSE
     BTTP_TEST_SRC
-    src/*.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp
 )
 # En-têtes
 file(
     GLOB_RECURSE
     BTTP_TEST_INCLUDES
-    include/*.h
+    ${CMAKE_CURRENT_LIST_DIR}/include/*.h
 )
 
 # EXECUTABLE

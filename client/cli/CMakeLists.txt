@@ -1,6 +1,7 @@
 # Constantes
 set(BTTP_CLIENT_CLI_EXE ${BTTP}-cli) # Dossier de référence du CLI
-set(BTTP_CLIENT_CLI_CONSOLE_PREFIX BTTP) # Prefix des messages affichés dans la console
+set(BTTP_CLIENT_CLI_VERSION 0.0.1) # Version du CLI
+set(BTTP_CLIENT_CLI_ENV_DOSSIER BTTP_HOME) # Nom de la variable d'environnement définissant le dossier de travail
 set(BTTP_CLIENT_CLI_RACINE ${CMAKE_CURRENT_LIST_DIR}/include/Racine.h) # En-tête racine (fichier de configuration)
 
 # Configuration

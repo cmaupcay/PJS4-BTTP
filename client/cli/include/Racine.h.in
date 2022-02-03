@@ -1,0 +1,10 @@
+#ifndef H_BTTP_CLIENT_CLI_RACINE
+#define H_BTTP_CLIENT_CLI_RACINE
+
+#define BTTP_CLIENT_CLI_VERSION "${BTTP_CLIENT_CLI_VERSION}"
+
+#define BTTP_CLIENT_CLI_ENV_DOSSIER "${BTTP_CLIENT_CLI_ENV_DOSSIER}"
+
+#include "../../coeur/include/BTTP-Client.h"
+
+#endif

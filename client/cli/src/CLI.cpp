@@ -8,16 +8,24 @@ namespace BTTP
         {
             const int executer(const int& argc, const char** argv)
             {
-                bool actif = true;
-                int retour = 0;
-                std::string tampon, commande = "";
+                // Détermination du dossier de travail
+                std::string dossier;
+                if (std::getenv(BTTP_CLIENT_CLI_ENV_DOSSIER) == NULL)
+                    dossier = std::filesystem::current_path();
+                else dossier = std::getenv(BTTP_CLIENT_CLI_ENV_DOSSIER);
+                Protocole::Contexte::initialiser(dossier);
 
-                while (actif)
-                {
-                    std::cin >> tampon;
-                }
+                // Affichage introductif
+                Console::afficher(BTTP_CLIENT_CLI_INTRO);
+                Console::afficher("Dossier : " + BTTP::Protocole::Contexte::dossier());
+                Console::afficher(""); // Saut de ligne
 
-                return retour;
+                const int code = Commandes::resoudre(argc, argv);
+
+                // Affichage de sortie
+                Console::afficher(""); // Saut de ligne
+
+                return code;
             }
         }
     }

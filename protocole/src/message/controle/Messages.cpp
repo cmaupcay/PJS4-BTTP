@@ -10,19 +10,14 @@ namespace BTTP
             {
                 Message* resoudre(const std::string paquet)
                 {
-                    Message* msg = nullptr;
-                    
                     if (paquet.length() > 0)
                         switch (static_cast<Type>(paquet[0]))
                         {
-                        
+                            // TODO Classes des types de message
                         default:
-                            break;
+                            throw Erreur::Messages::Type::Inconnu(paquet);
                         }
-
-                    if (msg != nullptr) msg->deconstruire(paquet);
-                    else throw Erreur::Messages_Type_Inconnu(paquet);
-                    return msg;
+                    return nullptr;
                 }
             }
         }

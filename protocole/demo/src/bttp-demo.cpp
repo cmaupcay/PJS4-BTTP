@@ -21,7 +21,7 @@ int main(const int argc, const char** args)
             id = new BTTP::Protocole::Identite(nom);
             mdp = demander("Mot de passe : ");
         }
-        catch (BTTP::Protocole::Erreur::Identite_Importation& e)
+        catch (BTTP::Protocole::Erreur::Identite::Importation& e)
         {
             const std::string email = demander("E-mail : ");
             mdp = demander("Mot de passe : ");

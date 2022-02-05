@@ -10,6 +10,7 @@
 
 namespace BTTP
 {
+    // TOCOMMENT
     class Erreur : public std::exception
     {
     private:

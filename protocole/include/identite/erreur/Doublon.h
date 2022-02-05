@@ -13,15 +13,18 @@ namespace BTTP
     {
         namespace Erreur
         {
-            class Identite_Doublon : public Erreur
+            namespace Identite
             {
-            public:
-                Identite_Doublon(const std::string& fichier)
-                    : Erreur(
-                        "Identite/Doublon", "L'exportation de la clé privée dans le fichier '" + fichier + "' a échoué car un fichier similaire existe déjà.",
-                        BTTP_IDENTITE_DOUBLON_CODE
-                    ) {}
-            };
+                class Doublon : public Erreur
+                {
+                public:
+                    Doublon(const std::string& fichier)
+                        : Erreur(
+                            "Identite/Doublon", "L'exportation de la clé privée dans le fichier '" + fichier + "' a échoué car un fichier similaire existe déjà.",
+                            BTTP_IDENTITE_DOUBLON_CODE
+                        ) {}
+                };
+            }
         }
     }
 }

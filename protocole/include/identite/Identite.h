@@ -38,6 +38,7 @@ namespace BTTP
 {
     namespace Protocole 
     {
+        // TOCOMMENT
         class Identite 
         {
             public:
@@ -58,7 +59,9 @@ namespace BTTP
 
             protected:
                 static Config config(const std::string nom, const std::string contact, const std::string mdp);
+
                 void genererClePrivee(const std::string nom, const std::string contact, const std::string mdp);
+                // TODO Le protocole doit-il s'occuper des fichiers ?
                 void exporterClePrivee(
                     const std::string nom, const bool armor = BTTP_IDENTITE_ARMOR,
                     const std::string chemin = BTTP_IDENTITE_CHEMIN_DEFAUT, const bool creer_chemin = BTTP_IDENTITE_CHEMIN_CREER,

@@ -13,6 +13,8 @@ namespace BTTP
         {
             namespace Controle
             {
+                // TOTEST
+                // TOCOMMENT
                 Message* resoudre(const std::string paquet);
             }
         }

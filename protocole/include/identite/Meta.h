@@ -7,6 +7,7 @@ namespace BTTP
 {
     namespace Protocole
     {
+        // TOCOMMENT
         struct Meta
         // Basé sur les UID de OpenPGP
         {

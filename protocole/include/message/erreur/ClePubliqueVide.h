@@ -4,7 +4,7 @@
 #include "../../Erreur.h"
 
 #ifndef BTTP_MESSAGES_CLE_PUBLIQUE_VIDE_CODE
-    #define BTTP_MESSAGES_CLE_PUBLIQUE_VIDE_CODE -100
+    #define BTTP_MESSAGES_CLE_PUBLIQUE_VIDE_CODE -200
 #endif
 
 namespace BTTP
@@ -13,13 +13,20 @@ namespace BTTP
     {
         namespace Erreur
         {
-            class ClePublique_Vide : public Erreur
+            namespace Messages
             {
-            public:
-                ClePublique_Vide()
-                    : Erreur("Messages/ClePublique/Vide", "Le message ne contient pas de clé publique.", BTTP_MESSAGES_CLE_PUBLIQUE_VIDE_CODE)
-                {}
-            };
+                namespace ClePublique
+                {
+                    // TOCOMMENT
+                    class Vide : public Erreur
+                    {
+                    public:
+                        Vide()
+                            : Erreur("Messages/ClePublique/Vide", "Le message ne contient pas de clé publique.", BTTP_MESSAGES_CLE_PUBLIQUE_VIDE_CODE)
+                        {}
+                    };
+                }
+            }
         }
     }
 }

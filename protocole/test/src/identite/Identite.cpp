@@ -41,7 +41,7 @@ namespace BTTP
                 if (!std::filesystem::exists(dossier + '/' + BTTP_TEST_DOSSIER_ID + '/' + nom_emissaire + '.' + BTTP_IDENTITE_EXT)) GTEST_SKIP();
                 EXPECT_THROW({ // Création en double
                     new BTTP::Protocole::Identite(nom_emissaire, "autre" + suffixe_contact, mdp_emissaire, BTTP_TEST_DOSSIER_ID, true);
-                }, BTTP::Protocole::Erreur::Identite_Doublon);
+                }, BTTP::Protocole::Erreur::Identite::Doublon);
             }
 
             // IMPORTATION
@@ -56,7 +56,7 @@ namespace BTTP
                 if (std::filesystem::exists(dossier + '/' + BTTP_TEST_DOSSIER_ID + "/autre" + '.' + BTTP_IDENTITE_EXT)) GTEST_SKIP();
                 EXPECT_THROW({ // Importation impossible
                     new BTTP::Protocole::Identite("autre", BTTP_TEST_DOSSIER_ID, true);
-                }, BTTP::Protocole::Erreur::Identite_Importation);
+                }, BTTP::Protocole::Erreur::Identite::Importation);
             }
 
             // CHIFFREMENT / DECHIFFREMENT
@@ -72,12 +72,12 @@ namespace BTTP
                 if (emissaire == nullptr || destinataire == nullptr) GTEST_SKIP();
                 EXPECT_THROW({
                     emissaire->chiffrer(message, destinataire->cle_publique(), mdp_destinataire);
-                }, BTTP::Protocole::Erreur::Identite_Chiffrement);
+                }, BTTP::Protocole::Erreur::Identite::Chiffrement);
 
                 const std::string message_chiffre = destinataire->chiffrer(message, emissaire->cle_publique(), mdp_destinataire);
                 EXPECT_THROW({
                     emissaire->dechiffrer(message_chiffre, destinataire->cle_publique(), mdp_destinataire);
-                }, BTTP::Protocole::Erreur::Identite_Dechiffrement);
+                }, BTTP::Protocole::Erreur::Identite::Dechiffrement);
             }
             TEST_F(Identite, MauvaiseClePublique)
             {
@@ -85,7 +85,7 @@ namespace BTTP
                 const std::string message_chiffre = emissaire->chiffrer(message, destinataire->cle_publique(), mdp_emissaire);
                 EXPECT_THROW({
                     destinataire->dechiffrer(message_chiffre, destinataire->cle_publique(), mdp_destinataire);
-                }, BTTP::Protocole::Erreur::Identite_Dechiffrement);
+                }, BTTP::Protocole::Erreur::Identite::Dechiffrement);
             }
             TEST_F(Identite, ChiffrementCorrompu)
             {
@@ -93,14 +93,14 @@ namespace BTTP
                 const std::string message_chiffre = emissaire->chiffrer(message, destinataire->cle_publique(), mdp_emissaire);
                 EXPECT_THROW({ // Avant
                     destinataire->dechiffrer("virus" + message_chiffre, emissaire->cle_publique(), mdp_destinataire);
-                }, BTTP::Protocole::Erreur::Identite_Dechiffrement);
+                }, BTTP::Protocole::Erreur::Identite::Dechiffrement);
                 const std::string message_corrompu = message_chiffre.substr(0, message_chiffre.size() / 2) + "virus" + message_chiffre.substr(message_chiffre.size() / 2 + 1);
                 EXPECT_THROW({ // Dedans
                     destinataire->dechiffrer(message_corrompu, emissaire->cle_publique(), mdp_destinataire);
-                }, BTTP::Protocole::Erreur::Identite_Dechiffrement);
+                }, BTTP::Protocole::Erreur::Identite::Dechiffrement);
                 EXPECT_THROW({ // Après
                     destinataire->dechiffrer(message_chiffre + "virus", emissaire->cle_publique(), mdp_destinataire);
-                }, BTTP::Protocole::Erreur::Identite_Dechiffrement);
+                }, BTTP::Protocole::Erreur::Identite::Dechiffrement);
             }
         }
     }

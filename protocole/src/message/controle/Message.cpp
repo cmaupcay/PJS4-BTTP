@@ -43,11 +43,11 @@ namespace BTTP
                 template <class T>
                 void TMessage<T>::construction(const std::string contenu)
                 {
-                    const size_t debut_entete = contenu.find(BTTP_MESSAGE_CONTROLE_SEP);
-                    this->_destinataire = contenu.substr(0, debut_entete);
-                    const size_t fin_entete = contenu.find(BTTP_MESSAGE_CONTROLE_SEP, debut_entete + 1);
-                    this->lire_entete(contenu.substr(debut_entete + 1, fin_entete - debut_entete - 1));
-                    this->_contenu = contenu.substr(fin_entete + 1);
+                    const std::vector<std::string> infos = Messages::decouper(contenu, BTTP_MESSAGE_CONTROLE_SEP);
+                    if (infos.size() != 3); throw Erreur::Messages::Deconstruction::Incomplet(contenu, infos.size(), 3);
+                    this->_destinataire = infos[0];
+                    this->lire_entete(infos[1]);
+                    this->_contenu = infos[2];
                 }
             }
         }

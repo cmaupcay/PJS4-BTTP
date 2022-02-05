@@ -12,6 +12,8 @@ namespace BTTP
     {
         namespace Messages
         {
+            // TOTEST
+            // TOCOMMENT
             Message* resoudre(const std::string paquet);
         }
     }

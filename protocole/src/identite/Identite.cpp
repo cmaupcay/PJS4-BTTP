@@ -45,15 +45,15 @@ namespace BTTP
         ) const
         {
             const std::string fichier = Identite::fichier(nom, chemin, dossier_contexte);
-            if (std::filesystem::exists(fichier)) throw Erreur::Identite_Doublon(fichier);
+            if (std::filesystem::exists(fichier)) throw Erreur::Identite::Doublon(fichier);
             const std::string dossier = fichier.substr(0, fichier.find_last_of('/'));
             if (!std::filesystem::is_directory(dossier))
             {
                 if (creer_chemin) std::filesystem::create_directories(dossier);
-                else throw Erreur::Identite_Exportation(fichier);
+                else throw Erreur::Identite::Exportation(fichier);
             }
             std::ofstream fichier_ex(fichier, std::ios::binary);
-            if (!fichier_ex) throw Erreur::Identite_Exportation(fichier);
+            if (!fichier_ex) throw Erreur::Identite::Exportation(fichier);
             fichier_ex << this->_cle_privee.write((armor ? OpenPGP::PGP::Armored::YES : OpenPGP::PGP::Armored::NO)) << std::flush;
             fichier_ex.close();
         }
@@ -62,7 +62,7 @@ namespace BTTP
         {
             const std::string fichier = Identite::fichier(nom, chemin, dossier_contexte);
             std::ifstream fichier_im(fichier, std::ios::binary);
-            if (!fichier_im) throw Erreur::Identite_Importation(fichier);
+            if (!fichier_im) throw Erreur::Identite::Importation(fichier);
             this->_cle_privee = OpenPGP::SecretKey(fichier_im);
             fichier_im.close();
         }
@@ -80,6 +80,7 @@ namespace BTTP
             this->importerClePrivee(nom, chemin, dossier_contexte);
         }
 
+        // TOCOMMENT
         const std::string Identite::traduireMessage(const OpenPGP::Message message_pgp)
         {
             std::string message = "";
@@ -99,14 +100,14 @@ namespace BTTP
         {
             // Configuration du chiffrement
             OpenPGP::SecretKey::Ptr signataire = std::make_shared<OpenPGP::SecretKey>(_cle_privee);
-            if (!signataire->meaningful()) throw Erreur::Identite_Chiffrement("La clé privée est incohérente.", message);
+            if (!signataire->meaningful()) throw Erreur::Identite::Chiffrement("La clé privée est incohérente.", message);
             const OpenPGP::Encrypt::Args args("", message, SYM, COMP, true, signataire, mdp, HASH);
-            if (!args.valid()) throw Erreur::Identite_Chiffrement("Les arguments de chiffrement sont invalides.", message);
+            if (!args.valid()) throw Erreur::Identite::Chiffrement("Les arguments de chiffrement sont invalides.", message);
             // Chiffrement et signature du message
             OpenPGP::Message message_chiffre;
             try { message_chiffre = OpenPGP::Encrypt::pka(args, destinataire); }
-            catch (std::exception& e) { throw Erreur::Identite_Chiffrement(e.what(), message); }
-            if (!message_chiffre.meaningful()) throw Erreur::Identite_Chiffrement("L'intégrité du message n'a pu être vérifiée.", message);
+            catch (std::exception& e) { throw Erreur::Identite::Chiffrement(e.what(), message); }
+            if (!message_chiffre.meaningful()) throw Erreur::Identite::Chiffrement("L'intégrité du message n'a pu être vérifiée.", message);
             // Retour au format brut
             return message_chiffre.raw();
         }
@@ -116,13 +117,13 @@ namespace BTTP
             // Déchiffrement du message
             OpenPGP::Message message_dechiffre;
             try { message_dechiffre = OpenPGP::Decrypt::pka(this->_cle_privee, mdp, message); }
-            catch (std::exception& err) { throw Erreur::Identite_Dechiffrement(err.what()); }
-            if (!message_dechiffre.meaningful()) throw Erreur::Identite_Dechiffrement("L'intégrité du message n'a pu être vérifiée.");
+            catch (std::exception& err) { throw Erreur::Identite::Dechiffrement(err.what()); }
+            if (!message_dechiffre.meaningful()) throw Erreur::Identite::Dechiffrement("L'intégrité du message n'a pu être vérifiée.");
             // Vérification de la signature
             OpenPGP::Key::Ptr signataire = std::make_shared<OpenPGP::Key>(emissaire);
-            if (!signataire->meaningful()) throw Erreur::Identite_Dechiffrement("La clé publique est incohérente.");
+            if (!signataire->meaningful()) throw Erreur::Identite::Dechiffrement("La clé publique est incohérente.");
             if (!OpenPGP::Verify::binary(*signataire, message_dechiffre))
-                throw Erreur::Identite_Dechiffrement("La vérification de la signature a échoué.");
+                throw Erreur::Identite::Dechiffrement("La vérification de la signature a échoué.");
             // Traduction en chaine de caractère (voir Identite::traduireMessage)
             return traduireMessage(message_dechiffre);
         }

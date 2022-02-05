@@ -13,18 +13,21 @@ namespace BTTP
     {
         namespace Erreur
         {
-            class Identite_Chiffrement : public Erreur
+            namespace Identite
             {
-            private:
-                const std::string& _message_echec;
-            public:
-                Identite_Chiffrement(const std::string details, const std::string& message_echec)
-                    : Erreur("Identite/Chiffrement", "Le chiffrement du message a échoué.\n\tDetails : " + details, BTTP_IDENTITE_CHIFFREMENT_CODE),
-                    _message_echec{ message_echec }
-                {}
+                class Chiffrement : public Erreur
+                {
+                private:
+                    const std::string& _message_echec;
+                public:
+                    Chiffrement(const std::string details, const std::string& message_echec)
+                        : Erreur("Identite/Chiffrement", "Le chiffrement du message a échoué.\n\tDetails : " + details, BTTP_IDENTITE_CHIFFREMENT_CODE),
+                        _message_echec{ message_echec }
+                    {}
 
-                inline const std::string& message_echec() const { return this->_message_echec; }
-            };
+                    inline const std::string& message_echec() const { return this->_message_echec; }
+                };
+            }
         }
     }
 }

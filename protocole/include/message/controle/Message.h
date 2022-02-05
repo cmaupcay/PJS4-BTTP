@@ -16,6 +16,7 @@ namespace BTTP
         {
             namespace Controle
             {
+                // TOCOMMENT
                 template<class T>
                 class TMessage : public Protocole::Messages::TMessage<T>
                 {
@@ -54,11 +55,13 @@ namespace BTTP
                     inline const std::string& destinataire() const { return this->_destinataire; }
                 };
 
+                // TOCOMMENT
                 enum class Type
                 {
                     EXECUTION = '>'
                 };
 
+                // TOCOMMENT
                 class Message : public TMessage<Type>
                 {
                 protected:

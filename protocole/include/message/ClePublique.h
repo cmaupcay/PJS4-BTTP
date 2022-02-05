@@ -33,6 +33,10 @@ namespace BTTP
                     : BTTP::Protocole::Messages::Message(Type::CLE_PUBLIQUE),
                     _cle{ BTTP_MESSAGE_CLE_PUBLIQUE_VIDE }
                 {}
+                ClePublique(const std::string paquet)
+                    : BTTP::Protocole::Messages::Message(Type::CLE_PUBLIQUE),
+                    _cle{ BTTP_MESSAGE_CLE_PUBLIQUE_VIDE }
+                { this->deconstruire(paquet); }
 
                 const Identite::ClePublique cle() const;
             };

@@ -59,6 +59,7 @@ namespace BTTP
                 enum class Type
                 {
                     EXECUTION = '>'
+                    // TODO Réfléchir aux types manquants
                 };
 
                 // TOCOMMENT

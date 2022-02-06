@@ -5,15 +5,14 @@ configure_file(${BTTP_CLIENT_RACINE}.in ${BTTP_CLIENT_RACINE})
 file(
     GLOB_RECURSE
     BTTP_CLIENT_SRC
-    src/*.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp
 )
 # En-têtes
 file(
     GLOB_RECURSE
     BTTP_CLIENT_INCLUDES
-    include/*.h
+    ${CMAKE_CURRENT_LIST_DIR}/include/*.h
 )
-
 # Bibliothèque
 add_library(
     ${BTTP_CLIENT}

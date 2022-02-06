@@ -57,31 +57,14 @@ namespace BTTP
 
             protected:
                 void genererClePrivee(const std::string nom, const std::string contact, const std::string mdp);
-                // TODO Le protocole doit-il s'occuper des fichiers ?
-                void exporterClePrivee(
-                    const std::string nom, const bool armor = BTTP_IDENTITE_ARMOR,
-                    const std::string chemin = BTTP_IDENTITE_CHEMIN_DEFAUT, const bool creer_chemin = BTTP_IDENTITE_CHEMIN_CREER,
-                    const bool dossier_contexte = BTTP_IDENTITE_CHEMIN_BTTP_DEFAUT
-                ) const;
-                void importerClePrivee(
-                    const std::string nom, const std::string chemin = BTTP_IDENTITE_CHEMIN_DEFAUT,
-                    const bool dossier_contexte = BTTP_IDENTITE_CHEMIN_BTTP_DEFAUT
-                );
-
-                static inline const std::string fichier(
-                    const std::string nom, const std::string chemin, const bool dossier_contexte
-                );
+                
+                void importerClePrivee(const std::string cle_privee);
             
             public:
-                Identite(
-                    const std::string nom, const std::string chemin = BTTP_IDENTITE_CHEMIN_DEFAUT,
-                    const bool dossier_contexte = BTTP_IDENTITE_CHEMIN_BTTP_DEFAUT
-                );
-                Identite(
-                    const std::string nom, const std::string contact, const std::string mdp,
-                    const std::string chemin = BTTP_IDENTITE_CHEMIN_DEFAUT,
-                    const bool dossier_contexte = BTTP_IDENTITE_CHEMIN_BTTP_DEFAUT
-                );
+                Identite(const std::string cle_privee);
+                Identite(const std::string nom, const std::string contact, const std::string mdp);
+
+                std::string exporterClePrivee(const bool armor = BTTP_IDENTITE_ARMOR) const;
                 
                 /**
                  * @brief Retourne la clé publique de l'identité.

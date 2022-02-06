@@ -16,19 +16,25 @@ namespace BTTP
 
                 void ClePublique::SetUpTestCase()
                 {
+    
                     if (BTTP::Protocole::Test::Identite::destinataire == nullptr)
                         BTTP::Protocole::Test::Identite::destinataire = new Identite(
                             BTTP::Protocole::Test::Identite::nom_destinataire,
-                            BTTP_TEST_DOSSIER_ID, true
+                            BTTP::Protocole::Test::Identite::nom_destinataire + BTTP::Protocole::Test::Identite::suffixe_contact,
+                            BTTP::Protocole::Test::Identite::mdp_destinataire
                         );
+
                     cle = new Cle::Publique(BTTP::Protocole::Test::Identite::destinataire->cle_publique());
                 }
                 
                 void ClePublique::TearDownTestCase()
                 {
-                    delete BTTP::Protocole::Test::Identite::destinataire, cle;
+                    delete BTTP::Protocole::Test::Identite::destinataire;
+                    delete cle;
                     if (message != nullptr) delete message;
                     construction = "";
+                    BTTP::Protocole::Test::Identite::destinataire = nullptr;
+                    cle = nullptr;
                 }
 
                 // CREATION
@@ -39,6 +45,7 @@ namespace BTTP
                     EXPECT_THROW({ message->cle(); }, BTTP::Protocole::Erreur::Messages::ClePublique::Vide);
                     EXPECT_EQ(message->type(), BTTP::Protocole::Messages::Type::CLE_PUBLIQUE);
                 }
+        
                 TEST_F(ClePublique, CreationDepuisClePublique)
                 {
                     message = new BTTP::Protocole::Messages::ClePublique(*cle);
@@ -61,6 +68,8 @@ namespace BTTP
                     message->deconstruire(construction);
                     EXPECT_EQ(message->cle(), *cle);
                 }
+
+                
             }
         }
     }

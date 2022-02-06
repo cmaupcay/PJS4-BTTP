@@ -13,14 +13,19 @@ namespace BTTP
 
             void Meta::SetUpTestCase()
             {
-                Identite::destinataire = new BTTP::Protocole::Identite(Identite::nom_destinataire, BTTP_TEST_DOSSIER_ID, true);
+                Identite::destinataire = new BTTP::Protocole::Identite(Identite::nom_destinataire, Identite::nom_destinataire + Identite::suffixe_contact, Identite::mdp_destinataire);
                 contact = Identite::nom_destinataire + Identite::suffixe_contact;
             }
 
             void Meta::TearDownTestCase()
             {
-                delete meta, Identite::destinataire;
+                delete meta;
+                delete Identite::destinataire;
                 contact = "";
+
+                meta = nullptr;
+                Identite::destinataire = nullptr;
+
             }
 
             // CREATION

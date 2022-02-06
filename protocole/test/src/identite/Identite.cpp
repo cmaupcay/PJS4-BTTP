@@ -6,7 +6,6 @@ namespace BTTP
     {
         namespace Test 
         {
-            std::string Identite::dossier = "";
             const std::string Identite::message = "message de la plus haute importance";
             const std::string Identite::suffixe_contact = "@test.fr";
 
@@ -22,41 +21,17 @@ namespace BTTP
 
             void Identite::SetUpTestCase() 
             {
-                destinataire = new BTTP::Protocole::Identite(nom_destinataire, nom_destinataire + suffixe_contact, mdp_destinataire, BTTP_TEST_DOSSIER_ID, true);
+                destinataire = new BTTP::Protocole::Identite(nom_destinataire, nom_destinataire + suffixe_contact, mdp_destinataire);
+                emissaire = new BTTP::Protocole::Identite(nom_emissaire, nom_emissaire + suffixe_contact, mdp_emissaire);
             }
 
             void Identite::TearDownTestCase() 
             {
-                delete emissaire, destinataire;
-            }
-
-            // CREATION
-            TEST_F(Identite, CreationDansContexte)
-            {
-                emissaire = new BTTP::Protocole::Identite(nom_emissaire, nom_emissaire + suffixe_contact, mdp_emissaire, BTTP_TEST_DOSSIER_ID, true);
-                ASSERT_TRUE(std::filesystem::exists(dossier + '/' + BTTP_TEST_DOSSIER_ID + '/' + nom_emissaire + '.' + BTTP_IDENTITE_EXT));
-            }
-            TEST_F(Identite, CreationDoublon)
-            {
-                if (!std::filesystem::exists(dossier + '/' + BTTP_TEST_DOSSIER_ID + '/' + nom_emissaire + '.' + BTTP_IDENTITE_EXT)) GTEST_SKIP();
-                EXPECT_THROW({ // Création en double
-                    new BTTP::Protocole::Identite(nom_emissaire, "autre" + suffixe_contact, mdp_emissaire, BTTP_TEST_DOSSIER_ID, true);
-                }, BTTP::Protocole::Erreur::Identite::Doublon);
-            }
-
-            // IMPORTATION
-            TEST_F(Identite, ImportationDepuisContexte)
-            {
-                if (!std::filesystem::exists(dossier + '/' + BTTP_TEST_DOSSIER_ID + '/' + nom_emissaire + '.' + BTTP_IDENTITE_EXT)) GTEST_SKIP();
                 delete emissaire;
-                emissaire = new BTTP::Protocole::Identite(nom_emissaire, BTTP_TEST_DOSSIER_ID, true);
-            }
-            TEST_F(Identite, ImportationImpossible)
-            {
-                if (std::filesystem::exists(dossier + '/' + BTTP_TEST_DOSSIER_ID + "/autre" + '.' + BTTP_IDENTITE_EXT)) GTEST_SKIP();
-                EXPECT_THROW({ // Importation impossible
-                    new BTTP::Protocole::Identite("autre", BTTP_TEST_DOSSIER_ID, true);
-                }, BTTP::Protocole::Erreur::Identite::Importation);
+                delete destinataire;
+
+                emissaire = nullptr;
+                destinataire = nullptr;
             }
 
             // CHIFFREMENT / DECHIFFREMENT
@@ -67,6 +42,7 @@ namespace BTTP
                 const std::string message_dechiffre = destinataire->dechiffrer(message_chiffre, emissaire->cle_publique(), mdp_destinataire);
                 EXPECT_EQ(message, message_dechiffre);
             }
+            
             TEST_F(Identite, MauvaisMotDePasse)
             {
                 if (emissaire == nullptr || destinataire == nullptr) GTEST_SKIP();
@@ -79,6 +55,7 @@ namespace BTTP
                     emissaire->dechiffrer(message_chiffre, destinataire->cle_publique(), mdp_destinataire);
                 }, BTTP::Protocole::Erreur::Identite::Dechiffrement);
             }
+            
             TEST_F(Identite, MauvaiseClePublique)
             {
                 if (emissaire == nullptr || destinataire == nullptr) GTEST_SKIP();

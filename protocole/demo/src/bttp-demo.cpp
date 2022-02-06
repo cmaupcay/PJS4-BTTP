@@ -3,12 +3,7 @@
 
 int main(const int argc, const char** args)
 {
-    std::string dossier = dossier_depuis_fichier(args[0]);
-    if (!std::filesystem::is_directory(dossier))
-        dossier = std::filesystem::current_path();
-    BTTP::Protocole::Contexte::initialiser(dossier);
     std::cout << "bttp v" << BTTP_VERSION << " - demo" << std::endl;
-    std::cout << "Dossier de travail : " << BTTP::Protocole::Contexte::dossier() << std::endl;
     std::cout << std::endl;
 
     try 
@@ -16,17 +11,9 @@ int main(const int argc, const char** args)
         BTTP::Protocole::Identite* id = nullptr;
         std::string mdp;
         const std::string nom = demander("Nom : ");    
-        try
-        {
-            id = new BTTP::Protocole::Identite(nom);
-            mdp = demander("Mot de passe : ");
-        }
-        catch (BTTP::Protocole::Erreur::Identite::Importation& e)
-        {
-            const std::string email = demander("E-mail : ");
-            mdp = demander("Mot de passe : ");
-            id = new BTTP::Protocole::Identite(nom, email, mdp);
-        } 
+        const std::string email = demander("E-mail : ");
+        mdp = demander("Mot de passe : ");
+        id = new BTTP::Protocole::Identite(nom, email, mdp);
         std::cout << std::endl;
 
         const BTTP::Protocole::Meta meta{ id->cle_publique() };
@@ -54,6 +41,7 @@ int main(const int argc, const char** args)
         MessageDemo msg_recu{ "" };
         msg_recu.deconstruire(paquet_dechiffre);
         std::cout << "Message déchiffré : " << msg_recu.lire() << std::endl;
+
     }
     catch (BTTP::Erreur& err) { std::cout << err; }
 

@@ -1,12 +1,10 @@
 #include "../../include/identite/Identite.h"
+#include <sstream>
 
 namespace BTTP
 {
     namespace Protocole
     {
-
-        const std::string Identite::fichier(const std::string nom, const std::string chemin, const bool dossier_contexte)
-        { return (dossier_contexte ? Contexte::dossier() + '/' : "") + (chemin != "" ? chemin + '/' : "") + nom + '.' + BTTP_IDENTITE_EXT; }
 
         void Identite::genererClePrivee(std::string nom, std::string email, std::string mdp)
         {
@@ -14,44 +12,29 @@ namespace BTTP
             this->_cle_privee = Cle::Privee::generer(config);
         }
 
-        void Identite::exporterClePrivee(
-            const std::string nom, const bool armor, const std::string chemin, const bool creer_chemin, const bool dossier_contexte
-        ) const
+        std::string Identite::exporterClePrivee(const bool armor) const
         {
-            const std::string fichier = Identite::fichier(nom, chemin, dossier_contexte);
-            if (std::filesystem::exists(fichier)) throw Erreur::Identite::Doublon(fichier);
-            const std::string dossier = fichier.substr(0, fichier.find_last_of('/'));
-            if (!std::filesystem::is_directory(dossier))
-            {
-                if (creer_chemin) std::filesystem::create_directories(dossier);
-                else throw Erreur::Identite::Exportation(fichier);
-            }
-            std::ofstream fichier_ex(fichier, std::ios::binary);
-            if (!fichier_ex) throw Erreur::Identite::Exportation(fichier);
-            fichier_ex << this->_cle_privee.write((armor ? OpenPGP::PGP::Armored::YES : OpenPGP::PGP::Armored::NO)) << std::flush;
-            fichier_ex.close();
+            std::ostringstream cle_privee;
+            cle_privee << this->_cle_privee.write((armor ? OpenPGP::PGP::Armored::YES : OpenPGP::PGP::Armored::NO)) << std::flush;
+
+            return cle_privee.str();
         }
 
-        void Identite::importerClePrivee(const std::string nom, const std::string chemin, const bool dossier_contexte)
+        void Identite::importerClePrivee(const std::string cle_privee)
         {
-            const std::string fichier = Identite::fichier(nom, chemin, dossier_contexte);
-            std::ifstream fichier_im(fichier, std::ios::binary);
-            if (!fichier_im) throw Erreur::Identite::Importation(fichier);
-            this->_cle_privee = Cle::Privee(fichier_im);
-            fichier_im.close();
+            
+            this->_cle_privee = Cle::Privee(_cle_privee);
+
         }
 
-        Identite::Identite(
-            const std::string nom, const std::string email, const std::string mdp, const std::string chemin, const bool dossier_contexte
-        )
+        Identite::Identite(const std::string nom, const std::string email, const std::string mdp)
         {
             this->genererClePrivee(nom, email, mdp);
-            this->exporterClePrivee(nom, BTTP_IDENTITE_ARMOR, chemin, dossier_contexte);
         }
 
-        Identite::Identite(const std::string nom, const std::string chemin, const bool dossier_contexte) 
+        Identite::Identite(const std::string cle_privee) 
         {
-            this->importerClePrivee(nom, chemin, dossier_contexte);
+            this->importerClePrivee(cle_privee);
         }
 
         // TOCOMMENT

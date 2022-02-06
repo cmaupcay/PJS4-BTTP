@@ -43,8 +43,16 @@ namespace BTTP
         class Identite 
         {
             private:
+                /**
+                 * @brief Clé privée relative à l'identité.
+                 */
                 Cle::Privee _cle_privee;
 
+                /**
+                 * @brief Conversion d'un OpenPGP::Message en chaîne de caractère.
+                 * @param message_pgp Message de la bibliothèque calccrypto/OpenPGP.
+                 * @return const std::string Message reconstruit.
+                 */
                 static const std::string traduireMessage(const OpenPGP::Message message_pgp);
 
             protected:
@@ -75,11 +83,35 @@ namespace BTTP
                     const bool dossier_contexte = BTTP_IDENTITE_CHEMIN_BTTP_DEFAUT
                 );
                 
+                /**
+                 * @brief Retourne la clé publique de l'identité.
+                 * @return const Cle::Publique Clé publique associée à l'identité.
+                 */
                 inline const Cle::Publique cle_publique() const { return Cle::Publique(this->_cle_privee.get_public()); }
 
+                /**
+                 * @brief Chiffrement et signature d'une chaîne de caractère à destination d'une identité.
+                 * @param message Message à chiffrer.
+                 * @param destinataire Clé publique relative à l'identité du destinataire.
+                 * @param mdp Mot de passe de la clé privée du signataire du message.
+                 * @return const std::string Chaîne de caractère chiffrée et signée.
+                 */
                 const std::string chiffrer(const std::string message, const Cle::Publique destinataire, const std::string mdp) const;
+                /**
+                 * @brief Déchiffrement et vérification de la signature d'une chaîne de caractère chiffrée et signée a destination de l'identité.
+                 * @param message Message chiffré et signé par l'émissaire.
+                 * @param emissaire Signataire du message.
+                 * @param mdp Mot de passe de la clé privée du destinataire.
+                 * @return const std::string Chaîne de caractère déchiffrée.
+                 */
                 const std::string dechiffrer(const std::string message, const Cle::Publique emissaire, const std::string mdp) const;
 
+                /**
+                 * @brief Ecrit la clé publique relative à l'identité dans le flux de sortie.
+                 * @param os Flux de sortie.
+                 * @param id Identité cible.
+                 * @return std::ostream& Flux de sortie mis à jour.
+                 */
                 inline friend std::ostream& operator<<(std::ostream& os, const Identite& id)
                 { return (os << id.cle_publique().write()); }
         };

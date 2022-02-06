@@ -1,10 +1,10 @@
-#ifndef H_BTTP_MESSAGES_CLE_PUBLIQUE_VIDE
-#define H_BTTP_MESSAGES_CLE_PUBLIQUE_VIDE
+#ifndef H_BTTP_MESSAGES_VIDE
+#define H_BTTP_MESSAGES_VIDE
 
 #include "../../Erreur.h"
 
-#ifndef BTTP_MESSAGES_CLE_PUBLIQUE_VIDE_CODE
-    #define BTTP_MESSAGES_CLE_PUBLIQUE_VIDE_CODE -200
+#ifndef BTTP_MESSAGES_VIDE_CODE
+    #define BTTP_MESSAGES_VIDE_CODE -200
 #endif
 
 namespace BTTP
@@ -15,17 +15,25 @@ namespace BTTP
         {
             namespace Messages
             {
-                namespace ClePublique
+                /**
+                 * @brief Erreur de tentative de lecture d'un message vide.
+                 */
+                class Vide : public Erreur
                 {
-                    // TOCOMMENT
-                    class Vide : public Erreur
-                    {
-                    public:
-                        Vide()
-                            : Erreur("Messages/ClePublique/Vide", "Le message ne contient pas de clé publique.", BTTP_MESSAGES_CLE_PUBLIQUE_VIDE_CODE)
-                        {}
-                    };
-                }
+                protected:
+                    /**
+                     * @param emplacement Emplacement vide qui a été lu.
+                     * @param code Code UNIQUE à l'erreur.
+                     */
+                    Vide(const std::string emplacement, const int code = BTTP_MESSAGES_VIDE_CODE)
+                        : Erreur("Messages/Vide", emplacement + " est vide.", code)
+                    {}
+
+                public:
+                    Vide()
+                        : Erreur("Messages/Vide", "Le message est vide.", BTTP_MESSAGES_VIDE_CODE)
+                    {}
+                };
             }
         }
     }

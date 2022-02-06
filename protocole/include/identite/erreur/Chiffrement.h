@@ -16,7 +16,7 @@ namespace BTTP
             namespace Identite
             {
                 /**
-                 * @brief Erreur survenue lors du chiffrement ou de la signature d'un message.
+                 * @brief Erreur de chiffrement ou de signature d'un message.
                  */
                 class Chiffrement : public Erreur
                 {

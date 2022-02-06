@@ -16,7 +16,7 @@ namespace BTTP
             namespace Identite
             {
                 /**
-                 * @brief Erreur survenue dans le déchiffrement et la vérification d'un message chiffré et signé.
+                 * @brief Erreur de déchiffrement ou de vérification d'un message chiffré et signé.
                  */
                 class Dechiffrement : public Erreur
                 {

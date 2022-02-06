@@ -42,7 +42,7 @@ namespace BTTP
                 {
                     if (message != nullptr) delete message;
                     message = new BTTP::Protocole::Messages::ClePublique();
-                    EXPECT_THROW({ message->cle(); }, BTTP::Protocole::Erreur::Messages::ClePublique::Vide);
+                    EXPECT_THROW({ message->cle(); }, BTTP::Protocole::Erreur::Messages::Vide);
                     EXPECT_EQ(message->type(), BTTP::Protocole::Messages::Type::CLE_PUBLIQUE);
                 }
         

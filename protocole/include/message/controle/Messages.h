@@ -29,7 +29,7 @@ namespace BTTP
                 /**
                  * @brief Génère une instance d'un message de contrôle du type associé au type du message en entrée.
                  * 
-                 * @param message Message simple à encapsuler.
+                 * @param message Message BTTP standard à encapsuler.
                  * @param destinataire Destinataire du message encapsulé.
                  * @param signataire Signataire du message encapsulé.
                  * @param mdp Mot de passe du signataire.

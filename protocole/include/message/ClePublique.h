@@ -22,7 +22,7 @@ namespace BTTP
                 std::string _cle;
 
                 inline const std::string contenu() const override { return this->_cle; }
-                inline void construction(const std::string contenu) override { this->_cle = contenu; }
+                inline void deconstruction(const std::string contenu) override { this->_cle = contenu; }
 
             public:
                 ClePublique(Cle::Publique cle)

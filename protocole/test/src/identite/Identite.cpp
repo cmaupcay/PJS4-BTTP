@@ -21,8 +21,6 @@ namespace BTTP
 
             void Identite::SetUpTestCase() 
             {
-                destinataire = new BTTP::Protocole::Identite(nom_destinataire, nom_destinataire + suffixe_contact, mdp_destinataire);
-                emissaire = new BTTP::Protocole::Identite(nom_emissaire, nom_emissaire + suffixe_contact, mdp_emissaire);
             }
 
             void Identite::TearDownTestCase() 
@@ -34,6 +32,25 @@ namespace BTTP
                 destinataire = nullptr;
             }
 
+            // GENERATION / EXPORTATION / IMPORTATION
+            TEST_F(Identite, Generation_x2)
+            {
+                destinataire = new BTTP::Protocole::Identite(nom_destinataire, nom_destinataire + suffixe_contact, mdp_destinataire);
+                emissaire = new BTTP::Protocole::Identite(nom_emissaire, nom_emissaire + suffixe_contact, mdp_emissaire);
+            }
+            TEST_F(Identite, Exportation)
+            {
+                BTTP::Protocole::Cle::Privee cle{ destinataire->exporter() };
+                EXPECT_EQ(destinataire->cle_publique(), cle.get_public());
+                BTTP::Protocole::Cle::Privee cle_armor{ emissaire->exporter(true) };
+                EXPECT_EQ(emissaire->cle_publique(), cle_armor.get_public());
+            }
+            TEST_F(Identite, Importation)
+            {
+                BTTP::Protocole::Identite id{ destinataire->exporter() };
+                EXPECT_EQ(destinataire->cle_publique(), id.cle_publique());
+            }
+
             // CHIFFREMENT / DECHIFFREMENT
             TEST_F(Identite, ChiffrementDechiffrement)
             {
@@ -42,7 +59,6 @@ namespace BTTP
                 const std::string message_dechiffre = destinataire->dechiffrer(message_chiffre, emissaire->cle_publique(), mdp_destinataire);
                 EXPECT_EQ(message, message_dechiffre);
             }
-            
             TEST_F(Identite, MauvaisMotDePasse)
             {
                 if (emissaire == nullptr || destinataire == nullptr) GTEST_SKIP();
@@ -55,7 +71,6 @@ namespace BTTP
                     emissaire->dechiffrer(message_chiffre, destinataire->cle_publique(), mdp_destinataire);
                 }, BTTP::Protocole::Erreur::Identite::Dechiffrement);
             }
-            
             TEST_F(Identite, MauvaiseClePublique)
             {
                 if (emissaire == nullptr || destinataire == nullptr) GTEST_SKIP();

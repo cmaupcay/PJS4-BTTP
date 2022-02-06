@@ -55,9 +55,10 @@ namespace BTTP
                 inline friend std::ostream& operator<<(std::ostream& os, const IMessage& msg) { return (os << msg.construire()); }
             };
 
+            // TOTEST Voir les fonctions implémentées.
             /**
              * @brief Classe de base des messages manipulés par le protocole.
-             * @tparam _Type Classe de type des messages.
+             * @tparam _Type Enumération de type des messages.
              */
             template <class _Type>
             class TMessage : public IMessage
@@ -87,6 +88,11 @@ namespace BTTP
                  * @return const std::string Contenu du message linéarisé.
                  */
                 virtual const std::string contenu() const = 0;
+                /**
+                 * @brief Déconstruction du contenu d'un paquet et enregistrement des informations extraites.
+                 * @see BTTP::Protocole::Messages::TMessage<_Type>::deconstruire()
+                 * @param contenu Contenu d'un paquet (sans le préfix du type).
+                 */
                 virtual void deconstruction(const std::string contenu) = 0;
 
             public:
@@ -118,7 +124,7 @@ namespace BTTP
             };
 
             /**
-             * @brief Classe des types de messages BTTP.
+             * @brief Enumération des types standards de messages BTTP.
              */
             enum class Type
             {

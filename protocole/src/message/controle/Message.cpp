@@ -32,6 +32,7 @@ namespace BTTP
                     const Identite* signataire, const std::string mdp
                 )
                 { 
+                    // TODO Un autre moyen d'identifier le destinataire ?
                     this->_destinataire = destinataire.fingerprint();
                     this->_contenu = signataire->chiffrer(contenu, destinataire, mdp);
                 }

@@ -5,40 +5,33 @@ namespace BTTP
 {
     namespace Protocole
     {
-
-        void Identite::genererClePrivee(std::string nom, std::string email, std::string mdp)
+        
+        void Identite::generer(std::string nom, std::string email, std::string mdp)
         {
             Cle::Config config{ nom, email, mdp };
             this->_cle_privee = Cle::Privee::generer(config);
         }
 
-        std::string Identite::exporterClePrivee(const bool armor) const
-        {
-            std::ostringstream cle_privee;
-            cle_privee << this->_cle_privee.write((armor ? OpenPGP::PGP::Armored::YES : OpenPGP::PGP::Armored::NO)) << std::flush;
-
-            return cle_privee.str();
+        std::string Identite::exporter(const bool armor) const
+        { 
+            try { return this->_cle_privee.write((armor ? OpenPGP::PGP::Armored::YES : OpenPGP::PGP::Armored::NO)); }
+            catch (std::exception& err) { throw Erreur::Identite::Exportation(err.what()); }
         }
 
-        void Identite::importerClePrivee(const std::string cle_privee)
-        {
-            
-            this->_cle_privee = Cle::Privee(_cle_privee);
-
+        void Identite::importer(const std::string cle_privee)
+        { 
+            try { this->_cle_privee = Cle::Privee(cle_privee); }
+            catch (std::exception& err) { throw Erreur::Identite::Importation(err.what()); }
         }
 
         Identite::Identite(const std::string nom, const std::string email, const std::string mdp)
-        {
-            this->genererClePrivee(nom, email, mdp);
-        }
+        { this->generer(nom, email, mdp); }
 
         Identite::Identite(const std::string cle_privee) 
-        {
-            this->importerClePrivee(cle_privee);
-        }
+        { this->importer(cle_privee); }
 
         // TOCOMMENT Retrouver l'exemple original.
-        const std::string Identite::traduireMessage(const OpenPGP::Message message_pgp)
+        const std::string Identite::traduire_message(const OpenPGP::Message message_pgp)
         {
             std::string message = "";
             bool saut = false; // On retire le premier saut à la ligne
@@ -74,15 +67,15 @@ namespace BTTP
             // Déchiffrement du message
             OpenPGP::Message message_dechiffre;
             try { message_dechiffre = OpenPGP::Decrypt::pka(this->_cle_privee, mdp, message); }
-            catch (std::exception& err) { throw Erreur::Identite::Dechiffrement(err.what()); }
-            if (!message_dechiffre.meaningful()) throw Erreur::Identite::Dechiffrement("L'intégrité du message n'a pu être vérifiée.");
+            catch (std::exception& err) { throw Erreur::Identite::Dechiffrement(err.what(), message); }
+            if (!message_dechiffre.meaningful()) throw Erreur::Identite::Dechiffrement("L'intégrité du message n'a pu être vérifiée.", message);
             // Vérification de la signature
             OpenPGP::Key::Ptr signataire = std::make_shared<OpenPGP::Key>(emissaire);
-            if (!signataire->meaningful()) throw Erreur::Identite::Dechiffrement("La clé publique est incohérente.");
+            if (!signataire->meaningful()) throw Erreur::Identite::Dechiffrement("La clé publique est incohérente.", message);
             if (!OpenPGP::Verify::binary(*signataire, message_dechiffre))
-                throw Erreur::Identite::Dechiffrement("La vérification de la signature a échoué.");
-            // Traduction en chaine de caractère (voir Identite::traduireMessage)
-            return traduireMessage(message_dechiffre);
+                throw Erreur::Identite::Dechiffrement("La vérification de la signature a échoué.", message);
+            // Traduction en chaine de caractère (voir Identite::traduire_message)
+            return traduire_message(message_dechiffre);
         }
     }
 }

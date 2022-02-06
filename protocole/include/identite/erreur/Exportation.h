@@ -15,12 +15,19 @@ namespace BTTP
         {
             namespace Identite
             {
+                // TOCOMMENT
+                /**
+                 * @brief Erreur d'exportation d'une clé privée.
+                 */
                 class Exportation : public Erreur
                 {
                 public:
-                    Exportation(const std::string& fichier)
+                    /**
+                     * @param details Details de l'erreur.
+                     */
+                    Exportation(const std::string details)
                         : Erreur(
-                            "Identite/Exportation", "L'exportation de la clé privée dans le fichier '" + fichier + "' a échoué.",
+                            "Identite/Exportation", "L'exportation de la clé privée a échoué.\n\tDetails : " + details,
                             BTTP_IDENTITE_EXPORTATION_CODE
                         ) {}
                 };

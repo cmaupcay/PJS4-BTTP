@@ -27,7 +27,6 @@
 #include "erreur/Dechiffrement.h"
 #include "erreur/Importation.h"
 #include "erreur/Exportation.h"
-#include "erreur/Doublon.h"
 
 namespace BTTP 
 {
@@ -52,18 +51,47 @@ namespace BTTP
                  * @param message_pgp Message de la bibliothèque calccrypto/OpenPGP.
                  * @return const std::string Message reconstruit.
                  */
-                static const std::string traduireMessage(const OpenPGP::Message message_pgp);
+                static const std::string traduire_message(const OpenPGP::Message message_pgp);
 
             protected:
-                void genererClePrivee(const std::string nom, const std::string contact, const std::string mdp);
+                /**
+                 * @brief Génération d'une nouvelle identité (clé privée).
+                 * @warning L'identité précédente est effacée.
+                 * @param nom Nom du propriétaire de la clé.
+                 * @param contact Contact identifiant le propriétaire.
+                 * @param mdp Mot de passe de la clé privée.
+                 */
+                void generer(const std::string nom, const std::string contact, const std::string mdp);
                 
-                void importerClePrivee(const std::string cle_privee);
+                /**
+                 * @brief Importation d'une nouvelle identité (clé privée).
+                 * @warning L'identité précédente est effacée.
+                 * @param cle_privee Clé privée.
+                 */
+                void importer(const std::string cle_privee);
             
             public:
+                /**
+                 * @brief Construction d'une nouvelle identité et importation d'une clé privée.
+                 * @see BTTP::Protocole::Identite::importer()
+                 * @param cle_privee Clé privée à importer.
+                 */
                 Identite(const std::string cle_privee);
+                /**
+                 * @brief Construction et génération d'une nouvelle identité.
+                 * @see BTTP::Protocole::Identite::generer()
+                 * @param nom Nom du propriétaire de la clé à générer.
+                 * @param contact Contact identifiant le propriétaire.
+                 * @param mdp Mot de passe de la clé privée à générer.
+                 */
                 Identite(const std::string nom, const std::string contact, const std::string mdp);
 
-                std::string exporterClePrivee(const bool armor = BTTP_IDENTITE_ARMOR) const;
+                /**
+                 * @brief Exportation de la clé privée relative à l'identité.
+                 * @param armor Mode structuré.
+                 * @return std::string Clé privée.
+                 */
+                std::string exporter(const bool armor = BTTP_IDENTITE_ARMOR) const;
                 
                 /**
                  * @brief Retourne la clé publique de l'identité.

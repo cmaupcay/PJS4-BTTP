@@ -15,12 +15,18 @@ namespace BTTP
         {
             namespace Identite
             {
+                /**
+                 * @brief Erreur d'importation d'une clé privée.
+                 */
                 class Importation : public Erreur
                 {
                 public:
-                    Importation(const std::string& fichier)
+                    /**
+                     * @param details Details de l'erreur.
+                     */
+                    Importation(const std::string details)
                         : Erreur(
-                            "Identite/Importation", "L'importation de la clé privée depuis le fichier '" + fichier + "' a échoué.",
+                            "Identite/Importation", "L'importation de la clé privée a échoué.\n\tDetails : '" + details,
                             BTTP_IDENTITE_IMPORTATION_CODE
                         ) {}
                 };

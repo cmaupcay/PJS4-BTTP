@@ -6,11 +6,11 @@ namespace BTTP
     {
         namespace Messages
         {
-            const Identite::ClePublique ClePublique::cle() const
+            const Cle::Publique ClePublique::cle() const
             {
                 if (this->_cle == BTTP_MESSAGE_CLE_PUBLIQUE_VIDE)
                     throw Erreur::Messages::ClePublique::Vide();
-                return Identite::ClePublique(this->_cle);
+                return Cle::Publique(this->_cle);
             }
         }
     }

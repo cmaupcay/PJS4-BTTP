@@ -25,7 +25,7 @@ namespace BTTP
                 inline void construction(const std::string contenu) override { this->_cle = contenu; }
 
             public:
-                ClePublique(Identite::ClePublique cle)
+                ClePublique(Cle::Publique cle)
                     : BTTP::Protocole::Messages::Message(Type::CLE_PUBLIQUE),
                     _cle{ cle.write(OpenPGP::PGP::Armored::NO) }
                 {}
@@ -38,7 +38,7 @@ namespace BTTP
                     _cle{ BTTP_MESSAGE_CLE_PUBLIQUE_VIDE }
                 { this->deconstruire(paquet); }
 
-                const Identite::ClePublique cle() const;
+                const Cle::Publique cle() const;
             };
         }
     }

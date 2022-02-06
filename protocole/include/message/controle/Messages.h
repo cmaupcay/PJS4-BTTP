@@ -33,12 +33,12 @@ namespace BTTP
                  * @param destinataire Destinataire du message encapsulé.
                  * @param signataire Signataire du message encapsulé.
                  * @param mdp Mot de passe du signataire.
-                 * @return Message* 
+                 * @return Message* Message contruit.
                  * 
                  * @throws Erreur::Messages::Controle::Inconnu Le type du message ne correspond à aucun type de message de controle.
                  */
                 Message* generer(
-                    const Messages::Message& message, const Identite::ClePublique destinataire,
+                    const Messages::Message& message, const Cle::Publique destinataire,
                     const Identite* signataire, const std::string mdp = ""
                 );
             }

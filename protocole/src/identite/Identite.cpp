@@ -4,40 +4,14 @@ namespace BTTP
 {
     namespace Protocole
     {
-        Identite::Config Identite::config(const std::string nom, const std::string email, const std::string mdp)
-        {
-            OpenPGP::KeyGen::Config config;
-            config.passphrase = mdp;
-            config.pka        = PKA;
-            config.bits       = BITS;
-            config.sym        = SYM;
-            config.hash       = HASH;
-            
-            OpenPGP::KeyGen::Config::UserID uid;
-            uid.user          = nom;
-            uid.comment       = BTTP_IDENTITE_COMMENTAIRE;
-            uid.email         = email;
-            uid.sig           = HASH;
-            config.uids.push_back(uid);
-
-            OpenPGP::KeyGen::Config::SubkeyGen subkey;
-            subkey.pka        = PKA;
-            subkey.bits       = BITS;
-            subkey.sym        = SYM;
-            subkey.hash       = HASH;
-            subkey.sig        = HASH;
-            config.subkeys.push_back(subkey);
-
-            return config;
-        }
 
         const std::string Identite::fichier(const std::string nom, const std::string chemin, const bool dossier_contexte)
         { return (dossier_contexte ? Contexte::dossier() + '/' : "") + (chemin != "" ? chemin + '/' : "") + nom + '.' + BTTP_IDENTITE_EXT; }
 
         void Identite::genererClePrivee(std::string nom, std::string email, std::string mdp)
         {
-            Config config = Identite::config(nom, email, mdp);
-            this->_cle_privee = OpenPGP::KeyGen::generate_key(config);
+            Cle::Config config{ nom, email, mdp };
+            this->_cle_privee = Cle::Privee::generer(config);
         }
 
         void Identite::exporterClePrivee(
@@ -63,7 +37,7 @@ namespace BTTP
             const std::string fichier = Identite::fichier(nom, chemin, dossier_contexte);
             std::ifstream fichier_im(fichier, std::ios::binary);
             if (!fichier_im) throw Erreur::Identite::Importation(fichier);
-            this->_cle_privee = OpenPGP::SecretKey(fichier_im);
+            this->_cle_privee = Cle::Privee(fichier_im);
             fichier_im.close();
         }
 
@@ -96,12 +70,12 @@ namespace BTTP
             return message;
         }
 
-        const std::string Identite::chiffrer(const std::string message, const ClePublique destinataire, const std::string mdp) const
+        const std::string Identite::chiffrer(const std::string message, const Cle::Publique destinataire, const std::string mdp) const
         {
             // Configuration du chiffrement
-            OpenPGP::SecretKey::Ptr signataire = std::make_shared<OpenPGP::SecretKey>(_cle_privee);
+            Cle::Privee::Ptr signataire = std::make_shared<Cle::Privee>(_cle_privee);
             if (!signataire->meaningful()) throw Erreur::Identite::Chiffrement("La clé privée est incohérente.", message);
-            const OpenPGP::Encrypt::Args args("", message, SYM, COMP, true, signataire, mdp, HASH);
+            const OpenPGP::Encrypt::Args args("", message, Cle::Config::SYM, Cle::Config::COMP, true, signataire, mdp, Cle::Config::HASH);
             if (!args.valid()) throw Erreur::Identite::Chiffrement("Les arguments de chiffrement sont invalides.", message);
             // Chiffrement et signature du message
             OpenPGP::Message message_chiffre;
@@ -112,7 +86,7 @@ namespace BTTP
             return message_chiffre.raw();
         }
 
-        const std::string Identite::dechiffrer(const std::string message, const ClePublique emissaire, const std::string mdp) const
+        const std::string Identite::dechiffrer(const std::string message, const Cle::Publique emissaire, const std::string mdp) const
         {
             // Déchiffrement du message
             OpenPGP::Message message_dechiffre;

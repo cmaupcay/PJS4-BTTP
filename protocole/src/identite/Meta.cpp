@@ -4,7 +4,7 @@ namespace BTTP
 {
     namespace Protocole
     {
-        Meta::Meta(const Identite::ClePublique cle_publique)
+        Meta::Meta(const Cle::Publique cle_publique)
         {
             // Récupération de la liste des clés
             std::string suid = cle_publique.list_keys();

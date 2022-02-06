@@ -11,7 +11,7 @@ namespace BTTP
                 template <class T>
                 TMessage<T>::TMessage(
                         T type, 
-                        const std::string contenu, const Identite::ClePublique destinataire,
+                        const std::string contenu, const Cle::Publique destinataire,
                         const Identite* signataire, const std::string mdp
                     )
                     : Messages::TMessage<T>(type)
@@ -20,7 +20,7 @@ namespace BTTP
                 template <class T>
                 TMessage<T>::TMessage(
                         T type, 
-                        const IMessage* message, const Identite::ClePublique destinataire,
+                        const IMessage* message, const Cle::Publique destinataire,
                         const Identite* signataire, const std::string mdp
                     )
                     : Messages::TMessage<T>(type)
@@ -28,7 +28,7 @@ namespace BTTP
 
                 template <class T>
                 void TMessage<T>::initialiser(
-                    const std::string contenu, const Identite::ClePublique destinataire,
+                    const std::string contenu, const Cle::Publique destinataire,
                     const Identite* signataire, const std::string mdp
                 )
                 { 

@@ -30,16 +30,16 @@ namespace BTTP
                 protected:
                     TMessage(
                         const T type, 
-                        const std::string contenu, const Identite::ClePublique destinataire,
+                        const std::string contenu, const Cle::Publique destinataire,
                         const Identite* signataire = nullptr, const std::string mdp = ""
                     );    
                     TMessage(
                         const T type, 
-                        const IMessage* message, const Identite::ClePublique destinataire,
+                        const IMessage* message, const Cle::Publique destinataire,
                         const Identite* signataire = nullptr, const std::string mdp = ""
                     );                
                     inline void initialiser(
-                        const std::string contenu, const Identite::ClePublique destinataire,
+                        const std::string contenu, const Cle::Publique destinataire,
                         const Identite* signataire, const std::string mdp = ""
                     );
 
@@ -68,7 +68,7 @@ namespace BTTP
                 protected:
                     Message(
                         const Type type, 
-                        const IMessage* message, const Identite::ClePublique destinataire,
+                        const IMessage* message, const Cle::Publique destinataire,
                         const Identite* signataire = nullptr, const std::string mdp = ""
                     ) : TMessage<Type>(type, message, destinataire, signataire, mdp)
                     {}

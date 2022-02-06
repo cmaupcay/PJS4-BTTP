@@ -1,7 +1,7 @@
 #ifndef H_BTTP_IDENTITE
 #define H_BTTP_IDENTITE
 
-#include "../Racine.h"
+#include "Cles.h"
 
 #ifndef BTTP_IDENTITE_CHEMIN_DEFAUT
     #define BTTP_IDENTITE_CHEMIN_DEFAUT BTTP_DOSSIER "/id"
@@ -18,18 +18,13 @@
 #ifndef BTTP_IDENTITE_EXT
     #define BTTP_IDENTITE_EXT "asc"
 #endif
-#ifndef BTTP_IDENTITE_COMMENTAIRE
-    #define BTTP_IDENTITE_COMMENTAIRE "BTTP version " BTTP_VERSION " via calccrypto/OpenPGP"
-#endif
 
-#include <OpenPGP.h>
 #include <fstream>
 #include <filesystem>
 #include <iostream>
 
 #include "erreur/Chiffrement.h"
 #include "erreur/Dechiffrement.h"
-
 #include "erreur/Importation.h"
 #include "erreur/Exportation.h"
 #include "erreur/Doublon.h"
@@ -39,27 +34,20 @@ namespace BTTP
     namespace Protocole 
     {
         // TOCOMMENT
+        /**
+         * @brief Représentation d'un appareil et de ses clés privé et publique.
+         * Elle est capable de chiffrer, signer, déchiffrer et vérifier des messages.
+         * @details Cette implémentation est basée sur la bibliothèque OpenPGP de calccrypto.
+         * Repos : https://github.com/calccrypto/OpenPGP
+         */
         class Identite 
         {
-            public:
-                typedef OpenPGP::KeyGen::Config Config;
-                typedef OpenPGP::PublicKey ClePublique;
-                typedef OpenPGP::SecretKey ClePrivee;
-
             private:
-                static const uint8_t PKA = OpenPGP::PKA::ID::RSA_ENCRYPT_OR_SIGN;
-                static const std::size_t BITS = 4096;
-                static const uint8_t SYM = OpenPGP::Sym::ID::AES256;
-                static const uint8_t HASH = OpenPGP::Hash::ID::SHA1;
-                static const uint8_t COMP = OpenPGP::Compression::ID::ZLIB;
-
-                ClePrivee _cle_privee;
+                Cle::Privee _cle_privee;
 
                 static const std::string traduireMessage(const OpenPGP::Message message_pgp);
 
             protected:
-                static Config config(const std::string nom, const std::string contact, const std::string mdp);
-
                 void genererClePrivee(const std::string nom, const std::string contact, const std::string mdp);
                 // TODO Le protocole doit-il s'occuper des fichiers ?
                 void exporterClePrivee(
@@ -87,10 +75,10 @@ namespace BTTP
                     const bool dossier_contexte = BTTP_IDENTITE_CHEMIN_BTTP_DEFAUT
                 );
                 
-                inline const ClePublique cle_publique() const { return this->_cle_privee.get_public(); }
+                inline const Cle::Publique cle_publique() const { return Cle::Publique(this->_cle_privee.get_public()); }
 
-                const std::string chiffrer(const std::string message, const ClePublique destinataire, const std::string mdp) const;
-                const std::string dechiffrer(const std::string message, const ClePublique emissaire, const std::string mdp) const;
+                const std::string chiffrer(const std::string message, const Cle::Publique destinataire, const std::string mdp) const;
+                const std::string dechiffrer(const std::string message, const Cle::Publique emissaire, const std::string mdp) const;
 
                 inline friend std::ostream& operator<<(std::ostream& os, const Identite& id)
                 { return (os << id.cle_publique().write()); }

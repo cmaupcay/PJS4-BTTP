@@ -1,5 +1,5 @@
-#ifndef H_BTTP_UTILISATEUR
-#define H_BTTP_UTILISATEUR
+#ifndef H_BTTP_META
+#define H_BTTP_META
 
 #include "Identite.h"
 
@@ -17,7 +17,7 @@ namespace BTTP
             std::string _commentaire;
             
         public:
-            Meta(const Identite::ClePublique cle_publique);
+            Meta(const Cle::Publique cle_publique);
 
             // Constructeur tile pour créer une fonction de type : const Identite nouvelle_identite(const Meta meta, const std::strind mdp);
             Meta(const std::string nom, const std::string contact, const std::string commentaire = BTTP_IDENTITE_COMMENTAIRE)

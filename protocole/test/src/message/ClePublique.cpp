@@ -8,7 +8,7 @@ namespace BTTP
         {
             namespace Test
             {
-                Identite::ClePublique* ClePublique::cle = nullptr;
+                Cle::Publique* ClePublique::cle = nullptr;
                 Messages::ClePublique* ClePublique::message = nullptr;
                 std::string ClePublique::construction = "";
 
@@ -21,7 +21,7 @@ namespace BTTP
                             BTTP::Protocole::Test::Identite::nom_destinataire,
                             BTTP_TEST_DOSSIER_ID, true
                         );
-                    cle = new Identite::ClePublique(BTTP::Protocole::Test::Identite::destinataire->cle_publique());
+                    cle = new Cle::Publique(BTTP::Protocole::Test::Identite::destinataire->cle_publique());
                 }
                 
                 void ClePublique::TearDownTestCase()

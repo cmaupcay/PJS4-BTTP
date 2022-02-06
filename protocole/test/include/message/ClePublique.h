@@ -14,7 +14,7 @@ namespace BTTP
                 class ClePublique : public ::testing::Test 
                 {
                 public:
-                    static Identite::ClePublique* cle;
+                    static Cle::Publique* cle;
                     static Messages::ClePublique* message;
                     static std::string construction;
 

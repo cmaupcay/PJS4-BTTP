@@ -12,22 +12,24 @@ __BTTP__ est un projet visant à faciliter l'_exécution de __tâches__ automati
 
 ### _Appareils_
 
-- __appareil distant :__ un système d'information capable d'annoncer son _état_ à un _appareil de contrôle_, de lui notifier l'ajout ou la modification de _tâches_, d'exécuter des _tâches_ en réponse à une _requête d'exécution_, et de retourner les _résultats d'exécution_ à l'_appareil client_ ayant émis la requête.
+- __appareil distant :__ un système d'information capable d'annoncer son _état_ à un _appareil de contrôle_, de lui notifier l'ajout ou la modification de _tâches_, d'exécuter des _tâches_ en réponse à un _message d'exécution_, et de retourner les _résultats d'exécution_ à l'_appareil client_ ayant émis le message.
 
-- __appareil client :__ un système d'information capable d'initier une _transaction_ avec un _appareil distant_ au travers d'un _appareil de contrôle_, d'émettre des _requêtes d'exécution_ et de traîter des _resultats d'exécutions_.
+- __appareil client :__ un système d'information capable d'initier une _transaction_ avec un _appareil distant_ au travers d'un _appareil de contrôle_, d'émettre des _messages d'exécution_ et de traîter des _resultats d'exécutions_.
 
-- __appareil de contrôle :__ 
+- __appareil de contrôle :__ // TODO Définition appareil de contrôle
 
 ### _Sécurité_
 
-- __identité :__ représentation d'un appareil et de ses clés privée et publique. Elle est capable de chiffrer, signer, déchiffrer et vérifier des messages.
+- __identité :__ représentation d'un appareil et de ses clés privée et publique. Elle est capable de chiffrer, signer, déchiffrer et vérifier des _messages_.
 
 ### _Echanges_
 
-- __transaction :__ 
+- __transaction :__ // TODO Définition transaction
 
-- __requête d'exécution :__
+- __message :__ // TODO Définition message
 
-- __résultats d'exécution :__
+- __message d'exécution :__ // TODO Définition message d'execution
+
+- __résultat d'exécution :__ // TODO Définition résultat d'exécution
 
 - __état :__ une information binaire relative à un _appareil distant_, stockée sur un _appareil de contrôle_ et indiquant si l'appareil distant est ouvert à une _transaction_. Elle est partagée à tous les autres appareils de l'_identité_ propriétaire stockés sur l'appareil de contrôle.

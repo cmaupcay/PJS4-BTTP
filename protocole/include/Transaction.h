@@ -25,12 +25,12 @@ namespace BTTP
         {
         private:
             const Identite& _identite;
-            const Identite::ClePublique& _destinataire;
-            const Identite::ClePublique& _controleur;
+            const Cle::Publique& _destinataire;
+            const Cle::Publique& _controleur;
 
         public:
             // TODO Implémentation
-            Transaction(const Identite& identite, const Identite::ClePublique& destinataire, const Identite::ClePublique& controleur);
+            Transaction(const Identite& identite, const Cle::Publique& destinataire, const Cle::Publique& controleur);
 
             // TODO Implémentation
             void initialiser() override;

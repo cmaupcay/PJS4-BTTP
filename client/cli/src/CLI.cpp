@@ -14,10 +14,12 @@ namespace BTTP
                     dossier = std::filesystem::current_path();
                 else dossier = std::getenv(BTTP_CLIENT_CLI_ENV_DOSSIER);
                 Protocole::Contexte::initialiser();
+                Coeur::Contexte::initialiser(dossier);
+
 
                 // Affichage introductif
                 Console::afficher(BTTP_CLIENT_CLI_INTRO);
-                Console::afficher("Dossier : " + dossier);
+                Console::afficher("Dossier : " + Coeur::Contexte::dossier());
                 Console::afficher(""); // Saut de ligne
 
                 const int code = Commandes::resoudre(argc, argv);

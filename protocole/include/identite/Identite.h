@@ -3,20 +3,8 @@
 
 #include "Cles.h"
 
-#ifndef BTTP_IDENTITE_CHEMIN_DEFAUT
-    #define BTTP_IDENTITE_CHEMIN_DEFAUT BTTP_DOSSIER "/id"
-#endif
-#ifndef BTTP_IDENTITE_CHEMIN_BTTP_DEFAUT
-    #define BTTP_IDENTITE_CHEMIN_BTTP_DEFAUT true
-#endif
-#ifndef BTTP_IDENTITE_CHEMIN_CREER
-    #define BTTP_IDENTITE_CHEMIN_CREER true
-#endif
 #ifndef BTTP_IDENTITE_ARMOR
     #define BTTP_IDENTITE_ARMOR false
-#endif
-#ifndef BTTP_IDENTITE_EXT
-    #define BTTP_IDENTITE_EXT "asc"
 #endif
 
 #include <fstream>

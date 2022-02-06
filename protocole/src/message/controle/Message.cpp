@@ -8,26 +8,26 @@ namespace BTTP
         {
             namespace Controle
             {
-                template <class T>
-                TMessage<T>::TMessage(
-                        T type, 
+                template <class _Type>
+                TMessage<_Type>::TMessage(
+                        _Type type, 
                         const std::string contenu, const Cle::Publique destinataire,
                         const Identite* signataire, const std::string mdp
                     )
-                    : Messages::TMessage<T>(type)
+                    : Messages::TMessage<_Type>(type)
                 { this->initialiser(contenu, destinataire, signataire, mdp); }
                 
-                template <class T>
-                TMessage<T>::TMessage(
-                        T type, 
+                template <class _Type>
+                TMessage<_Type>::TMessage(
+                        _Type type, 
                         const IMessage* message, const Cle::Publique destinataire,
                         const Identite* signataire, const std::string mdp
                     )
-                    : Messages::TMessage<T>(type)
+                    : Messages::TMessage<_Type>(type)
                 { this->initialiser(message == nullptr ? "" : message->construire(), destinataire, signataire, mdp); }
 
-                template <class T>
-                void TMessage<T>::initialiser(
+                template <class _Type>
+                void TMessage<_Type>::initialiser(
                     const std::string contenu, const Cle::Publique destinataire,
                     const Identite* signataire, const std::string mdp
                 )
@@ -36,12 +36,12 @@ namespace BTTP
                     this->_contenu = signataire->chiffrer(contenu, destinataire, mdp);
                 }
 
-                template <class T>
-                const std::string TMessage<T>::construire() const
+                template <class _Type>
+                const std::string TMessage<_Type>::construire() const
                 { return this->type_c() + this->_destinataire + BTTP_MESSAGE_CONTROLE_SEP + this->entete() + BTTP_MESSAGE_CONTROLE_SEP + this->_contenu; }
 
-                template <class T>
-                void TMessage<T>::construction(const std::string contenu)
+                template <class _Type>
+                void TMessage<_Type>::deconstruction(const std::string contenu)
                 {
                     const std::vector<std::string> infos = Messages::decouper(contenu, BTTP_MESSAGE_CONTROLE_SEP);
                     if (infos.size() != 3); throw Erreur::Messages::Deconstruction::Incomplet(contenu, infos.size(), 3);
@@ -49,6 +49,8 @@ namespace BTTP
                     this->lire_entete(infos[1]);
                     this->_contenu = infos[2];
                 }
+
+                template class TMessage<Type>;
             }
         }
     }

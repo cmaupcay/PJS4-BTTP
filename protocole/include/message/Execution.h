@@ -20,7 +20,7 @@ namespace BTTP
                 std::vector<std::string> _args;
 
                 const std::string contenu() const override;
-                void construction(const std::string contenu) override;
+                void deconstruction(const std::string contenu) override;
 
             public:
                 Execution(const uint32_t id_script);

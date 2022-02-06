@@ -7,7 +7,7 @@ private:
     inline const std::string contenu() const override 
     { return this->_contenu; }
         
-    inline void construction(const std::string contenu) override
+    inline void deconstruction(const std::string contenu) override
     { 
         std::string _tmp = std::string(contenu.rbegin(), contenu.rend());
         if (_tmp[0] == '\n')
@@ -23,7 +23,7 @@ public:
         : BTTP::Protocole::Messages::Message(
             BTTP::Protocole::Messages::Type::EXECUTION
         ), _contenu{ "" }
-    { this->construction(contenu); }
+    { this->deconstruction(contenu); }
 
     inline const std::string& lire() const { return this->_contenu; }
 };

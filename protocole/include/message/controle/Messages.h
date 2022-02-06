@@ -15,10 +15,10 @@ namespace BTTP
             {
                 // TOTEST
                 /**
-                 * @brief Résout le type d'un paquet et créé une instance de la classe du message.
+                 * @brief Résout le type d'un paquet et créé une instance de la classe du message associé au type.
                  * 
                  * @param paquet Paquet à résoudre.
-                 * @return Message* Instance de la classe associé au type résolu.
+                 * @return BTTP::Protocole::Controle::Message* Instance de la classe associé au type résolu.
                  * 
                  * @throws Erreur::Messages::Type::Inconnu Le type du paquet n'est pas connu.
                  */

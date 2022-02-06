@@ -17,8 +17,8 @@ namespace BTTP
             namespace Controle
             {
                 // TOCOMMENT
-                template<class T>
-                class TMessage : public Protocole::Messages::TMessage<T>
+                template<class _Type>
+                class TMessage : public Protocole::Messages::TMessage<_Type>
                 {
                 private:
                     std::string _contenu;
@@ -29,12 +29,12 @@ namespace BTTP
 
                 protected:
                     TMessage(
-                        const T type, 
+                        const _Type type, 
                         const std::string contenu, const Cle::Publique destinataire,
                         const Identite* signataire = nullptr, const std::string mdp = ""
                     );    
                     TMessage(
-                        const T type, 
+                        const _Type type, 
                         const IMessage* message, const Cle::Publique destinataire,
                         const Identite* signataire = nullptr, const std::string mdp = ""
                     );                
@@ -46,7 +46,7 @@ namespace BTTP
                     virtual const std::string entete() const = 0;
                     virtual void lire_entete(const std::string entete) = 0;
 
-                    void construction(const std::string contenu) override;
+                    void deconstruction(const std::string contenu) override;
 
                 public:
                     const std::string construire() const override;

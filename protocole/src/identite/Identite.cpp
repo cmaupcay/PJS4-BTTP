@@ -37,7 +37,7 @@ namespace BTTP
             this->importerClePrivee(cle_privee);
         }
 
-        // TOCOMMENT
+        // TOCOMMENT Retrouver l'exemple original.
         const std::string Identite::traduireMessage(const OpenPGP::Message message_pgp)
         {
             std::string message = "";

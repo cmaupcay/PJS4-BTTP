@@ -36,11 +36,12 @@ namespace BTTP
                 return contenu;
             }
 
-            // TOCOMMENT
-            void Execution::construction(const std::string contenu)
+            void Execution::deconstruction(const std::string contenu)
             {
+                // Découpage selon le séparateur des messages BTTP simples.
                 const std::vector<std::string> elements = decouper(contenu, BTTP_MESSAGE_SEP);
                 if (elements.size() < 2) throw Erreur::Messages::Deconstruction::Incomplet(contenu, elements.size(), 2);
+                // Enregistrement des informations
                 if (this->_id != nullptr) delete this->_id;
                 this->_id = new uint32_t(std::atoi(elements[0].c_str()));
                 if (this->_id_script != nullptr) delete this->_id_script;

@@ -33,7 +33,6 @@ namespace BTTP
 {
     namespace Protocole 
     {
-        // TOCOMMENT
         /**
          * @brief Représentation d'un appareil et de ses clés privé et publique.
          * Elle est capable de chiffrer, signer, déchiffrer et vérifier des messages.

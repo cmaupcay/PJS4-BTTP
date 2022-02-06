@@ -9,7 +9,7 @@ namespace BTTP
             const Cle::Publique ClePublique::cle() const
             {
                 if (this->_cle == BTTP_MESSAGE_CLE_PUBLIQUE_VIDE)
-                    throw Erreur::Messages::ClePublique::Vide();
+                    throw Erreur::Messages::Vide();
                 return Cle::Publique(this->_cle);
             }
         }

@@ -15,7 +15,6 @@ namespace BTTP
         {
             namespace Identite
             {
-                // TOCOMMENT
                 /**
                  * @brief Erreur d'exportation d'une clé privée.
                  */

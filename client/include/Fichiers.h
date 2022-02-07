@@ -28,31 +28,39 @@ namespace BTTP
              */
             const std::string dossier(const std::string fichier);
 
-            // TODO Implémentation.
-            std::ostream ecriture(
-                const std::string data, const std::string fichier,
+            // TOTEST
+            // TOCOMMENT
+            std::ofstream ecriture(
+                const std::string fichier,
                 const std::string dossier = BTTP_DOSSIER,
+                const bool ajouter = false, const bool binaire = false,
                 const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT,
                 const bool creer_chemin = BTTP_CREATION_CHEMIN_PAR_DEFAUT
             );
-            // TODO Implémentation.
+            // TOTEST
+            // TOCOMMENT
             void ecrire(
                 const std::string data, const std::string fichier,
                 const std::string dossier = BTTP_DOSSIER,
+                const bool ajouter = false, const bool binaire = false,
                 const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT,
                 const bool creer_chemin = BTTP_CREATION_CHEMIN_PAR_DEFAUT
             );
 
-            // TODO Implémentation.
-            const std::istream lecture(
+            // TOTEST
+            // TOCOMMENT
+            const std::ifstream lecture(
                 const std::string fichier,
                 const std::string dossier = BTTP_DOSSIER,
+                const bool binaire = false,
                 const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT
             );
-            // TODO Implémentation.
+            // TOTEST
+            // TOCOMMENT
             const std::string lire(
                 const std::string fichier,
                 const std::string dossier = BTTP_DOSSIER,
+                const bool binaire = false,
                 const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT
             );
         }

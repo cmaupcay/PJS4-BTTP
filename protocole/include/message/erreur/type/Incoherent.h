@@ -3,9 +3,7 @@
 
 #include "../../../Erreur.h"
 
-#ifndef BTTP_MESSAGE_TYPE_INCOHERENT_CODE
-    #define BTTP_MESSAGE_TYPE_INCOHERENT_CODE -111
-#endif
+#define BTTP_MESSAGE_TYPE_INCOHERENT_CODE -111
 
 namespace BTTP
 {

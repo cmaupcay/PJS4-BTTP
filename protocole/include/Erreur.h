@@ -4,9 +4,7 @@
 #include <iomanip>
 #include <exception>
 
-#ifndef BTTP_ERREUR_CODE_DEFAUT
-    #define BTTP_ERREUR_CODE_DEFAUT -1
-#endif
+#define BTTP_ERREUR_CODE_DEFAUT -1
 
 namespace BTTP
 {

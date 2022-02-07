@@ -9,17 +9,41 @@ namespace BTTP
             const int executer(const int& argc, const char** argv)
             {
                 // Détermination du dossier de travail
+                // TODO Déplacer dans la classe de gestion des dossiers et fichiers du coeur du client.
                 std::string dossier;
                 if (std::getenv(BTTP_CLIENT_CLI_ENV_DOSSIER) == NULL)
-                    dossier = std::filesystem::current_path();
+                {
+                    dossier = argv[0];
+                    dossier = dossier.substr(0, dossier.find_last_of('/'));
+                    if (!std::filesystem::is_directory(dossier))
+                        dossier = std::filesystem::current_path();
+                }
                 else dossier = std::getenv(BTTP_CLIENT_CLI_ENV_DOSSIER);
-                Protocole::Contexte::initialiser();
                 Coeur::Contexte::initialiser(dossier);
-
 
                 // Affichage introductif
                 Console::afficher(BTTP_CLIENT_CLI_INTRO);
                 Console::afficher("Dossier : " + Coeur::Contexte::dossier());
+
+                // TODO Déplacer dans la classe de gestion d'identité du coeur du client (pas l'affichage, pas besoin d'un pointeur dans la fonction)
+                Protocole::Identite* id = nullptr;
+                try
+                {
+                    Console::afficher("Importation de votre identité... ", false);
+                    id = new Protocole::Identite(Coeur::importer("user"));
+                    Console::afficher("FAIT");
+                }
+                catch (std::exception& err)
+                {
+                    Console::afficher("ERREUR");
+                    Console::afficher("Génération de votre identité... ", false);
+                    id = new Protocole::Identite("user", "contact", "mdp");
+                    Console::afficher("FAIT");
+                    Console::afficher("Exportation de votre identité...", false);
+                    Coeur::exporter(*id);
+                    Console::afficher("FAIT");
+                }
+
                 Console::afficher(""); // Saut de ligne
 
                 const int code = Commandes::resoudre(argc, argv);

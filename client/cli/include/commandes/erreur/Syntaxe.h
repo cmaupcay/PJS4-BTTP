@@ -3,9 +3,7 @@
 
 #include "../../Racine.h"
 
-#ifndef H_BTTP_CLIENT_CLI_COMMANDE_SYNTAXE_CODE
-    #define H_BTTP_CLIENT_CLI_COMMANDE_SYNTAXE_CODE -11100
-#endif
+#define H_BTTP_CLIENT_CLI_COMMANDE_SYNTAXE_CODE -11100
 
 namespace BTTP
 {

@@ -4,7 +4,6 @@ namespace BTTP
 {
     namespace Protocole
     {
-
         void Contexte::initialiser()
         {
             // Initialisation de la librairie Plaristote/segvcatch

@@ -3,9 +3,7 @@
 
 #include "../../Erreur.h"
 
-#ifndef BTTP_IDENTITE_CHIFFREMENT_CODE
-    #define BTTP_IDENTITE_CHIFFREMENT_CODE -201
-#endif
+#define BTTP_IDENTITE_CHIFFREMENT_CODE -201
 
 namespace BTTP
 {

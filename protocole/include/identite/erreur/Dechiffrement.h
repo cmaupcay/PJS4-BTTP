@@ -3,9 +3,7 @@
 
 #include "../../Erreur.h"
 
-#ifndef BTTP_IDENTITE_DECHIFFREMENT_CODE
-    #define BTTP_IDENTITE_DECHIFFREMENT_CODE -202
-#endif
+#define BTTP_IDENTITE_DECHIFFREMENT_CODE -202
 
 namespace BTTP
 {

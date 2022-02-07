@@ -3,9 +3,7 @@
 
 #include "../../Erreur.h"
 
-#ifndef BTTP_MESSAGES_VIDE_CODE
-    #define BTTP_MESSAGES_VIDE_CODE -200
-#endif
+#define BTTP_MESSAGES_VIDE_CODE -200
 
 namespace BTTP
 {

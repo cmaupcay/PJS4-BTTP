@@ -23,11 +23,18 @@ namespace BTTP
             try { this->_cle_privee = Cle::Privee(cle_privee); }
             catch (std::exception& err) { throw Erreur::Identite::Importation(err.what()); }
         }
+        void Identite::importer(std::istream& cle_privee)
+        {
+            try { this->_cle_privee = Cle::Privee(cle_privee); }
+            catch (std::exception& err) { throw Erreur::Identite::Importation(err.what()); }
+        }
 
         Identite::Identite(const std::string nom, const std::string email, const std::string mdp)
         { this->generer(nom, email, mdp); }
 
         Identite::Identite(const std::string cle_privee) 
+        { this->importer(cle_privee); }
+        Identite::Identite(std::istream& cle_privee) 
         { this->importer(cle_privee); }
 
         // TOCOMMENT Retrouver l'exemple original.

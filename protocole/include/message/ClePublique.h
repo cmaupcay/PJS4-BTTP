@@ -6,9 +6,7 @@
 
 #include "erreur/ClePubliqueVide.h"
 
-#ifndef BTTP_MESSAGE_CLE_PUBLIQUE_VIDE
-    #define BTTP_MESSAGE_CLE_PUBLIQUE_VIDE ""
-#endif
+#define BTTP_MESSAGE_CLE_PUBLIQUE_VIDE ""
 
 namespace BTTP
 {

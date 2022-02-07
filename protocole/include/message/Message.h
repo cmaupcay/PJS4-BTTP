@@ -9,10 +9,6 @@
 #include "erreur/deconstruction/Incomplet.h"
 #include "erreur/type/Incoherent.h"
 
-#ifndef BTTP_MESSAGE_SEP
-    #define BTTP_MESSAGE_SEP '|'
-#endif
-
 namespace BTTP
 {
     namespace Protocole

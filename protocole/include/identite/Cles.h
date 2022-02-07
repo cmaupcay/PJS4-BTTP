@@ -3,10 +3,6 @@
 
 #include "../Racine.h"
 
-#ifndef BTTP_IDENTITE_COMMENTAIRE
-    #define BTTP_IDENTITE_COMMENTAIRE "BTTP version " BTTP_VERSION " via calccrypto/OpenPGP"
-#endif
-
 #include <OpenPGP.h>
 
 namespace BTTP

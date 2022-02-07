@@ -3,9 +3,7 @@
 
 #include "../../Racine.h"
 
-#ifndef H_BTTP_CLIENT_CLI_COMMANDE_INCONNUE_CODE
-    #define H_BTTP_CLIENT_CLI_COMMANDE_INCONNUE_CODE -11101
-#endif
+#define H_BTTP_CLIENT_CLI_COMMANDE_INCONNUE_CODE -11101
 
 namespace BTTP
 {

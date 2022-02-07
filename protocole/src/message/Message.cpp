@@ -1,5 +1,4 @@
 #include "../../include/message/Message.h"
-                #include <iostream>
 
 namespace BTTP
 {

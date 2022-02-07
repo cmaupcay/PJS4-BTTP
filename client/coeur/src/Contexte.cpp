@@ -2,26 +2,17 @@
 
 namespace BTTP
 {
-
     namespace Client 
     {
-
         namespace Coeur 
         {
+            std::string Contexte::_dossier = "";
 
-            std::string Contexte::_dossier = COEUR_CONTEXTE_DEFAUT;
-
-            void Contexte::initialiser(const std::string dossier){
-
+            void Contexte::initialiser(const std::string dossier)
+            {
+                Protocole::Contexte::initialiser();
                 Contexte::_dossier = dossier;
-
             }
-
-
         }
-
-
     }
-
-
 }

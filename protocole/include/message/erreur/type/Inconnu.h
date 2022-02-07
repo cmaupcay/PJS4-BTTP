@@ -3,9 +3,7 @@
 
 #include "../../../Erreur.h"
 
-#ifndef BTTP_MESSAGE_TYPE_INCONNU_CODE
-    #define BTTP_MESSAGE_TYPE_INCONNU_CODE -110
-#endif
+#define BTTP_MESSAGE_TYPE_INCONNU_CODE -110
 
 namespace BTTP
 {

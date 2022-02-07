@@ -3,10 +3,6 @@
 
 #include "Cles.h"
 
-#ifndef BTTP_IDENTITE_ARMOR
-    #define BTTP_IDENTITE_ARMOR false
-#endif
-
 #include <fstream>
 #include <filesystem>
 #include <iostream>
@@ -57,6 +53,12 @@ namespace BTTP
                  * @param cle_privee Clé privée.
                  */
                 void importer(const std::string cle_privee);
+                /**
+                 * @brief Importation d'une nouvelle identité (clé privée) à partir d'un flux.
+                 * @warning L'identité précédente est effacée.
+                 * @param cle_privee Flux de la clé privée.
+                 */
+                void importer(std::istream& cle_privee);
             
             public:
                 /**
@@ -65,6 +67,12 @@ namespace BTTP
                  * @param cle_privee Clé privée à importer.
                  */
                 Identite(const std::string cle_privee);
+                /**
+                 * @brief Construction d'une nouvelle identité et importation d'une clé privée depuis un flux.
+                 * @see BTTP::Protocole::Identite::importer()
+                 * @param cle_privee Flux de la clé privée à importer.
+                 */
+                Identite(std::istream& cle_privee);
                 /**
                  * @brief Construction et génération d'une nouvelle identité.
                  * @see BTTP::Protocole::Identite::generer()

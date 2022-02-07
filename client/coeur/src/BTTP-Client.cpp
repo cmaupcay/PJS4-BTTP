@@ -9,49 +9,37 @@ namespace BTTP
         namespace Coeur
         {
 
-            const std::string fichier(const std::string nom, const std::string chemin, const bool dossier_contexte)
-            { return (dossier_contexte ? Contexte::dossier() + '/' : "") + (chemin != "" ? chemin + '/' : "") + nom + '.' + BTTP_IDENTITE_EXT; }
+            const std::string chemin_fichier(const std::string nom, const std::string dossier, const bool utiliser_contexte)
+            { return (utiliser_contexte ? Contexte::dossier() + '/' : "") + dossier + '/' + nom + '.' + BTTP_IDENTITE_EXT; }
 
-            void ecrireCle(const std::string cle, const std::string nom, const std::string chemin, const bool creer_chemin, const bool dossier_contexte) 
+            void exporter(const Protocole::Identite& identite, const std::string dossier, const bool creer_chemin, const bool utiliser_contexte) 
             {
-
-                const std::string fichie = fichier(nom, chemin, dossier_contexte);
-
-                const std::string dossier = fichie.substr(0, fichie.find_last_of('/'));
-
-                if(!std::filesystem::is_directory(dossier))
+                const std::string nom = Protocole::Meta(identite.cle_publique()).nom();
+                const std::string cible = chemin_fichier(nom, dossier, utiliser_contexte);
+                const std::string chemin = cible.substr(0, cible.find_last_of('/'));
+                if(!std::filesystem::is_directory(chemin))
                 {
-
-                    if(creer_chemin) std::filesystem::create_directories(dossier);
-
+                    if(creer_chemin) std::filesystem::create_directories(chemin);
+                    // else throw // TODO Classe d'erreur
                 }
-
-                std::ofstream fichier_ex(fichie, std::ios::binary);
-                
-                fichier_ex << cle << std::flush;
-                fichier_ex.close();
-
+                std::ofstream fichier(cible, std::ios::binary);
+                if (fichier.is_open())
+                {
+                    fichier << identite.exporter();
+                    fichier.close();
+                }
+                // else throw // TODO Classe d'erreur
             }
 
-            const std::string lireCle(const std::string nom, const std::string chemin, const bool dossier_contexte){
+            const Protocole::Identite importer(const std::string nom, const std::string dossier, const bool utiliser_contexte){
 
-                const std::string fichie = fichier(nom, chemin, dossier_contexte);
-                std::ifstream fichier_im(fichie, std::ios::binary);
-
-                //TODO corriger ça (je suis un peu un escroc)
-                
-                Protocole::Cle::Privee *cle = new Protocole::Cle::Privee(fichier_im);
-
-                fichier_im.close();
-
-                return cle->write(OpenPGP::PGP::Armored::NO);
-
-
+                const std::string cible = chemin_fichier(nom, dossier, utiliser_contexte);
+                std::ifstream fichier(cible, std::ios::binary);
+                // if (fichier.is_open())
+                    // return Protocole::Identite(fichier); 
+                // else throw // TODO Classe d'erreur
+                return Protocole::Identite(fichier); 
             }
-
-
-
         }
-
     }
 }

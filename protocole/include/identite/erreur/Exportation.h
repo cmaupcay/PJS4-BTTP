@@ -3,9 +3,7 @@
 
 #include "../../Erreur.h"
 
-#ifndef BTTP_IDENTITE_EXPORTATION_CODE
-    #define BTTP_IDENTITE_EXPORTATION_CODE -211
-#endif
+#define BTTP_IDENTITE_EXPORTATION_CODE -211
 
 namespace BTTP
 {

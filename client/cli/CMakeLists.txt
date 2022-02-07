@@ -1,8 +1,9 @@
 # Constantes
 set(BTTP_CLIENT_CLI_EXE ${BTTP}-cli) # Dossier de référence du CLI
 set(BTTP_CLIENT_CLI_VERSION 0.0.1) # Version du CLI
-set(BTTP_CLIENT_CLI_ENV_DOSSIER BTTP_HOME) # Nom de la variable d'environnement définissant le dossier de travail
 set(BTTP_CLIENT_CLI_RACINE ${CMAKE_CURRENT_LIST_DIR}/include/Racine.h) # En-tête racine (fichier de configuration)
+## Variables d'environnements
+set(BTTP_CLIENT_CLI_ENV_DOSSIER BTTP_HOME) # Dossier de travail
 
 # Configuration
 configure_file(${BTTP_CLIENT_CLI_RACINE}.in ${BTTP_CLIENT_CLI_RACINE})

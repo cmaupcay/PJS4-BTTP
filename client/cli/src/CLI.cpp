@@ -19,18 +19,18 @@ namespace BTTP
                         dossier = std::filesystem::current_path();
                 }
                 else dossier = std::getenv(BTTP_CLIENT_CLI_ENV_DOSSIER);
-                Coeur::Contexte::initialiser(dossier);
+                Contexte::initialiser(dossier);
 
                 // Affichage introductif
                 Console::afficher(BTTP_CLIENT_CLI_INTRO);
-                Console::afficher("Dossier : " + Coeur::Contexte::dossier());
+                Console::afficher("Dossier : " + Contexte::dossier());
 
                 // TODO Déplacer dans la classe de gestion d'identité du coeur du client (pas l'affichage, pas besoin d'un pointeur dans la fonction)
                 Protocole::Identite* id = nullptr;
                 try
                 {
                     Console::afficher("Importation de votre identité... ", false);
-                    id = new Protocole::Identite(Coeur::importer("user"));
+                    id = new Protocole::Identite(importer("user"));
                     Console::afficher("FAIT");
                 }
                 catch (std::exception& err)
@@ -40,7 +40,7 @@ namespace BTTP
                     id = new Protocole::Identite("user", "contact", "mdp");
                     Console::afficher("FAIT");
                     Console::afficher("Exportation de votre identité...", false);
-                    Coeur::exporter(*id);
+                    exporter(*id);
                     Console::afficher("FAIT");
                 }
 

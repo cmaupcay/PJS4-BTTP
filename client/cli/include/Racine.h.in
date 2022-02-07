@@ -5,6 +5,6 @@
 
 #define BTTP_CLIENT_CLI_ENV_DOSSIER "${BTTP_CLIENT_CLI_ENV_DOSSIER}"
 
-#include "../../coeur/include/BTTP-Client.h"
+#include "../../include/BTTP-Client.h"
 
 #endif

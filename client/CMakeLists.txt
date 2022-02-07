@@ -12,9 +12,26 @@ include(${CMAKE_CURRENT_LIST_DIR}/../protocole/CMakeLists.txt)
 set(BTTP_CLIENT ${BTTP}-client) # Nom du projet CMake
 set(BTTP_CLIENT_VERSION 0.0.1) # Version du client
 set(BTTP_CLIENT_DEP ${BTTP_LIB}) # Dépendances
-set(BTTP_CLIENT_COEUR_DOSSIER ${CMAKE_CURRENT_LIST_DIR}/coeur) # Dossier de référence du coeur
-set(BTTP_CLIENT_RACINE ${BTTP_CLIENT_COEUR_DOSSIER}/include/Racine.h) # En-tête racine (fichier de configuration)
+set(BTTP_CLIENT_RACINE ${CMAKE_CURRENT_LIST_DIR}/include/Racine.h) # En-tête racine (fichier de configuration)
 set(BTTP_CLIENT_LIB ${BTTP_CLIENT} ${BTTP_CLIENT_DEP})
+# Paramètres
+## Dossier & Fichier
+if(NOT DEFINED BTTP_DOSSIER)
+    set(BTTP_DOSSIER .bttp) # Nom du dossier de travail du client
+endif()
+if(NOT DEFINED BTTP_IDENTITE_DOSSIER)
+    set(BTTP_IDENTITE_DOSSIER id) # Nom du dossier où sont stockées les identités (relatif à BTTP_DOSSIER)
+endif()
+if(NOT DEFINED BTTP_IDENTITE_EXT)
+    set(BTTP_IDENTITE_EXT asc) # Extension de fichier des identités
+endif()
+### Valeurs par défaut
+if(NOT DEFINED BTTP_UTILISER_CONTEXTE_PAR_DEFAUT)
+    set(BTTP_UTILISER_CONTEXTE_PAR_DEFAUT true) # Défini si le client doit utiliser le dossier de contexte par défaut.
+endif()
+if(NOT DEFINED BTTP_CREATION_CHEMIN_PAR_DEFAUT)
+    set(BTTP_CREATION_CHEMIN_PAR_DEFAUT true) # Défini si le client doit tenter de créer des chemins non existants.
+endif()
 
 # OPTIONS
 if(NOT DEFINED BTTP_CLIENT_CLI)
@@ -27,7 +44,30 @@ endif()
 # PROJET
 project(${BTTP_CLIENT} LANGUAGES CXX VERSION ${BTTP_CLIENT_VERSION})
 
-include(${BTTP_CLIENT_COEUR_DOSSIER}/CMakeLists.txt)
+# Configuration
+configure_file(${BTTP_CLIENT_RACINE}.in ${BTTP_CLIENT_RACINE})
+# Sources
+file(
+    GLOB_RECURSE
+    BTTP_CLIENT_SRC
+    ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp
+)
+# En-têtes
+file(
+    GLOB_RECURSE
+    BTTP_CLIENT_INCLUDES
+    ${CMAKE_CURRENT_LIST_DIR}/include/*.h
+)
+# Bibliothèque
+add_library(
+    ${BTTP_CLIENT}
+    ${BTTP_CLIENT_SRC}
+    ${BTTP_CLIENT_INCLUDES}
+)
+target_link_libraries(
+    ${BTTP_CLIENT}
+    ${BTTP_CLIENT_DEP}
+)
 
 # COMPLEMENTS
 # CLI

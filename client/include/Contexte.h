@@ -11,8 +11,9 @@ namespace BTTP
         {
         private:
             static std::string _dossier;
+
         public:
-            static void initialiser(const std::string dossier = BTTP_DOSSIER);
+            static void initialiser(const std::string dossier = "");
             inline static const std::string& dossier() {return _dossier;}
 
         };

@@ -9,7 +9,8 @@ namespace BTTP
         void Contexte::initialiser(const std::string dossier)
         {
             Protocole::Contexte::initialiser();
-            Contexte::_dossier = dossier;
+            if (std::filesystem::is_directory(dossier)) _dossier = dossier;
+            // else throw // TODO Classe d'erreur DossierInexistant, super classe ElementInexistant ?
         }
     }
 }

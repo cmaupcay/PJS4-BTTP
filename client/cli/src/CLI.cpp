@@ -8,18 +8,11 @@ namespace BTTP
         {
             const int executer(const int& argc, const char** argv)
             {
-                // Détermination du dossier de travail
-                // TODO Déplacer dans la classe de gestion des dossiers et fichiers du coeur du client.
-                std::string dossier;
-                if (std::getenv(BTTP_CLIENT_CLI_ENV_DOSSIER) == NULL)
-                {
-                    dossier = argv[0];
-                    dossier = dossier.substr(0, dossier.find_last_of('/'));
-                    if (!std::filesystem::is_directory(dossier))
-                        dossier = std::filesystem::current_path();
-                }
-                else dossier = std::getenv(BTTP_CLIENT_CLI_ENV_DOSSIER);
-                Contexte::initialiser(dossier);
+                // Détermination du dossier de travail...
+                Contexte::initialiser(
+                    // On prend le dossier où est situé l'exécutable.
+                    std::filesystem::canonical(Fichiers::dossier(argv[0])).string()
+                );
 
                 // Affichage introductif
                 Console::afficher(BTTP_CLIENT_CLI_INTRO);

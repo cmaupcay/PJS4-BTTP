@@ -3,8 +3,6 @@
 
 #define BTTP_CLIENT_CLI_VERSION "${BTTP_CLIENT_CLI_VERSION}"
 
-#define BTTP_CLIENT_CLI_ENV_DOSSIER "${BTTP_CLIENT_CLI_ENV_DOSSIER}"
-
 #include "../../include/BTTP-Client.h"
 
 #endif

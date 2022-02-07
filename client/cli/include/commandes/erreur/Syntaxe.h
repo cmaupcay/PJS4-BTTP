@@ -18,7 +18,7 @@ namespace BTTP
                 private:
                     const std::string& _commande;
                 public:
-                    Commande_Syntaxe(const std::string commande)
+                    Commande_Syntaxe(const std::string& commande)
                         : Erreur("Client/CLI/Commande/Syntaxe", "La syntaxe de la commande \"" + commande + "\" n'est pas correcte.", H_BTTP_CLIENT_CLI_COMMANDE_SYNTAXE_CODE),
                         _commande{ commande }
                     {}

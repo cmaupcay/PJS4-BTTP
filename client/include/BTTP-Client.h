@@ -1,11 +1,7 @@
 #ifndef H_BTTP_CLIENT_COEUR
 #define H_BTTP_CLIENT_COEUR
 
-#include "Contexte.h"
 #include "Fichiers.h"
-
-#include <fstream>
-#include <filesystem>
 
 namespace BTTP 
 {

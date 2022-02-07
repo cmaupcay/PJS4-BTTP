@@ -18,15 +18,13 @@ namespace BTTP
             )
             {
                 const std::string cible = chemin(fichier, dossier, utiliser_contexte);
-                // if (!std::filesystem::exists(cible)) throw // TODO Classe d'erreur
+                if (!std::filesystem::exists(cible)) throw Erreur::Fichiers::Inexistant(cible);
                 std::ios::openmode mode = std::ios::out;
                 if (ajouter) mode = std::ios::app;
                 if (binaire) mode |= std::ios::binary;
                 std::ofstream flux{ cible, mode };
-                return flux;
-                // TODO Classe d'erreur
-                // if (flux.is_open()) return flux;
-                // else throw
+                if (flux.is_open()) return flux;
+                else throw Erreur::Fichiers::Ouverture(cible);
             }
 
             void ecrire(
@@ -45,12 +43,10 @@ namespace BTTP
             )
             {
                 const std::string cible = chemin(fichier, dossier, utiliser_contexte);
-                // if (!std::filesystem::exists(cible)) throw // TODO Classe d'erreur
+                if (!std::filesystem::exists(cible)) throw Erreur::Fichiers::Inexistant(cible);
                 std::ifstream flux{ cible, binaire ? std::ios::binary : std::ios::in };
-                return flux;
-                // TODO Classe d'erreur
-                // if (flux.is_open()) return flux;
-                // else throw
+                if (flux.is_open()) return flux;
+                else throw Erreur::Fichiers::Ouverture(cible);
             }
 
             const std::string lire(

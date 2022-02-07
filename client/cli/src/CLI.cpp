@@ -26,7 +26,7 @@ namespace BTTP
                     id = new Protocole::Identite(importer("user"));
                     Console::afficher("FAIT");
                 }
-                catch (std::exception& err)
+                catch (Client::Erreur::Fichiers::Inexistant& err)
                 {
                     Console::afficher("ERREUR");
                     Console::afficher("Génération de votre identité... ", false);

@@ -18,7 +18,7 @@ namespace BTTP
                 private:
                     const std::string& _mot;
                 public:
-                    Commande_Inconnue(const std::string mot)
+                    Commande_Inconnue(const std::string& mot)
                         : Erreur("Client/CLI/Commande/Inconnue", "La commande \"" + mot + "\" est inconnue.", H_BTTP_CLIENT_CLI_COMMANDE_INCONNUE_CODE),
                         _mot{ mot }
                     {}

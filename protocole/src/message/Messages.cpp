@@ -15,6 +15,8 @@ namespace BTTP
                         return new ClePublique(paquet);
                     case Type::EXECUTION:
                         return new Execution(paquet);
+                    case Type::RESULTAT:
+                        return new Resultat(paquet);
                     // TODO Classes des types de message
                     default:
                         throw Erreur::Messages::Type::Inconnu(paquet);

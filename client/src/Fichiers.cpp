@@ -18,7 +18,11 @@ namespace BTTP
             )
             {
                 const std::string cible = chemin(fichier, dossier, utiliser_contexte);
-                if (!std::filesystem::exists(cible)) throw Erreur::Fichiers::Inexistant(cible);
+                if (!std::filesystem::exists(cible))
+                {
+                    if (creer_chemin) std::filesystem::create_directories(Fichiers::dossier(cible));
+                    else throw Erreur::Fichiers::Inexistant(cible);
+                }
                 std::ios::openmode mode = std::ios::out;
                 if (ajouter) mode = std::ios::app;
                 if (binaire) mode |= std::ios::binary;

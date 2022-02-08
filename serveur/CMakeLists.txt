@@ -3,11 +3,10 @@ set(CMAKE_CXX_STANDARD 17)
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${EXECUTABLE_OUTPUT_PATH}/lib)
 
-// TODO Ajouter les tests comme dans protocole
-
 # DEPENDANCES
 set(BTTP_CLIENT_CLI OFF)
 set(BTTP_CLIENT_GUI OFF)
+set(BTTP_CLIENT_TEST OFF)
 include(${CMAKE_CURRENT_LIST_DIR}/../client/CMakeLists.txt)
 
 # CONSTANTES
@@ -45,3 +44,6 @@ target_link_libraries(
     ${BTTP_SERVEUR}
     ${BTTP_SERVEUR_DEP}
 )
+
+set(BTTP_SERVEUR_TEST_DOSSIER ${CMAKE_CURRENT_LIST_DIR}/test)
+include(${BTTP_SERVEUR_TEST_DOSSIER}/CMakeLists.txt)

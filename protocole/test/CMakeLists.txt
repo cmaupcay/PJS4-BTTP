@@ -6,8 +6,9 @@ set(BTTP_TEST_RACINE ${CMAKE_CURRENT_LIST_DIR}/include/Racine.h) # En-tête raci
 set(BTTP_TEST_DOSSIER_TMP true) # Défini si le dossier doit être effacer à la fin des tests
 
 # DEPENDANCES
-add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/modules/googletest)
-
+if(NOT DEFINED GOOGLETEST_VERSION)
+    add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/modules/googletest)
+endif()
 # FICHIERS
 configure_file(${BTTP_TEST_RACINE}.in ${BTTP_TEST_RACINE})
 # Sources

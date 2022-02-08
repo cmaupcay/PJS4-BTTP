@@ -7,3 +7,6 @@
 [submodule "client/cli/googletest"]
 	path = client/cli/test/modules/googletest
 	url = https://github.com/google/googletest.git
+[submodule "serveur/googletest"]
+	path = serveur/test/modules/googletest
+	url = https://github.com/google/googletest.git

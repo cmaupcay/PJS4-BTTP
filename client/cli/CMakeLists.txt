@@ -1,7 +1,8 @@
 # Constantes
-set(BTTP_CLIENT_CLI_EXE ${BTTP}-cli) # Dossier de référence du CLI
+set(BTTP_CLIENT_CLI_EXE ${BTTP}-cli) # Nom de l'executable
 set(BTTP_CLIENT_CLI_VERSION 0.0.1) # Version du CLI
 set(BTTP_CLIENT_CLI_RACINE ${CMAKE_CURRENT_LIST_DIR}/include/Racine.h) # En-tête racine (fichier de configuration)
+set(BTTP_CLIENT_CLI_MAIN ${CMAKE_CURRENT_LIST_DIR}/src/bttp-cli.cpp)
 
 # TODO Ajouter les tests comme dans protocole
 
@@ -31,3 +32,6 @@ target_link_libraries(
     ${BTTP_CLIENT_CLI_EXE}
     ${BTTP_CLIENT_LIB}
 )
+
+set(BTTP_CLIENT_CLI_TEST_DOSSIER ${CMAKE_CURRENT_LIST_DIR}/test)
+include(${BTTP_CLIENT_CLI_TEST_DOSSIER}/CMakeLists.txt)

@@ -1,5 +1,5 @@
 # CONSTANTES
-set(BTTP_CLIENT_TEST_EXE ${BTTP}-test)
+set(BTTP_CLIENT_TEST_EXE ${BTTP_CLIENT}-test)
 set(BTTP_CLIENT_TEST_DEP gtest)
 set(BTTP_CLIENT_TEST_RACINE ${CMAKE_CURRENT_LIST_DIR}/include/Racine.h) # En-tête racine (fichier de configuration)
 # DEBUG

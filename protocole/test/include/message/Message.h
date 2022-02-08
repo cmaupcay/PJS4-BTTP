@@ -22,21 +22,21 @@ namespace BTTP
                     static void SetUpTestCase();
                     static void TearDownTestCase();
 
-                    static const bool decoupage_correct(
+                    static void decoupage_correct(
                         const std::string paquet, const std::string separateur,
                         const std::string elements[], const size_t n_elements
                     );
-                    static const bool decoupage_correct(
+                    static void decoupage_correct(
                         const std::string paquet, const char separateur,
                         const std::string elements[], const size_t n_elements
                     );
 
-                    static const bool jointure_correcte(
-                        const std::string paquet, const std::string separateur,
+                    static void jointure_correcte(
+                        const std::string attendu, const std::string separateur,
                         const std::string elements[], const size_t n_elements
                     );
-                    static const bool jointure_correcte(
-                        const std::string paquet, const char separateur,
+                    static void jointure_correcte(
+                        const std::string attendu, const char separateur,
                         const std::string elements[], const size_t n_elements
                     );
                 };

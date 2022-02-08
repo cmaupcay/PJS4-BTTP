@@ -79,7 +79,7 @@ namespace BTTP
                     destinataire->dechiffrer(message_chiffre, destinataire->cle_publique(), mdp_destinataire);
                 }, BTTP::Protocole::Erreur::Identite::Dechiffrement);
             }
-            TEST_F(Identite, ChiffrementCorrompu)
+            TEST_F(Identite, ChiffrementCorrompu) // TOTEST Des problèmes d'assertion peuvent apparaître
             {
                 if (emissaire == nullptr || destinataire == nullptr) GTEST_SKIP();
                 const std::string message_chiffre = emissaire->chiffrer(message, destinataire->cle_publique(), mdp_emissaire);

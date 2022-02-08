@@ -35,3 +35,10 @@ target_link_libraries(
     ${BTTP_LIB}
     ${BTTP_TEST_DEP}
 )
+
+set_target_properties(
+    ${BTTP_TEST_EXE} 
+    PROPERTIES 
+    RUNTIME_OUTPUT_DIRECTORY 
+    "${EXECUTABLE_OUTPUT_PATH}/tests"
+)

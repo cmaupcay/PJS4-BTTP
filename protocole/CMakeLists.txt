@@ -75,4 +75,4 @@ endif()
 
 # CACHE
 unset(BTTP_DEMO CACHE)
-unset(BTTP_TEXT CACHE)
+unset(BTTP_TEST CACHE)

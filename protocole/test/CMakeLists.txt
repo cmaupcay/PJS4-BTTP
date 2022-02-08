@@ -35,7 +35,6 @@ target_link_libraries(
     ${BTTP_LIB}
     ${BTTP_TEST_DEP}
 )
-
 set_target_properties(
     ${BTTP_TEST_EXE} 
     PROPERTIES 

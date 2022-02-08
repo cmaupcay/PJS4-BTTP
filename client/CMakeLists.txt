@@ -42,6 +42,9 @@ endif()
 if(NOT DEFINED BTTP_CLIENT_GUI)
     option(BTTP_CLIENT_GUI "Compile la version graphique du client." ON)
 endif()
+if(NOT DEFINED BTTP_CLIENT_TEST)
+    option(BTTP_CLIENT_TEST "Compile les tests du coeur du client." ON)
+endif()
 
 # PROJET
 project(${BTTP_CLIENT} LANGUAGES CXX VERSION ${BTTP_CLIENT_VERSION})
@@ -81,4 +84,10 @@ endif()
 if(BTTP_CLIENT_GUI)
     set(BTTP_CLIENT_GUI_DOSSIER ${CMAKE_CURRENT_LIST_DIR}/gui) # Dossier de référence du GUI
     include(${BTTP_CLIENT_GUI_DOSSIER}/CMakeLists.txt)
+endif()
+
+#Tests du coeur
+if(BTTP_CLIENT_TEST)
+    set(BTTP_CLIENT_TEST_DOSSIER ${CMAKE_CURRENT_LIST_DIR}/test)
+    include(${BTTP_CLIENT_TEST_DOSSIER}/CMakeLists.txt)
 endif()

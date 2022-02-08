@@ -4,12 +4,12 @@ namespace BTTP
 {
     namespace Protocole
     {
-        namespace Messages
+        namespace Test
         {
-            namespace Test
+            namespace Messages
             {
                 Cle::Publique* ClePublique::cle = nullptr;
-                Messages::ClePublique* ClePublique::message = nullptr;
+                Protocole::Messages::ClePublique* ClePublique::message = nullptr;
                 std::string ClePublique::construction = "";
 
                 ClePublique::ClePublique() {};
@@ -17,23 +17,23 @@ namespace BTTP
                 void ClePublique::SetUpTestCase()
                 {
     
-                    if (BTTP::Protocole::Test::Identite::destinataire == nullptr)
-                        BTTP::Protocole::Test::Identite::destinataire = new Identite(
-                            BTTP::Protocole::Test::Identite::nom_destinataire,
-                            BTTP::Protocole::Test::Identite::nom_destinataire + BTTP::Protocole::Test::Identite::suffixe_contact,
-                            BTTP::Protocole::Test::Identite::mdp_destinataire
+                    if (Identite::destinataire == nullptr)
+                        Identite::destinataire = new Protocole::Identite(
+                            Identite::nom_destinataire,
+                            Identite::nom_destinataire + Identite::suffixe_contact,
+                            Identite::mdp_destinataire
                         );
 
-                    cle = new Cle::Publique(BTTP::Protocole::Test::Identite::destinataire->cle_publique());
+                    cle = new Cle::Publique(Identite::destinataire->cle_publique());
                 }
                 
                 void ClePublique::TearDownTestCase()
                 {
-                    delete BTTP::Protocole::Test::Identite::destinataire;
+                    delete Identite::destinataire;
                     delete cle;
                     if (message != nullptr) delete message;
                     construction = "";
-                    BTTP::Protocole::Test::Identite::destinataire = nullptr;
+                    Identite::destinataire = nullptr;
                     cle = nullptr;
                 }
 

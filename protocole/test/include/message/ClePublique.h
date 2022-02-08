@@ -7,15 +7,15 @@ namespace BTTP
 {
     namespace Protocole
     {
-        namespace Messages
+        namespace Test
         {
-            namespace Test
+            namespace Messages
             {
                 class ClePublique : public ::testing::Test 
                 {
                 public:
                     static Cle::Publique* cle;
-                    static Messages::ClePublique* message;
+                    static Protocole::Messages::ClePublique* message;
                     static std::string construction;
 
                     ClePublique();

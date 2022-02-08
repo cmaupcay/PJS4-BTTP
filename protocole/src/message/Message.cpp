@@ -24,7 +24,7 @@ namespace BTTP
                 {
                     // On ajoute la partie entre les dernier et avant-dernier séparateurs trouvés.
                     vecteur.push_back(contenu.substr(debut, fin - debut));
-                    debut = fin + 1; // On saute le séparateur trouvé
+                    debut = fin + separateur.size(); // On saute le séparateur trouvé
                 }
                 if (debut < n) // Si la chaîne ne se termine pas par un séparateur...
                     vecteur.push_back(contenu.substr(debut)); // On ajoute la dernière partie.

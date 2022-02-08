@@ -28,7 +28,7 @@ namespace BTTP
 
                     public:
                         /**
-                         * @param paquet Paquet dont le type est incconu de la fonction de résolution.
+                         * @param paquet Paquet dont le type est inconnu de la fonction de résolution.
                          */
                         Inconnu(const std::string& paquet)
                             : Erreur("Messages/Type/Inconnu", "Impossible de résoudre le type du message.", BTTP_MESSAGE_TYPE_INCONNU_CODE),

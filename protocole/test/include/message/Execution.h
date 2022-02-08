@@ -7,9 +7,9 @@ namespace BTTP
 {
     namespace Protocole
     {
-        namespace Messages
+        namespace Test
         {
-            namespace Test
+            namespace Messages
             {
                 class Execution : public ::testing::Test 
                 {

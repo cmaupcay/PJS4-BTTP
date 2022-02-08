@@ -3,7 +3,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${EXECUTABLE_OUTPUT_PATH}/lib)
 
-// TODO Ajouter les tests comme dans protocole
+# TODO Ajouter les tests comme dans protocole
 
 # DEPENDANCES
 set(BTTP_DEMO OFF)

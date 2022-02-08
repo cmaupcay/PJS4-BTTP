@@ -32,7 +32,7 @@ add_executable(
 )
 target_link_libraries(
     ${BTTP_CLIENT_TEST_EXE} 
-    ${BTTP_LIB}
+    ${BTTP_CLIENT_LIB}
     ${BTTP_CLIENT_TEST_DEP}
 )
 set_target_properties(

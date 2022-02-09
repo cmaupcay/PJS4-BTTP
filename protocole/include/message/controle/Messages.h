@@ -12,7 +12,7 @@ namespace BTTP
     {
         namespace Messages
         {
-            namespace Controle
+            namespace 
             {
                 // TOTEST
                 /**
@@ -24,8 +24,6 @@ namespace BTTP
                  */
                 Message* resoudre(const std::string paquet);
 
-                // TODO Reprendre la fonction d'initialisation (switch) avec une initialisation du message à la fin.
-                // TODO Créer la classe d'erreur Erreur::Messages::Controle::Inconnu
                 /**
                  * @brief Génère une instance d'un message de contrôle du type associé au type du message en entrée.
                  * @param message Message BTTP standard à encapsuler.

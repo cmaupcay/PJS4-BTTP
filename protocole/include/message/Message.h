@@ -138,7 +138,6 @@ namespace BTTP
                  * @brief Résultat(s) d'exécution d'un script.
                  * @pre EXECUTION
                  */
-                // TODO Classe du type de message Resultat
                 RESULTAT = '<',
                 /**
                  * @brief Ouverture d'une transaction.

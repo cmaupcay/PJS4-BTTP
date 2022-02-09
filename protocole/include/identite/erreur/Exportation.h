@@ -1,7 +1,7 @@
 #ifndef H_BTTP_IDENTITE_EXPORTATION
 #define H_BTTP_IDENTITE_EXPORTATION
 
-#include "../../Erreur.h"
+#include "../../erreur/Erreur.h"
 
 #define BTTP_IDENTITE_EXPORTATION_CODE -211
 

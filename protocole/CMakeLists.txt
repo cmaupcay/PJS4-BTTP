@@ -61,6 +61,10 @@ add_library(
     ${BTTP_SRC}
     ${BTTP_INCLUDES}
 )
+target_include_directories(
+    ${BTTP}
+    PUBLIC "${CMAKE_CURRENT_LIST_DIR}/include/"
+)
 
 # COMPLEMENTS
 # Démonstration

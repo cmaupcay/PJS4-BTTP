@@ -3,6 +3,6 @@
 
 #define BTTP_SERVEUR_VERSION "${BTTP_SERVEUR_VERSION}"
 
-#include "../../protocole/include/BTTP.h"
+#include <BTTP.h>
 
 #endif

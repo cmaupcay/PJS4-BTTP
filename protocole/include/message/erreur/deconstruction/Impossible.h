@@ -1,7 +1,7 @@
 #ifndef H_BTTP_MESSAGES_DECONSTRUCTION_IMPOSSIBLE
 #define H_BTTP_MESSAGES_DECONSTRUCTION_IMPOSSIBLE
 
-#include "../../../Erreur.h"
+#include "../../../erreur/Erreur.h"
 
 #define BTTP_MESSAGES_DECONSTRUCTION_IMPOSSIBLE_CODE -100
 

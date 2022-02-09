@@ -1,7 +1,7 @@
 #ifndef H_BTTP_IDENTITE_IMPORTATION
 #define H_BTTP_IDENTITE_IMPORTATION
 
-#include "../../Erreur.h"
+#include "../../erreur/Erreur.h"
 
 #define BTTP_IDENTITE_IMPORTATION_CODE -212
 

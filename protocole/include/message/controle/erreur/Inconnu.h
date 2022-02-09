@@ -1,7 +1,7 @@
 #ifndef H_BTTP_MESSAGE_CONTROLE_INCONNU
 #define H_BTTP_MESSAGE_CONTROLE_INCONNU
 
-#include "../../../Erreur.h"
+#include "../../../erreur/Erreur.h"
 
 #define BTTP_MESSAGE_CONTROLE_INCONNU_CODE -200
 

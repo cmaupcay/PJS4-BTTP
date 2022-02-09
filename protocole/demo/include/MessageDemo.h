@@ -1,4 +1,4 @@
-#include "../../include/BTTP.h"
+#include <BTTP.h>
 
 class MessageDemo : public BTTP::Protocole::Messages::Message
 {

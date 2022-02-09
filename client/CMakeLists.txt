@@ -71,6 +71,10 @@ target_link_libraries(
     ${BTTP_CLIENT}
     ${BTTP_CLIENT_DEP}
 )
+target_include_directories(
+    ${BTTP_CLIENT}
+    PUBLIC "${CMAKE_CURRENT_LIST_DIR}/include/"
+)
 
 # COMPLEMENTS
 # CLI

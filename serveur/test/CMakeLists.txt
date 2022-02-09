@@ -6,7 +6,7 @@ set(BTTP_SERVEUR_TEST_RACINE ${CMAKE_CURRENT_LIST_DIR}/include/Racine.h) # En-t�
 set(BTTP_SERVEUR_TEST_DOSSIER_TMP true) # Défini si le dossier doit être effacer à la fin des tests
 
 # DEPENDANCES
-if(NOT DEFINED GOOGLETEST_VERSION)
+if(NOT TARGET gtest)
     add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/modules/googletest)
 endif()
 

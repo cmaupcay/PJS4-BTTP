@@ -12,7 +12,7 @@ namespace BTTP
         class ITransaction
         {
         public:
-            virtual void initialiser() = 0;
+            virtual void ouvrir() = 0;
             virtual void fermer() = 0;
 
             virtual const std::string preparer(const Messages::IMessage& message) const = 0;
@@ -33,7 +33,7 @@ namespace BTTP
             Transaction(const Identite& identite, const Cle::Publique& destinataire, const Cle::Publique& controleur);
 
             // TODO Implémentation
-            void initialiser() override;
+            void ouvrir() override;
             // TODO Implémentation
             void fermer() override;
 

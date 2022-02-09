@@ -1,7 +1,7 @@
 #ifndef H_BTTP_MESSAGE_TYPE_INCOHERENT
 #define H_BTTP_MESSAGE_TYPE_INCOHERENT
 
-#include "../../../Erreur.h"
+#include "../../../erreur/Erreur.h"
 
 #define BTTP_MESSAGE_TYPE_INCOHERENT_CODE -111
 

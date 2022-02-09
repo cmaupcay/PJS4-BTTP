@@ -18,25 +18,25 @@ namespace BTTP
             private :
 
                 /**
-                 * @brief Idenifiant numérique de la réponse
-                 * @details IL doit être identique à l'id d'exéution
+                 * @brief Idenifiant numérique d'exécution.
+                 * @details Il doit être identique à l'identifiant du message d'exécution auquel répond ce message.
                  */
                 uint32_t* _id;
 
                 /**
-                 * @brief Message contenu dans le résultat
+                 * @brief Contenu du résultat.
                  */
                 std::string _resultat;
 
                 /**
-                 * @brief Retourne à la fois le message en lui même et l'id, l'objet sous forme de string
-                 * @return const std::string 
+                 * @brief Retourne à la fois le message en lui même et l'id, l'objet sous forme de string.
+                 * @return const std::string Contenu sérialisé du message.
                  */
                 const std::string contenu() const override;
 
                 /**
-                 * @brief 
-                 * @param contenu 
+                 * @brief Déconstruction du contenu d'un paquet et enregistrement des informations extraites.
+                 * @param contenu Contenu extrait d'un paquet de type RESULTAT.
                  */
                 void deconstruction(std::string contenu) override;
             
@@ -54,15 +54,14 @@ namespace BTTP
                 Resultat(const std::string paquet);
             
                 /**
-                 * @brief Retourne l'identifiant numérique du message.
-                 * @return const uint32_t& Identifiant du message.
+                 * @brief Retourne l'identifiant numérique d'exécution associé au message.
+                 * @return const uint32_t& Identifiant d'exécution.
                  */
                 inline const uint32_t& id() const { return *this->_id; }
 
-                //TOCOMMENT RETURN
                 /**
-                 * @brief Retourne le contenu du message
-                 * @return const std::string& 
+                 * @brief Retourne le contenu du résultat.
+                 * @return const std::string& Résultat d'exécution d'un script.
                  */
                 inline const std::string& resultat() const { return this->_resultat; }
             };

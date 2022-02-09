@@ -1,7 +1,7 @@
 #ifndef H_BTTP_MESSAGE_TYPE_INCONNU
 #define H_BTTP_MESSAGE_TYPE_INCONNU
 
-#include "../../../Erreur.h"
+#include "../../../erreur/Erreur.h"
 
 #define BTTP_MESSAGE_TYPE_INCONNU_CODE -110
 

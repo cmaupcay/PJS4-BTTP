@@ -4,8 +4,6 @@ set(BTTP_CLIENT_CLI_VERSION 0.0.1) # Version du CLI
 set(BTTP_CLIENT_CLI_RACINE ${CMAKE_CURRENT_LIST_DIR}/include/Racine.h) # En-tête racine (fichier de configuration)
 set(BTTP_CLIENT_CLI_MAIN ${CMAKE_CURRENT_LIST_DIR}/src/bttp-cli.cpp)
 
-# TODO Ajouter les tests comme dans protocole
-
 # Configuration
 configure_file(${BTTP_CLIENT_CLI_RACINE}.in ${BTTP_CLIENT_CLI_RACINE})
 

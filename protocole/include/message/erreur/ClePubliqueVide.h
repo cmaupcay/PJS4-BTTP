@@ -1,7 +1,7 @@
 #ifndef H_BTTP_MESSAGES_VIDE
 #define H_BTTP_MESSAGES_VIDE
 
-#include "../../Erreur.h"
+#include "../../erreur/Erreur.h"
 
 #define BTTP_MESSAGES_VIDE_CODE -200
 

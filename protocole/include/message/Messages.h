@@ -3,6 +3,7 @@
 
 #include "ClePublique.h"
 #include "Execution.h"
+#include "Resultat.h"
 
 #include "erreur/type/Inconnu.h"
 

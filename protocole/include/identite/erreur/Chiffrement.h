@@ -1,7 +1,7 @@
 #ifndef H_BTTP_IDENTITE_CHIFFREMENT
 #define H_BTTP_IDENTITE_CHIFFREMENT
 
-#include "../../Erreur.h"
+#include "../../erreur/Erreur.h"
 
 #define BTTP_IDENTITE_CHIFFREMENT_CODE -201
 

@@ -1,8 +1,7 @@
 #ifndef H_BTTP_MESSAGE_EXECUTION
 #define H_BTTP_MESSAGE_EXECUTION
 
-#include "Message.h"
-#include "erreur/deconstruction/Incomplet.h"
+#include "Resultat.h"
 
 namespace BTTP
 {
@@ -16,7 +15,7 @@ namespace BTTP
             {
             private:
                 /**
-                 * @brief Idenifiant numérique de la requête d'exécution.
+                 * @brief Idenifiant numérique d'exécution.
                  * @details Cet identifiant permet à une application de gérer plusieurs requêtes d'exécution
                  * simultanées pour une même identité.
                  */
@@ -44,7 +43,7 @@ namespace BTTP
             public:
                 /**
                  * @brief Construction d'un nouveau message à partir de l'identifiant du script à exécuter.
-                 * @details L'identifiant numérique de la requête est généré pseudo-aléatoirement (std::rand).
+                 * @details L'identifiant numérique d'exécution est généré pseudo-aléatoirement (std::rand).
                  * @param id_script Identifiant numérique du script à exécuter.
                  */
                 Execution(const uint32_t id_script);
@@ -62,6 +61,13 @@ namespace BTTP
                  * @brief Destruction du message.
                  */
                 ~Execution();
+
+                /**
+                 * @brief Retourne un message vide de la classe du message attendu en réponse à ce message, ici un résultat d'exécution.
+                 * @return IMessage* Message attendu en réponse à ce message.
+                 */
+                inline IMessage* reponse() const override
+                { return new Resultat(*this->_id); }
 
                 /**
                  * @brief Retourne l'identifiant numérique du message.

@@ -48,6 +48,13 @@ namespace BTTP
                  */
                 virtual const char type_c() const = 0;
 
+                /**
+                 * @brief Retourne un message vide de la classe du message attendu en retour de celui-ci.
+                 * Si aucune réponse n'est attendue, renvoie nullptr.
+                 * @return IMessage* Message attendu en réponse à celui-ci.
+                 */
+                virtual IMessage* reponse() const = 0;
+
                 inline friend std::ostream& operator<<(std::ostream& os, const IMessage& msg) { return (os << msg.construire()); }
             };
 
@@ -102,6 +109,14 @@ namespace BTTP
                  * @return const char Type du message.
                  */
                 inline const char type_c() const override { return static_cast<char>(this->_type); }
+
+                /**
+                 * @brief Retourne un message vide de la classe du message attendu en retour , ici un résultat d'exécution..
+                 * Si aucune réponse n'est attendue, renvoie nullptr.
+                 * @details Par défaut, aucune réponse n'est attendue
+                 * @return IMessage* Message attendu en réponse à celui-ci.
+                 */
+                inline IMessage* reponse() const override { return nullptr; }
 
                 /**
                  * @brief Construction d'un paquet à partir des informations du message.

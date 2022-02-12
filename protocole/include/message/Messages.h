@@ -23,6 +23,8 @@ namespace BTTP
              * @throws Erreur::Messages::Type::Inconnu Le type du paquet n'est pas connu.
              */
             Message* resoudre(const std::string paquet);
+
+            IMessage* reponse(const Message& message);
         }
     }
 }

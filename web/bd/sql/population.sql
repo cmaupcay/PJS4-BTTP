@@ -6,3 +6,5 @@ INSERT INTO bttp.format_script(extension) VALUES ("sh");    /* Script shell Linu
 INSERT INTO bttp.format_script(extension) VALUES ("bat");   /* Script shell Windows */
 INSERT INTO bttp.format_script(extension) VALUES ("bin");   /* Binaire Linux */
 INSERT INTO bttp.format_script(extension) VALUES ("exe");   /* Binaire Windows */
+
+COMMIT;

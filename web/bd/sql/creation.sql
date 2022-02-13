@@ -1,25 +1,25 @@
 /* TODO Mettre a jour le MLD */
 /* Suppression des tables existantes */
-DROP TABLE IF EXISTS bttp.utilisateur;
-DROP TABLE IF EXISTS bttp.terminal_client;
-DROP TABLE IF EXISTS bttp.terminal_distant;
 DROP TABLE IF EXISTS bttp.script;
 DROP TABLE IF EXISTS bttp.script_publique;
-DROP TABLE IF EXISTS bttp.liaison_script_publique;
 DROP TABLE IF EXISTS bttp.categorie_script;
 DROP TABLE IF EXISTS bttp.format_script;
+DROP TABLE IF EXISTS bttp.terminal_distant;
+DROP TABLE IF EXISTS bttp.terminal_client;
+DROP TABLE IF EXISTS bttp.utilisateur;
 /* Suppression de la base existante */
 DROP DATABASE IF EXISTS bttp;
 
 /* Création de la base */
-CREATE DATABASE bttp;
+CREATE DATABASE bttp CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 /* Création des tables */
 CREATE TABLE bttp.utilisateur (
     id INT AUTO_INCREMENT, /* Identifiant numérique unique de l'utilisateur */
     pseudo VARCHAR(32) NOT NULL, /* Pseudonyme de l'utilisateur */
     mdp VARCHAR(512) NOT NULL, /* Hash du mot de passe */
     PRIMARY KEY(id),
-    UNIQUE(pseudo)
+    UNIQUE(pseudo),
+    CHECK(pseudo=LOWER(pseudo))
 ) ENGINE=InnoDB AUTO_INCREMENT=1;
 
 CREATE TABLE bttp.terminal_client (
@@ -33,14 +33,14 @@ CREATE TABLE bttp.terminal_client (
     meta VARCHAR(512) NOT NULL, /* Meta données du terminal au format JSON */
     PRIMARY KEY(id),
     UNIQUE(cle_publique),
-    FOREIGN KEY(id_proprietaire) REFERENCES bttp.utilisateur(id)
+    FOREIGN KEY(id_proprietaire) REFERENCES bttp.utilisateur(id) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=1;
 
 CREATE TABLE bttp.terminal_distant (
     id INT, /* Identifiant numérique unique du terminal */
     disponible BOOLEAN NOT NULL DEFAULT 0, /* Indique si le terminal est disponible pour une transaction */
     PRIMARY KEY(id),
-    FOREIGN KEY(id) REFERENCES bttp.terminal_client(id) /* Un terminal distant est forcément un terminal client */
+    FOREIGN KEY(id) REFERENCES bttp.terminal_client(id) ON DELETE CASCADE /* Un terminal distant est forcément un terminal client */
 ) ENGINE=InnoDB;
 
 CREATE TABLE bttp.categorie_script (
@@ -61,7 +61,7 @@ CREATE TABLE bttp.script_publique (
     id INT AUTO_INCREMENT, /* Identifiant numérique unique du script publique */
     nom VARCHAR(64) NOT NULL, /* Nom du script publique */
     version VARCHAR(16) NOT NULL, /* Version du script publique */ /* TODO Externaliser les versions dans un table */
-    id_auteur INT NOT NULL, /* Idenitifiant numérique unique de l'utilisateur ayant publié le script */
+    id_auteur INT, /* Idenitifiant numérique unique de l'utilisateur ayant publié le script */
     publication DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, /* Date et heure de publication du script */
     verifie BOOLEAN NOT NULL DEFAULT 0, /* Indique si le code source du script a été verifié par un tiers */
     id_categorie INT NOT NULL, /* Identifiant numérique unique de la catégorie à laquelle appartient le script */
@@ -71,9 +71,9 @@ CREATE TABLE bttp.script_publique (
     chemin_code_source VARCHAR(256), /* Chemin du code source sur le serveur */
     PRIMARY KEY(id),
     UNIQUE(nom, id_auteur, id_format), /* Un même utilisateur ne peut pas publier deux scripts ayant le même nom et le même format */
-    FOREIGN KEY(id_auteur) REFERENCES bttp.utilisateur(id),
-    FOREIGN KEY(id_categorie) REFERENCES bttp.categorie_script(id),
-    FOREIGN KEY(id_format) REFERENCES bttp.format_script(id)
+    FOREIGN KEY(id_auteur) REFERENCES bttp.utilisateur(id) ON DELETE SET NULL, /* Les scripts publiques persistent même si leur auteur n'existe plus */
+    FOREIGN KEY(id_categorie) REFERENCES bttp.categorie_script(id) ON DELETE CASCADE,
+    FOREIGN KEY(id_format) REFERENCES bttp.format_script(id) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=1;
 
 CREATE TABLE bttp.script (
@@ -84,8 +84,8 @@ CREATE TABLE bttp.script (
     somme INT NOT NULL, /* Somme de contrôle du code source hébergé localement */
     id_script_publique INT, /* Identifiant numérique du script publique auquel est lié ce script (peu être nul) */
     PRIMARY KEY(id),
-    FOREIGN KEY(id_hote) REFERENCES bttp.terminal_distant(id),
-    FOREIGN KEY(id_script_publique) REFERENCES bttp.script_publique(id)
+    FOREIGN KEY(id_hote) REFERENCES bttp.terminal_distant(id) ON DELETE CASCADE,
+    FOREIGN KEY(id_script_publique) REFERENCES bttp.script_publique(id) ON DELETE SET NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=1;
 
 COMMIT;

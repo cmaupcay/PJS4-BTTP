@@ -5,6 +5,8 @@
 
 #define BTTP_TRANSACTION_MESSAGE_NUL ""
 
+#include "erreur/Ouverture.h"
+
 namespace BTTP
 {
     namespace Protocole

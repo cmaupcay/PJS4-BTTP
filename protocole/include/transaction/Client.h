@@ -3,6 +3,8 @@
 
 #include "Transaction.h"
 
+#include "erreur/Refusee.h"
+
 namespace BTTP
 {
     namespace Protocole

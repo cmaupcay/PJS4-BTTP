@@ -29,7 +29,8 @@ namespace BTTP
                 // const Messages::Ouverture message{ this->_distant }; // TODO Il manque la classe de message Ouverture :(
                 // this->envoyer(message, mdp);
                 const Messages::IMessage* reponse = this->recevoir(mdp);
-                // if (reponse->type_c() != static_cast<char>(Messages::Type::OUVERTURE)) throw Erreur::Transaction::OvertureRefusee(*reponse); // TODO Classe d'erreur OuverureRefusee
+                if (reponse->type_c() != static_cast<char>(Messages::Type::OUVERTURE)) 
+                    throw Erreur::Transaction::Refusee(reponse);
             }
 
             void Client::fermeture(const std::string& mdp)

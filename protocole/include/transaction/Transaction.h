@@ -4,8 +4,13 @@
 #include "../identite/Meta.h"
 #include "../message/Messages.h"
 #include "../message/controle/Messages.h"
-#include "Mode.h" // Temporaire, sera inclus par le message Ouverture
 #include "../Connexion.h"
+
+#include "Mode.h" // Temporaire, sera inclus par le message Ouverture
+
+#include "erreur/DejaFermee.h"
+#include "erreur/DejaOuverte.h"
+#include "erreur/Fermee.h"
 
 namespace BTTP
 {
@@ -19,7 +24,7 @@ namespace BTTP
             public:
                 virtual const Mode mode() const = 0;
 
-                virtual const bool ouvert() const = 0;
+                virtual const bool ouverte() const = 0;
                 virtual void ouvrir(const std::string mdp) = 0;
                 virtual void fermer(const std::string mdp) = 0;
 
@@ -51,7 +56,7 @@ namespace BTTP
             public:
                 inline const Mode mode() const override { return this->_mode; }
 
-                inline const bool ouvert() const override { return this->_ouverte; }
+                inline const bool ouverte() const override { return this->_ouverte; }
                 // TOTEST Ouverture
                 void ouvrir(const std::string mdp) override;
                 // TOTEST Fermeture

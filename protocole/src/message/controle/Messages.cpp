@@ -20,9 +20,9 @@ namespace BTTP
                     return nullptr;
                 }
 
-                Message* generer(const Messages::Message& message, const Cle::Publique destinataire, const Identite* signataire, const std::string mdp)
+                Message* generer(const Messages::IMessage& message, const Cle::Publique destinataire, const Identite& signataire, const std::string mdp)
                 {
-                    switch (message.type())
+                    switch (message.type_c())
                     {
                     // TODO Classes des types de messages de contrôle
                     default:

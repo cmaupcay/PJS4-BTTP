@@ -12,7 +12,7 @@ namespace BTTP
     {
         namespace Messages
         {
-            namespace 
+            namespace Controle
             {
                 // TOTEST
                 /**
@@ -35,8 +35,8 @@ namespace BTTP
                  * @throws Erreur::Messages::Controle::Inconnu Le type du message ne correspond à aucun type de message de controle.
                  */
                 Message* generer(
-                    const Messages::Message& message, const Cle::Publique destinataire,
-                    const Identite* signataire, const std::string mdp
+                    const Messages::IMessage& message, const Cle::Publique destinataire,
+                    const Identite& signataire, const std::string mdp
                 );
             }
         }

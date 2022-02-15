@@ -30,31 +30,46 @@ namespace BTTP
                 _message_a_relayer_a_distant{ message_ouverture }, _message_a_relayer_a_client{ "" }
             {}
 
+            const bool Controle::prochain_message_client() const
+            {
+                this->_message_a_relayer_a_distant = this->connexion().recevoir();
+                return this->_message_a_relayer_a_distant != BTTP_TRANSACTION_MESSAGE_NUL;
+            }
+            const bool Controle::prochain_message_distant() const
+            {
+                this->_message_a_relayer_a_client = this->_connexion_distant.recevoir();
+                return this->_message_a_relayer_a_client != BTTP_TRANSACTION_MESSAGE_NUL;
+            }
+
             const std::string Controle::lire_entete(const std::string& message, const Cle::Publique& signataire, const std::string& mdp) const
             { 
                 if (message == BTTP_TRANSACTION_MESSAGE_NUL) return message;
-                return this->identite().dechiffrer(message, signataire, mdp);
+                return this->identite().dechiffrer(extraire_entete(message), signataire, mdp);
             }
 
-            const bool Controle::relayer(IConnexion& connexion, std::string& message)
+            const bool Controle::relayer(IConnexion& connexion, const std::string entete, std::string& message)
             { 
                 if (message != BTTP_TRANSACTION_MESSAGE_NUL)
                 {
-                    connexion.envoyer(retirer_entete(message));
+                    const std::string nouveau_message = entete + BTTP_MESSAGE_CONTROLE_SEP + retirer_entete(message);
+                    connexion.envoyer(nouveau_message);
                     message = BTTP_TRANSACTION_MESSAGE_NUL;
                     return true;
                 }
                 return false;
             }
-            const bool Controle::relayer_a_client(const bool lire)
+            
+            const bool Controle::relayer_a_client(const std::string mdp, const bool lire)
             {
-                if (lire) this->_message_a_relayer_a_distant = this->connexion().recevoir();
-                return relayer(this->_connexion_distant, this->_message_a_relayer_a_distant);
+                if (lire) if (!this->prochain_message_distant()) return false;
+                const std::string entete = this->identite().chiffrer(generer_entete(this->_client), this->_client, mdp);
+                return relayer(this->connexion(), entete, this->_message_a_relayer_a_client);
             }
-            const bool Controle::relayer_a_distant(const bool lire)
+            const bool Controle::relayer_a_distant(const std::string mdp, const bool lire)
             {
-                if (lire) this->_message_a_relayer_a_client = this->_connexion_distant.recevoir();
-                return relayer(this->connexion(), this->_message_a_relayer_a_client);
+                if (lire) if (!this->prochain_message_client()) return false;
+                const std::string entete = this->identite().chiffrer(generer_entete(this->_distant), this->_distant, mdp);
+                return relayer(this->_connexion_distant, entete, this->_message_a_relayer_a_distant);
             }
         }
     }

@@ -3,6 +3,7 @@
 
 #include "Fichiers.h"
 
+// TODO La taille de chaque message envoyé est transmis avant la transmission du message
 // TODO Synchronisation des horloges via serveur RTC
 
 namespace BTTP 

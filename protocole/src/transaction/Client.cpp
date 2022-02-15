@@ -11,9 +11,8 @@ namespace BTTP
                 // Génération du message de contrôle adapté au message passé en paramètre
                 const std::string message_controle = (Messages::Controle::generer(message, this->_distant, this->identite(), mdp))->construire();
                 // Chiffrement de l'entete du message
-                const size_t longueur_entete = message_controle.find_last_of(BTTP_MESSAGE_CONTROLE_SEP);
-                return this->identite().chiffrer(message_controle.substr(0, longueur_entete), this->_controleur, mdp)
-                       + message_controle.substr(longueur_entete);
+                return this->identite().chiffrer(extraire_entete(message_controle), this->_controleur, mdp)
+                       + BTTP_MESSAGE_CONTROLE_SEP + retirer_entete(message_controle);
             }
 
             inline const Messages::IMessage* Client::resoudre(const std::string& message, const std::string& mdp)

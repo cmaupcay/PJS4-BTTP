@@ -9,16 +9,16 @@ namespace BTTP
             void Controle::ouverture(const std::string& mdp)
             {
                 if (!this->_connexion_distant.ouverte()) this->_connexion_distant.ouvrir();
-                const bool client = this->relayer_a_distant(false); // On relait le message d'ouverture au terminal distant
-                if (client && this->relayer_a_client(true)) return; // On relait la réponse au terminal client
+                const bool client = this->relayer_a_distant(mdp, false); // On relait le message d'ouverture au terminal distant
+                if (client && this->relayer_a_client(mdp, true)) return; // On relait la réponse au terminal client
                 throw Erreur::Transaction::Ouverture(!client); 
             }
 
             void Controle::fermeture(const std::string& mdp)
             {
                 // On relait les potentiels derniers messages reçus
-                this->relayer_a_distant(false);
-                this->relayer_a_client(false);
+                this->relayer_a_distant(mdp, false);
+                this->relayer_a_client(mdp, false);
                 this->_connexion_distant.fermer();
             }
         
@@ -30,12 +30,12 @@ namespace BTTP
                 _message_a_relayer_a_distant{ message_ouverture }, _message_a_relayer_a_client{ "" }
             {}
 
-            const bool Controle::prochain_message_client() const
+            const bool Controle::prochain_message_client()
             {
                 this->_message_a_relayer_a_distant = this->connexion().recevoir();
                 return this->_message_a_relayer_a_distant != BTTP_TRANSACTION_MESSAGE_NUL;
             }
-            const bool Controle::prochain_message_distant() const
+            const bool Controle::prochain_message_distant()
             {
                 this->_message_a_relayer_a_client = this->_connexion_distant.recevoir();
                 return this->_message_a_relayer_a_client != BTTP_TRANSACTION_MESSAGE_NUL;

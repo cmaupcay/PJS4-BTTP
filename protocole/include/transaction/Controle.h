@@ -59,21 +59,14 @@ namespace BTTP
                 );
 
                 // TOTEST
-                inline static const std::string extraire_entete(const std::string message)
-                { return message.substr(0, message.find_last_of(BTTP_MESSAGE_CONTROLE_SEP)); }
-                // TOTEST
-                inline static const std::string retirer_entete(const std::string message)
-                { return message.substr(message.find_last_of(BTTP_MESSAGE_CONTROLE_SEP) + 1); }
-
-                // TOTEST
-                inline const bool prochain_message_client() const;
+                inline const bool prochain_message_client();
                 inline const std::string lire_entete_client(const std::string mdp) const
                 { return lire_entete(this->_message_a_relayer_a_distant, this->_client, mdp); }
                 // TOTEST
                 inline const bool relayer_a_distant(const std::string mdp, const bool lire = true);
 
                 // TOTEST
-                inline const bool prochain_message_distant() const;
+                inline const bool prochain_message_distant();
                 inline const std::string lire_entete_distant(const std::string mdp) const
                 { return lire_entete(this->_message_a_relayer_a_client, this->_distant, mdp); }
                 // TOTEST

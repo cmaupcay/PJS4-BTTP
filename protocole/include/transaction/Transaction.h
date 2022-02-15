@@ -67,6 +67,13 @@ namespace BTTP
                 // TOTEST Réception de message
                 const Messages::IMessage* recevoir(const std::string mdp) override;
             };
+
+            // TOTEST
+            inline const std::string extraire_entete(const std::string message)
+            { return message.substr(0, message.find_last_of(BTTP_MESSAGE_CONTROLE_SEP)); }
+            // TOTEST
+            inline const std::string retirer_entete(const std::string message)
+            { return message.substr(message.find_last_of(BTTP_MESSAGE_CONTROLE_SEP) + 1); }
         }
     }
 }

@@ -3,6 +3,8 @@
 
 #include "Fichiers.h"
 
+// TODO Synchronisation des horloges via serveur RTC
+
 namespace BTTP 
 {
     namespace Client 

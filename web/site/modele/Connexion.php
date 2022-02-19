@@ -8,7 +8,7 @@ function verif_utilisateur($pseudo, $mdp, &$resultat=array()) {
     $mdp = hash('sha256', $mdp);
 
     try {
-        $commande = $pdo->prpare($sql);
+        $commande = $pdo->prepare($sql);
         $commande->binParam(':pseudo', $pseudo);
         $commande->bindParam(":mdp", $mdp);
         $bool->$command->execute();

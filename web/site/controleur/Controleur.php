@@ -4,7 +4,7 @@
 
     /**
      * Extension de Modele.php
-     * Controlleur facilement paramétrés par depuis_ini de Moele 
+     * Controlleur facilement paramétrés par depuis_ini de Modele 
      * dans le constructeur de Controleur
      */
     abstract class _Controleur {

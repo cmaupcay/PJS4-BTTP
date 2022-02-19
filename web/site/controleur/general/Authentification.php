@@ -2,7 +2,7 @@
 
 function verif_connexion() {
     if(isset($_COOKIE['Jeton'])){
-        require("./modele/connexion.php");
+        require("./modele/Connexion.php");
 
         $_SESSION['profil'] = array();
 

@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Pas besoin ? pas de cookies dans la base
+ */
 function verif_connexion() {
     if(isset($_COOKIE['Jeton'])){
         require("./modele/Connexion.php");
@@ -17,6 +20,7 @@ function verif_connexion() {
     }
     return false;
 }
+
 ?>
 
 

@@ -157,12 +157,10 @@ namespace BTTP
                 /**
                  * @brief Ouverture d'une transaction.
                  */
-                // TODO Classe du type de message Ouverture
                 OUVERTURE = '*',
                 /**
                  * @brief Fermeture d'une transaction.
                  */
-                // TODO Classe du type de message Fermeture
                 FERMETURE = '/'
                 // TODO Réfléchir aux types manquants
             };

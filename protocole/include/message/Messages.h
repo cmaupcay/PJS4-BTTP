@@ -4,6 +4,8 @@
 #include "ClePublique.h"
 #include "Execution.h"
 #include "Resultat.h"
+#include "Ouverture.h"
+#include "Fermeture.h"
 
 #include "erreur/type/Inconnu.h"
 
@@ -24,6 +26,8 @@ namespace BTTP
              */
             Message* resoudre(const std::string paquet);
 
+            // TOCOMMENT reponse
+            // TODO Implémentation
             IMessage* reponse(const Message& message);
         }
     }

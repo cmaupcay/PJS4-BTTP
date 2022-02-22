@@ -37,7 +37,7 @@ endif()
 project(${BTTP} LANGUAGES CXX VERSION ${BTTP_VERSION})
 
 # DEPENDANCES
-# TODO Utiliser find_package
+# TODO Utiliser find_package pour OpenPGP et segvcatch
 
 # FICHIERS
 # Configuration

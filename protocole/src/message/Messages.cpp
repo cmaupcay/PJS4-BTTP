@@ -17,6 +17,10 @@ namespace BTTP
                         return new Execution(paquet);
                     case Type::RESULTAT:
                         return new Resultat(paquet);
+                    // case Type::OUVERTURE:
+                    //     return new Ouverture(paquet);
+                    // case Type::FERMETURE:
+                    //     return new Fermeture(paquet);
                     // TODO Classes des types de message
                     default:
                         throw Erreur::Messages::Type::Inconnu(paquet);

@@ -12,6 +12,7 @@ namespace BTTP
             class Ouverture : public Message
             {
             private:
+                // TODO Classe de message d'ouverture
             };
         }
     }

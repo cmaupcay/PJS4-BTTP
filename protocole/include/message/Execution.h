@@ -3,6 +3,8 @@
 
 #include "Resultat.h"
 
+#define BTTP_MESSAGE_EXECUTION_ARGS_SEP '='
+
 namespace BTTP
 {
     namespace Protocole
@@ -25,9 +27,11 @@ namespace BTTP
                  */
                 uint32_t* _id_script;
                 /**
-                 * @brief Arguments d'exécution à ajouter au script
+                 * @brief Arguments d'exécution à ajouter au script, sous forme de paire nom/valeur.
                  */
-                std::vector<std::string> _args;
+                std::vector<std::pair<std::string, std::string>> _args;
+
+                inline const std::vector<std::string> _joindre_args() const;
 
                 /**
                  * @brief Linéarisation du contenu du message.
@@ -83,14 +87,15 @@ namespace BTTP
                  * @brief Retourne les arguments d'exécution à ajouter au script.
                  * @return const std::vector<std::string>& Arguments d'exécution.
                  */
-                inline const std::vector<std::string>& args() const { return this->_args; }
+                inline const std::vector<std::pair<std::string, std::string>>& args() const { return this->_args; }
 
-                // TODO Les arguments doivent être des paires <nom, valeur>. Penser à la sérialisation.
                 /**
                  * @brief Ajoute un argument à ajouter au script à l'exécution.
-                 * @param arg Argument à ajouter.
+                 * @param nom Nom de l'argument à ajouter.
+                 * @param valeur Valeur de l'argument.
                  */
-                inline void ajouter_argument(const std::string arg) { this->_args.push_back(arg); }
+                inline void ajouter_argument(const std::string nom, const std::string valeur) 
+                { this->_args.push_back(std::pair<std::string, std::string>(nom, valeur)); }
                 /**
                  * @brief Supprime le dernier éléments ajouter.
                  */

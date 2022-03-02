@@ -29,10 +29,19 @@ namespace BTTP
                 this->_args.~vector();
             }
 
+            const std::vector<std::string> Execution::_joindre_args() const
+            {
+                const size_t n = this->_args.size();
+                std::vector<std::string> args;
+                for (int a = 0; a < n; a++)
+                    args.push_back(this->_args[a].first + BTTP_MESSAGE_EXECUTION_ARGS_SEP + this->_args[a].second);
+                return args;
+            }
             const std::string Execution::contenu() const
             {
                 std::string contenu = std::to_string(*this->_id) + BTTP_MESSAGE_SEP + std::to_string(*this->_id_script) + BTTP_MESSAGE_SEP;
-                contenu += joindre(this->_args, BTTP_MESSAGE_SEP);
+                const std::vector<std::string> args = this->_joindre_args();
+                contenu += joindre(args, BTTP_MESSAGE_SEP);
                 return contenu;
             }
 

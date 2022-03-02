@@ -49,8 +49,6 @@
 </form>
 </div>
 
-	<div class="msg-erreur"> <?php echo $msg; ?> </div>
-
 
 </body>
 

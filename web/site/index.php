@@ -2,6 +2,8 @@
 
     session_start();
 
+    include_once 'controleur/general/General.php';
+
     $erreur = false;
 
 
@@ -10,11 +12,21 @@
         $controle = $_GET['controle'];
         $action = $_GET['action'];
 
-        if(!(($controle=="visiteurs") && ($action =="action" || ($action="inscription")) || 
-            ($controle=="abonnes") && ($action=="accueil" || $action=="connexion"))){
-
-                require('erreur404.tpl');
-                $erreur = false;
+        if($controle=="visiteurs" && $action=="accueil"){
+            accueil();
+        }
+        elseif($controle=="visiteurs" && $action=="inscription"){
+            inscription();
+        }
+        elseif($controle=="abonnes" && $action=="accueil"){ //pas sur si c utile d'avoir un controle en entier pour les abonnes et les visiteurs
+            accueil();
+        }
+        elseif($controle=="abonnes" && $action=="connexion"){
+            connexion();
+        }
+        else{
+            require('erreur404.tpl');
+            $erreur = false;
         }
     }
     $controle = 'connexion';

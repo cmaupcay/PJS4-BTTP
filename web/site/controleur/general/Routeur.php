@@ -73,7 +73,8 @@
 
         //Chargement d'un fichier css
         private function charger_css(string $fichier) {
-            // ???
+            // Les fichiers css ne sont chargés que depuis la racine '/vue/Style' !
+            // L'extension de fichier '.css' ne doit pas être spécifiée.
             $fichier = 'vue/Style' . $fichier . '.css';
             $this->charger_fichier($fichier, 'text/css');
         }
@@ -118,7 +119,7 @@
                     case $this->js:
                         $this->charger_js($var[1]);
                         break;
-                    //Type inconnu : rdirection page d'erreur
+                    //Type inconnu : redirection page d'erreur
                     default:
                         break;
                 }

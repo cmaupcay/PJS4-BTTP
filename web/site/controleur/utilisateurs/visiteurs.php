@@ -1,5 +1,5 @@
 <?php
-
+//Le contenu de ce fichier à été déplacé dans General.php afn de ne pas avoir a require plusieurs fichiers dans l'index
 
     function accueil() {
         require ('.modele/marketplace.php');
@@ -29,7 +29,7 @@
                 require('./vue/visiteurs/inscription.tpl');
             } else {
 
-                inseretion_bd($pseudo, $mdp);
+                insertion_bd($pseudo, $mdp);
                 
                 require('./modele/connexion.php');
 

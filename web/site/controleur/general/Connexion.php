@@ -3,7 +3,8 @@
 /**
  * Pas besoin ? pas de cookies dans la base
  */
-function verif_connexion() {
+
+function verif_connexion() { //A voir si on utilise
     if(isset($_COOKIE['Jeton'])){
         require("./modele/Connexion.php");
 

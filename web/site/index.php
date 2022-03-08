@@ -18,11 +18,11 @@
         elseif($controle=="visiteurs" && $action=="inscription"){
             inscription();
         }
+        elseif($controle=="visiteurs" && $action=="connexion"){ //impossible d'avoir un abonné se connecter parce qu'on sait pas si c'est un abonné
+            connexion();
+        }
         elseif($controle=="abonnes" && $action=="accueil"){ //pas sur si c utile d'avoir un controle en entier pour les abonnes et les visiteurs
             accueil();
-        }
-        elseif($controle=="abonnes" && $action=="connexion"){
-            connexion();
         }
         else{
             require('erreur404.tpl');

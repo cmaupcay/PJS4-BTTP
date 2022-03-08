@@ -29,7 +29,7 @@
     /**
      * insert dans la bd le nouvel utilisateur
      */
-    function inseretion_bd($pseudp, $mdp) {
+    function insertion_bd($pseudp, $mdp) {
         require('connectBD.php');
 
         $sql = "INSERT INTO 'utilisateur' (pseudo, mdp) VALUES (:pseudo, :mdp)";

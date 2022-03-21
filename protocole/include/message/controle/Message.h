@@ -123,8 +123,23 @@ namespace BTTP
                  */
                 enum class Type
                 {
-                    // TOCOMMENT Chaque type doit être résumé ici.
-                    EXECUTION = '>'
+                    /**
+                     * @brief Ouverture d'une transaction. Encapsule toujours un message de type OUVERTURE.
+                     * @details Vérification de l'état du terminal distant.
+                     * @see ./Ouverture.h
+                     */
+                    OUVERTURE = '*', // TODO Controle::Ouverture
+                    /**
+                     * @brief Relais d'un message sans contrôle spécifique.
+                     * @see ./Relais.h
+                     */
+                    RELAIS = '=', // TODO Classe Controle::Relais
+                    /**
+                     * @brief Contrôle relatif à une execution. Encapsule toujours un message de type EXECUTION.
+                     * @details Vérification du script demandé.
+                     * @see ./Execution.h
+                     */
+                    EXECUTION = '>' // TODO Classe Controle::Execution
                     // TODO Réfléchir aux types manquants
                 };
 

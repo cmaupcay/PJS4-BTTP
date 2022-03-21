@@ -145,6 +145,32 @@ namespace BTTP
                  */
                 CLE_PUBLIQUE = '!',
                 /**
+                 * @brief Demande de données.
+                 * @see ./Demande.h
+                 */
+                DEMANDE = '?', // TODO Demande.h
+                /**
+                 * @brief Données en reponse à une demande.
+                 * @pre DEMANDE
+                 * @see ./Reponse.h
+                 */
+                REPONSE = ':', // TODO Reponse.h
+                /**
+                 * @brief Indication de réussite d'une action.
+                 * @see ./Pret.h
+                 */
+                PRET = 'o', // TODO Pret.h
+                /**
+                 * @brief Indication d'une erreur suite à une action.
+                 * @see ./Erreur.h
+                 */
+                ERREUR = 'n', // TODO Erreur.h
+                /**
+                 * @brief Ouverture d'une transaction.
+                 * @see ./Ouverture.h
+                 */
+                OUVERTURE = '*',
+                /**
                  * @brief Demande d'exécution d'un script.
                  * @see ./Execution.h
                  */
@@ -152,14 +178,13 @@ namespace BTTP
                 /**
                  * @brief Résultat(s) d'exécution d'un script.
                  * @pre EXECUTION
+                 * @see ./Resultat.h
                  */
                 RESULTAT = '<',
                 /**
-                 * @brief Ouverture d'une transaction.
-                 */
-                OUVERTURE = '*',
-                /**
                  * @brief Fermeture d'une transaction.
+                 * @pre OUVERTURE
+                 * @see ./Fermeture.h
                  */
                 FERMETURE = '/'
                 // TODO Réfléchir aux types manquants

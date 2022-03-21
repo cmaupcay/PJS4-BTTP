@@ -42,7 +42,7 @@
       </div>
 
       <div class="form-group">
-      <p><input name="Mdp" type="text" placeholder="Mdp" class="form-control" autocomplete="off" required></p>
+      <p><input name="Mdp" type="password" placeholder="Mdp" class="form-control" autocomplete="off" required></p>
       </div>
 
       <div class="form-group">

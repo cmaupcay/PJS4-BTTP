@@ -5,7 +5,11 @@
  */
 
 function verif_connexion() { //A voir si on utilise
-    if(isset($_COOKIE['Jeton'])){
+    
+    require_once("vue/connexion.tpl");
+
+     if(isset($_COOKIE['Jeton'])){
+        
         require("./modele/Connexion.php");
 
         $_SESSION['profil'] = array();

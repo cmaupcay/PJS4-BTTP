@@ -48,9 +48,7 @@ function accueil()
         }
     }
     
-    
-
-    require ('.modele/marketplace.php');
+    require ('./modele/marketplace.php');
 
         echo 'salut visiteur';
        //cette fonction affichera les scripts disponibles de la marketplace
@@ -59,13 +57,12 @@ function accueil()
        require('./vue/visiteurs/accueil.tpl');
 }
 
-function connexion()
-{
+function connexion() {
     require('./modele/Connexion.php');
 
     //Ici on met ce dont on a besoin afin de relier le modele et la vue
 
-    require('./vue/inscription/connexion.tpl');
+    require_once('./vue/connexion.tpl');
 }
 
 ?>

@@ -74,7 +74,7 @@ namespace BTTP
                 inline const uint32_t& id_script() const { return *this->_id_script; }
                 /**
                  * @brief Retourne les arguments d'exécution à ajouter au script.
-                 * @return const std::vector<std::string>& Arguments d'exécution.
+                 * @return const std::vector<Argument>& Arguments d'exécution.
                  */
                 inline const std::vector<Argument>& args() const { return this->_args; }
 

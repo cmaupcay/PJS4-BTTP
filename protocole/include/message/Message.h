@@ -104,14 +104,6 @@ namespace BTTP
                 inline const char type_c() const override { return static_cast<char>(this->_type); }
 
                 /**
-                 * @brief Retourne un message vide de la classe du message attendu en retour , ici un résultat d'exécution..
-                 * Si aucune réponse n'est attendue, renvoie nullptr.
-                 * @details Par défaut, aucune réponse n'est attendue
-                 * @return IMessage* Message attendu en réponse à celui-ci.
-                 */
-                inline IMessage* reponse() const override { return nullptr; }
-
-                /**
                  * @brief Construction d'un paquet à partir des informations du message.
                  * @return const std::string Paquet construit.
                  */
@@ -143,7 +135,7 @@ namespace BTTP
                  */
                 DEMANDE = '?',
                 /**
-                 * @brief Données en reponse à une demande.
+                 * @brief Données en réponse à une demande.
                  * @pre DEMANDE
                  * @see ./Reponse.h
                  */
@@ -233,7 +225,7 @@ namespace BTTP
             {
                 std::string nom;
                 std::string valeur;
-                Argument(const std::string nom, const std::string valeur)
+                Argument(const std::string nom = "", const std::string valeur = "")
                     : nom{ nom }, valeur{ valeur }
                 {}
             };
@@ -243,12 +235,12 @@ namespace BTTP
              * @param args Liste des arguments sous la forme "nom=valeur".
              * @return const std::vector<Argument> Vetceur de paires (nom, valeur).
              */
-            inline const std::vector<Argument> decouper_args(const std::vector<std::string>& args);
+            const std::vector<Argument> decouper_args(const std::vector<std::string>& args);
             /**
              * @brief Transformation une liste d'arguments en liste des arguments sous la forme "nom=valeur".
              * @return const std::vector<std::string> Liste des arguments sous la forme "nom=valeur".
              */
-            inline const std::vector<std::string> joindre_args(const std::vector<Argument> args);
+            const std::vector<std::string> joindre_args(const std::vector<Argument> args);
         }
     }
 }

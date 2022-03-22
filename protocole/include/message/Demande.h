@@ -51,17 +51,17 @@ namespace BTTP
 
                 /**
                  * @brief Retourne le champs demandé.
-                 * @return const Champs Champs demandé.
+                 * @return const std::string& Champs demandé.
                  */
                 inline const std::string& champs() const { return this->_champs; }
                 /**
-                 * @brief Retourne les arguments d'exécution à ajouter au script.
-                 * @return const std::vector<std::string>& Arguments d'exécution.
+                 * @brief Retourne les arguments ajoutés à la demande.
+                 * @return const std::vector<Argument>& Arguments.
                  */
                 inline const std::vector<Argument>& args() const { return this->_args; }
 
                 /**
-                 * @brief Ajoute un argument à ajouter au script à l'exécution.
+                 * @brief Ajoute un argument dans la demande.
                  * @param nom Nom de l'argument à ajouter.
                  * @param valeur Valeur de l'argument.
                  */

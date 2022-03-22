@@ -13,12 +13,12 @@ namespace BTTP
 
             Demande::Demande()
                 : BTTP::Protocole::Messages::Message(Type::DEMANDE), 
-                _champs{ nullptr }
+                _champs{ "" }
             {}
 
             Demande::Demande(const std::string paquet)
                 : BTTP::Protocole::Messages::Message(Type::DEMANDE, paquet), 
-                _champs{ nullptr }
+                _champs{ "" }
             {}
 
             const std::string Demande::contenu() const

@@ -14,13 +14,13 @@ namespace BTTP
             private:
                 /**
                  * @brief Retourne le contenu du message.
-                 * @return const std::string Message associé.
+                 * @return const std::string Ce type de message ne contient aucune information.
                  */
-                inline const std::string contenu() const override {}
+                inline const std::string contenu() const override { return ""; }
 
                 /**
                  * @brief Enregistrement du contenu d'un message similaire.
-                 * @param contenu Message asocié.
+                 * @param contenu Ce type de message ne contient aucune information.
                  */
                 inline void deconstruction(const std::string contenu) override {}
 

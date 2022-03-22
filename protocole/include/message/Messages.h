@@ -29,10 +29,6 @@ namespace BTTP
              * @throws Erreur::Messages::Type::Inconnu Le type du paquet n'est pas connu.
              */
             Message* resoudre(const std::string paquet);
-
-            // TOCOMMENT reponse
-            // TODO Implémentation
-            IMessage* reponse(const Message& message);
         }
     }
 }

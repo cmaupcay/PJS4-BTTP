@@ -34,7 +34,7 @@ namespace BTTP
             {
                 // Découpage selon le séparateur des messages BTTP standards.
                 const std::vector<std::string> elements = decouper(contenu, BTTP_MESSAGE_SEP);
-                if (elements.size() < 3) throw Protocole::Erreur::Messages::Deconstruction::Incomplet(contenu, elements.size(), 3);
+                if (elements.size() != 3) throw Protocole::Erreur::Messages::Deconstruction::Incomplet(contenu, elements.size(), 3);
 
                 // Enregistrement des informations.
                 this->_nom = elements[0];

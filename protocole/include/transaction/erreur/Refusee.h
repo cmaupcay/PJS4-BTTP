@@ -23,21 +23,21 @@ namespace BTTP
                     /**
                      * @brief Message de refus de la transaction.
                      */
-                    const Protocole::Messages::IMessage* _reponse;
+                    const Protocole::Messages::IMessage* _message;
                 public:
-                    Refusee(const Protocole::Messages::IMessage* reponse)
+                    Refusee(const Protocole::Messages::IMessage* message)
                         : Ouverture(
                             true, "Refusee", "L'ouverture de la transaction a été refusée par le terminal distant.",
                             BTTP_TRANSACTION_REFUSEE_CODE
                         ),
-                        _reponse{ reponse }
+                        _message{ message }
                     {}
 
                     /**
                      * @brief Retourne le message spécifiant le refus de l'ouverture de la transaction.
                      * @return const Protocole::Messages::IMessage& Message de refus.
                      */
-                    inline const Protocole::Messages::IMessage* reponse() const { return this->_reponse; }
+                    inline const Protocole::Messages::IMessage* message() const { return this->_message; }
                 };
             }
         }

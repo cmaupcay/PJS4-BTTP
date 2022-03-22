@@ -33,7 +33,7 @@
             <ul class="navbar-nav ml-auto">
               <li class="nav-item active"><a href="index.php?controle=visiteurs&action=accueil"
                   class="nav-link text-uppercase font-weight-bold">ACCUEIL</a></li>
-              <li class="nav-item"><a href="index.php?controle=abonnes&action=connexion"
+              <li class="nav-item"><a href="index.php?controle=visiteurs&action=connexion"
                   class="nav-link text-uppercase font-weight-bold">CONNEXION</a></li>
               <li class="nav-item"><a href="index.php?controle=visiteurs&action=inscription"
                   class="nav-link text-uppercase font-weight-bold">INSCRIPTION</a></li>

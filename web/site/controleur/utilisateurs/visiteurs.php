@@ -39,10 +39,18 @@
 
                 require('./controle/connexion.php');
 
-                $url = "?controle=utilisateur&action=accueil";
+                $url = "?controle=abonne&action=accueil";
 
                 header("Location:" . $url);
             }
         }
+    }
+
+    function connexion() {
+        require('./modele/Connexion.php');
+    
+        //Ici on met ce dont on a besoin afin de relier le modele et la vue
+    
+        require_once('./vue/connexion.tpl');
     }
 ?>

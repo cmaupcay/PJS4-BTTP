@@ -39,7 +39,7 @@
 
                 require('./controle/connexion.php');
 
-                $url = "index.php?controle=utilisateur&action=accueil";
+                $url = "controle=utilisateur&action=accueil";
 
                 header("Location:" . $url);
             }

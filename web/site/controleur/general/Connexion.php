@@ -25,7 +25,3 @@ function verif_connexion() { //A voir si on utilise
     }
     return false;
 }
-
-?>
-
-

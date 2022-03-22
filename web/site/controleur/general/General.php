@@ -23,13 +23,13 @@ function inscription() {
             require('./modele/Connexion.php');
 
             if(verif_utilisateur($pseudo, $mdp, $resultat) == false){ //si pour une raison obscure l'inscription marche pas on renvoie l'utilisateur à la page d'inscription
-                header("Location:index.php?controle=visiteur&action=inscription");
+                header("Location:controle=visiteur&action=inscription");
                 die();
             }
 
             $_SESSION['profil'] = $resultat[0]; //nous permet de reutiliser les infos plus tard
 
-            $url = "index.php?controle=utilisateur&action=accueil";
+            $url = "controle=utilisateur&action=accueil";
 
             header("Location:" . $url);
         }

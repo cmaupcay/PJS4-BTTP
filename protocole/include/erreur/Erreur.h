@@ -34,15 +34,18 @@ namespace BTTP
          * @param message Message d'explication de l'erreur.
          * @param code Code numérique UNIQUE à l'erreur.
          */
-        Erreur(const std::string nom, const std::string message, const int code = BTTP_ERREUR_CODE_DEFAUT)
-            : _nom{ "BTTP/" + nom }, _message{ message }, _code{ code }
-        {}
+        Erreur(const std::string nom, const std::string message, const int code = BTTP_ERREUR_CODE_DEFAUT);
 
         /**
          * @brief Retourne le nom de l'erreur. Les espaces de nom sont séparés par des /.
          * @return const std::string& Nom de l'erreur.
          */
         inline const std::string& nom() const { return this->_nom; }
+        /**
+         * @brief Retourne le message associé l'erreur.
+         * @return const std::string& Message associé à l'erreur.
+         */
+        inline const std::string& message() const { return this->_message; }
         /**
          * @brief Linéarise les informations de l'erreur pour l'affichage.
          * @return const std::string au format : [nom:code] message

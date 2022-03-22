@@ -4,6 +4,7 @@
 // TOCOMMENT Présentation de la bibliothèque.
 
 #include "transaction/Transactions.h"
-#include "Contexte.h" 
+#include "Contexte.h"
+#include "Commun.h"
 
 #endif

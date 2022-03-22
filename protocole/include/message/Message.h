@@ -48,13 +48,6 @@ namespace BTTP
                  */
                 virtual const char type_c() const = 0;
 
-                /**
-                 * @brief Retourne un message vide de la classe du message attendu en retour de celui-ci.
-                 * Si aucune réponse n'est attendue, renvoie nullptr.
-                 * @return IMessage* Message attendu en réponse à celui-ci.
-                 */
-                virtual IMessage* reponse() const = 0;
-
                 inline friend std::ostream& operator<<(std::ostream& os, const IMessage& msg) { return (os << msg.construire()); }
             };
 
@@ -84,7 +77,7 @@ namespace BTTP
                  */
                 TMessage(const _Type type, const std::string paquet)
                     : IMessage(paquet), _type{ type }
-                {}
+                { this->deconstruire(paquet); }
 
                 /**
                  * @brief Retourne le contenu du message à ajouter au paquet.
@@ -148,23 +141,23 @@ namespace BTTP
                  * @brief Demande de données.
                  * @see ./Demande.h
                  */
-                DEMANDE = '?', // TODO Demande.h
+                DEMANDE = '?',
                 /**
                  * @brief Données en reponse à une demande.
                  * @pre DEMANDE
                  * @see ./Reponse.h
                  */
-                REPONSE = ':', // TODO Reponse.h
+                REPONSE = ':',
                 /**
                  * @brief Indication de réussite d'une action.
                  * @see ./Pret.h
                  */
-                PRET = 'o', // TODO Pret.h
+                PRET = 'o',
                 /**
                  * @brief Indication d'une erreur suite à une action.
                  * @see ./Erreur.h
                  */
-                ERREUR = 'n', // TODO Erreur.h
+                ERREUR = 'n',
                 /**
                  * @brief Ouverture d'une transaction.
                  * @see ./Ouverture.h
@@ -187,7 +180,6 @@ namespace BTTP
                  * @see ./Fermeture.h
                  */
                 FERMETURE = '/'
-                // TODO Réfléchir aux types manquants
             };
 
             /**
@@ -233,6 +225,30 @@ namespace BTTP
             const std::string joindre(const std::vector<std::string>& vecteur, const std::string jointure);
             inline const std::string joindre(const std::vector<std::string>& vecteur, const char jointure)
             { return joindre(vecteur, std::string(1, jointure)); }
+
+            /**
+             * @brief Paire nom d'argument et valeur.
+             */
+            struct Argument
+            {
+                std::string nom;
+                std::string valeur;
+                Argument(const std::string nom, const std::string valeur)
+                    : nom{ nom }, valeur{ valeur }
+                {}
+            };
+
+            /**
+             * @brief Transformation d'une liste d'arguments en vetceur de paires (nom, valeur).
+             * @param args Liste des arguments sous la forme "nom=valeur".
+             * @return const std::vector<Argument> Vetceur de paires (nom, valeur).
+             */
+            inline const std::vector<Argument> decouper_args(const std::vector<std::string>& args);
+            /**
+             * @brief Transformation une liste d'arguments en liste des arguments sous la forme "nom=valeur".
+             * @return const std::vector<std::string> Liste des arguments sous la forme "nom=valeur".
+             */
+            inline const std::vector<std::string> joindre_args(const std::vector<Argument> args);
         }
     }
 }

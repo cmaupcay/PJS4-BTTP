@@ -3,8 +3,6 @@
 
 #include "Resultat.h"
 
-#define BTTP_MESSAGE_EXECUTION_ARGS_SEP '='
-
 namespace BTTP
 {
     namespace Protocole
@@ -29,12 +27,10 @@ namespace BTTP
                 /**
                  * @brief Arguments d'exécution à ajouter au script, sous forme de paire nom/valeur.
                  */
-                std::vector<std::pair<std::string, std::string>> _args;
-
-                inline const std::vector<std::string> _joindre_args() const;
+                std::vector<Argument> _args;
 
                 /**
-                 * @brief Linéarisation du contenu du message.
+                 * @brief Retourne le contenu du message.
                  * @return const std::string Contenu du message.
                  */
                 const std::string contenu() const override;
@@ -67,13 +63,6 @@ namespace BTTP
                 ~Execution();
 
                 /**
-                 * @brief Retourne un message vide de la classe du message attendu en réponse à ce message, ici un résultat d'exécution.
-                 * @return IMessage* Message attendu en réponse à ce message.
-                 */
-                inline IMessage* reponse() const override
-                { return new Resultat(*this->_id); }
-
-                /**
                  * @brief Retourne l'identifiant numérique du message.
                  * @return const uint32_t& Identifiant du message.
                  */
@@ -87,7 +76,7 @@ namespace BTTP
                  * @brief Retourne les arguments d'exécution à ajouter au script.
                  * @return const std::vector<std::string>& Arguments d'exécution.
                  */
-                inline const std::vector<std::pair<std::string, std::string>>& args() const { return this->_args; }
+                inline const std::vector<Argument>& args() const { return this->_args; }
 
                 /**
                  * @brief Ajoute un argument à ajouter au script à l'exécution.
@@ -95,7 +84,7 @@ namespace BTTP
                  * @param valeur Valeur de l'argument.
                  */
                 inline void ajouter_argument(const std::string nom, const std::string valeur) 
-                { this->_args.push_back(std::pair<std::string, std::string>(nom, valeur)); }
+                { this->_args.push_back(Argument(nom, valeur)); }
                 /**
                  * @brief Supprime le dernier éléments ajouter.
                  */

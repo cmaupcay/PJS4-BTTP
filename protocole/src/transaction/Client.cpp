@@ -25,17 +25,17 @@ namespace BTTP
 
             void Client::ouverture(const std::string& mdp)
             {
-                // const Messages::Ouverture message{ this->_distant }; // TODO Il manque la classe de message Ouverture :(
-                // this->envoyer(message, mdp);
+                const Messages::Ouverture message;
+                this->envoyer(message, mdp);
                 const Messages::IMessage* reponse = this->recevoir(mdp);
-                if (reponse->type_c() != static_cast<char>(Messages::Type::OUVERTURE)) 
+                if (reponse->type_c() == static_cast<char>(Messages::Type::PRET)) 
                     throw Erreur::Transaction::Refusee(reponse);
             }
 
             void Client::fermeture(const std::string& mdp)
             {
-                // const Messages::Fermeture message; // TODO Il manque la classe de message Fermeture :(
-                // this->envoyer(message, mdp);
+                const Messages::Fermeture message;
+                this->envoyer(message, mdp);
             }
         
             Client::Client(const Mode mode, const Identite& identite, const Cle::Publique& distant, const Cle::Publique& controleur, IConnexion& connexion_controleur)

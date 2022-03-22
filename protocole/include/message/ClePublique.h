@@ -2,11 +2,9 @@
 #define H_BTTP_MESSAGE_CLE_PUBLIQUE
 
 #include "Message.h"
-#include "../identite/Identite.h"
+#include "../identite/Cles.h"
 
 #include "erreur/ClePubliqueVide.h"
-
-#define BTTP_MESSAGE_CLE_PUBLIQUE_VIDE ""
 
 namespace BTTP
 {
@@ -42,25 +40,16 @@ namespace BTTP
                  * @brief Construction du message à partir d'une clé publique.
                  * @param cle Clé publique.
                  */
-                ClePublique(Cle::Publique cle)
-                    : BTTP::Protocole::Messages::Message(Type::CLE_PUBLIQUE),
-                    _cle{ cle.write(OpenPGP::PGP::Armored::NO) }
-                {}
+                ClePublique(const Cle::Publique cle);
                 /**
                  * @brief Construction d'un message vide.
                  */
-                ClePublique()
-                    : BTTP::Protocole::Messages::Message(Type::CLE_PUBLIQUE),
-                    _cle{ BTTP_MESSAGE_CLE_PUBLIQUE_VIDE }
-                {}
+                ClePublique();
                 /**
                  * @brief Construction d'un message vide, déconstruction d'un paquet et enregistrement de la clé publique.
                  * @param paquet Paquet à déconstruire.
                  */
-                ClePublique(const std::string paquet)
-                    : BTTP::Protocole::Messages::Message(Type::CLE_PUBLIQUE),
-                    _cle{ BTTP_MESSAGE_CLE_PUBLIQUE_VIDE }
-                { this->deconstruire(paquet); }
+                ClePublique(const std::string paquet);
 
                 /**
                  * @brief Retourne la clé publique contenue par le message.

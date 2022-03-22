@@ -24,6 +24,9 @@ endif()
 if(NOT DEFINED BTTP_MESSAGE_CONTROLE_SEP)
     set(BTTP_MESSAGE_CONTROLE_SEP @) # Séparateur utilisé par les messages de controle standards
 endif()
+if(NOT DEFINED BTTP_MESSAGE_ARGS_SEP)
+    set(BTTP_MESSAGE_ARGS_SEP =) # Séparateur utilisé par les messages standards pour séparé les noms et valeurs des arguments
+endif()
 
 # OPTIONS
 if(NOT DEFINED BTTP_DEMO)

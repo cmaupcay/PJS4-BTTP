@@ -13,17 +13,24 @@ namespace BTTP
                     {
                     case Type::CLE_PUBLIQUE:
                         return new ClePublique(paquet);
+                    case Type::DEMANDE:
+                        return new Demande(paquet);
+                    case Type::REPONSE:
+                        return new Reponse(paquet);
+                    case Type::PRET:
+                        return new Pret(paquet);
+                    case Type::ERREUR:
+                        return new Erreur(paquet);
+                    case Type::OUVERTURE:
+                        return new Ouverture(paquet);
                     case Type::EXECUTION:
                         return new Execution(paquet);
                     case Type::RESULTAT:
                         return new Resultat(paquet);
-                    // case Type::OUVERTURE:
-                    //     return new Ouverture(paquet);
-                    // case Type::FERMETURE:
-                    //     return new Fermeture(paquet);
-                    // TODO Classes des types de message
+                    case Type::FERMETURE:
+                        return new Fermeture(paquet);
                     default:
-                        throw Erreur::Messages::Type::Inconnu(paquet);
+                        throw Protocole::Erreur::Messages::Type::Inconnu(paquet);
                     }
                 return nullptr;
             }

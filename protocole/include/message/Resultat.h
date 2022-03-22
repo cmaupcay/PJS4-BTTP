@@ -4,7 +4,6 @@
 #include "Message.h"
 #include "erreur/deconstruction/Incomplet.h"
 
-
 namespace BTTP 
 {
     namespace Protocole 
@@ -14,7 +13,6 @@ namespace BTTP
             class Resultat : public Message
             {
             private :
-
                 /**
                  * @brief Idenifiant numérique d'exécution.
                  * @details Il doit être identique à l'identifiant du message d'exécution auquel répond ce message.
@@ -27,7 +25,7 @@ namespace BTTP
                 std::string _resultat;
 
                 /**
-                 * @brief Retourne à la fois le message en lui même et l'id, l'objet sous forme de string.
+                 * @brief Retourne le contenu du message.
                  * @return const std::string Contenu sérialisé du message.
                  */
                 const std::string contenu() const override;

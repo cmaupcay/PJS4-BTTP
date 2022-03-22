@@ -140,7 +140,6 @@ namespace BTTP
                      * @see ./Execution.h
                      */
                     EXECUTION = '>' // TODO Classe Controle::Execution
-                    // TODO Réfléchir aux types manquants
                 };
 
                 /**

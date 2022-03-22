@@ -2,9 +2,13 @@
 #define H_BTTP_MESSAGES
 
 #include "ClePublique.h"
+#include "Demande.h"
+#include "Reponse.h"
+#include "Pret.h"
+#include "Erreur.h"
+#include "Ouverture.h"
 #include "Execution.h"
 #include "Resultat.h"
-#include "Ouverture.h"
 #include "Fermeture.h"
 
 #include "erreur/type/Inconnu.h"

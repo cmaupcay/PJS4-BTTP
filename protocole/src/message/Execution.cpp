@@ -19,9 +19,9 @@ namespace BTTP
             {}
 
             Execution::Execution(const std::string paquet)
-                : Message(Type::EXECUTION),
+                : Message(Type::EXECUTION, paquet),
                 _id{ nullptr }, _id_script{ nullptr }
-            { this->deconstruire(paquet); }
+            {}
 
             Execution::~Execution()
             {
@@ -29,18 +29,10 @@ namespace BTTP
                 this->_args.~vector();
             }
 
-            const std::vector<std::string> Execution::_joindre_args() const
-            {
-                const size_t n = this->_args.size();
-                std::vector<std::string> args;
-                for (int a = 0; a < n; a++)
-                    args.push_back(this->_args[a].first + BTTP_MESSAGE_EXECUTION_ARGS_SEP + this->_args[a].second);
-                return args;
-            }
             const std::string Execution::contenu() const
             {
                 std::string contenu = std::to_string(*this->_id) + BTTP_MESSAGE_SEP + std::to_string(*this->_id_script) + BTTP_MESSAGE_SEP;
-                const std::vector<std::string> args = this->_joindre_args();
+                const std::vector<std::string> args = joindre_args(this->_args);
                 contenu += joindre(args, BTTP_MESSAGE_SEP);
                 return contenu;
             }
@@ -55,7 +47,8 @@ namespace BTTP
                 this->_id = new uint32_t(std::atoi(elements[0].c_str()));
                 if (this->_id_script != nullptr) delete this->_id_script;
                 this->_id_script = new uint32_t(std::atoi(elements[1].c_str()));
-                this->_args = std::vector<std::string>(elements.begin() + 2, elements.end());
+                std::vector<std::string> args = std::vector<std::string>(elements.begin() + 2, elements.end());
+                this->_args = decouper_args(args);
             }
         }
     }

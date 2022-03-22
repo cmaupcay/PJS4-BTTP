@@ -43,6 +43,30 @@ namespace BTTP
                 }
                 return contenu;
             }
+                        
+            const std::vector<std::string> joindre_args(const std::vector<Argument> args)
+            {
+                const size_t n = args.size();
+                std::vector<std::string> _args;
+                for (int a = 0; a < n; a++)
+                    _args.push_back(args[a].nom + BTTP_MESSAGE_ARGS_SEP + args[a].valeur);
+                return _args;
+            }
+
+            const std::vector<Argument> decouper_args(const std::vector<std::string>& args)
+            {
+                std::vector<Argument> _args;
+                const size_t argc = args.size();
+                Argument arg;
+                for (size_t i = 0; i < argc; i++)
+                {
+                    const std::vector<std::string> v = decouper(args[i], BTTP_MESSAGE_ARGS_SEP);
+                    if (v.size() != 2) continue; // TODO Erreur dédiée : FormatArgument.
+                    arg.nom = v[0]; arg.valeur = v[1];
+                    _args.push_back(arg);
+                }
+                return _args;
+            }
 
             template class TMessage<Type>;
         }

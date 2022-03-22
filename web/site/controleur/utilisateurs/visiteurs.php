@@ -2,7 +2,7 @@
 //Le contenu de ce fichier à été déplacé dans General.php afn de ne pas avoir a require plusieurs fichiers dans l'index
 
     function accueil() {
-        require ('.modele/marketplace.php');
+        require ('./modele/marketplace.php');
 
         echo 'salut visiteur';
        //cette fonction affichera les scripts disponibles de la marketplace

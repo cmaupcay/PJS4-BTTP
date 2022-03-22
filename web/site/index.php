@@ -2,8 +2,6 @@
 
     session_start();
 
-    include_once 'controleur/general/General.php';
-
     $erreur = false;
 
 
@@ -13,19 +11,20 @@
         $action = $_GET['action'];
 
         if($controle=="visiteurs" && $action=="accueil"){
+            require('controleur/utilisateurs/visiteurs.php');
             accueil();
         }
         elseif($controle=="visiteurs" && $action=="inscription"){
+            require('controleur/utilisateurs/visiteurs.php');
             inscription();
         }
         elseif($controle=="visiteurs" && $action=="connexion"){ //impossible d'avoir un abonné se connecter parce qu'on sait pas si c'est un abonné
+            require('controleur/utilisateurs/visiteurs.php');
             connexion();
         }
         elseif($controle=="abonnes" && $action=="accueil"){ //pas sur si c utile d'avoir un controle en entier pour les abonnes et les visiteurs
+            require('controleur/utilisateurs/abonnes.php');
             accueil();
-        }
-        elseif($controle=="abonnes" && $action=="connexion") {
-            connexion();
         }
         else{
             require('erreur404.tpl');
@@ -39,5 +38,3 @@
         require('./controleur/general/' . $controle . '.php');
         $action ();
     }
-
-?>

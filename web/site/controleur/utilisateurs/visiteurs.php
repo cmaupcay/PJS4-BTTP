@@ -1,48 +1,56 @@
 <?php
 //Le contenu de ce fichier à été déplacé dans General.php afn de ne pas avoir a require plusieurs fichiers dans l'index
 
-    function accueil() {
-        require ('.modele/marketplace.php');
+function accueil() {
+    require ('./modele/marketplace.php');
 
-        echo 'salut visiteur';
-       //cette fonction affichera les scripts disponibles de la marketplace
-       // scripts_disponibles($scripts);
+    echo 'salut visiteur';
+    //cette fonction affichera les scripts disponibles de la marketplace
+    // scripts_disponibles($scripts);
 
-       require('./vue/visiteurs/accueil.tpl');
-    }
+    require('./vue/visiteurs/accueil.tpl');
+}
 
-    function inscription() {
-        require('./modele/inscription.php');
+function inscription() {
+    require('./modele/inscription.php');
 
-        $pseudo = isset($_POST['pseudo'])?($_POST['pseudo']):'';
-        $mdp = isset($_POST['mdp'])?($_POST['mdp']):'';
+    $pseudo = isset($_POST['pseudo'])?($_POST['pseudo']):'';
+    $mdp = isset($_POST['mdp'])?($_POST['mdp']):'';
 
 
-        $msg ="";
+    $msg ="";
 
-        if(count($_POST) < 2) {
+    if(count($_POST) < 2) {
+        require('./vue/visiteurs/inscription.tpl');
+    } else {
+        if(verif_inscription($pseudo)) {
+
+            $msg = "compte déjà existant";
             require('./vue/visiteurs/inscription.tpl');
         } else {
-            if(verif_inscription($pseudo)) {
 
-                $msg = "compte déjà existant";
-                require('./vue/visiteurs/inscription.tpl');
-            } else {
+            insertion_bd($pseudo, $mdp);
+            
+            require('./modele/connexion.php');
 
-                insertion_bd($pseudo, $mdp);
-                
-                require('./modele/connexion.php');
+            verif_utilisateur($pseudo, $mdp, $resultat);
 
-                verif_utilisateur($pseudo, $mdp, $resultat);
+            $_SESSION['profil'] = $resultat[0];
 
-                $_SESSION['profil'] = $resultat[0];
+            require('./controle/connexion.php');
 
-                require('./controle/connexion.php');
+            $url = "index.php?controle=utilisateur&action=accueil";
 
-                $url = "index.php?controle=utilisateur&action=accueil";
-
-                header("Location:" . $url);
-            }
+            header("Location:" . $url);
         }
     }
-?>
+}
+
+
+function connexion() {
+    require('./modele/Connexion.php');
+
+    //Ici on met ce dont on a besoin afin de relier le modele et la vue
+
+    require_once('./vue/connexion.tpl');
+}

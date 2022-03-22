@@ -1,14 +1,5 @@
 <?php
 
-function connexion() {
-    require('./modele/Connexion.php');
-
-    //Ici on met ce dont on a besoin afin de relier le modele et la vue
-
-    require_once('./vue/connexion.tpl');
-}
-
-
 function accueil()
 {
     require("./controleur/general/Connexion.php");
@@ -30,7 +21,3 @@ function accueil()
        //affichera la liste des scritps disponibles 
        require('./vue/abonnes/accueil.tpl');
 }
-
-
-
-?>

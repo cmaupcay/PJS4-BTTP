@@ -28,7 +28,7 @@
               <a href="?controle=visiteurs&action=connexion" class="nav-link text-uppercase font-weight-bold">CONNEXION</a>
             </li>
             <li class="nav-item">
-              <a href="?visiterus=visiteurs&action=inscription" class="nav-link text-uppercase font-weight-bold">INSCRIPTION</a>
+              <a href="?controle=visiteurs&action=inscription" class="nav-link text-uppercase font-weight-bold">INSCRIPTION</a>
             </li>
           </ul>
         </div>

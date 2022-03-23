@@ -62,16 +62,14 @@
 
     <div class="login-form">
         <br><br>
-<<<<<<< Updated upstream
+
         <form action="?controle=abonnes&action=accueil" method="post"> 
 
             <!-- lorsqu'on envoie le formulaire on va vouloir traiter ces données, donc on va san doute vouloir faire une fonction js pour les traiter on submit
             du coup il faut pas oublier de changer ca-->
 
-
-=======
         <form action="?controle=abonnes&action=accueil" method="post">
->>>>>>> Stashed changes
+
             <h2 class="text-center"> Connexion </h2>
             <div class="form-group">
                 <p><input name="email" type="text" class="form-control" placeholder="Email" autocomplete="off"

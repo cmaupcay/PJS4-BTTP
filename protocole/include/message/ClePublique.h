@@ -4,7 +4,7 @@
 #include "Message.h"
 #include "../identite/Cles.h"
 
-#include "erreur/ClePubliqueVide.h"
+#include "erreur/Vide.h"
 
 namespace BTTP
 {

@@ -3,6 +3,7 @@
 
 #include "Message.h"
 #include "../identite/Cles.h"
+#include "erreur/Vide.h"
 
 namespace BTTP
 {
@@ -22,23 +23,29 @@ namespace BTTP
                 std::string _cible;
 
                 /**
+                 * @brief Clé publique du client.
+                 */
+                std::string _client;
+
+                /**
                  * @brief Retourne le contenu du message.
                  * @return const std::string Empreinte de la clé publique du terminal distant cible.
                  */
-                inline const std::string contenu() const override { return this->_cible; }
+                inline const std::string contenu() const override;
 
                 /**
                  * @brief Enregistrement du contenu d'un message similaire.
                  * @param contenu Clé publque du terminal distant cible.
                  */
-                inline void deconstruction(const std::string contenu) override { this->_cible = contenu; }
+                void deconstruction(const std::string contenu) override;
 
             public:
                 /**
                  * @brief Construction du message à partir d'une clé publique.
-                 * @param cle Clé publique du terminal distant cible.
+                 * @param cible Clé publique du terminal distant cible.
+                 * @param client Clé publique du terminal client.
                  */
-                Ouverture(const Cle::Publique cle);
+                Ouverture(const Cle::Publique cible, const Cle::Publique client);
                 /**
                  * @brief Construction d'un message vide.
                  */
@@ -54,6 +61,12 @@ namespace BTTP
                  * @return const std::string& Empreinte du terminal cible.
                  */
                 inline const std::string& cible() const { return this->_cible; }
+
+                /**
+                 * @brief Retourne la clé publique du client émissaire du message.
+                 * @return const Cle::Publique Clé publique du client.
+                 */
+                const Cle::Publique client() const;
             };
         }
     }

@@ -9,12 +9,15 @@ namespace BTTP
     {
         namespace Transaction
         {
+            // TODO Ajout du message d'ouverture dans le constructeur + definition de la cle du client et verification à l'ouverture.
             /**
              * @brief Transaction utilisée par les appareils distants.
              */
             class Distant : public Client
             {
             private:
+                const std::string& _message_ouverture;
+
                 // TOTEST
                 /**
                  * @brief Procédure d'ouverture de la transaction.
@@ -39,7 +42,7 @@ namespace BTTP
                  * @param connexion_controleur Connexion réseau avec l'appareil de contrôle.
                  */
                 Distant(
-                    const Identite* identite, const Cle::Publique& client,
+                    const Identite* identite, const std::string& message_ouverture,
                     const Cle::Publique& controleur, IConnexion* connexion_controleur
                 );
             };

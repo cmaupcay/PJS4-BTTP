@@ -19,7 +19,7 @@ namespace BTTP
             {
             private:
                 /** Clé publique de l'appareil distant. */
-                const Cle::Publique& _distant;
+                const Cle::Publique* _distant;
                 /** Clé publique de l'appareil de contrôle. */
                 const Cle::Publique& _controleur;
 
@@ -34,6 +34,18 @@ namespace BTTP
                 const std::string preparer(const Messages::IMessage* message, const std::string& mdp) const;
 
             protected:
+                /**
+                 * @brief Construction d'une nouvelle transaction cliente sans spécification de la clé publique de l'appareil distant.
+                 * @warning Ce constructeur foit être utilisé par les transactions distantes uniquement.
+                 * @param identite Identité locale à utiliser.
+                 * @param controleur Clé publique de l'appareil de contrôle.
+                 * @param connexion_controleur Connexion réseau avec l'appareil de contrôle.
+                 */
+                Client(
+                    const Identite* identite,
+                    const Cle::Publique& controleur, IConnexion* connexion_controleur
+                );
+
                 // TOTEST
                 /**
                  * @brief Procédure d'ouverture de la transaction.
@@ -51,6 +63,13 @@ namespace BTTP
                  * @throws BTTP::Erreur::Transaction::Fermeture La fermeture de la transaction a entrainé une erreur.
                  */
                 void fermeture(const std::string& mdp) override;
+
+                /**
+                 * @brief Définition de la clé publique du client.
+                 * @warning Cette fonction doit uniquement être utilisé par la transaction de type Distant lors de son ouverture.
+                 * @param client Clé publique du client.
+                 */
+                inline void definir_cle_client(const Cle::Publique& client) { this->_distant = &client; }
             
             protected:
                 /**

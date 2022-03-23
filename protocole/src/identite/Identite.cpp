@@ -69,13 +69,20 @@ namespace BTTP
             return message_chiffre.raw();
         }
 
-        const std::string Identite::dechiffrer(const std::string message, const Cle::Publique emissaire, const std::string mdp) const
+        const OpenPGP::Message Identite::dechiffrement(const std::string message, const std::string mdp) const
         {
             // Déchiffrement du message
             OpenPGP::Message message_dechiffre;
             try { message_dechiffre = OpenPGP::Decrypt::pka(this->_cle_privee, mdp, message); }
             catch (std::exception& err) { throw Erreur::Identite::Dechiffrement(err.what(), message); }
             if (!message_dechiffre.meaningful()) throw Erreur::Identite::Dechiffrement("L'intégrité du message n'a pu être vérifiée.", message);
+            return message_dechiffre;
+        }
+
+        const std::string Identite::dechiffrer(const std::string message, const Cle::Publique emissaire, const std::string mdp) const
+        {
+            // Déchiffrement du message
+            OpenPGP::Message message_dechiffre = this->dechiffrement(message, mdp);
             // Vérification de la signature
             OpenPGP::Key::Ptr signataire = std::make_shared<OpenPGP::Key>(emissaire);
             if (!signataire->meaningful()) throw Erreur::Identite::Dechiffrement("La clé publique est incohérente.", message);

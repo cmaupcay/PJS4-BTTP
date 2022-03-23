@@ -37,6 +37,14 @@ namespace BTTP
                  */
                 static const std::string traduire_message(const OpenPGP::Message message_pgp);
 
+                /**
+                 * @brief Déchiffrement d'une chaîne de caractère.
+                 * @param message Message chiffré.
+                 * @param mdp Mot de passe de la clé privée.
+                 * @return const OpenPGP::Message 
+                 */
+                const OpenPGP::Message dechiffrement(const std::string message, const std::string mdp) const;
+
             protected:
                 /**
                  * @brief Génération d'une nouvelle identité (clé privée).
@@ -111,6 +119,17 @@ namespace BTTP
                  * @return const std::string Chaîne de caractère déchiffrée.
                  */
                 const std::string dechiffrer(const std::string message, const Cle::Publique emissaire, const std::string mdp) const;
+
+                /**
+                 * @brief Déchiffrement sans vérification de la signature d'une chaîne de caractère chiffrée a destination de l'identité.
+                 * @warning L'usage de cette fonction doit être strictement limité aux situations dans lesquelles l'idenité de l'emissaire
+                 * du message n'est pas connue du destinataire (ex: ouverture d'une transaction).
+                 * @param message Message chiffré.
+                 * @param mdp Mot de passe de la clé privée du destinataire.
+                 * @return const std::string Chaîne de caractère déchiffrée.
+                 */
+                inline const std::string dechiffrer_sans_verifier(const std::string message, const std::string mdp) const
+                { return traduire_message(this->dechiffrement(message, mdp)); }
 
                 /**
                  * @brief Ecrit la clé publique relative à l'identité dans le flux de sortie.

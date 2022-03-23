@@ -20,28 +20,6 @@
 <body>
   <div class="bg">
 
-    <header class="header">
-      <nav class="navbar navbar-expand-lg fixed-top py-3 fill">
-        <div><a href="index.php?controle=visiteurs&action=accueil"
-            class="nav-link text-uppercase font-weight-bold">Logo-pour-accueil</a></div>
-        <div class="container">
-          <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
-            class="navbar-toggler navbar-toggler-right"><i class="fa fa-bars"></i></button>
-
-          <div id="navbarSupportedContent" class="collapse navbar-collapse">
-            <ul class="navbar-nav ml-auto">
-              <li class="nav-item active"><a href="index.php?controle=visiteurs&action=accueil"
-                  class="nav-link text-uppercase font-weight-bold">ACCUEIL</a></li>
-              <li class="nav-item"><a href="index.php?controle=visiteurs&action=connexion"
-                  class="nav-link text-uppercase font-weight-bold">CONNEXION</a></li>
-              <li class="nav-item"><a href="index.php?controle=visiteurs&action=inscription"
-                  class="nav-link text-uppercase font-weight-bold">INSCRIPTION</a></li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-    </header>
     <br><br><br>
     <div class="logo text-center">
       <img src="logo.png" alt="..." class="img-thumbnail">

@@ -20,27 +20,7 @@
 
 <body>
 
-    <header class="header">
-        <nav class="navbar navbar-expand-lg fixed-top py-3 fill">
 
-            <div class="container">
-                <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
-                    class="navbar-toggler navbar-toggler-right"><i class="fa fa-bars"></i></button>
-
-                <div id="navbarSupportedContent" class="collapse navbar-collapse">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item active"><a href="?controle=visiteurs&action=accueil"
-                                class="nav-link text-uppercase font-weight-bold">ACCUEIL</a></li>
-                        <li class="nav-item"><a href="?controle=visiteurs&action=connexion"
-                                class="nav-link text-uppercase font-weight-bold">CONNEXION</a></li>
-                        <li class="nav-item"><a href="?controle=visiteurs&action=inscription"
-                                class="nav-link text-uppercase font-weight-bold">INSCRIPTION</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
 
     <div class="login-form">
         <br><br>
@@ -66,34 +46,5 @@
     </div>
 
 </body>
-
-<style>
-    .login-form {
-        width: 340px;
-        margin: 50px auto;
-    }
-
-    .login-form form {
-        margin-bottom: 15px;
-        background: #f7f7f7;
-        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-        padding: 30px;
-    }
-
-    .login-form h2 {
-        margin: 0 0 15px;
-    }
-
-    .form-control,
-    .btn {
-        min-height: 38px;
-        border-radius: 2px;
-    }
-
-    .btn {
-        font-size: 15px;
-        font-weight: bold;
-    }
-</style>
 
 </html>

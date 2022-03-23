@@ -13,14 +13,37 @@
         rel="stylesheet" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <title>identification</title>
-    <link rel="stylesheet" type="text/css" href="./vue/style.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgb(141, 202, 243)">
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a href="?controle=visiteurs&action=accueil" class="nav-link text-uppercase font-weight-bold" >ACCUEIL <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a href="?controle=visiteurs&action=connexion" class="nav-link text-uppercase font-weight-bold">CONNEXION</a>
+            </li>
+            <li class="nav-item">
+              <a href="?visiterus=visiteurs&action=inscription" class="nav-link text-uppercase font-weight-bold">INSCRIPTION</a>
+            </li>
+          </ul>
+        </div>
+        <!--
+        <form class="form-inline">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        -->
+
+      </nav>
+    
 
 
-
-    <!--
+            <!--
                 <nav class="navbar navbar-light" style="background-color: #47acf5;">
                     <div class="container">
                         <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -40,6 +63,8 @@
                       </div>                
                 </nav>
         -->
+
+
 
 
 
@@ -73,10 +98,5 @@
 
 
 </body>
-
-<style>
-
-</style>
-
 
 </html>

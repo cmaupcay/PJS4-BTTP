@@ -30,11 +30,11 @@
 
                 <div id="navbarSupportedContent" class="collapse navbar-collapse">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item active"><a href="index.php?controle=visiteurs&action=accueil"
+                        <li class="nav-item active"><a href="?controle=visiteurs&action=accueil"
                                 class="nav-link text-uppercase font-weight-bold">ACCUEIL</a></li>
-                        <li class="nav-item"><a href="index.php?controle=visiteurs&action=connexion"
+                        <li class="nav-item"><a href="?controle=visiteurs&action=connexion"
                                 class="nav-link text-uppercase font-weight-bold">CONNEXION</a></li>
-                        <li class="nav-item"><a href="index.php?controle=visiteurs&action=inscription"
+                        <li class="nav-item"><a href="?controle=visiteurs&action=inscription"
                                 class="nav-link text-uppercase font-weight-bold">INSCRIPTION</a></li>
                     </ul>
                 </div>
@@ -44,7 +44,7 @@
 
     <div class="login-form">
         <br><br>
-        <form action="index.php?controle=visiteurs&action=inscription" method="POST">
+        <form action="?controle=visiteurs&action=inscription" method="POST">
             <h2 class="text-center"> Inscription </h2>
 
             <div class="form-group">

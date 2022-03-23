@@ -41,7 +41,7 @@
 
     <div class="login-form">
         <br><br>
-        <form action="index.php?controle=abonnes&action=accueil" method="post"> 
+        <form action="?controle=abonnes&action=accueil" method="post"> 
 
             <!-- lorsqu'on envoie le formulaire on va vouloir traiter ces données, donc on va san doute vouloir faire une fonction js pour les traiter on submit
             du coup il faut pas oublier de changer ca-->

@@ -17,36 +17,61 @@
 </head>
 
 <body>
-    <header class="header">
-        <nav class="navbar navbar-expand-lg fixed-top py-3 fill">
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgb(141, 202, 243)">
 
-            <div class="container">
-                <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
-                    class="navbar-toggler navbar-toggler-right"><i class="fa fa-bars"></i></button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a href="?controle=visiteurs&action=accueil" class="nav-link text-uppercase font-weight-bold" >ACCUEIL <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a href="?controle=visiteurs&action=connexion" class="nav-link text-uppercase font-weight-bold">CONNEXION</a>
+            </li>
+            <li class="nav-item">
+              <a href="?visiterus=visiteurs&action=inscription" class="nav-link text-uppercase font-weight-bold">INSCRIPTION</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    
 
-                <div id="navbarSupportedContent" class="collapse navbar-collapse">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item active"><a href="?controle=visiteurs&action=accueil"
-                                class="nav-link text-uppercase font-weight-bold">ACCUEIL</a></li>
-                        <li class="nav-item"><a href="?controle=visiteurs&action=connexion"
-                                class="nav-link text-uppercase font-weight-bold">CONNEXION</a></li>
-                        <li class="nav-item"><a href="?controle=visiteurs&action=inscription"
-                                class="nav-link text-uppercase font-weight-bold">INSCRIPTION</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
+
+            <!--
+                <nav class="navbar navbar-light" style="background-color: #47acf5;">
+                    <div class="container">
+                        <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+                          class="navbar-toggler navbar-toggler-right"><i class="fa fa-bars"></i></button>
+
+                        <div id="navbarSupportedContent" class="collapse navbar-collapse">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item active"><a href="?controle=visiteurs&action=accueil"
+                                    class="nav-link text-uppercase font-weight-bold">ACCUEIL</a></li>
+                            <li class="nav-item"><a href="?controle=visiteurs&action=connexion"
+                                    class="nav-link text-uppercase font-weight-bold">CONNEXION</a></li>
+                            <li class="nav-item"><a href="?controle=visiteurs&action=inscription"
+                                    class="nav-link text-uppercase font-weight-bold">INSCRIPTION</a></li>
+                        </ul>
+                         </div>
+                      </div>                
+                </nav>
+        -->
+
+        
+  
 
     <div class="login-form">
         <br><br>
+<<<<<<< Updated upstream
         <form action="?controle=abonnes&action=accueil" method="post"> 
 
             <!-- lorsqu'on envoie le formulaire on va vouloir traiter ces données, donc on va san doute vouloir faire une fonction js pour les traiter on submit
             du coup il faut pas oublier de changer ca-->
 
 
+=======
+        <form action="?controle=abonnes&action=accueil" method="post">
+>>>>>>> Stashed changes
             <h2 class="text-center"> Connexion </h2>
             <div class="form-group">
                 <p><input name="email" type="text" class="form-control" placeholder="Email" autocomplete="off"

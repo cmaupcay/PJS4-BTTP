@@ -23,7 +23,7 @@ namespace BTTP
                 try
                 {
                     Console::afficher("Importation de votre identité... ", false);
-                    id = new Protocole::Identite(importer("user"));
+                    id = new Protocole::Identite(Identites::importer("user"));
                     Console::afficher("FAIT");
                 }
                 catch (Client::Erreur::Fichiers::Inexistant& err)
@@ -33,7 +33,7 @@ namespace BTTP
                     id = new Protocole::Identite("user", "contact", "mdp");
                     Console::afficher("FAIT");
                     Console::afficher("Exportation de votre identité...", false);
-                    exporter(*id);
+                    Identites::exporter(*id);
                     Console::afficher("FAIT");
                 }
 

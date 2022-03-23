@@ -4,7 +4,7 @@
 #include "../identite/Meta.h"
 #include "../message/Messages.h"
 #include "../message/controle/Messages.h"
-#include "../Connexion.h"
+#include "../IConnexion.h"
 
 #include "erreur/DejaFermee.h"
 #include "erreur/DejaOuverte.h"

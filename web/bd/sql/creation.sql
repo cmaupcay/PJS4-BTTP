@@ -82,7 +82,7 @@ CREATE TABLE bttp.script (
     nom VARCHAR(64) NOT NULL, /* Nom du script */
     ajout DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, /* Date et heure d'ajout du script */
     somme INT NOT NULL, /* Somme de contrôle du code source hébergé localement */
-    id_script_publique INT, /* Identifiant numérique du script publique auquel est lié ce script (peu être nul) */
+    id_script_publique INT, /* Identifiant numérique du script publique auquel est lié ce script (peut être nul) */
     PRIMARY KEY(id),
     FOREIGN KEY(id_hote) REFERENCES bttp.terminal_distant(id) ON DELETE CASCADE,
     FOREIGN KEY(id_script_publique) REFERENCES bttp.script_publique(id) ON DELETE SET NULL

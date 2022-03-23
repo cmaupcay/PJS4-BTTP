@@ -15,6 +15,10 @@ set(BTTP_CLIENT_DEP ${BTTP_LIB}) # Dépendances
 set(BTTP_CLIENT_RACINE ${CMAKE_CURRENT_LIST_DIR}/include/Racine.h) # En-tête racine (fichier de configuration)
 set(BTTP_CLIENT_LIB ${BTTP_CLIENT} ${BTTP_CLIENT_DEP})
 # Paramètres
+## Réseau
+if(NOT DEFINED BTTP_PORT)
+    set(BTTP_PORT 1414) # Port par défaut des applications BTTP.
+endif()
 ## Dossier & Fichier
 if(NOT DEFINED BTTP_DOSSIER)
     set(BTTP_DOSSIER .bttp) # Nom du dossier de travail du client

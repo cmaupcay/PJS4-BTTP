@@ -12,7 +12,7 @@ set(BTTP_LIB ${BTTP} ${BTTP_DEP}) # Importation de la librairie et de ses dépen
 # Paramètres
 ## Identité
 if(NOT DEFINED BTTP_IDENTITE_COMMENTAIRE)
-    set(BTTP_IDENTITE_COMMENTAIRE BTTP version ${BTTP_VERSION} via calccrypto/OpenPGP) # Commentaire associé aux clés généré via BTTP
+    set(BTTP_IDENTITE_COMMENTAIRE "BTTP version ${BTTP_VERSION} via calccrypto/OpenPGP") # Commentaire associé aux clés généré via BTTP
 endif()
 if(NOT DEFINED BTTP_IDENTITE_ARMOR)
     set(BTTP_IDENTITE_ARMOR false) # Défini si les identités doivent utiliser le mode structuré (armored)

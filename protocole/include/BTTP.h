@@ -5,6 +5,5 @@
 
 #include "transaction/Transactions.h"
 #include "Contexte.h"
-#include "Commun.h"
 
 #endif

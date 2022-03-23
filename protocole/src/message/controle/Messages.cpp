@@ -13,20 +13,28 @@ namespace BTTP
                     if (paquet.length() > 0)
                         switch (static_cast<Type>(paquet[0]))
                         {
-                            // TODO Classes des types de message de contrôle
+                        case Type::OUVERTURE:
+                            return new Ouverture(paquet);
+                        case Type::RELAIS:
+                            return new Relais(paquet);
+                        case Type::EXECUTION:
+                            return new Execution(paquet);
                         default:
                             throw Erreur::Messages::Type::Inconnu(paquet);
                         }
                     return nullptr;
                 }
 
-                Message* generer(const Messages::IMessage& message, const Cle::Publique destinataire, const Identite& signataire, const std::string mdp)
+                Message* generer(const IMessage* message, const Cle::Publique destinataire, const Identite* signataire, const std::string mdp)
                 {
-                    switch (message.type_c())
+                    switch (message->type_c())
                     {
-                    // TODO Classes des types de messages de contrôle
+                    case static_cast<char>(Messages::Type::OUVERTURE):
+                        return new Ouverture(message, destinataire, signataire, mdp);
+                    case static_cast<char>(Messages::Type::EXECUTION):
+                        return new Execution(message, destinataire, signataire, mdp);
                     default:
-                        throw Erreur::Messages::Controle::Inconnu(message);
+                        return new Relais(message, destinataire, signataire, mdp);
                     }
                     return nullptr;
                 }

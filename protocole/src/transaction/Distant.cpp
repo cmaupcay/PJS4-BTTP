@@ -8,12 +8,21 @@ namespace BTTP
         {
             void Distant::ouverture(const std::string& mdp)
             {
-                // const Messages::Ouverture message{ this->_distant }; // TODO Il manque la classe de message Ouverture :(
-                // this->envoyer(message, mdp);
+                const Messages::Pret message;
+                this->envoyer(&message, mdp);
             }
 
-            Distant::Distant(const Identite& identite, const Cle::Publique& client, const Cle::Publique& controleur, IConnexion& connexion_controleur)
-                : Client(Mode::DISTANT, identite, client, controleur, connexion_controleur)
+            void Distant::fermeture(const std::string& mdp)
+            {
+                const Messages::Pret message;
+                this->envoyer(&message, mdp);
+            }
+
+            Distant::Distant(
+                const Identite* identite, const Cle::Publique& client,
+                const Cle::Publique& controleur, IConnexion* connexion_controleur
+            )
+                : Client(identite, client, controleur, connexion_controleur)
             {}
         }
     }

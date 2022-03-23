@@ -22,11 +22,13 @@ namespace BTTP
                 {
                 private:
                     /**
-                     * @brief Contenu chiffré du message à l'attention du destinataire, généralement un message linéarisé.
+                     * @brief Contenu chiffré du message à l'attention du destinataire.
                      */
-                    std::string _contenu;
+                    std::string _message;
                     /**
                      * @brief Empreinte du destinataire. Permet à l'appareil de contrôle de reconnaître le destinataire.
+                     * @details Le client peut ainsi envoyer des messages à différents appareils distants sur une même
+                     * connexion avec l'appareil de contrôle.
                      */
                     std::string _destinataire;
 
@@ -34,27 +36,11 @@ namespace BTTP
                      * @brief Retourne le contenu du message à ajouter au paquet.
                      * @return const std::string Contenu chiffré à l'attention du destinataire.
                      */
-                    inline const std::string contenu() const override
-                    { return this->_contenu; }
+                    inline const std::string contenu() const override { return this->_message; }
 
                 protected:
                     /**
-                     * @brief Construction d'un nouveau message de contrôle à partir d'une chaîne de caractère.
-                     * @see BTTP::Protocole::Messages::Controle::TMessage<_Type>::initialiser()
-                     * @param type Type du message de contrôle.
-                     * @param contenu Contenu à chiffrer et signer.
-                     * @param destinataire Destinataire du contenu.
-                     * @param signataire Signataire du contenu.
-                     * @param mdp Mot de passe du signataire.
-                     */
-                    TMessage(
-                        const _Type type, 
-                        const std::string contenu, const Cle::Publique destinataire,
-                        const Identite* signataire = nullptr, const std::string mdp = ""
-                    );
-                    /**
                      * @brief Construction d'un nouveau message de contrôle à partir d'un message BTTP.
-                     * @see BTTP::Protocole::Messages::Controle::TMessage<_Type>::initialiser()
                      * @param type Type du message de contrôle.
                      * @param message Message à linéariser, chiffrer et signer.
                      * @param destinataire Destinataire du message contenu.
@@ -64,20 +50,14 @@ namespace BTTP
                     TMessage(
                         const _Type type, 
                         const IMessage* message, const Cle::Publique destinataire,
-                        const Identite* signataire = nullptr, const std::string mdp = ""
+                        const Identite* signataire, const std::string mdp
                     );
                     /**
-                     * @brief Initialisation des informations du message.
-                     * @warning Le contenu et le destinataire enregistrés précédemment sont effacés.
-                     * @param contenu Contenu à chiffrer et signer.
-                     * @param destinataire Destinataire du contenu.
-                     * @param signataire Signataire du contenu.
-                     * @param mdp Mot de passe du signataire.
+                     * @brief Construction d'un nouveau message de contrôle à partir d'un paquet.
+                     * @param type Type du message de contrôle.
+                     * @param paquet Paquet à déconstruire.
                      */
-                    inline void initialiser(
-                        const std::string contenu, const Cle::Publique destinataire,
-                        const Identite* signataire, const std::string mdp = ""
-                    );
+                    TMessage(const _Type type, const std::string paquet);
 
                     /**
                      * @brief Retourne l'en-tête du message, qui contient les informations devant être lues par l'appareil de contrôle.
@@ -110,7 +90,7 @@ namespace BTTP
                      * @brief Retourne le contenu du message, à l'attention du destinataire.
                      * @return const std::string& Contenu chiffré et signé.
                      */
-                    inline const std::string& message() const { return this->_contenu; }
+                    inline const std::string& message() const { return this->_message; }
                     /**
                      * @brief Retourne l'empreinte du destinataire du contenu.
                      * @return const std::string& Chaîne identifiant le destinataire.
@@ -128,18 +108,18 @@ namespace BTTP
                      * @details Vérification de l'état du terminal distant.
                      * @see ./Ouverture.h
                      */
-                    OUVERTURE = '*', // TODO Controle::Ouverture
+                    OUVERTURE = '*',
                     /**
                      * @brief Relais d'un message sans contrôle spécifique.
                      * @see ./Relais.h
                      */
-                    RELAIS = '=', // TODO Classe Controle::Relais
+                    RELAIS = '=',
                     /**
                      * @brief Contrôle relatif à une execution. Encapsule toujours un message de type EXECUTION.
                      * @details Vérification du script demandé.
                      * @see ./Execution.h
                      */
-                    EXECUTION = '>' // TODO Classe Controle::Execution
+                    EXECUTION = '>'
                 };
 
                 /**
@@ -160,8 +140,17 @@ namespace BTTP
                     Message(
                         const Type type, 
                         const IMessage* message, const Cle::Publique destinataire,
-                        const Identite* signataire = nullptr, const std::string mdp = ""
+                        const Identite* signataire, const std::string mdp
                     ) : TMessage<Type>(type, message, destinataire, signataire, mdp)
+                    {}
+
+                    /**
+                     * @brief Construction d'un nouveau message de contrôle à partir d'un paquet.
+                     * @param type Type du message de contrôle.
+                     * @param paquet Paquet à déconstruire.
+                     */
+                    Message(const Type type, const std::string paquet)
+                        : TMessage<Type>(type, paquet)
                     {}
                 };
             }

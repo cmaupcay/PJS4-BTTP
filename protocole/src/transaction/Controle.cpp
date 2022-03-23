@@ -8,37 +8,36 @@ namespace BTTP
         {
             void Controle::ouverture(const std::string& mdp)
             {
-                if (!this->_connexion_distant.ouverte()) this->_connexion_distant.ouvrir();
-                const bool client = this->relayer_a_distant(mdp, false); // On relait le message d'ouverture au terminal distant
-                if (client && this->relayer_a_client(mdp, true)) return; // On relait la réponse au terminal client
-                throw Erreur::Transaction::Ouverture(!client); 
+                if (!this->_connexion_distant->ouverte()) this->_connexion_distant->ouvrir();
+                // On relait le message d'ouverture au terminal distant.
+                if (this->relayer_a_distant(mdp))
+                // Et on transmet sa réponse au client.
+                    if (this->relayer_a_client(mdp)) return;
+                // Si un des relais échoue, on lève une erreur.
+                throw new Erreur::Transaction::Ouverture(nullptr);
             }
 
             void Controle::fermeture(const std::string& mdp)
             {
                 // On relait les potentiels derniers messages reçus
-                this->relayer_a_distant(mdp, false);
-                this->relayer_a_client(mdp, false);
-                this->_connexion_distant.fermer();
+                this->relayer_a_distant(mdp);
+                this->relayer_a_client(mdp);
             }
         
             Controle::Controle(
-                const Identite& identite, const std::string& message_ouverture,
-                const Cle::Publique& client, IConnexion& connexion_client, const Cle::Publique& distant, IConnexion& connexion_distant
+                const Identite* identite, const std::string& message_ouverture,
+                const Cle::Publique& client, IConnexion* connexion_client, 
+                const Cle::Publique& distant, IConnexion* connexion_distant
             )
-                : _Transaction(Mode::CONTROLE, connexion_client, identite), _client{ client }, _distant{ distant }, _connexion_distant{ connexion_distant },
+                : _Transaction(connexion_client, identite), _client{ client }, 
+                _distant{ distant }, _connexion_distant{ connexion_distant },
                 _message_a_relayer_a_distant{ message_ouverture }, _message_a_relayer_a_client{ "" }
             {}
 
-            const bool Controle::prochain_message_client()
+            const bool Controle::prochain_message(std::string& var, IConnexion* connexion)
             {
-                this->_message_a_relayer_a_distant = this->connexion().recevoir();
-                return this->_message_a_relayer_a_distant != BTTP_TRANSACTION_MESSAGE_NUL;
-            }
-            const bool Controle::prochain_message_distant()
-            {
-                this->_message_a_relayer_a_client = this->_connexion_distant.recevoir();
-                return this->_message_a_relayer_a_client != BTTP_TRANSACTION_MESSAGE_NUL;
+                var = connexion->recevoir();
+                return var != BTTP_TRANSACTION_MESSAGE_NUL;
             }
 
             const std::string Controle::lire_entete(const std::string& message, const Cle::Publique& signataire, const std::string& mdp) const
@@ -47,29 +46,17 @@ namespace BTTP
                 return this->identite().dechiffrer(extraire_entete(message), signataire, mdp);
             }
 
-            const bool Controle::relayer(IConnexion& connexion, const std::string entete, std::string& message)
+            const bool Controle::relayer(const Cle::Publique& destinataire, IConnexion* connexion, std::string& message, const std::string mdp)
             { 
                 if (message != BTTP_TRANSACTION_MESSAGE_NUL)
                 {
+                    const std::string entete = this->identite().chiffrer(this->generer_entete(), destinataire, mdp);
                     const std::string nouveau_message = entete + BTTP_MESSAGE_CONTROLE_SEP + retirer_entete(message);
-                    connexion.envoyer(nouveau_message);
+                    connexion->envoyer(nouveau_message);
                     message = BTTP_TRANSACTION_MESSAGE_NUL;
                     return true;
                 }
                 return false;
-            }
-            
-            const bool Controle::relayer_a_client(const std::string mdp, const bool lire)
-            {
-                if (lire) if (!this->prochain_message_distant()) return false;
-                const std::string entete = this->identite().chiffrer(generer_entete(this->_client), this->_client, mdp);
-                return relayer(this->connexion(), entete, this->_message_a_relayer_a_client);
-            }
-            const bool Controle::relayer_a_distant(const std::string mdp, const bool lire)
-            {
-                if (lire) if (!this->prochain_message_client()) return false;
-                const std::string entete = this->identite().chiffrer(generer_entete(this->_distant), this->_distant, mdp);
-                return relayer(this->_connexion_distant, entete, this->_message_a_relayer_a_distant);
             }
         }
     }

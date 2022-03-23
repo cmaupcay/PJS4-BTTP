@@ -4,8 +4,6 @@
 #include "Message.h"
 #include "../identite/Cles.h"
 
-#include "erreur/ClePubliqueVide.h"
-
 namespace BTTP
 {
     namespace Protocole
@@ -14,21 +12,18 @@ namespace BTTP
         {
             /**
              * @brief Message demandant l'ouverture d'une transaction avec le terminal cible.
-             * @note Même si ce message équivaut à un message de type ClePublique, une classe dédiée
-             * permet une cohérence avec les autres types de messages (unicité des classes) et une plus
-             * grande flexibilité à l'avenir, en cas d'ajout de vérification par exemple.
              */
             class Ouverture : public Message
             {
             private:
                 /**
-                 * @brief Clé publique du terminal distant cible.
+                 * @brief Empreinte de la clé publique du terminal distant cible.
                  */
                 std::string _cible;
 
                 /**
                  * @brief Retourne le contenu du message.
-                 * @return const std::string Clé publique du terminal distant cible.
+                 * @return const std::string Empreinte de la clé publique du terminal distant cible.
                  */
                 inline const std::string contenu() const override { return this->_cible; }
 
@@ -55,10 +50,10 @@ namespace BTTP
                 Ouverture(const std::string paquet);
 
                 /**
-                 * @brief Retourne la clé publique contenue par le message.
-                 * @return const Cle::Publique Clé publique du terminal distant cible.
+                 * @brief Retourne l'empreinte de la clé publique du terminal cible.
+                 * @return const std::string& Empreinte du terminal cible.
                  */
-                const Cle::Publique cible() const;
+                inline const std::string& cible() const { return this->_cible; }
             };
         }
     }

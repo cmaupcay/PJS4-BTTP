@@ -13,9 +13,9 @@ namespace BTTP
             /** Serveur de référence du script. */
             const Serveur& _serveur;
             /** Identifiant numérique du script commun avec le serveur. */
-            const uint64_t _id;
+            uint64_t _id;
             /** Nom d'affichage du script. */
-            const std::string _nom;
+            std::string _nom;
         
         public:
             /**
@@ -27,11 +27,13 @@ namespace BTTP
              */
             Script(const Serveur& serveur, const uint64_t id, const std::string nom);
 
+            // TOTEST
             /**
-             * @brief Construction d'un script depuis son nom de référence.
-             * @param reference 
+             * @brief Construction d'un script depuis son fichier de référence.
+             * @param serveur Serveur de référence.
+             * @param fichier Nom du fichier de référence.
              */
-            Script(const std::string reference);
+            Script(const Serveur& serveur, const std::string fichier);
 
             /**
              * @brief Retourne le serveur de référence du script.

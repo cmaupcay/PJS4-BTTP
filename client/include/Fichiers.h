@@ -100,6 +100,32 @@ namespace BTTP
                 const bool binaire = false,
                 const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT
             );
+
+            /**
+             * @brief Retourne la liste des fichiers présents dans un dossier.
+             * @param dossier Dossier cible.
+             * @param utiliser_contexte Défini si le chemin est relatif au dossier du contexte client. 
+             * @return const std::vector<std::string> Liste des noms de fichier.
+             */
+            const std::vector<std::string> liste(
+                const std::string dossier,
+                const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT
+            );
+
+            /**
+             * @brief Suppression d'un fichier.
+             * @param fichier Nom du fichier cible.
+             * @param dossier Dossier contenant le fichier.
+             * @param utiliser_contexte Défini si le chemin est relatif au dossier du contexte client.
+             * @return true Le fichier a été supprimé.
+             * @return false La suppression du fichier a échoué.
+             */
+            inline const bool supprimer(
+                const std::string fichier,
+                const std::string dossier = BTTP_DOSSIER,
+                const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT
+            )
+            { return std::filesystem::remove(chemin(fichier, dossier, utiliser_contexte)); }
         }
     }
 }

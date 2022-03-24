@@ -65,6 +65,18 @@ namespace BTTP
                 flux.close();
                 return contenu;
             }
+
+            const std::vector<std::string> liste(const std::string dossier, const bool utiliser_contexte)
+            {
+                std::vector<std::string> fichiers;
+                const std::filesystem::directory_iterator idossier{chemin("", dossier, utiliser_contexte)};
+                for (const std::filesystem::directory_entry& fichier : idossier)
+                {
+                    if (fichier.is_regular_file())
+                        fichiers.push_back(fichier.path().filename());
+                }
+                return fichiers;
+            }
         }
     }
 }

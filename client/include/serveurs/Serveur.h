@@ -14,7 +14,7 @@ namespace BTTP
         {
         private:
             /** Nom d'affichage du serveur et nom du fichier local. */
-            std::string _nom;
+            const std::string _nom;
             /** Adresse (nom d'hôte OU adresse IPv4 ou IPv6) du serveur. */
             std::string _adresse;
             /** Port de connexion à l'application BTTP. */
@@ -59,10 +59,9 @@ namespace BTTP
              */
             inline void modifier_port(const uint16_t port) { this->_port = port; }
 
-            // TOTEST Affichage
-            inline friend std::ostream& operator<<(std::ostream& os, const IMessage& msg) 
-            { return (os << this->_nom + " (" + this->_adresse + ':' + std::to_string(this->_port) + ')'); }
-        }
+            inline friend std::ostream& operator<<(std::ostream& os, const Serveur& srv) 
+            { return (os << srv.nom() + " (" + srv.adresse() + ':' + std::to_string(srv.port()) + ')'); }
+        };
     }
 }
 

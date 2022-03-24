@@ -1,5 +1,5 @@
-#ifndef BTTP_CLIENT_SERVEURS
-#define BTTP_CLIENT_SERVEURS
+#ifndef H_BTTP_CLIENT_SERVEURS
+#define H_BTTP_CLIENT_SERVEURS
 
 #include "../Fichiers.h"
 

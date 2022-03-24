@@ -1,5 +1,5 @@
-#ifndef BTTP_CLIENT_SERVEUR
-#define BTTP_CLIENT_SERVEUR
+#ifndef H_BTTP_CLIENT_SERVEUR
+#define H_BTTP_CLIENT_SERVEUR
 
 #include "../Racine.h"
 
@@ -59,8 +59,11 @@ namespace BTTP
              */
             inline void modifier_port(const uint16_t port) { this->_port = port; }
 
+            inline const std::string informations() const
+            { return this->_nom + " (" + this->_adresse + ':' + std::to_string(this->_port) + ')'; }
+
             inline friend std::ostream& operator<<(std::ostream& os, const Serveur& srv) 
-            { return (os << srv.nom() + " (" + srv.adresse() + ':' + std::to_string(srv.port()) + ')'); }
+            { return (os << srv.informations()); }
         };
     }
 }

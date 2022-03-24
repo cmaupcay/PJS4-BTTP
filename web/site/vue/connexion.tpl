@@ -12,55 +12,11 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css"
         rel="stylesheet" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <title>identification</title>
-    <link rel="stylesheet" type="text/css" href="./style.css">
+    <title>Connexion</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
-<body>
-    
-    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgb(141, 202, 243)">
-
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item active">
-              <a href="?controle=visiteurs&action=accueil" class="nav-link text-uppercase font-weight-bold" >ACCUEIL <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a href="?controle=visiteurs&action=connexion" class="nav-link text-uppercase font-weight-bold">CONNEXION</a>
-            </li>
-            <li class="nav-item">
-              <a href="?visiterus=visiteurs&action=inscription" class="nav-link text-uppercase font-weight-bold">INSCRIPTION</a>
-            </li>
-          </ul>
-        </div>
-
-      </nav>
-    
-    <!--
-        <nav class="navbar navbar-light" style="background-color: #47acf5;">
-            <div class="container">                    <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
-                          class="navbar-toggler navbar-toggler-right"><i class="fa fa-bars"></i></button>
-
-                        <div id="navbarSupportedContent" class="collapse navbar-collapse">
-                        <ul class="navbar-nav ml-auto">
-                            <li class="nav-item active"><a href="?controle=visiteurs&action=accueil"
-                                    class="nav-link text-uppercase font-weight-bold">ACCUEIL</a></li>
-                            <li class="nav-item"><a href="?controle=visiteurs&action=connexion"
-                                    class="nav-link text-uppercase font-weight-bold">CONNEXION</a></li>
-                            <li class="nav-item"><a href="?controle=visiteurs&action=inscription"
-                                    class="nav-link text-uppercase font-weight-bold">INSCRIPTION</a></li>
-                        </ul>
-                         </div>
-                      </div>                
-                </nav>
-        -->
-
-
-
-
-
-
+<body>    
     <div class="login-form">
         <br><br>
 
@@ -83,9 +39,9 @@
                 <div class="form-group">
                     <input type="submit" value="Se connecter" class="btn btn-primary btn-block">
                 </div>
-
-
             </form>
+
+            <a href="./visiteurs/inscription.tpl"> Inscrivez-vous </a>
     </div>
 
 

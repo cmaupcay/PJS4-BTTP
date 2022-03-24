@@ -3,7 +3,6 @@
 
     function accueil() {
         require ('./modele/marketplace.php');
-        require("./vue/header.php");
 
         echo 'salut visiteur';
        //cette fonction affichera les scripts disponibles de la marketplace
@@ -14,7 +13,6 @@
 
     function inscription() {
         require('./modele/inscription.php');
-        require('./vue/header.php');
 
         $pseudo = isset($_POST['pseudo'])?($_POST['pseudo']):'';
         $mdp = isset($_POST['mdp'])?($_POST['mdp']):'';
@@ -50,7 +48,6 @@
 
     function connexion() {
         require('./modele/Connexion.php');
-        require('./vue/header.php');
     
         //Ici on met ce dont on a besoin afin de relier le modele et la vue
     

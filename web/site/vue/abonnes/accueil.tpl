@@ -14,37 +14,27 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <title>Accueil</title>
 
-  <link rel="stylesheet" type="text/css" href="./vue/style.css">
 </head>
 
 <body>
-
-  <!--
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgb(141, 202, 243)">
 
+      <!-- TODO : actions de chaque onglet -->
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item active">
-            <a href="?controle=visiteurs&action=accueil" class="nav-link text-uppercase font-weight-bold" >ACCUEIL <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a href="?controle=visiteurs&action=connexion" class="nav-link text-uppercase font-weight-bold">CONNEXION</a>
-          </li>
-          <li class="nav-item">
-            <a href="?visiteurs=visiteurs&action=inscription" class="nav-link text-uppercase font-weight-bold">INSCRIPTION</a>
-          </li>
-        </ul>
+          <ul class="navbar-nav">
+              <li class="nav-item active">
+              <a href="?controle=abonnes&action=profile" class="nav-link text-uppercase font-weight-bold" > Your profile <span class="sr-only"></span></a>
+              </li>
+              <li class="nav-item">
+              <a href="?controle=visiteurs&action=terminals" class="nav-link text-uppercase font-weight-bold"> Your terminals </a>
+              </li>
+              <li class="nav-item">
+              <a href="?controle=visiteurs&action=marketplace" class="nav-link text-uppercase font-weight-bold"> Marketplace </a>
+              </li>
+          </ul>
       </div>
 
-        <form class="form-inline">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-
-
     </nav>
-  -->
-
   <div class="bg">
 
     <br><br><br>

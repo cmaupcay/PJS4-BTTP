@@ -20,26 +20,6 @@
 
 <body>
 
-    <!--
-    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgb(141, 202, 243)">
-
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item active">
-              <a href="?controle=visiteurs&action=accueil" class="nav-link text-uppercase font-weight-bold" >ACCUEIL <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a href="?controle=visiteurs&action=connexion" class="nav-link text-uppercase font-weight-bold">CONNEXION</a>
-            </li>
-            <li class="nav-item">
-              <a href="?visiteurs=visiteurs&action=inscription" class="nav-link text-uppercase font-weight-bold">INSCRIPTION</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    -->
-
-
     <div class="login-form">
         <br><br>
         <form action="?controle=visiteurs&action=inscription" method="POST">
@@ -61,6 +41,7 @@
 
         </form>
 
+        <a href="../connexion.tpl"> Connectez-vous </a>
     </div>
 
 </body>

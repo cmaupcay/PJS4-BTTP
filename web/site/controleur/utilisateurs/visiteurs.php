@@ -47,7 +47,7 @@
     }
 
     function connexion() {
-        require_once('./modele/Connexion.php');
+        require_once('./modele/connexion.php');
     
         //Ici on met ce dont on a besoin afin de relier le modele et la vue
     

@@ -3,10 +3,6 @@
 import 'package:flutter/material.dart';
 import 'welcome_page.dart';
 
-const fond = Color(0xFF191970);
-const cases = Colors.white;
-const bars = Color(0xFF2154a2);
-
 void main() {
   runApp(MyApp());
 }

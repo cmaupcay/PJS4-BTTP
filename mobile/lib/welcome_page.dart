@@ -1,11 +1,12 @@
 // ignore_for_file: file_names, prefer_const_constructors, sized_box_for_whitespace
 
-import 'package:bttp/main.dart';
+import 'main.dart';
 import 'package:flutter/material.dart';
-import 'package:bttp/delayed_animation.dart';
+import 'delayed_animation.dart';
 import 'package:flutter/services.dart';
 import 'social_page.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'globale_variable.dart';
 
 class WelcomePage extends StatelessWidget {
   @override

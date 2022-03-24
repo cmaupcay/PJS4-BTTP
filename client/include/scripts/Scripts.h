@@ -12,7 +12,6 @@ namespace BTTP
          */
         class Scripts
         {
-            // TODO Classe Script (un peu comme Serveur.h)
             // TODO ajout, suppression, liste de scripts
         };
     }

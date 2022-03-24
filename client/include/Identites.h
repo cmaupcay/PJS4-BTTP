@@ -1,7 +1,7 @@
 #ifndef BTTP_CLIENT_IDENTITES
 #define BTTP_CLIENT_IDENTITES
 
-#include "../Fichiers.h"
+#include "Fichiers.h"
 
 namespace BTTP
 {

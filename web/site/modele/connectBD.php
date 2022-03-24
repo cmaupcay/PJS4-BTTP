@@ -1,9 +1,9 @@
 <?php
 
     $hostname="localhost";
-    $base="pjs4";
+    $base="bttp";
     $loginBD="root";
-    $passBD = "root";
+    $passBD = "";
 
     try {
         $pdo = new PDO("mysql:server=$hostname; dbname=$base", "$loginBD", "$passBD");

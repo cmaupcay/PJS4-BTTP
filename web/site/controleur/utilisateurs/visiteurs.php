@@ -12,7 +12,7 @@
     }
 
     function inscription() {
-        require('./modele/inscription.php');
+        require_once('./modele/inscription.php');
 
         $pseudo = isset($_POST['pseudo'])?($_POST['pseudo']):'';
         $mdp = isset($_POST['mdp'])?($_POST['mdp']):'';
@@ -31,13 +31,13 @@
 
                 insertion_bd($pseudo, $mdp);
                 
-                require('./modele/connexion.php');
+                require_once('./modele/connexion.php');
 
                 verif_utilisateur($pseudo, $mdp, $resultat);
 
                 $_SESSION['profil'] = $resultat[0];
 
-                require('./controle/connexion.php');
+                //require('./controle/connexion.php');
 
                 $url = "?controle=abonne&action=accueil";
 
@@ -47,7 +47,7 @@
     }
 
     function connexion() {
-        require('./modele/Connexion.php');
+        require_once('./modele/Connexion.php');
     
         //Ici on met ce dont on a besoin afin de relier le modele et la vue
     

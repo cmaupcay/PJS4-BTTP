@@ -3,6 +3,7 @@
 /**
  * Vérifie s'il n'y a pas déjà un utilisateur avec le même pseudo
  */
+
 function verif_inscription($pseudo)
 {
     require('connectBD.php');

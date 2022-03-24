@@ -4,6 +4,28 @@ session_start();
 
 $erreur = false;
 
+require_once("./modele/connectBD.php");
+require_once("./modele/inscription.php");
+require_once("./modele/connexion.php");
+
+if(isset($_POST["pseudo"]) && isset($_POST["mdp"])){ //Quelqu'un vient de se connecter
+    //echo($_POST["pseudo"] . " ");
+    //echo($_POST["mdp"] . " ");
+    $_SESSION["pseudo"] = $_POST["pseudo"];
+    $_SESSION["mdp"] = $_POST["mdp"];
+}
+
+if(isset($_SESSION["pseudo"]) && isset($_SESSION["mdp"])){
+    echo($_SESSION["pseudo"] . " ");
+    echo($_SESSION["mdp"] . " ");
+    $identifie = verif_utilisateur($_SESSION["pseudo"], $_SESSION["mdp"]);
+}
+else{
+    
+    $identifie = false;
+}
+
+
 
 if (isset($_GET['controle']) && isset($_GET['action'])) {
 
@@ -16,10 +38,10 @@ if (isset($_GET['controle']) && isset($_GET['action'])) {
     } elseif ($controle == "visiteurs" && $action == "inscription") {
         require('controleur/utilisateurs/visiteurs.php');
         inscription();
-    } elseif ($controle == "visiteurs" && $action == "connexion") { //impossible d'avoir un abonné se connecter parce qu'on sait pas si c'est un abonné
+    } elseif ($controle == "visiteurs" && $action == "connexion") {
         require('controleur/utilisateurs/visiteurs.php');
         connexion();
-    } elseif ($controle == "abonnes" && $action == "accueil") { //pas sur si c utile d'avoir un controle en entier pour les abonnes et les visiteurs
+    } elseif ($controle == "abonnes" && $action == "accueil" && $identifie) { //on rajoute l'identification pour acceder à la page abonné
         require('controleur/utilisateurs/abonnes.php');
         accueil();
     } else {

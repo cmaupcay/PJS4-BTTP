@@ -19,6 +19,9 @@ set(BTTP_CLIENT_LIB ${BTTP_CLIENT} ${BTTP_CLIENT_DEP})
 if(NOT DEFINED BTTP_PORT)
     set(BTTP_PORT 1414) # Port par défaut des applications BTTP.
 endif()
+if(NOT DEFINED BTTP_TIMEOUT)
+    set(BTTP_TIMEOUT 60000) # Temps d'attente maximum en reception (en ms)
+endif()
 ## Dossier & Fichier
 if(NOT DEFINED BTTP_DOSSIER)
     set(BTTP_DOSSIER .bttp) # Nom du dossier de travail du client

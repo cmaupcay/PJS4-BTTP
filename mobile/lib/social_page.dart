@@ -1,12 +1,13 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-import 'package:bttp/main.dart';
+import 'main.dart';
 import 'package:flutter/material.dart';
-import 'package:bttp/delayed_animation.dart';
+import 'delayed_animation.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:bttp/login_page.dart';
+import 'login_page.dart';
+import 'globale_variable.dart';
 
 class SocialPage extends StatelessWidget {
   @override
@@ -17,7 +18,7 @@ class SocialPage extends StatelessWidget {
       backgroundColor: Color(0xFF000010),
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.white.withOpacity(0),
+        backgroundColor: screen.withOpacity(0),
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,

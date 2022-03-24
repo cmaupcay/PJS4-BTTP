@@ -61,6 +61,7 @@ CREATE TABLE bttp.script_publique (
     id INT AUTO_INCREMENT, /* Identifiant numérique unique du script publique */
     nom VARCHAR(64) NOT NULL, /* Nom du script publique */
     version VARCHAR(16) NOT NULL, /* Version du script publique */ /* TODO Externaliser les versions dans un table */
+    description TEXT NOT NULL, /* Description du script */
     id_auteur INT, /* Idenitifiant numérique unique de l'utilisateur ayant publié le script */
     publication DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, /* Date et heure de publication du script */
     verifie BOOLEAN NOT NULL DEFAULT 0, /* Indique si le code source du script a été verifié par un tiers */
@@ -80,6 +81,7 @@ CREATE TABLE bttp.script (
     id INT AUTO_INCREMENT, /* Identifiant numérique unique du script */
     id_hote INT NOT NULL, /* Identifiant numérique du terminal distant hébergeant ce script */
     nom VARCHAR(64) NOT NULL, /* Nom du script */
+    description TEXT NOT NULL, /* Description du script */
     ajout DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, /* Date et heure d'ajout du script */
     somme INT NOT NULL, /* Somme de contrôle du code source hébergé localement */
     id_script_publique INT, /* Identifiant numérique du script publique auquel est lié ce script (peut être nul) */

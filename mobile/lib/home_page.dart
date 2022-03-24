@@ -1,11 +1,13 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, use_key_in_widget_constructors, prefer_const_constructors_in_immutables, unnecessary_this, prefer_final_fields, unnecessary_new
 
-import 'package:bttp/main.dart';
+import 'main.dart';
 import 'package:flutter/material.dart';
-import 'package:bttp/delayed_animation.dart';
+import 'delayed_animation.dart';
 import 'package:flutter/services.dart';
 import 'social_page.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'globale_variable.dart';
+import 'settings_page.dart';
 
 /*class HomePage extends StatelessWidget {
   @override
@@ -219,7 +221,9 @@ class MyScripts extends StatelessWidget {
         )
       ],
     );
-    return Center(child: Text("MyScripts"));
+    return Center(
+      child: Text("MyScripts"),
+    );
   }
 }
 

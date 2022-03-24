@@ -11,10 +11,12 @@ namespace BTTP
                 if (!this->_connexion_distant->ouverte()) this->_connexion_distant->ouvrir();
                 // On relait le message d'ouverture au terminal distant.
                 if (this->relayer_a_distant(mdp))
-                // Et on transmet sa réponse au client.
-                    if (this->relayer_a_client(mdp)) return;
+                {
+                    // Et on transmet sa réponse au client.
+                    if (this->prochain_message_distant() && this->relayer_a_client(mdp)) return;
+                }
                 // Si un des relais échoue, on lève une erreur.
-                throw new Erreur::Transaction::Ouverture(nullptr);
+                throw Erreur::Transaction::Ouverture(nullptr);
             }
 
             void Controle::fermeture(const std::string& mdp)
@@ -34,15 +36,19 @@ namespace BTTP
                 _message_a_relayer_a_distant{ message_ouverture }, _message_a_relayer_a_client{ "" }
             {}
 
-            const bool Controle::prochain_message(std::string& var, IConnexion* connexion)
+            const bool Controle::prochain_message(std::string& stockage_message, IConnexion* connexion)
             {
-                var = connexion->recevoir();
-                return var != BTTP_TRANSACTION_MESSAGE_NUL;
+                try 
+                {
+                    stockage_message = connexion->recevoir();
+                    return true;
+                }
+                catch (const Erreur& erreur) { return false; }
             }
 
             const std::string Controle::lire_entete(const std::string& message, const Cle::Publique& signataire, const std::string& mdp) const
             { 
-                if (message == BTTP_TRANSACTION_MESSAGE_NUL) return message;
+                if (message == BTTP_TRANSACTION_MESSAGE_NUL) return message; // TODO Erreur spécifique
                 return this->identite().dechiffrer(extraire_entete(message), signataire, mdp);
             }
 

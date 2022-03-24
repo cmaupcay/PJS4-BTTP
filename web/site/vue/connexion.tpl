@@ -17,6 +17,7 @@
 </head>
 
 <body>
+    <!--
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgb(141, 202, 243)">
 
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -32,21 +33,15 @@
             </li>
           </ul>
         </div>
-        <!--
         <form class="form-inline">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
-        -->
-
       </nav>
-    
-
-
-            <!--
-                <nav class="navbar navbar-light" style="background-color: #47acf5;">
-                    <div class="container">
-                        <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    -->
+    <!--
+        <nav class="navbar navbar-light" style="background-color: #47acf5;">
+            <div class="container">                    <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
                           class="navbar-toggler navbar-toggler-right"><i class="fa fa-bars"></i></button>
 

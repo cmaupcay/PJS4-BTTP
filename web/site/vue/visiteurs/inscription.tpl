@@ -20,6 +20,7 @@
 
 <body>
 
+    <!--
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgb(141, 202, 243)">
 
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -36,6 +37,8 @@
           </ul>
         </div>
       </nav>
+    -->
+
 
     <div class="login-form">
         <br><br>

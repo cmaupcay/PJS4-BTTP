@@ -13,6 +13,8 @@ namespace BTTP
                     this->identite().dechiffrer_sans_verifier(this->_message_ouverture, mdp)
                 );
                 const Cle::Publique client = Messages::Ouverture(paquet).client();
+                // TODO Verifier que la clé appartient à la liste des clés autorisées
+                // TODO Verifier signature du paquet avant de definir la clé
                 this->definir_cle_client(client);
                 // Envoi du message de confirmation.
                 const Messages::Pret message;

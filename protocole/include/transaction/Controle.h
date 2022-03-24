@@ -55,12 +55,12 @@ namespace BTTP
                 /**
                  * @brief Lit et enregistre un nouveau message sur la connexion cible.
                  * @note Le contenu de 'var' est effacé.
-                 * @param var Variable de stockage du message.
+                 * @param stockage_message Variable de stockage du message.
                  * @param connexion Connexion réseau cible.
                  * @return true Un message a été lu et enregistré.
                  * @return false Aucun message n'a été lu.
                  */
-                const bool prochain_message(std::string& var, IConnexion* connexion);
+                const bool prochain_message(std::string& stockage_message, IConnexion* connexion);
 
                 // TOTEST
                 /**

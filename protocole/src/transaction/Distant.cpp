@@ -8,17 +8,36 @@ namespace BTTP
         {
             void Distant::ouverture(const std::string& mdp)
             {
+                const Identite::MessageNonVerifie message_ouverture{
+                    this->_message_ouverture, this->identite(), mdp
+                };
                 // Récupération de la clé publique du client depuis le message d'ouverture.
-                const std::string paquet = retirer_entete(
-                    this->identite().dechiffrer_sans_verifier(this->_message_ouverture, mdp)
+                const Messages::Ouverture message_ouverture_clair{ 
+                    retirer_entete(message_ouverture.clair())
+                };
+                const Cle::Publique client = message_ouverture_clair.client();
+                Messages::IMessage* reponse = nullptr;
+                // Vérification de l'autorisation pour la clé publique.
+                if (this->verifier_autorisation(client))
+                {
+                    // Vérification de la signature du paquet d'ouverture.
+                    if (message_ouverture.verifier(client))
+                    {
+                        this->definir_cle_client(client);
+                        // Envoi du message de confirmation.
+                        reponse = new Messages::Pret();
+                    }
+                    else reponse = new Messages::Erreur(
+                        new Erreur::Identite::Dechiffrement(
+                            "La signature du message d'ouverture n'est pas valide.",
+                            message_ouverture.clair()
+                        )
+                    );
+                }
+                else reponse = new Messages::Erreur(
+                    new Erreur::Transaction::OuvertureNonAutorisee(&message_ouverture_clair)
                 );
-                const Cle::Publique client = Messages::Ouverture(paquet).client();
-                // TODO Verifier que la clé appartient à la liste des clés autorisées
-                // TODO Verifier signature du paquet avant de definir la clé
-                this->definir_cle_client(client);
-                // Envoi du message de confirmation.
-                const Messages::Pret message;
-                this->envoyer(&message, mdp);
+                this->envoyer(reponse, mdp);
             }
 
             void Distant::fermeture(const std::string& mdp)

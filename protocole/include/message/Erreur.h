@@ -44,7 +44,7 @@ namespace BTTP
                  * @brief Construction d'un nouveau message à partir de l'identifiant du message d'exécution auquel répond ce message. 
                  * @param erreur Erreur à sérialiser.
                  */
-                Erreur(const BTTP::Erreur erreur);
+                Erreur(const BTTP::Erreur* erreur);
                 /**
                  * @brief Construction d'un message vide.
                  */

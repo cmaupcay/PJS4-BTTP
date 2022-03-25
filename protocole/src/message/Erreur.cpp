@@ -7,9 +7,9 @@ namespace BTTP
         namespace Messages
         {
             // TOTEST
-            Erreur::Erreur(const BTTP::Erreur erreur)
+            Erreur::Erreur(const BTTP::Erreur* erreur)
                 : Message(Type::ERREUR),
-                _nom{ erreur.nom() }, _message{ erreur.message() }, _code{ new int(erreur.code()) }
+                _nom{ erreur->nom() }, _message{ erreur->message() }, _code{ new int(erreur->code()) }
             {}
 
             Erreur::Erreur() 

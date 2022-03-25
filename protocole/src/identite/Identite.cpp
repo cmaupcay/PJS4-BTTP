@@ -71,7 +71,6 @@ namespace BTTP
 
         const OpenPGP::Message Identite::dechiffrement(const std::string message, const std::string mdp) const
         {
-            // Déchiffrement du message
             OpenPGP::Message message_dechiffre;
             try { message_dechiffre = OpenPGP::Decrypt::pka(this->_cle_privee, mdp, message); }
             catch (std::exception& err) { throw Erreur::Identite::Dechiffrement(err.what(), message); }
@@ -79,17 +78,29 @@ namespace BTTP
             return message_dechiffre;
         }
 
+        const bool Identite::verification_signature(const OpenPGP::Message& message_dechiffre, const Cle::Publique& emissaire)
+        {
+            OpenPGP::Key::Ptr signataire = std::make_shared<OpenPGP::Key>(emissaire);
+            if (!signataire->meaningful()) throw Erreur::Identite::Dechiffrement("La clé publique est incohérente.", "non affichable.");
+            return OpenPGP::Verify::binary(*signataire, message_dechiffre);
+        }
+
         const std::string Identite::dechiffrer(const std::string message, const Cle::Publique emissaire, const std::string mdp) const
         {
             // Déchiffrement du message
             OpenPGP::Message message_dechiffre = this->dechiffrement(message, mdp);
             // Vérification de la signature
-            OpenPGP::Key::Ptr signataire = std::make_shared<OpenPGP::Key>(emissaire);
-            if (!signataire->meaningful()) throw Erreur::Identite::Dechiffrement("La clé publique est incohérente.", message);
-            if (!OpenPGP::Verify::binary(*signataire, message_dechiffre))
-                throw Erreur::Identite::Dechiffrement("La vérification de la signature a échoué.", message);
-            // Traduction en chaine de caractère (voir Identite::traduire_message)
-            return traduire_message(message_dechiffre);
+            if (verification_signature(message_dechiffre, emissaire))
+                // Traduction en chaine de caractère (voir Identite::traduire_message)
+                return traduire_message(message_dechiffre);
+            throw Erreur::Identite::Dechiffrement("La vérification de la signature a échoué.", message);
+        }
+
+        Identite::MessageNonVerifie::MessageNonVerifie(const std::string message, const Identite& identite, const std::string mdp)
+        {
+            const OpenPGP::Message msg = identite.dechiffrement(message, mdp);
+            this->_complet = msg.write();
+            this->_clair = Identite::traduire_message(msg);
         }
     }
 }

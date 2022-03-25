@@ -43,7 +43,7 @@ namespace BTTP
                     stockage_message = connexion->recevoir();
                     return true;
                 }
-                catch (const Erreur& erreur) { return false; }
+                catch (const BTTP::Erreur& erreur) { return false; }
             }
 
             const std::string Controle::lire_entete(const std::string& message, const Cle::Publique& signataire, const std::string& mdp) const

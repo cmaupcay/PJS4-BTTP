@@ -25,6 +25,12 @@ namespace BTTP
                      */
                     const Protocole::Messages::IMessage* _message;
 
+                protected:
+                    Ouverture(const std::string nom, const std::string details, const int code, const Protocole::Messages::IMessage* message)
+                        : Erreur("Transaction/Ouverture" + nom, BTTP_TRANSACTION_OUVERTURE_MSG + details, code),
+                        _message{ message }
+                    {}
+
                 public:
                     Ouverture(const Protocole::Messages::IMessage* message)
                         : Erreur("Transaction/Ouverture", BTTP_TRANSACTION_OUVERTURE_MSG, BTTP_TRANSACTION_OUVERTURE_CODE),

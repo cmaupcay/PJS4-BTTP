@@ -45,6 +45,15 @@ namespace BTTP
                  */
                 const OpenPGP::Message dechiffrement(const std::string message, const std::string mdp) const;
 
+                /**
+                 * @brief Vérification de la signature d'un message déchiffré.
+                 * @param message_dechiffre Message OpenPGP précédemment déchiffré.
+                 * @param emissaire Emissaire du message.
+                 * @return true La signature est valide.
+                 * @return false La signature n'a pu être vérifié.
+                 */
+                static const bool verification_signature(const OpenPGP::Message& message_dechiffre, const Cle::Publique& emissaire);
+
             protected:
                 /**
                  * @brief Génération d'une nouvelle identité (clé privée).
@@ -81,6 +90,7 @@ namespace BTTP
                  * @param cle_privee Flux de la clé privée à importer.
                  */
                 Identite(std::istream& cle_privee);
+                // TOFIX Obliger le nom a ne pas être une chaîne vide.
                 /**
                  * @brief Construction et génération d'une nouvelle identité.
                  * @see BTTP::Protocole::Identite::generer()
@@ -120,16 +130,32 @@ namespace BTTP
                  */
                 const std::string dechiffrer(const std::string message, const Cle::Publique emissaire, const std::string mdp) const;
 
-                /**
-                 * @brief Déchiffrement sans vérification de la signature d'une chaîne de caractère chiffrée a destination de l'identité.
-                 * @warning L'usage de cette fonction doit être strictement limité aux situations dans lesquelles l'idenité de l'emissaire
-                 * du message n'est pas connue du destinataire (ex: ouverture d'une transaction).
-                 * @param message Message chiffré.
-                 * @param mdp Mot de passe de la clé privée du destinataire.
-                 * @return const std::string Chaîne de caractère déchiffrée.
-                 */
-                inline const std::string dechiffrer_sans_verifier(const std::string message, const std::string mdp) const
-                { return traduire_message(this->dechiffrement(message, mdp)); }
+                class MessageNonVerifie
+                {
+                private:
+                    /** Message déchiffré et traduit en chaîne claire. */
+                    std::string _clair;
+                    /** Message déchiffré et signature associée. */
+                    std::string _complet;
+                
+                public:
+                    /**
+                     * @brief Construction d'un nouveau message non vérifié.
+                     * @param message Message chiffré.
+                     * @param identite Identité du destinataire du message.
+                     * @param mdp Mot de passe de l'identité du destinataire.
+                     */
+                    MessageNonVerifie(const std::string message, const Identite& identite, const std::string mdp);
+
+                    inline const bool verifier(const Cle::Publique emissaire) const
+                    { return verification_signature(OpenPGP::Message(this->_complet), emissaire); }
+
+                    /**
+                     * @brief Retourne le message déchiffré sous sa forme claire.
+                     * @return const std::string& Message en clair.
+                     */
+                    inline const std::string& clair() const { return this->_clair; }
+                };
 
                 /**
                  * @brief Ecrit la clé publique relative à l'identité dans le flux de sortie.

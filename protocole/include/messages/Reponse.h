@@ -27,13 +27,13 @@ namespace BTTP
                  * @brief Retourne le contenu du message.
                  * @return const std::string Nom du champs demandé et données associées.
                  */
-                inline const std::string contenu() const override;
+                const std::string contenu() const override;
 
                 /**
                  * @brief Enregistrement du contenu d'un message similaire.
                  * @param contenu Nom du champs demandé et données associées.
                  */
-                inline void deconstruction(const std::string contenu) override;
+                void deconstruction(const std::string contenu) override;
 
             public:
                 /**

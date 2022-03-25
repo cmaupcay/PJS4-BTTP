@@ -1,33 +1,38 @@
 #ifndef H_BTTP_CLIENT_SCRIPTS
 #define H_BTTP_CLIENT_SCRIPTS
 
-#include "Script.h"
+#include "messages/DemandeAjout.h"
+#include "messages/ReponseAjout.h"
+#include "messages/DemandeSuppression.h"
 #include "../Fichiers.h"
+
+#include "erreur/Execution.h"
+#include "erreur/Ajout.h"
 
 namespace BTTP
 {
     namespace Client
     {
-        /**
-         * @brief Classe abstraite rassemblant les utilitaires relatifs aux scripts locaux.
-         */
-        class Scripts
+        namespace Scripts
         {
-        public:
             /**
              * @brief Ajout d'un script.
-             * @param script Métadonnées du script à ajouter.
+             * @param nom Nom du script à ajouter.
              * @param contenu Contenu du script (code source).
-             * @param connexion_serveur Connexion au serveur.
+             * @param serveur Serveur de référence du script à ajouter.
+             * @param identite Identité locale.
+             * @param mdp Mot de passe de l'identité locale.
              * @param dossier Dossier de destination.
              * @param utiliser_contexte Drapeau indiquant si le dossier est relatif au contexte BTTP.
              * @param creer_chemin Drapeau indiquant si le chemin doit être créé s'il n'existe pas.
-             * @return true Le script a été ajouté localement et sur le serveur. Le fichier associé a été enregistré localement.
-             * @return false L'ajout du script a échoué.
+             * @return const Script Métadonnées du script ajouté.
+             * 
+             * @throws BTTP::Client::Erreur::Scripts::Ajout Impossible d'ajouter le script.
              */
-            static const bool ajouter(
-                const Script script, const std::string contenu,
-                Protocole::IConnexion* connexion_serveur,
+            const Script ajouter(
+                const std::string nom, const std::string contenu,
+                const Serveurs::Serveur& serveur,
+                const Protocole::Identite* identite, const std::string mdp,
                 const std::string dossier = BTTP_SCRIPT_DOSSIER, 
                 const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT,
                 const bool creer_chemin = BTTP_CREATION_CHEMIN_PAR_DEFAUT
@@ -36,15 +41,18 @@ namespace BTTP
             /**
              * @brief Suppression d'un script.
              * @param script Métadonnées du script à supprimer.
-             * @param connexion_serveur Connexion au serveur.
+             * @param serveur Serveur de référence du script à ajouter.
+             * @param identite Identité locale.
+             * @param mdp Mot de passe de l'identité locale.
              * @param dossier Dossier de destination.
              * @param utiliser_contexte Drapeau indiquant si le dossier est relatif au contexte BTTP.
              * @return true Le script a été supprimé localement et sur le serveur. Le fichier associé a été supprimé localement.
              * @return false La suppression du script a échoué.
              */
-            static const bool supprimer(
+            const bool supprimer(
                 const Script script,
-                Protocole::IConnexion* connexion_serveur,
+                const Serveurs::Serveur& serveur,
+                const Protocole::Identite* identite, const std::string mdp,
                 const std::string dossier = BTTP_SCRIPT_DOSSIER, 
                 const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT
             );
@@ -54,10 +62,11 @@ namespace BTTP
              * @param script Métadonnées du script à lancer.
              * @param dossier Dossier de destination.
              * @param utiliser_contexte Drapeau indiquant si le dossier est relatif au contexte BTTP.
-             * @return true Le script a été exécuté avec succès.
-             * @return false Une erreur est survenue avant ou pendant l'exécution.
+             * @return std::string Sortie.
+             * 
+             * @throws BTTP::Client::Erreur::Scripts::Execution L'exécution a engendré une erreur.
              */
-            static const bool executer(
+            const std::string executer(
                 const Script script,
                 const std::string dossier = BTTP_SCRIPT_DOSSIER, 
                 const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT
@@ -70,12 +79,12 @@ namespace BTTP
              * @param utiliser_contexte Drapeau indiquant si le dossier est relatif au contexte BTTP.
              * @return const std::vector<Script> Liste des scripts locaux relatis au serveur cible.
              */
-            static const std::vector<Script> liste(
-                const Serveur& serveur,
+            const std::vector<Script> liste(
+                const Serveurs::Serveur& serveur,
                 const std::string dossier = BTTP_SCRIPT_DOSSIER, 
                 const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT
             );
-        };
+        }
     }
 }
 

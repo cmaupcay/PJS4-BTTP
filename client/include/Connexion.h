@@ -2,7 +2,6 @@
 #define H_BTTP_CLIENT_CONNEXION
 
 #include "Racine.h"
-#include "serveurs/Serveur.h"
 #include "erreur/connexion/Fermee.h"
 #include "erreur/connexion/Timeout.h"
 #include <chrono>
@@ -17,17 +16,20 @@ namespace BTTP
             private:
                 /** Socket de la connexion. */
                 asio::ip::tcp::socket* _socket;
-                /** Serveur sur lequel pointe la connexion.*/
-                const Serveur& _serveur;
+                /** Adresse de connexion. */
+                const std::string _adresse;
+                /** Port de connexion. */
+                const uint16_t _port;
                 /** pour la gestion des erreurs avec asio.*/
                 asio::error_code _erreur;
 
             public:
                 /**
-                * @brief Construction d'un nouvel objet représentant une connexion.
-                * @param serveur Serveur cible.
-                */
-                Connexion(const Serveur& serveur);
+                 * @brief Construction d'un nouvel objet représentant une connexion.
+                 * @param adresse Adresse de connexion.
+                 * @param port Port de connexion.
+                 */
+                Connexion(const std::string adresse, const uint16_t port);
                 /**
                 * @brief Vérifie si la connexion est ouverte.
                 * @return true La connexion est ouverte.
@@ -52,7 +54,6 @@ namespace BTTP
                 * @return Retourne le message reçu.
                 */
                 const std::string recevoir() override;
-
         };
     }
 }

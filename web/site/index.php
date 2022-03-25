@@ -49,9 +49,9 @@
             $erreur = false;
         }
     } else {
-        $controle = 'connexion';
-        $action = 'connexion';
+        $controle = 'visiteurs';
+        $action = 'accueil';
 
-        require('./controleur/general/' . $controle . '.php');
+        require('./controleur/utilisateurs/' . $controle . '.php');
         $action();
     }

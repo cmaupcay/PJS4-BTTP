@@ -16,7 +16,10 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
-<body>    
+<body>   
+    
+    <div><a href="index.php?controle=visiteurs&action=accueil" class="nav-link text-uppercase font-weight-bold"> BTTP </a></div>
+
     <div class="login-form">
         <br><br>
 
@@ -40,7 +43,7 @@
                 </div>
             </form>
 
-            <a href="./visiteurs/inscription.tpl"> Inscrivez-vous </a>
+            <a href="?controle=visiteurs&action=inscription"> Inscrivez-vous </a>
     </div>
 
 

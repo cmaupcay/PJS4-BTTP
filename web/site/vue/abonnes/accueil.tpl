@@ -23,10 +23,10 @@
       <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
               <li class="nav-item active">
-              <a href="?controle=abonnes&action=profile" class="nav-link text-uppercase font-weight-bold" > Your profile <span class="sr-only"></span></a>
+              <a href="?controle=abonnes&action=profile" class="nav-link text-uppercase font-weight-bold" > Profil <span class="sr-only"></span></a>
               </li>
               <li class="nav-item">
-              <a href="?controle=visiteurs&action=terminals" class="nav-link text-uppercase font-weight-bold"> Your terminals </a>
+              <a href="?controle=visiteurs&action=terminals" class="nav-link text-uppercase font-weight-bold"> Vos terminaux </a>
               </li>
               <li class="nav-item">
               <a href="?controle=visiteurs&action=marketplace" class="nav-link text-uppercase font-weight-bold"> Marketplace </a>
@@ -57,7 +57,7 @@
         </div>
       </div>
       <div class="presentation">
-        <h2><a href="ordi.html">Gerer ordinateurs connectés : </a></h2>
+        <h2><a href="ordi.html">Gérer appareils connectés : </a></h2>
         <a href="ordi"><img src="e.bmp" alt="..." class="img-thumbnail"></a> <a href="ordi"><img src="e.bmp" alt="..."
             class="img-thumbnail"></a> <a href="ordi"><img src="e.bmp" alt="..." class="img-thumbnail"></a>
         <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#slide2">montrer plus de
@@ -70,7 +70,9 @@
               alt="..." class="img-thumbnail"></a><a href="script"><img src="e.bmp" alt="..." class="img-thumbnail"></a>
         </div>
       </div>
-      <div class="presentation">
+    <!--
+        //TODO : à ajouter dans marketplace.tpl
+            <div class="presentation">
         <h2><a href="scripts.html">Scripts en votre possession : </a></h2>
         <a href="script"><img src="e.bmp" alt="..." class="img-thumbnail"></a> <a href="script"><img src="e.bmp"
             alt="..." class="img-thumbnail"></a> <a href="script"><img src="e.bmp" alt="..." class="img-thumbnail"></a>
@@ -85,22 +87,8 @@
         </div>
       </div>
     </div>
-    <!--<form action="index.php?controle=visiteurs&action=inscription" method="POST">
-      <h2 class="text-center"> Inscription </h2>
 
-      <div class="form-group">
-      <p><input name="Pseudo" type="text" placeholder="Pseudo"  class="form-control" autocomplete="off" required></p>
-      </div>
-
-      <div class="form-group">
-      <p><input name="Mdp" type="password" placeholder="Mdp" class="form-control" autocomplete="off" required></p>
-      </div>
-
-      <div class="form-group">
-      <input type="submit" class="btn-primary btn-block" value="S'inscrire !">
-      </div>
-
-    </form>-->
+    -->
 
     <br><br><br><br><br><br><br><br><br>
   </div>

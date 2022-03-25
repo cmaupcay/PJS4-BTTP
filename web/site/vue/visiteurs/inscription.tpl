@@ -19,7 +19,8 @@
 </head>
 
 <body>
-
+    <div><a href="index.php?controle=visiteurs&action=accueil" class="nav-link text-uppercase font-weight-bold"> BTTP </a></div>
+    
     <div class="login-form">
         <br><br>
         <form action="?controle=visiteurs&action=inscription" method="POST">
@@ -41,7 +42,8 @@
 
         </form>
 
-        <a href="../connexion.tpl"> Connectez-vous </a>
+        <p style="font-size:smaller; text-align:center">Vous possédez déjà un compte ? <a href="?controle=visiteurs&action=connexion"> Connectez-vous </a>
+            
     </div>
 
 </body>

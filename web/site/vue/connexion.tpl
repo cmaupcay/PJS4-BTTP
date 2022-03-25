@@ -18,7 +18,7 @@
 
 <body>   
     
-    <div><a href="index.php?controle=visiteurs&action=accueil" class="nav-link text-uppercase font-weight-bold"> BTTP </a></div>
+    <div><a href="?controle=visiteurs&action=accueil" class="nav-link text-uppercase font-weight-bold"> BTTP </a></div>
 
     <div class="login-form">
         <br><br>

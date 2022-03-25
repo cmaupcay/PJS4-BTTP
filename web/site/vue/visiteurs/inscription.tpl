@@ -20,11 +20,11 @@
 
 <body>
 
-    <div><a href="index.php?controle=visiteurs&action=accueil" class="nav-link text-uppercase font-weight-bold"> BTTP </a></div>
+    <div><a href="?controle=visiteurs&action=accueil" class="nav-link text-uppercase font-weight-bold"> BTTP </a></div>
 
     <div class="login-form">
         <br><br>
-        <form action="index.php?controle=visiteurs&action=inscription" method="POST">
+        <form action="?controle=visiteurs&action=inscription" method="POST">
             <h2 class="text-center"> Inscription </h2>
 
             <div class="form-group">

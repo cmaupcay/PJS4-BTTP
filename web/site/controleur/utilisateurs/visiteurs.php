@@ -39,7 +39,7 @@
 
                 //require('./controle/connexion.php');
 
-                $url = "?controle=abonne&action=accueil";
+                $url = "?controle=abonnes&action=accueil";
 
                 header("Location:" . $url);
             }

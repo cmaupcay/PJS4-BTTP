@@ -28,12 +28,12 @@
             <h2 class="text-center"> Inscription </h2>
 
             <div class="form-group">
-                <p><input name="Pseudo" type="text" placeholder="Pseudo" class="form-control" autocomplete="off"
+                <p><input name="pseudo" type="text" placeholder="pseudo" class="form-control" autocomplete="off"
                         required></p>
             </div>
 
             <div class="form-group">
-                <p><input name="Mdp" type="password" placeholder="Mdp" class="form-control" autocomplete="off" required>
+                <p><input name="mdp" type="password" placeholder="mdp" class="form-control" autocomplete="off" required>
                 </p>
             </div>
 

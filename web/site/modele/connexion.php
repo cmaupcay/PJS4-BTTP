@@ -15,7 +15,6 @@ function verif_utilisateur($pseudo, $mdp, &$resultat = array())
         $bool = $commande->execute();
         if ($bool)
             $resultat = $commande->fetchAll(PDO::FETCH_ASSOC);
-            echo(count($resultat) . "\n");
         return (count($resultat) > 0);
     } catch (PDOException $e) {
         echo utf8_encode("Echec de select : " . $e->getMessage() . "\n");

@@ -4,7 +4,6 @@
     function accueil() {
         require ('./modele/marketplace.php');
 
-        echo 'salut visiteur';
        //cette fonction affichera les scripts disponibles de la marketplace
        // scripts_disponibles($scripts);
 

@@ -105,7 +105,7 @@
 				</nav>
 			</div>
 			<div class="col-md-8 offset-md-2 info">
-				<h1 class="text-center">BTTP</h1>
+				<h1 class="text-center"> Bienvenue sur BTTP</h1>
 				<p class="text-center">
 					Salut c'est Ninho. Si tu veux écouter ma dernière mixtape, swipe up
 				</p>

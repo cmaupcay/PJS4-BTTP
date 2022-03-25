@@ -18,7 +18,7 @@
     <link rel="stylesheet" type="text/css" href="./vue/style.css">
 </head>
 
-<body>
+<body style="background-color:rgb(14, 0, 41)">
 
     <div><a href="?controle=visiteurs&action=accueil" class="nav-link text-uppercase font-weight-bold"> BTTP </a></div>
 

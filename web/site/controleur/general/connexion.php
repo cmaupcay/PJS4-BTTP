@@ -5,6 +5,7 @@
  */
 
     function connexion(){
+
     require './modele/connexion.php';
 
     }

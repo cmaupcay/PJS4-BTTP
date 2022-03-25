@@ -26,6 +26,13 @@
 
                 $msg = "compte déjà existant";
                 require('./vue/visiteurs/inscription.tpl');
+            } else if($mdp != $mdp2){
+                
+                $msg = "Resaisissez votre mot de passe";
+
+                echo $msg;
+
+                require('./vue/visiteurs/inscription.tpl');
             } else {
 
                 insertion_bd($pseudo, $mdp);

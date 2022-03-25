@@ -3,7 +3,7 @@
 
 #include "../../Racine.h"
 
-#define H_BTTP_CLIENT_CLI_COMMANDE_INCONNUE_CODE -11101
+#define BTTP_CLIENT_CLI_COMMANDE_INCONNUE_CODE -11101
 
 namespace BTTP
 {
@@ -19,7 +19,7 @@ namespace BTTP
                     const std::string& _mot;
                 public:
                     Commande_Inconnue(const std::string& mot)
-                        : Erreur("Client/CLI/Commande/Inconnue", "La commande \"" + mot + "\" est inconnue.", H_BTTP_CLIENT_CLI_COMMANDE_INCONNUE_CODE),
+                        : Erreur("Client/CLI/Commande/Inconnue", "La commande \"" + mot + "\" est inconnue.", BTTP_CLIENT_CLI_COMMANDE_INCONNUE_CODE),
                         _mot{ mot }
                     {}
 

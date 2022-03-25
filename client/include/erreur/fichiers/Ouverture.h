@@ -3,7 +3,7 @@
 
 #include "../../Racine.h"
 
-#define H_BTTP_CLIENT_FICHIERS_OUVERTURE_CODE -1101
+#define BTTP_CLIENT_FICHIERS_OUVERTURE_CODE -1101
 
 namespace BTTP
 {
@@ -19,7 +19,7 @@ namespace BTTP
                     const std::string& _fichier;
                 public:
                     Ouverture(const std::string& fichier, const std::string type = "fichier")
-                        : Erreur("Client/Fichiers/Ouverture", "Impossible d'ouvrir le " + type + " '" + fichier + "'.", H_BTTP_CLIENT_FICHIERS_OUVERTURE_CODE),
+                        : Erreur("Client/Fichiers/Ouverture", "Impossible d'ouvrir le " + type + " '" + fichier + "'.", BTTP_CLIENT_FICHIERS_OUVERTURE_CODE),
                         _fichier{ fichier }
                     {}
 

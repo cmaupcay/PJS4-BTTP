@@ -3,7 +3,7 @@
 
 #include "../../Racine.h"
 
-#define H_BTTP_CLIENT_CLI_COMMANDE_SYNTAXE_CODE -11100
+#define BTTP_CLIENT_CLI_COMMANDE_SYNTAXE_CODE -11100
 
 namespace BTTP
 {
@@ -19,7 +19,7 @@ namespace BTTP
                     const std::string& _commande;
                 public:
                     Commande_Syntaxe(const std::string& commande)
-                        : Erreur("Client/CLI/Commande/Syntaxe", "La syntaxe de la commande \"" + commande + "\" n'est pas correcte.", H_BTTP_CLIENT_CLI_COMMANDE_SYNTAXE_CODE),
+                        : Erreur("Client/CLI/Commande/Syntaxe", "La syntaxe de la commande \"" + commande + "\" n'est pas correcte.", BTTP_CLIENT_CLI_COMMANDE_SYNTAXE_CODE),
                         _commande{ commande }
                     {}
 

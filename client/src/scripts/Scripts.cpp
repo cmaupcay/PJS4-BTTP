@@ -35,6 +35,23 @@ namespace BTTP
             return false;
         }
 
+        const std::string executer(
+            const Script script, const std::string dossier, 
+            const bool utiliser_contexte
+        )
+        {
+            const std::string nom_fichier_sortie = script.nom() + "_tmp";
+            const std::string fichier_sortie = Fichiers::chemin(nom_fichier_sortie, dossier, utiliser_contexte);
+            const std::string chemin_script = Fichiers::chemin(script.reference(), dossier, utiliser_contexte);
+            const std::string commande = "./" + chemin_script + " > " + nom_fichier_sortie;
+            if (system(commande.c_str()) >= 0)
+            {
+                const std::string sortie = Fichiers::lire(nom_fichier_sortie, dossier, false, utiliser_contexte);
+                if (Fichiers::supprimer(nom_fichier_sortie, dossier, utiliser_contexte)) return sortie;
+            }
+            throw Erreur::Scripts::Execution(script);
+        }
+
         const std::vector<Script> Scripts::liste(
             const Serveur& serveur, const std::string dossier, 
             const bool utiliser_contexte

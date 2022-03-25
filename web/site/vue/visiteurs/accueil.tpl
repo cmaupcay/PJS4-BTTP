@@ -25,7 +25,7 @@
 	.banner{
 		height: 100vh;
 		width: 100%;
-		background:url('./accueil_visiteurs.jpg');
+		background:url('./vue/visiteurs/accueilVisiteurs.jpg');
 		background-position: top;
 		background-size:cover;
 		/*background-attachment: fixed;*/

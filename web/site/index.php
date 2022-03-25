@@ -32,7 +32,7 @@
         $controle = $_GET['controle'];
         $action = $_GET['action'];
 
-        if ($controle == "visiteurs" && $action == "accueil") {
+        if($controle=="visiteurs" && $action == "accueil") {
             require('controleur/utilisateurs/visiteurs.php');
             accueil();
         } elseif ($controle == "visiteurs" && $action == "inscription") {

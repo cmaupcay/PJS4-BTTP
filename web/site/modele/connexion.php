@@ -4,7 +4,7 @@ function verif_utilisateur($pseudo, $mdp, &$resultat = array())
 {
     require('connectBD.php');
 
-    $sql = 'SELECT * FROM `bttp.utilisateur` WHERE `pseudo`=:pseudo AND `mdp`=:mdp';
+    $sql = 'SELECT * FROM `utilisateur` WHERE `pseudo`=:pseudo AND `mdp`=:mdp';
 
     $mdp = hash('sha256', $mdp);
     
@@ -23,6 +23,3 @@ function verif_utilisateur($pseudo, $mdp, &$resultat = array())
     }
 }
 
-function inserer_cookie_bd($tokan, $date, $id)
-{
-}

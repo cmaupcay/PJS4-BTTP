@@ -24,7 +24,8 @@ CREATE TABLE bttp.utilisateur (
 
 CREATE TABLE bttp.terminal_client (
     id INT AUTO_INCREMENT, /* Identifiant numérique unique du terminal */
-    cle_publique VARCHAR(512) NOT NULL, /* Clé publique propre au terminal */
+    cle_publique VARCHAR(4096) NOT NULL, /* Clé publique propre au terminal */
+    cle_publique_empreinte VARCHAR(40) NOT NULL, /* Empreinte de la clé publique */
     nom VARCHAR(64) NOT NULL, /* Nom du terminal */
     id_proprietaire INT NOT NULL, /* Identifiant numérique unique du proprietaire */
     ajout DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, /* Date et heure d'ajout du terminal */
@@ -32,7 +33,7 @@ CREATE TABLE bttp.terminal_client (
     favori BOOLEAN NOT NULL DEFAULT 0, /* Indique si l'utilisateur a ajouté le terminal à ses favoris */
     meta VARCHAR(512) NOT NULL, /* Meta données du terminal au format JSON */
     PRIMARY KEY(id),
-    UNIQUE(cle_publique),
+    UNIQUE(cle_publique, cle_publique_empreinte),
     FOREIGN KEY(id_proprietaire) REFERENCES bttp.utilisateur(id) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=1;
 

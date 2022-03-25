@@ -123,7 +123,14 @@ class MyScriptsAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       actions: [
         IconButton(
-          onPressed: null,
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => SettingsPage(),
+              ),
+            );
+          },
           icon: Icon(
             Icons.settings,
             color: Colors.white,
@@ -184,7 +191,14 @@ class MyProfileAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       actions: [
         IconButton(
-          onPressed: null,
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => SettingsPage(),
+              ),
+            );
+          },
           icon: Icon(
             Icons.settings,
             color: Colors.white,
@@ -212,7 +226,14 @@ class MyScripts extends StatelessWidget {
       ),
       actions: [
         IconButton(
-          onPressed: null,
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => SettingsPage(),
+              ),
+            );
+          },
           icon: Icon(
             Icons.settings,
             color: Colors.white,

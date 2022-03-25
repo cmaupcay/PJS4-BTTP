@@ -9,16 +9,16 @@ var screen = Colors.white;
 var bars = Color(0xFF2154a2);
 var theme = true;
 void changetheme() {
-  if (theme) {
+  if (!theme) {
     //passer dark
     fond = Color(0xFF191970);
     screen = Colors.white;
     bars = Color(0xFF2154a2);
-    theme = false;
-  } else {
-    fond = Color(0xFF191970);
-    screen = Colors.white;
-    bars = Color(0xFF2154a2);
     theme = true;
+  } else {
+    fond = Color(0xFF0acac5);
+    screen = Color(0xFF070225);
+    bars = Color(0xFF15f4ee);
+    theme = false;
   }
 }

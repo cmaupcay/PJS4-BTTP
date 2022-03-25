@@ -6,10 +6,6 @@ import 'globale_variable.dart';
 import 'home_page.dart';
 
 class SettingsPage extends StatelessWidget {
-  final DarkThemeSectionLeft =
-      new Container(child: Text("Dark mode", color = Colors.white));
-  final DarkThemeSectionRight = new Container();
-
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations(
@@ -41,9 +37,17 @@ class SettingsPage extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Row(
-            children: <Widget>[DarkThemeSectionLeft, DarkThemeSectionRight],
-          ),
+          Row(children: const <Widget>[
+            Expanded(
+              child: Text('Dark mode', textAlign: TextAlign.center),
+            ),
+            Expanded(
+              child: OutlinedButton(
+                onPressed: changetheme,
+                child: Text('appui'),
+              ),
+            ),
+          ]),
         ],
       ),
     );

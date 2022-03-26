@@ -21,7 +21,7 @@ namespace BTTP
              * @return true Le serveur a été ajouté localement et a enregistré la clé publique de l'appareil.
              * @return false La procédure d'ajout n'a pas pu être finalisé.
              */
-            static const bool ajout(
+            const bool ajout(
                 Serveur& serveur,
                 const Protocole::Identite* identite, const std::string mdp,
                 const std::string dossier = BTTP_SERVEUR_DOSSIER, 
@@ -36,7 +36,7 @@ namespace BTTP
              * @param utiliser_contexte Drapeau indiquant si le dossier est relatif au contexte BTTP.
              * @return const Serveur Serveur importé.
              */
-            inline static const Serveur charger(
+            inline const Serveur charger(
                 const std::string nom,
                 const std::string dossier = BTTP_SERVEUR_DOSSIER, 
                 const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT
@@ -52,7 +52,7 @@ namespace BTTP
              * @return true Le serveur a été supprimé localement.
              * @return false La suppression du serveur a échoué.
              */
-            inline static const bool suppression(
+            inline const bool suppression(
                 const Serveur& serveur,
                 const std::string dossier = BTTP_SERVEUR_DOSSIER, 
                 const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT
@@ -65,7 +65,7 @@ namespace BTTP
              * @param utiliser_contexte Drapeau indiquant si le dossier est relatif au contexte BTTP.
              * @return const std::vector<Serveur> 
              */
-            static const std::vector<Serveur> liste(
+            const std::vector<Serveur> liste(
                 const std::string dossier = BTTP_SERVEUR_DOSSIER, 
                 const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT
             );

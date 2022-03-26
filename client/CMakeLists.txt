@@ -11,7 +11,7 @@ include(${CMAKE_CURRENT_LIST_DIR}/../protocole/CMakeLists.txt)
 # CONSTANTES
 set(BTTP_CLIENT ${BTTP}-client) # Nom du projet CMake
 set(BTTP_CLIENT_VERSION 0.1.2) # Version du client
-set(BTTP_CLIENT_DEP ${BTTP_LIB}) # Dépendances
+set(BTTP_CLIENT_DEP ${BTTP_LIB} pthread) # Dépendances
 set(BTTP_CLIENT_RACINE ${CMAKE_CURRENT_LIST_DIR}/include/Racine.h) # En-tête racine (fichier de configuration)
 set(BTTP_CLIENT_LIB ${BTTP_CLIENT} ${BTTP_CLIENT_DEP})
 # Paramètres

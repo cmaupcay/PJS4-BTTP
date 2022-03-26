@@ -35,7 +35,7 @@ namespace BTTP
                 * @return true La connexion est ouverte.
                 * @return false La connexion est fermée.
                 */
-                const bool ouverte() override;
+                inline const bool ouverte() override { return this->_socket->is_open(); }
                 /**
                 * @brief Ouvre une nouvelle connexion.
                 */
@@ -43,7 +43,7 @@ namespace BTTP
                 /**
                 * @brief Ferme la connexion.
                 */
-                inline void fermer() override {this->_socket->close();}
+                inline void fermer() override { this->_socket->close(); }
                 /**
                 * @brief Envoie un message sur la connexion.
                 * @param message_prepare Le message à envoyer.

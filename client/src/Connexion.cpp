@@ -2,10 +2,8 @@
 
 namespace BTTP 
 {
-
     namespace Client
     {
-
         Connexion::Connexion(const std::string adresse, const uint16_t port) 
             : _adresse{ adresse }, _port{ port }
         {

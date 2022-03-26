@@ -28,14 +28,16 @@ namespace BTTP
             /**
              * @brief Importation d'une identité depuis un fichier.
              * @param nom Nom du fichier cible.
+             * @param ajouter_extension Drapeau indiquant si l'extension par défaut des identités doit être ajoutée au nom du fichier.
              * @param dossier Dossier cible.
              * @param utiliser_contexte Drapeau indiquant si le dossier est relatif au contexte BTTP.
              * @return const Protocole::Identite Identité importée.
              */
             const Protocole::Identite importer(
-                const std::string nom, 
+                const std::string nom,
                 const std::string dossier = BTTP_IDENTITE_DOSSIER,
-                const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT
+                const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT,
+                const bool ajouter_extension = true
             );
             /**
              * @brief Importation d'une identité depuis un fichier.

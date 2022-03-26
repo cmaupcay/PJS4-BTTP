@@ -13,9 +13,11 @@ namespace BTTP
                 Fichiers::ecrire(identite.exporter(), nom + '.' + BTTP_IDENTITE_EXT, dossier, false, true, utiliser_contexte, creer_chemin);
             }
 
-            const Protocole::Identite importer(const std::string nom, const std::string dossier, const bool utiliser_contexte)
+            const Protocole::Identite importer(const std::string nom, const std::string dossier, const bool utiliser_contexte, const bool ajouter_extension)
             {
-                std::ifstream fichier = Fichiers::lecture(nom + '.' + BTTP_IDENTITE_EXT, dossier, true, utiliser_contexte); 
+                std::string nom_fichier = nom;
+                if (ajouter_extension) nom_fichier += "." + std::string(BTTP_IDENTITE_EXT);
+                std::ifstream fichier = Fichiers::lecture(nom_fichier, dossier, true, utiliser_contexte); 
                 return Protocole::Identite(fichier);
             }
 
@@ -33,7 +35,7 @@ namespace BTTP
                 const std::vector<std::string> fichiers = Fichiers::liste(dossier, utiliser_contexte);
                 std::string contenu;
                 for (const std::string& fichier : fichiers)
-                    identites.push_back(importer(fichier, dossier, utiliser_contexte));
+                    identites.push_back(importer(fichier, dossier, utiliser_contexte, false));
                 return identites;
             }
         }

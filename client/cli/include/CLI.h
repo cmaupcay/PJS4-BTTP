@@ -14,6 +14,8 @@ namespace BTTP
     {
         namespace CLI
         {
+            const Protocole::Identite definir_identite();
+
             const int executer(const int& argc, const char** argv);
         }
     }

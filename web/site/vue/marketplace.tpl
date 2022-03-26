@@ -74,6 +74,7 @@
 		background: #e91e63;
 	}
     </style>
+
 </head>
 
 <body>
@@ -86,9 +87,6 @@
 					<ul class="nav">
 						<li class="nav-item">
 							<a class="nav-link" href="?controle=visiteurs&action=produits">Produits</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="?controle=visiteurs&action=marketplace">Marketplace</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="?controle=visiteurs&action=infos">Infos</a>
@@ -104,14 +102,16 @@
 			</div>
         </div>
 
-    <form class="form-inline" style="position:center; padding-top:0.7%">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+        <h2 class="display-5 text-center" style="padding-top:5%"> Recherchez les scripts qui vous intéressent </h2>
 
-    <h5 class="display-5 text-center" style="color:antiquewhite"> Scripts qui pourraient vous intéresser : </a></h5>
-    
-    <br>
+        <div class="input-group mb-3" style="padding-top:3%; padding-bottom:5%">
+            <input type="text" class="form-control" placeholder="Recherchez des scripts ..." aria-label="Recherchez des scripts ..." aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" style="background-color:blue; width:10em"> Rechercher </button>
+                 </div>
+        </div>
+
+        <br>
 
     <div class="container py-5 bg-light"> 
 
@@ -145,9 +145,6 @@
                 }
             ?>
         </div>
-
-
-
             <!--
 <div class="col-md-4 col-sm-4">
                 <div class="card mb-4 shadow-sm">
@@ -207,9 +204,6 @@
                     </div>
                 </div>
             -->
-            
-
-
     </div>
 
 </body>

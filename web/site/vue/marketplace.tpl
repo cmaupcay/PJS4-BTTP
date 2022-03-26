@@ -52,33 +52,7 @@
 
         <div class="row">
 
-            <php? 
-                foreach($scripts as $script) {
-                    echo('<div class="col-md-4 col-sm-4">');
-                    echo('<div class="card mb-4 shadow-sm">');
-                    echo('<div class="card-body"');
-
-                    foreach($script as $scr => $s) {
-                        $str = '';
-                        switch($s) {
-                            case "nom" : 
-                                $str = '<p class="card-text"> Nom : ' . $s . '</p>';
-                                break;
-                            case "publication" :
-                                $str = '<p class="card-text"> Date de publication : ' . $s . '</p>';
-                                break;
-                            case "version" :
-                                $str ='<p class="card-text"> Version : ' . $s . '</p>';
-                                break;
-                        }
-                    }
-
-                    echo '<button type="button" class="btn btn-sm btn-outline-secondary"> Télécharger </button>'; //pq ça s'affiche pas ??? t bizarre
-                    echo '<button type="button" class="btn btn-sm btn-outline-secondary"> Code source </button>';
-                    echo '</div></div>';
-
-                }
-            ?>
+            
         </div>
             <!--
 <div class="col-md-4 col-sm-4">

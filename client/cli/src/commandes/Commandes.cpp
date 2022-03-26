@@ -11,7 +11,8 @@ namespace BTTP
                 const std::vector<Commande*> commandes()
                 {
                     std::vector<Commande*> c;
-
+                    c.push_back(new Serveurs());
+                    c.push_back(new Identites());
                     return c;
                 }
 
@@ -20,18 +21,17 @@ namespace BTTP
                     if (argc > 1)
                     {
                         const std::vector<Commande*> com = commandes();
-                        const size_t n_com = com.size();
-                        for (int c = 0; c < n_com; c++)
-                            if (argv[1] == com[c]->nom())
+                        for (const Commande* c : com)
+                            if (argv[1] == c->nom())
                             {
-                                try { return com[c]->executer(argc, argv); }
-                                catch (Erreur::Commande_Syntaxe& err)
+                                try { return c->executer(argc, argv); }
+                                catch (Erreur::Commandes::Syntaxe& err)
                                 {
-                                    Console::afficher(com[c]->aide());
+                                    Console::afficher(c->aide());
                                     return err.code();
                                 }
                             }
-                        throw Erreur::Commande_Inconnue(argv[1]);
+                        throw Erreur::Commandes::Inconnue(argv[1]);
                     }
                     Console::afficher(aide());
                     return EXIT_FAILURE;
@@ -39,7 +39,15 @@ namespace BTTP
 
                 const std::string aide()
                 {
-                    return "Usage : bttp-cli <commande> [options]";
+                    std::string aide = "Usage : bttp-cli <commande> [options]\nCommandes : ";
+                    const std::vector<Commande*> com = commandes();
+                    const size_t n_com = commandes().size();
+                    for (size_t c = 0; c < n_com; c++)
+                    {
+                        aide += com[c]->nom();
+                        if (c < n_com - 1) aide += ", ";
+                    }
+                    return aide;
                 }
             }
         }

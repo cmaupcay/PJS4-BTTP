@@ -1,9 +1,8 @@
 #ifndef H_BTTP_CLIENT_CLI_COMMANDES
 #define H_BTTP_CLIENT_CLI_COMMANDES
 
-#include "Commande.h" // Temporaire
-
-#include <vector>
+#include "Serveurs.h"
+#include "Identites.h"
 
 #include "erreur/Inconnue.h"
 

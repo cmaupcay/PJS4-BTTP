@@ -2,7 +2,7 @@
 #define H_BTTP_CLIENT_CLI
 
 #include "commandes/Commandes.h"
-#include "Console.h"
+#include "erreur/Identite.h"
 
 #include <stdlib.h>
 

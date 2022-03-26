@@ -11,22 +11,10 @@ namespace BTTP
 
                 std::vector<Protocole::Identite> identites = Client::Identites::liste();
                 size_t n_identites = identites.size();
-                if (n_identites == 0) // Génération
+                if (n_identites == 0)
                 {
                     Console::saut();
-                    Console::afficher("> Génération de l'identité");
-        
-                    // Génération
-                    const std::string nom = Console::demander("Identité : ");
-                    const std::string contact = Console::demander("Contact : ");
-                    // TODO Créer une fonction permettant de taper un mot de passe dans le terminal.
-                    const std::string mdp = Console::demander("Mot de passe : ");
-                    Console::afficher("> Génération...");
-                    const Protocole::Identite id{ nom, contact, mdp };
-                    // Exportation
-                    Console::afficher("> Exportation...");
-                    Identites::exporter(id);
-                    return id;
+                    throw Erreur::Identite();
                 }
                 else if (n_identites == 1) return identites[0];
                 else
@@ -36,7 +24,7 @@ namespace BTTP
                     while (i_identite >= n_identites || i_identite < 0)
                     {
                         Console::saut();
-                        Console::afficher("> Sélection de l'identité");
+                        Console::afficher("> Sélection de l'identité : ");
                         for (size_t i = 0; i < n_identites; i++)
                             std::cout << "\t#" << i << " - " << Protocole::Meta(identites[i].cle_publique()) << std::endl;
                         Console::saut();
@@ -59,11 +47,15 @@ namespace BTTP
                 Console::afficher(BTTP_CLIENT_CLI_INTRO);
                 Console::afficher("Dossier : " + Contexte::dossier());
 
-                // Définition de l'identité
-                const Protocole::Identite id = definir_identite();
-                // Affichage de l'identité courante.
-                Console::saut();
-                Console::afficher("Identité : " + Protocole::Meta(id.cle_publique()).afficher());
+                // Définition de l'identité, sauf si aucune commande n'est renseignée ou pour la commande de gestion des identités.
+                if (argc > 1 && strcmp(argv[1], BTTP_COMMANDE_IDENTITES) != 0)
+                {
+                    const Protocole::Identite id = definir_identite();
+                    Client::Contexte::modifier_identite(&id);
+                    // Affichage de l'identité courante.
+                    Console::saut();
+                    Console::afficher("Identité : " + Protocole::Meta(id.cle_publique()).afficher());
+                }
                 
                 Console::saut();
                 const int code = Commandes::resoudre(argc, argv);

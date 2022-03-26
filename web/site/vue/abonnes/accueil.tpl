@@ -1,138 +1,60 @@
-<!DOCTYPE html>
-
 <html>
-
 <head>
-  <meta charset="utf-8">
-  <link rel="stylesheet" type="text/css"
-    href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css"
-    href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <title>Accueil</title>
+    <meta charset="UTF-8">
 
-  <link rel="stylesheet" type="text/css" href="./vue/style.css">
-</head>
+    <title> Bienvenue </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+	<link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="./style.css">
+    <style>
+		.banner {
+			background:url('./vue/visiteurs/accueilVisiteurs.jpg');
+			background-position: top;
+			background-size:cover;
+		}
+	</style>
+
+  </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgb(141, 202, 243)">
-
-  <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-          <li class="nav-item active">
-          <a href="?controle=visiteurs&action=accueil" class="nav-link text-uppercase font-weight-bold" > Your profile <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-          <a href="?controle=visiteurs&action=connexion" class="nav-link text-uppercase font-weight-bold"> Your terminals </a>
-          </li>
-          <li class="nav-item">
-          <a href="?controle=visiteurs&action=inscription" class="nav-link text-uppercase font-weight-bold"> Marketplace </a>
-          </li>
-      </ul>
-  </div>
-
-  </nav>
-  <div class="bg">
-
-    <div class="logo text-center">
-      <img src="logo.png" alt="..." class="img-thumbnail">
-    </div>
-    <div class="o-bg">
-      <div class="presentation">
-        <h2><a href="marketplace.html">Scripts qui pourraient vous interesser : </a></h2>
-        <a href="script"><img src="e.bmp" alt="..." class="img-thumbnail"></a> <img src="e.bmp" alt="..."
-          class="img-thumbnail"></a> <a href="script"><img src="e.bmp" alt="..." class="img-thumbnail"></a>
-        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#slide1">montrer plus de
-          scripts</button>
-        <div id="slide1" class="collapse">
-          <a href="script"><img src="e.bmp" alt="..." class="img-thumbnail"></a> <a href="script"><img src="e.bmp"
-              alt="..." class="img-thumbnail"></a><a href="script"><img src="e.bmp" alt="..." class="img-thumbnail"></a>
-          <br>
-          <a href="script"><img src="e.bmp" alt="..." class="img-thumbnail"></a> <a href="script"><img src="e.bmp"
-              alt="..." class="img-thumbnail"></a><a href="script"><img src="e.bmp" alt="..." class="img-thumbnail"></a>
-        </div>
-      </div>
-      <div class="presentation">
-        <h2><a href="ordi.html">Gerer ordinateurs connectés : </a></h2>
-        <a href="ordi"><img src="e.bmp" alt="..." class="img-thumbnail"></a> <a href="ordi"><img src="e.bmp" alt="..."
-            class="img-thumbnail"></a> <a href="ordi"><img src="e.bmp" alt="..." class="img-thumbnail"></a>
-        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#slide2">montrer plus de
-          scripts</button>
-        <div id="slide2" class="collapse">
-          <a href="script"><img src="e.bmp" alt="..." class="img-thumbnail"></a> <a href="script"><img src="e.bmp"
-              alt="..." class="img-thumbnail"></a><a href="script"><img src="e.bmp" alt="..." class="img-thumbnail"></a>
-          <br>
-          <a href="script"><img src="e.bmp" alt="..." class="img-thumbnail"></a> <a href="script"><img src="e.bmp"
-              alt="..." class="img-thumbnail"></a><a href="script"><img src="e.bmp" alt="..." class="img-thumbnail"></a>
-        </div>
-      </div>
-      <div class="presentation">
-        <h2><a href="scripts.html">Scripts en votre possession : </a></h2>
-        <a href="script"><img src="e.bmp" alt="..." class="img-thumbnail"></a> <a href="script"><img src="e.bmp"
-            alt="..." class="img-thumbnail"></a> <a href="script"><img src="e.bmp" alt="..." class="img-thumbnail"></a>
-        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#slide3">montrer plus de
-          scripts</button>
-        <div id="slide3" class="collapse">
-          <a href="script"><img src="e.bmp" alt="..." class="img-thumbnail"></a> <a href="script"><img src="e.bmp"
-              alt="..." class="img-thumbnail"></a><a href="script"><img src="e.bmp" alt="..." class="img-thumbnail"></a>
-          <br>
-          <a href="script"><img src="e.bmp" alt="..." class="img-thumbnail"></a> <a href="script"><img src="e.bmp"
-              alt="..." class="img-thumbnail"></a><a href="script"><img src="e.bmp" alt="..." class="img-thumbnail"></a>
-        </div>
-      </div>
-    </div>
-  </div>
+	<div class="container-fluid banner">
+		<div class="row">
+			<div class="col-md-12">
+				<nav class="navbar navbar-md">
+					<a class="navbar-brand" href="?controle=abonnes&action=accueil"> BTTP </a>
+					<ul class="nav">
+						<li class="nav-item">
+							<a class="nav-link" href="?controle=visiteurs&action=produits">Profil</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="?controle=abonnes&action=appareils"> Appareils </a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="?controle=visiteurs&action=infos">Informations</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="?controle=abonnes&action=deconnexion">Déconnexion</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+			<div class="col-md-8 offset-md-2 info">
+        <!--TODO Afficher le nom de la personne connectée-->
+				<h1 class="text-center">Bienvenue sur BTTP</h1>
+				<p class="text-center">
+					Salut c'est Ninho. Si tu veux écouter ma dernière mixtape, swipe up
+				</p>
+				<a href="" class="btn btn-md text-center">Bouton pour swipe up</a>
+			</div>
+		</div>
+		<p style="font-size:0.7em; padding-right:0">Photo by <a href="https://unsplash.com/@robynnexy?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Robynne Hu</a> on <a href="https://unsplash.com/s/photos/high-tech?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+		 </p>
+	</div>
 </body>
-
-<style>
-  body {
-    background-image: url("code-1486361_960_720.png");
-    background-repeat: no-repeat;
-  }
-
-  .bg {
-    height: 100%;
-  }
-
-  .presentation {
-    margin: 25px;
-    background-color: rgb(250, 250, 210);
-  }
-
-  .header nav {
-    border: 1px solid black;
-    background-color: rgb(250, 250, 210);
-  }
-
-  .login-form {
-    width: 340px;
-    margin: 50px auto;
-  }
-
-  .login-form form {
-    margin-bottom: 15px;
-    background: #f7f7f7;
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    padding: 30px;
-  }
-
-  .login-form h2 {
-    margin: 0 0 15px;
-  }
-
-  .form-control,
-  .btn {
-    min-height: 38px;
-    border-radius: 2px;
-  }
-
-  .btn {
-    font-size: 15px;
-    font-weight: bold;
-  }
-</style>
-
-<!-- </html> -->

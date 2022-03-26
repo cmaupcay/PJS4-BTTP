@@ -12,3 +12,20 @@ function accueil()
        //affichera la liste des scritps disponibles 
        require('./vue/abonnes/accueil.tpl');
 }
+
+function appareils() {
+
+    require("./vue/abonnes/appareils.tpl");
+    
+}
+
+function deconnexion() {
+
+    $_SESSION['profil'] = array();
+    setcookie("Jeton", "", time() - 3600);
+
+    $url = "index.php?controle=visiteurs&action=accueil";
+    header("Location:" . $url);
+
+}
+

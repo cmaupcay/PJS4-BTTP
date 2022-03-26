@@ -20,8 +20,8 @@
         
         $identifie = false;
     }
-
-
+    
+    require_once("./modele/connectBD.php");
 
     if (isset($_GET['controle']) && isset($_GET['action'])) {
 
@@ -37,10 +37,20 @@
         } elseif ($controle == "visiteurs" && $action == "connexion") {
             require('controleur/utilisateurs/visiteurs.php');
             connexion();
+        }  elseif ($controle=="visiteurs" && $action == "marketplace"){
+            require('controleur/utilisateurs/visiteurs.php');
+            marketplace();
         } elseif ($controle == "abonnes" && $action == "accueil" && $identifie) { //on rajoute l'identification pour acceder à la page abonné
             require('controleur/utilisateurs/abonnes.php');
             accueil();
-        } else {
+        } elseif($controle=="abonnes" && $action == "deconnexion") {
+            require('controleur/utilisateurs/abonnes.php');
+            deconnexion();
+        } elseif($controle=="abonnes"&&$action="appareils") {
+            require('controleur/utilisateurs/abonnes.php');
+            appareils();
+        }
+        else {
             require('erreur404.tpl');
             $erreur = false;
         }

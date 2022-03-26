@@ -23,7 +23,7 @@
         }
     }
 
-    //TODO
+    //TODO : afficher le code source d'un script sur lequel on a cliqué
     function code_source() {
 
     }

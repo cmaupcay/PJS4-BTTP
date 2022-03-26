@@ -1,0 +1,109 @@
+.login-form {
+    width: 340px;
+    margin: 50px auto;
+}
+
+.login-form form {
+    margin-bottom: 15px;
+    background: #f7f7f7;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+}
+
+.login-form h2 {
+    margin: 0 0 15px;
+}
+
+.form-inline {
+    position:relative;
+    padding-right:3%;
+    padding-left: 80%;
+    background-color: red;
+}
+.form-control, .btn {
+    min-height: 38px;
+    border-radius: 2px;
+}
+
+.msg-erreur {
+    text-align: center;
+    font-size: 30px;
+    color: red;
+}
+
+body{
+	margin:0;
+	padding:0;
+	font-family: 'Raleway',sans-serif;
+	color: #fff;
+}
+.banner{
+	height: 100vh;
+	width: 100%;
+	background:url('accueil_visiteurs.jpg');
+	background-position: top;
+	background-size:cover;
+	/*background-attachment: fixed;*/
+	background-repeat: no-repeat;
+}
+.banner .navbar{
+	margin-top:2%;
+}
+.banner .navbar-brand{
+	color: #fff;
+	font-size:1.8em;
+	font-weight: 700;
+	margin-left: 10%;
+}
+.banner .nav{
+	margin-right:5%; 
+}
+.banner .nav li a{
+	color:#aaa;
+	font-size: 1.2em;
+}
+
+.banner .nav li a:hover{
+	color: #00A8E8;
+}
+.banner .info{
+	margin-top:15%;
+	transform: translateY(-15%);
+}
+.banner .info h1{
+	font-size: 2.5em;
+	font-weight: 700;
+	color: #fff;
+	letter-spacing: 2px;
+}
+.banner .info p{
+	font-size: 2em;
+	font-weight: 500;
+	color: #aaa;
+	letter-spacing: 2px;
+}
+.banner .info a{
+	margin-left:50%;
+	transform: translateX(-50%);
+	color: #fff;
+	background: #007ea7;
+	padding:10px 20px; 
+	font-size: 2em;
+	font-weight: 600;
+}
+.banner .info a:hover{
+	background: #00A8E8;
+}
+
+.banner h2  {
+	font-size:45px;
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.btn {
+	border-radius:10px;
+}
+
+.card-text {
+	color:black;
+}

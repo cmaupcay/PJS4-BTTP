@@ -10,76 +10,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="./vue/style.css">
-
-    <style>
- body{
-	margin:0;
-	padding:0;
-	background:#fff;
-	font-family: 'Raleway',sans-serif;
-	color: #fff;
-	}
-	.banner{
-		height: 100vh;
-		width: 100%;
-		background-color:rgb(14, 0, 41);
-		background-position: top;
-		background-size:cover;
-		/*background-attachment: fixed;*/
-		background-repeat: no-repeat;
-	}
-	.banner .navbar{
-		margin-top:2%;
-	}
-	.banner .navbar-brand{
-		color: #fff;
-		font-size:1.8em;
-		font-weight: 700;
-		margin-left: 10%;
-	}
-	.banner .nav{
-		margin-right:5%; 
-	}
-	.banner .nav li a{
-		color:#aaa;
-		font-size: 1.2em;
-	}
-	.banner .info{
-		margin-top:15%;
-		transform: translateY(-15%);
-	}
-	.banner .info h1{
-		font-size: 2.5em;
-		font-weight: 700;
-		color: #fff;
-		letter-spacing: 2px;
-	}
-	.banner .info p{
-		font-size: 2em;
-		font-weight: 500;
-		color: #aaa;
-		letter-spacing: 2px;
-	}
-	.banner .info a{
-		margin-left:50%;
-		transform: translateX(-50%);
-		color: #fff;
-		background: #e91d43;
-		padding:10px 20px; 
-		font-size: 2em;
-		font-weight: 600;
-	}
-	.banner .info a:hover{
-		background: #e91e63;
-	}
-    </style>
+    <link rel="stylesheet" type="text/css" href="style.css">
 
 </head>
 
 <body>
 
-<div class="container-fluid banner">
+<div class="container-fluid banner" style="background-color:#003459">
 		<div class="row">
 			<div class="col-md-12">
 				<nav class="navbar navbar-md">
@@ -104,15 +41,13 @@
 
         <h2 class="display-5 text-center" style="padding-top:5%"> Recherchez les scripts qui vous intéressent </h2>
 
-        <div class="input-group mb-3" style="padding-top:3%; padding-bottom:5%">
+        <div class="input-group mb-3" style="padding-top:3%; padding-bottom:5%; width:50%">
             <input type="text" class="form-control" placeholder="Recherchez des scripts ..." aria-label="Recherchez des scripts ..." aria-describedby="basic-addon2">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" style="background-color:blue; width:10em"> Rechercher </button>
+                    <button class="btn btn-outline-secondary" type="button" style="background-color:#00A8E8; color:aliceblue; width:10em"> Rechercher </button>
                  </div>
         </div>
-
         <br>
-
     <div class="container py-5 bg-light"> 
 
         <div class="row">

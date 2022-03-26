@@ -12,70 +12,16 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
 	<link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="../../style.css">
+    <link rel="stylesheet" type="text/css" href="./style.css">
 
-    <style>
-    body{
-	margin:0;
-	padding:0;
-	background:#fff;
-	font-family: 'Raleway',sans-serif;
-	color: #fff;
-	}
-	.banner{
-		height: 100vh;
-		width: 100%;
-		background:url('./vue/visiteurs/accueilVisiteurs.jpg');
-		background-position: top;
-		background-size:cover;
-		/*background-attachment: fixed;*/
-		background-repeat: no-repeat;
-	}
-	.banner .navbar{
-		margin-top:2%;
-	}
-	.banner .navbar-brand{
-		color: #fff;
-		font-size:1.8em;
-		font-weight: 700;
-		margin-left: 10%;
-	}
-	.banner .nav{
-		margin-right:5%; 
-	}
-	.banner .nav li a{
-		color:#aaa;
-		font-size: 1.2em;
-	}
-	.banner .info{
-		margin-top:15%;
-		transform: translateY(-15%);
-	}
-	.banner .info h1{
-		font-size: 2.5em;
-		font-weight: 700;
-		color: #fff;
-		letter-spacing: 2px;
-	}
-	.banner .info p{
-		font-size: 2em;
-		font-weight: 500;
-		color: #aaa;
-		letter-spacing: 2px;
-	}
-	.banner .info a{
-		margin-left:50%;
-		transform: translateX(-50%);
-		color: #fff;
-		background: #e91d43;
-		padding:10px 20px; 
-		font-size: 2em;
-		font-weight: 600;
-	}
-	.banner .info a:hover{
-		background: #e91e63;
-	}
-    </style>
+
+	<style>
+		.banner {
+			background:url('./vue/visiteurs/accueilVisiteurs.jpg');
+			background-position: top;
+			background-size:cover;
+		}
+	</style>
 
 </head>
 
@@ -84,16 +30,16 @@
 		<div class="row">
 			<div class="col-md-12">
 				<nav class="navbar navbar-md">
-					<a class="navbar-brand" href="?controle=visiteurs&action=accueil">  BTTP </a>
+					<a class="navbar-brand" href="?controle=visiteurs&action=accueil"> BTTP </a>
 					<ul class="nav">
 						<li class="nav-item">
 							<a class="nav-link" href="?controle=visiteurs&action=produits">Produits</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="?controle=visiteurs&action=marketpalce">Marketplace</a>
+							<a class="nav-link" href="?controle=visiteurs&action=marketplace">Marketplace</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="?controle=visiteurs&action=infos">Infos</a>
+							<a class="nav-link" href="?controle=visiteurs&action=infos">Informations</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="?controle=visiteurs&action=connexion">Connexion</a>
@@ -105,7 +51,7 @@
 				</nav>
 			</div>
 			<div class="col-md-8 offset-md-2 info">
-				<h1 class="text-center"> Bienvenue sur BTTP</h1>
+				<h1 class="text-center">Bienvenue sur BTTP</h1>
 				<p class="text-center">
 					Salut c'est Ninho. Si tu veux écouter ma dernière mixtape, swipe up
 				</p>

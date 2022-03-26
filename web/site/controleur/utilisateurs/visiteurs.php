@@ -2,7 +2,6 @@
 //Le contenu de ce fichier à été déplacé dans General.php afn de ne pas avoir a require plusieurs fichiers dans l'index
 
     function accueil() {
-        require ('./modele/marketplace.php');
 
        //cette fonction affichera les scripts disponibles de la marketplace
        // scripts_disponibles($scripts);
@@ -15,16 +14,20 @@
 
         $pseudo = isset($_POST['pseudo'])?($_POST['pseudo']):'';
         $mdp = isset($_POST['mdp'])?($_POST['mdp']):'';
+        $mdp2= isset($_POST['mdp2'])?($_POST['mdp2']):'';
 
 
         $msg ="";
 
-        if(count($_POST) < 2) {
+        if(count($_POST) < 3) {
             require('./vue/visiteurs/inscription.tpl');
         } else {
             if(verif_inscription($pseudo)) {
 
                 $msg = "compte déjà existant";
+
+                echo $msg;
+                
                 require('./vue/visiteurs/inscription.tpl');
             } else if($mdp != $mdp2){
                 
@@ -33,7 +36,9 @@
                 echo $msg;
 
                 require('./vue/visiteurs/inscription.tpl');
-            } else {
+            }
+
+            else {
 
                 insertion_bd($pseudo, $mdp);
                 
@@ -58,4 +63,15 @@
         //Ici on met ce dont on a besoin afin de relier le modele et la vue
     
         require_once('./vue/connexion.tpl');
+    }
+
+    function marketplace() {
+
+        require_once './modele/marketplace.php';
+
+
+        scripts_publiques($scripts);
+
+        require './vue/marketplace.tpl';
+
     }

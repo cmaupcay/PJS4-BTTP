@@ -2,6 +2,9 @@
 #define H_BTTP_CLIENT_SERVEUR
 
 #include "../Connexion.h"
+#include "messages/ReponseEmpreinteCle.h"
+#include "messages/ReponseUtilisateur.h"
+#include "messages/ReponseMotDePasse.h"
 
 namespace BTTP
 {
@@ -25,6 +28,8 @@ namespace BTTP
                 const Protocole::Cle::Publique* _cle;
                 /** Connexion réseau avec le serveur. */
                 Protocole::IConnexion* _connexion;
+                /** Drapeau indiquant si l'appareil local a été authentifié auprès du serveur. */
+                bool _auth;
 
             public:
                 /**
@@ -35,7 +40,7 @@ namespace BTTP
                  */
                 Serveur(const std::string nom, const std::string adresse, const uint16_t port)
                     : _nom{ nom }, _adresse{ adresse }, _port{ port }, _cle{ nullptr },
-                    _connexion{ new Connexion(adresse, port) }
+                    _connexion{ new Connexion(adresse, port) }, _auth{ false }
                 {}
                 // TOTEST
                 /**
@@ -84,7 +89,44 @@ namespace BTTP
                  */
                 inline void modifier_cle(const Protocole::Cle::Publique* cle) { this->_cle = cle; }
 
+                /**
+                 * @brief Retourne la connexion réseau avec le serveur.
+                 * @return Protocole::IConnexion* Connexion avec le serveur.
+                 */
                 inline Protocole::IConnexion* connexion() const { return this->_connexion; }
+
+                /**
+                 * @brief Indique si l'appareil local a été authenitfié auprès du serveur.
+                 * @see BTTP::Client::Serveurs::Serveur::authentification().
+                 * @return true L'appareil a été authentifié.
+                 * @return false L'appareil n'a pas été authentifié.
+                 */
+                inline const bool& authentifie() const { return this->_auth; }
+
+                // TODO Lever des erreurs précises (ex: mot de passe incorrect, nom d'utilisateur inexistant).
+                /**
+                 * @brief Procédure d'authentification de l'appareil depuis le couple utilisateur/mot de passe de son propriétaire.
+                 * Correspond à la toute première authentification auprès du serveur et permet à celui-ci d'attribuer un propriétaire au
+                 * nouvel appareil.
+                 * @param identite Identité locale à authentifier.
+                 * @param mdp Mot de passe de l'identité.
+                 * @param utilisateur Nom d'utilisateur sur le serveur.
+                 * @param mdp_utilisateur Mot de passe de l'utilisateur.
+                 * @return true L'appareil a été authentifié par le serveur.
+                 * @return false L'appareil n'a pu être authentifié.
+                 */
+                const bool authentification(
+                    const Protocole::Identite& identite, const std::string mdp,
+                    const std::string utilisateur, const std::string mdp_utilisateur
+                );
+                /**
+                 * @brief Procédure d'authentification de l'appareil depuis sa clé publique.
+                 * @param identite Identité locale à authentifier.
+                 * @param mdp Mot de passe de l'identité.
+                 * @return true L'appareil a été authentifié par le serveur.
+                 * @return false L'appareil n'a pu être authentifié.
+                 */
+                const bool authentification(const Protocole::Identite& identite, const std::string mdp);
 
                 /**
                  * @brief Sérialisation des informations du serveur. Utilisé lors de l'export dans un fichier notamment.

@@ -1,5 +1,5 @@
-#ifndef H_BTTP_CLIENT_SCRIPTS_MESSAGE_DEMANDE_AJOUT
-#define H_BTTP_CLIENT_SCRIPTS_MESSAGE_DEMANDE_AJOUT
+#ifndef H_BTTP_CLIENT_SCRIPT_MESSAGE_DEMANDE_AJOUT
+#define H_BTTP_CLIENT_SCRIPT_MESSAGE_DEMANDE_AJOUT
 
 #include "../../Racine.h"
 
@@ -25,6 +25,8 @@ namespace BTTP
                             { { BTTP_DEMANDE_SCRIPT_AJOUT_NOM, nom } }
                         )
                     {}
+
+                    inline const std::string script() const { return this->args()[0].valeur; }
                 };
             }
         }

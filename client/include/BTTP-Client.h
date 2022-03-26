@@ -8,4 +8,12 @@
 #include "serveurs/Serveurs.h"
 #include "scripts/Scripts.h"
 
+namespace BTTP
+{
+    namespace Client
+    {
+        
+    }
+}
+
 #endif

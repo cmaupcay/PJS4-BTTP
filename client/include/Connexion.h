@@ -35,7 +35,8 @@ namespace BTTP
                 * @return true La connexion est ouverte.
                 * @return false La connexion est fermée.
                 */
-                inline const bool ouverte() override { return this->_socket->is_open(); }
+                inline const bool ouverte() override 
+                { return (this->_socket == nullptr ? false : this->_socket->is_open()); }
                 /**
                 * @brief Ouvre une nouvelle connexion.
                 */

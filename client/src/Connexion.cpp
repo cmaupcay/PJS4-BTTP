@@ -5,21 +5,35 @@ namespace BTTP
     namespace Client
     {
         Connexion::Connexion(const std::string adresse, const uint16_t port) 
-            : _adresse{ adresse }, _port{ port }
-        {
-            asio::io_context contexte;
-            this->_socket = new asio::ip::tcp::socket(contexte);
-        }
+            : _adresse{ adresse }, _port{ port }, _socket{ nullptr }
+        {}
 
         void Connexion::ouvrir() 
         {
-            asio::ip::tcp::endpoint endpoint(asio::ip::make_address(this->_adresse, this->_erreur), this->_port);
-            this->_socket->connect(endpoint, this->_erreur); 
+            if (this->ouverte()) {} // throw ... // TODO Erreur deja ouvert
+            else
+            {
+                // Résolution de l'adresse de l'hôte.
+                asio::io_context contexte;
+                asio::ip::tcp::resolver resolver{ contexte };
+                const asio::ip::tcp::resolver::results_type resultats = resolver.resolve(
+                    this->_adresse, std::to_string(this->_port), this->_erreur
+                );
+                if (resultats.size() == 0 || this->_erreur) {} // throw ... // TODO Erreur de résolution de l'hôte.
+                else
+                {
+                    // Création du socket et connexion.
+                    const asio::ip::tcp::endpoint hote = *resultats;
+                    this->_socket = new asio::ip::tcp::socket(contexte);
+                    this->_socket->connect(hote, this->_erreur);
+                    // if (this->_erreur) throw ... // TODO Erreur de connexion.
+                }
+            }
         }
 
         void Connexion::envoyer(const std::string message_prepare) 
         {
-            if(this->_socket->is_open()) 
+            if (this->ouverte()) 
                 this->_socket->write_some(asio::buffer(message_prepare.data(), message_prepare.size()), this->_erreur);
             else
                 throw Erreur::Connexion::Fermee(this->_adresse, this->_port);
@@ -27,8 +41,7 @@ namespace BTTP
 
         const std::string Connexion::recevoir() 
         {
-
-            if(this->_socket->is_open())
+            if (this->ouverte())
             {
                 std::string message = "";
                 size_t taille;

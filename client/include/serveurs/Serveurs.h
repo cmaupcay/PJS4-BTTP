@@ -10,9 +10,10 @@ namespace BTTP
     {
         namespace Serveurs
         {
+            // TODO Peut-être remplacer le booléen par void et lever des exceptions en cas d'erreur.
             /**
-             * @brief Ajout d'un serveur de contrôle. L'appareil s'annonce au serveur.
-             * @param serveur Serveur de contrôle à ajouter.
+             * @brief Ajout d'un serveur de contrôle et récupération de la clé publique. L'appareil s'annonce au serveur.
+             * @param serveur Serveur de contrôle à ajouter et dont on souhaite mettre à jour la clé publique enregistrée localement.
              * @param identite Identité locale.
              * @param mdp Mot de passe de l'identité locale.
              * @param dossier Dossier de destination.
@@ -21,11 +22,26 @@ namespace BTTP
              * @return false La procédure d'ajout n'a pas pu être finalisé.
              */
             static const bool ajout(
-                const Serveur& serveur,
+                Serveur& serveur,
                 const Protocole::Identite* identite, const std::string mdp,
                 const std::string dossier = BTTP_SERVEUR_DOSSIER, 
-                const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT
+                const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT,
+                const bool creer_chemin = BTTP_CREATION_CHEMIN_PAR_DEFAUT
             );
+
+            /**
+             * @brief Importation des informations d'un serveur de contrôle enregistré localement et précédemment ajouté.
+             * @param nom Nom du serveur à 
+             * @param dossier Dossier de destination.
+             * @param utiliser_contexte Drapeau indiquant si le dossier est relatif au contexte BTTP.
+             * @return const Serveur Serveur importé.
+             */
+            inline static const Serveur charger(
+                const std::string nom,
+                const std::string dossier = BTTP_SERVEUR_DOSSIER, 
+                const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT
+            )
+            { return Serveur(nom, Fichiers::lire(nom, dossier, false, utiliser_contexte)); }
 
             // TODO Annoncement de la suppression au serveur cible.
             /**
@@ -36,11 +52,12 @@ namespace BTTP
              * @return true Le serveur a été supprimé localement.
              * @return false La suppression du serveur a échoué.
              */
-            static const bool suppression(
+            inline static const bool suppression(
                 const Serveur& serveur,
                 const std::string dossier = BTTP_SERVEUR_DOSSIER, 
                 const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT
-            );
+            )
+            { return Fichiers::supprimer(serveur.nom(), dossier, utiliser_contexte); }
 
             /**
              * @brief Retourne la liste des serveurs enregistrés localement.

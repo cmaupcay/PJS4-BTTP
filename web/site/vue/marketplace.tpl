@@ -52,11 +52,11 @@
 
         <div class="row">
 
-            <?php 
+            <php? 
                 foreach($scripts as $script) {
-                    echo '<div class="col-md-4 col-sm-4">';
-                    echo '<div class="card mb-4 shadow-sm">';
-                    echo '<div class="card-body"';
+                    echo('<div class="col-md-4 col-sm-4">');
+                    echo('<div class="card mb-4 shadow-sm">');
+                    echo('<div class="card-body"');
 
                     foreach($script as $scr => $s) {
                         $str = '';

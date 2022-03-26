@@ -20,7 +20,7 @@ namespace BTTP
 
                 public:
                     Execution(const Client::Scripts::Script& script)
-                        : Erreur("Client/Scripts/Execution", "L'exécution du script '" + script.nom() + "' a engendré une erreur.", BTTP_CLIENT_SCRIPTS_EXECUTION_CODE),
+                        : Erreur("Client/Scripts/Execution", "L'exécution du script \"" + script.nom() + "\" a engendré une erreur.", BTTP_CLIENT_SCRIPTS_EXECUTION_CODE),
                         _script{ script }
                     {}
 

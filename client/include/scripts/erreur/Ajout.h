@@ -21,7 +21,7 @@ namespace BTTP
 
                 public:
                     Ajout(const std::string nom, const Serveurs::Serveur& serveur)
-                        : Erreur("Client/Scripts/Ajout", "Impossible d'ajouter le script '" + nom + "' (serveur : '" + serveur.nom() + "').", BTTP_CLIENT_SCRIPTS_AJOUT_CODE),
+                        : Erreur("Client/Scripts/Ajout", "Impossible d'ajouter le script \"" + nom + "\" (serveur : \"" + serveur.nom() + "\").", BTTP_CLIENT_SCRIPTS_AJOUT_CODE),
                         _nom{ nom }, _serveur{ serveur }
                     {}
 

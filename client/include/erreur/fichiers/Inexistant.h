@@ -19,7 +19,7 @@ namespace BTTP
                     const std::string& _fichier;
                 public:
                     Inexistant(const std::string& fichier, const std::string type = "fichier")
-                        : Erreur("Client/Fichiers/Inexistant", "Le " + type + " '" + fichier + "' n'existe pas.", BTTP_CLIENT_FICHIERS_INEXISTANT_CODE),
+                        : Erreur("Client/Fichiers/Inexistant", "Le " + type + " \"" + fichier + "\" n'existe pas.", BTTP_CLIENT_FICHIERS_INEXISTANT_CODE),
                         _fichier{ fichier }
                     {}
 

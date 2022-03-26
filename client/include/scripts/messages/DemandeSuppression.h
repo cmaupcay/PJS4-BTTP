@@ -1,5 +1,5 @@
-#ifndef H_BTTP_CLIENT_SCRIPTS_MESSAGE_DEMANDE_SUPPRESSION
-#define H_BTTP_CLIENT_SCRIPTS_MESSAGE_DEMANDE_SUPPRESSION
+#ifndef H_BTTP_CLIENT_SCRIPT_MESSAGE_DEMANDE_SUPPRESSION
+#define H_BTTP_CLIENT_SCRIPT_MESSAGE_DEMANDE_SUPPRESSION
 
 #include "../Script.h"
 
@@ -19,7 +19,7 @@ namespace BTTP
                 class DemandeSuppression : public Protocole::Messages::Demande
                 {
                 public:
-                    DemandeSuppression(const Script& script)
+                    DemandeSuppression(const Scripts::Script& script)
                         : Protocole::Messages::Demande(
                             BTTP_DEMANDE_SCRIPT_SUPPRESSION,
                             { {
@@ -28,6 +28,8 @@ namespace BTTP
                             } }
                         )
                     {}
+
+                    inline const uint64_t id_script() const { return std::atol(this->args()[0].valeur.c_str()); }
                 };
             }
         }

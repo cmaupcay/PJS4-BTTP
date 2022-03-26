@@ -37,7 +37,6 @@ namespace BTTP
                 const std::string dossier = BTTP_IDENTITE_DOSSIER,
                 const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT
             );
-            // TODO Vérification des autres métadonnées une fois l'importation réussie (et donc à mettre dans le .cpp).
             /**
              * @brief Importation d'une identité depuis un fichier.
              * @param meta Métadonnées de l'identité à importer. Le nom est utilisé comme nom de fichier cible.
@@ -51,21 +50,6 @@ namespace BTTP
                 const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT
             );
 
-            // TODO Déplacer et adapter l'implémentation (voir cli/src/CLI.cpp).
-            /**
-             * @brief Tentative d'importation d'une identité. Si introuvable, elle est générée.
-             * @param meta Métadonnées de l'identité à importer. Le nom est utilisé comme nom de fichier cible.
-             * @param dossier Dossier cible.
-             * @param utiliser_contexte Drapeau indiquant si le dossier est relatif au contexte BTTP.
-             * @return const Protocole::Identite Identité importée.
-             */
-            const Protocole::Identite demarrer(
-                const Protocole::Meta& meta,
-                const std::string dossier = BTTP_IDENTITE_DOSSIER,
-                const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT
-            );
-
-            // TODO Implémentation.
             /**
              * @brief Retourne la liste des identités disponibles.
              * @param dossier Dossier cible.

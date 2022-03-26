@@ -26,6 +26,16 @@ namespace BTTP
                 if (meta_importees == meta) return identite;
                 throw Erreur::Identites::MetaIncorrectes(meta, meta_importees);
             }
+
+            const std::vector<Protocole::Identite> liste(const std::string dossier, const bool utiliser_contexte)
+            {
+                std::vector<Protocole::Identite> identites;
+                const std::vector<std::string> fichiers = Fichiers::liste(dossier, utiliser_contexte);
+                std::string contenu;
+                for (const std::string& fichier : fichiers)
+                    identites.push_back(importer(fichier, dossier, utiliser_contexte));
+                return identites;
+            }
         }
     }
 }

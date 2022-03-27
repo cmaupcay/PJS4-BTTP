@@ -70,7 +70,7 @@
 
         $scriptsRecuperes = scripts_publiques();
 
-        require './vue/marketplace.tpl';
+        require './vue/visiteurs/marketplace.tpl';
 
 
         echo '<div class="container py-5 bg-light">';

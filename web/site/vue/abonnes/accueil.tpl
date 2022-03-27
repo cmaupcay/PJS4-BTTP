@@ -15,7 +15,7 @@
     <link rel="stylesheet" type="text/css" href="./style.css">
     <style>
 		body {
-			background:url('./vue/visiteurs/accueilVisiteurs.jpg');
+			background:url('./vue/abonnes/accueilAbonnes.jpg');
 			background-position: top;
 			background-size:cover;
 		}

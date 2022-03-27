@@ -49,8 +49,7 @@
 				</nav>
 			</div>
 			<div class="col-md-8 offset-md-2 info">
-				<!-- TODO : afficher le nom de la personne connectée -->
-				<h1 class="text-center">Bienvenue dans ton espace personnel</h1>
+				<h1 class="text-center"> <?php echo $_SESSION['pseudo']?>, bienvenue dans ton espace personnel</h1>
 				<p class="text-center">
 					De nouveaux scripts sont disponibles. Consultez les dès maintenant !
 				</p>

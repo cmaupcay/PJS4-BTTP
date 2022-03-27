@@ -23,13 +23,16 @@
 					<a class="navbar-brand" href="?controle=abonnes&action=accueil"> BTTP </a>
 					<ul class="nav">
 						<li class="nav-item">
-							<a class="nav-link" href="?controle=visiteurs&action=produits">Profil</a>
+							<a class="nav-link" href="?controle=abonnes&action=profil">Profil</a>
 						</li>
                         <li class="nav-item">
-							<a class="nav-link" href="?controle=visiteurs&action=produits"> Marketplace </a>
+							<a class="nav-link" href="?controle=abonnes&action=appareils"> Appareils </a>
+						</li>
+                        <li class="nav-item">
+							<a class="nav-link" href="?controle=abonnes&action=marketplace"> Marketplace </a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="?controle=visiteurs&action=infos">Infos</a>
+							<a class="nav-link" href="?controle=abonnes&action=informations">Informations</a>
 						</li>
                         <li class="nav-item">
 							<a class="nav-link" href="?controle=abonnes&action=deconnexion">Deconnexion</a>

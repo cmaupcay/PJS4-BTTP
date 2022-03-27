@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -14,19 +15,18 @@
 	<link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="./style.css">
 
+    <style>
 
-	<style>
-		.banner {
-			background:url('./vue/visiteurs/accueilVisiteurs.jpg');
-			background-position: top;
-			background-size:cover;
-		}
-	</style>
+    .banner {
+        background-color:#003459;
+    }
 
+    </style>
 </head>
 
 <body>
-	<div class="container-fluid banner">
+
+<div class="container-fluid banner">
 		<div class="row">
 			<div class="col-md-12">
 				<nav class="navbar navbar-md">
@@ -50,15 +50,18 @@
 					</ul>
 				</nav>
 			</div>
-			<div class="col-md-8 offset-md-2 info">
-				<h1 class="text-center">Bienvenue sur BTTP</h1>
-				<p class="text-center">
-					Votre système d'inter opérabilité nouvelle génération. Découvreznos nombreux scripts publiques
-				</p>
-				<a href="" class="btn btn-md text-center"> Découvrir</a>
-			</div>
-		</div>
-		<p style="font-size:0.7em; padding-right:0">Photo by <a href="https://unsplash.com/@robynnexy?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Robynne Hu</a> on <a href="https://unsplash.com/s/photos/high-tech?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
-		 </p>
-	</div>
+
+            <h2 class="display-5 text-center" style="padding-top:5%"> Nos produits </h2>
+
+            <div class="col-md-12 text-center" style="padding-top:5%">
+                <p> BTTP propose une application mobile ainsi qu'une application client à installer sur votre PC distant. </p>
+                <p> Vous trouverez ci-dessous les liens pour télécharger chacun de nos produits : </p>
+                <p style="padding-top:4%"> Pour télécharger le client cliquez <a href="#"> ici </a></p>
+                <p style="padding-top:2%"> Pour télécharger notre application mobile, cliquez <a href="#"> ici </a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
+

@@ -13,52 +13,53 @@
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
 	<link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="./style.css">
-
-
-	<style>
+    <style>
 		.banner {
-			background:url('./vue/visiteurs/accueilVisiteurs.jpg');
+			background: #003459;
 			background-position: top;
 			background-size:cover;
 		}
 	</style>
 
-</head>
+  </head>
 
 <body>
 	<div class="container-fluid banner">
 		<div class="row">
 			<div class="col-md-12">
 				<nav class="navbar navbar-md">
-					<a class="navbar-brand" href="?controle=visiteurs&action=accueil"> BTTP </a>
+					<a class="navbar-brand" href="?controle=abonnes&action=accueil"> BTTP </a>
 					<ul class="nav">
 						<li class="nav-item">
-							<a class="nav-link" href="?controle=visiteurs&action=produits">Produits</a>
+							<a class="nav-link" href="?controle=abonnes&action=profil">Profil</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="?controle=visiteurs&action=marketplace">Marketplace</a>
+							<a class="nav-link" href="?controle=abonnes&action=appareils"> Appareils </a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="?controle=visiteurs&action=informations">Informations</a>
+							<a class="nav-link" href="?controle=abonnes&action=marketplace"> Marketplace </a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="?controle=visiteurs&action=connexion">Connexion</a>
+							<a class="nav-link" href="?controle=abonnes&action=informations">Informations</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="?controle=visiteurs&action=inscription">Inscription</a>
+							<a class="nav-link" href="?controle=abonnes&action=deconnexion">Déconnexion</a>
 						</li>
 					</ul>
 				</nav>
 			</div>
-			<div class="col-md-8 offset-md-2 info">
-				<h1 class="text-center">Bienvenue sur BTTP</h1>
-				<p class="text-center">
-					Votre système d'inter opérabilité nouvelle génération. Découvreznos nombreux scripts publiques
-				</p>
-				<a href="" class="btn btn-md text-center"> Découvrir</a>
-			</div>
-		</div>
-		<p style="font-size:0.7em; padding-right:0">Photo by <a href="https://unsplash.com/@robynnexy?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Robynne Hu</a> on <a href="https://unsplash.com/s/photos/high-tech?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
-		 </p>
-	</div>
-</body>
+        </div>
+
+        <h2 style="text-align : center; padding-top:3%;"> Votre profil </h2> 
+
+        <div class="row" style="padding-top:3%">
+            <div class="col-md-12" style="padding-left:10%; padding-right: 10%; margin-left:auto; margin-right:bottom">
+                <p> Pseudo : </p> <!-- TODO: afficher le nom de la personne connectée -->
+
+                <p> Consulter la page <a href="?controle=abonnes&action=appareils"; style="color:#00A8E8"> Appareils </a> pour gérer vos terminaux </p>
+                <p> Vous voulez changer de mot de passe ? </p>
+                <input type="text" class="form-control" placeholder="Votre mdp actuel" aria-label="Votre mdp actuel" aria-describedby="basic-addon2" style="border-radius:10px; width:30%">
+                <br>
+                <input type="text" class="form-control" placeholder="Votre nouveau mdp" aria-label="Votre nouveau mdp" aria-describedby="basic-addon2" style="border-radius:10px; width:30%">
+                <br>
+                <button class="btn btn-outline-secondary" type="button" style="background-color:#00A8E8; color:aliceblue; width:10em"> Modifier </button>

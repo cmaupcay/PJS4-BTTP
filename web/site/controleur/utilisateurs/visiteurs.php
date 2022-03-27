@@ -111,3 +111,13 @@
         echo '</div>';
         
     }
+
+    function produits() {
+
+        require './vue/produits.tpl';
+    }
+
+    function informations() {
+
+        require './vue/visiteurs/informations.tpl';
+    }

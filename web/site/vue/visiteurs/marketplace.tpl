@@ -25,8 +25,11 @@
 						<li class="nav-item">
 							<a class="nav-link" href="?controle=visiteurs&action=produits">Produits</a>
 						</li>
+                        <li class="nav-item">
+							<a class="nav-link" href="?controle=visiteurs&action=marketplace">Marketplace</a>
+						</li>                      
 						<li class="nav-item">
-							<a class="nav-link" href="?controle=visiteurs&action=infos">Infos</a>
+							<a class="nav-link" href="?controle=visiteurs&action=informations">Informations</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="?controle=visiteurs&action=connexion">Connexion</a>
@@ -41,8 +44,8 @@
 
         <h2 class="display-5 text-center" style="padding-top:5%"> Recherchez les scripts qui vous intéressent </h2>
 
-        <div class="input-group mb-3" style="padding-top:3%; padding-bottom:5%; width:50%">
-            <input type="text" class="form-control" placeholder="Recherchez des scripts ..." aria-label="Recherchez des scripts ..." aria-describedby="basic-addon2">
+        <div class="input-group mb-3 center-block" style="padding-top:3%; padding-bottom:5%; width:50%; margin-left:auto; margin-right:auto">
+            <input type="text" class="form-control" placeholder="Recherchez des scripts ..." aria-label="Recherchez des scripts ..." aria-describedby="basic-addon2" style="border-radius:10px">
                 <div class="input-group-append">
                     <button class="btn btn-outline-secondary" type="button" style="background-color:#00A8E8; color:aliceblue; width:10em"> Rechercher </button>
                  </div>
@@ -51,8 +54,6 @@
     <div class="container py-5 bg-light"> 
 
         <div class="row">
-
-            
         </div>
             <!--
 <div class="col-md-4 col-sm-4">

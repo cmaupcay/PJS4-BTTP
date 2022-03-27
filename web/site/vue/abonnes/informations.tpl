@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -10,21 +11,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-	<link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="./style.css">
-    <style>
-		.banner {
-			background:url('./vue/visiteurs/accueilVisiteurs.jpg');
-			background-position: top;
-			background-size:cover;
-		}
-	</style>
+    <link rel="stylesheet" type="text/css" href="style.css">
 
-  </head>
+</head>
 
 <body>
-	<div class="container-fluid banner">
+
+<div class="container-fluid banner" style="background-color:#003459">
 		<div class="row">
 			<div class="col-md-12">
 				<nav class="navbar navbar-md">
@@ -33,12 +26,13 @@
 						<li class="nav-item">
 							<a class="nav-link" href="?controle=abonnes&action=profil">Profil</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="?controle=abonnes&action=appareils"> Appareils </a>
+                        <li class="nav-item">
+                        <li class="nav-item">
+							<a class="nav-link" href="?controle=abonnes&action=appareils">Appareils</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="?controle=abonnes&action=marketplace"> Marketplace </a>
-						</li>
+                        <li class="nav-item">    
+							<a class="nav-link" href="?controle=abonnes&action=marketplace">Marketplace</a>
+						</li>                      
 						<li class="nav-item">
 							<a class="nav-link" href="?controle=abonnes&action=informations">Informations</a>
 						</li>
@@ -48,16 +42,6 @@
 					</ul>
 				</nav>
 			</div>
-			<div class="col-md-8 offset-md-2 info">
-        <!--TODO Afficher le nom de la personne connectée-->
-				<h1 class="text-center">Bienvenue sur BTTP</h1>
-				<p class="text-center">
-					Salut c'est Ninho. Si tu veux écouter ma dernière mixtape, swipe up
-				</p>
-				<a href="" class="btn btn-md text-center">Bouton pour swipe up</a>
-			</div>
-		</div>
-		<p style="font-size:0.7em; padding-right:0">Photo by <a href="https://unsplash.com/@robynnexy?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Robynne Hu</a> on <a href="https://unsplash.com/s/photos/high-tech?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
-		 </p>
-	</div>
-</body>
+        </div>
+
+        <p> Coucou c'est nous eh ouais c'est nous les mecs de cité </p>

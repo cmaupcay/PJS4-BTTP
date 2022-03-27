@@ -5,7 +5,7 @@
 
         require('connectBD.php');
 
-        $sql = " SELECT nom, publication, `version` FROM `script_publique`";
+        $sql = " SELECT nom, publication, `version`, chemin_code_source FROM `script_publique`";
 
         try {
 

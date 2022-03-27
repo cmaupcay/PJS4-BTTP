@@ -1,6 +1,5 @@
 <?php
 //Le contenu de ce fichier à été déplacé dans General.php afn de ne pas avoir a require plusieurs fichiers dans l'index
-
     function accueil() {
 
        //cette fonction affichera les scripts disponibles de la marketplace
@@ -93,10 +92,16 @@
                         if($i == 2){
                             echo'<p class="card-text"> Version : ' . $s . '</p>';
                         }
-                            $i++; 
+                        if($i == 3){
+                            $toShow = $s;
+                        }
+                            $i++;
                     }
-                    echo '<button type="button" class="btn btn-sm btn-outline-secondary"> Télécharger </button>';
+                    echo '<a href="controleur/general/download.php?file=' . $toShow . '"><button class="btn btn-sm btn-outline-secondary">Telecharger</button></a>';
+                    
+
                     echo '<button type="button" class="btn btn-sm btn-outline-secondary"> Code source </button>';
+                    readfile($toShow);
                     echo '</div>';
                     echo '</div>';
                     echo '</div>';
@@ -104,5 +109,5 @@
                 }
         echo '</div>';
         echo '</div>';
-
+        
     }

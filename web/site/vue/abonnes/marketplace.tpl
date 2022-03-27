@@ -14,9 +14,9 @@
 
 </head>
 
-<body>
+<body style="background-color:#003459">
 
-<div class="container-fluid banner" style="background-color:#003459">
+<div class="container-fluid banner">
 		<div class="row">
 			<div class="col-md-12">
 				<nav class="navbar navbar-md">

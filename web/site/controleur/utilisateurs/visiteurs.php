@@ -114,7 +114,7 @@
 
     function produits() {
 
-        require './vue/produits.tpl';
+        require './vue/visiteurs/produits.tpl';
     }
 
     function informations() {

@@ -16,7 +16,7 @@
 
 
 	<style>
-		.banner {
+		body {
 			background:url('./vue/visiteurs/accueilVisiteurs.jpg');
 			background-position: top;
 			background-size:cover;
@@ -55,7 +55,7 @@
 				<p class="text-center">
 					Votre système d'inter opérabilité nouvelle génération. Découvreznos nombreux scripts publiques
 				</p>
-				<a href="" class="btn btn-md text-center"> Découvrir</a>
+				<a href="?controle=visiteurs&action=marketplace" class="btn btn-md text-center"> Découvrir</a>
 			</div>
 		</div>
 		<p style="font-size:0.7em; padding-right:0">Photo by <a href="https://unsplash.com/@robynnexy?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Robynne Hu</a> on <a href="https://unsplash.com/s/photos/high-tech?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>

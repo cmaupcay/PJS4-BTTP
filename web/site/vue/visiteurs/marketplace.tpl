@@ -14,9 +14,9 @@
 
 </head>
 
-<body>
+<body style="background-color:#003459">
 
-<div class="container-fluid banner" style="background-color:#003459">
+<div class="container-fluid banner">
 		<div class="row">
 			<div class="col-md-12">
 				<nav class="navbar navbar-md">
@@ -47,7 +47,7 @@
         <div class="input-group mb-3 center-block" style="padding-top:3%; padding-bottom:5%; width:50%; margin-left:auto; margin-right:auto">
             <input type="text" class="form-control" placeholder="Recherchez des scripts ..." aria-label="Recherchez des scripts ..." aria-describedby="basic-addon2" style="border-radius:10px">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" style="background-color:#00A8E8; color:aliceblue; width:10em"> Rechercher </button>
+                    <button class="btn btn-outline-secondary" type="button" style="background-color:#00A8E8; color:aliceblue; width:10em;"> Rechercher </button>
                  </div>
         </div>
         <br>

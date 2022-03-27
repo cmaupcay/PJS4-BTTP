@@ -6,7 +6,6 @@
         require('connectBD.php');
 
         $sql = " SELECT nom, publication, `version`, chemin_code_source FROM `script_publique`";
-
         try {
 
             $commande = $pdo->prepare($sql);

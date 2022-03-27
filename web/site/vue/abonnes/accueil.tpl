@@ -14,7 +14,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="./style.css">
     <style>
-		.banner {
+		body {
 			background:url('./vue/visiteurs/accueilVisiteurs.jpg');
 			background-position: top;
 			background-size:cover;
@@ -49,15 +49,15 @@
 				</nav>
 			</div>
 			<div class="col-md-8 offset-md-2 info">
-        <!--TODO Afficher le nom de la personne connectée-->
-				<h1 class="text-center">Bienvenue sur BTTP</h1>
+				<!-- TODO : afficher le nom de la personne connectée -->
+				<h1 class="text-center">Bienvenue dans ton espace personnel</h1>
 				<p class="text-center">
-					Salut c'est Ninho. Si tu veux écouter ma dernière mixtape, swipe up
+					De nouveaux scripts sont disponibles. Consultez les dès maintenant !
 				</p>
-				<a href="" class="btn btn-md text-center">Bouton pour swipe up</a>
+				<a href="?controle=abonnes&action=marketplace" class="btn btn-md text-center"> Découvrir</a>
 			</div>
 		</div>
-		<p style="font-size:0.7em; padding-right:0">Photo by <a href="https://unsplash.com/@robynnexy?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Robynne Hu</a> on <a href="https://unsplash.com/s/photos/high-tech?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+		<p style="font-size:0.7em; padding-right:0; position:absolute; bottom:0">Photo by <a href="https://unsplash.com/@robynnexy?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Robynne Hu</a> on <a href="https://unsplash.com/s/photos/high-tech?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
 		 </p>
 	</div>
 </body>

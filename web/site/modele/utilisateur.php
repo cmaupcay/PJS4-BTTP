@@ -1,7 +1,7 @@
 <?php
 
 
-    //TODO : récupère le pseudo de la personne connectée
+    //TODO : récupèrele pseudo de la personne connectée
     function getPseudo() {
         
         $pseudo = isset($_POST['pseudo'])?($_POST['pseudo']):'';
@@ -35,7 +35,6 @@
 
     }
 
-    //TOTEST
     function nb_apapreils($id_proprietaire) {
 
         require 'connectBD.php';

@@ -8,7 +8,7 @@ namespace BTTP
         {
             ClePublique::ClePublique(const Cle::Publique cle)
                 : BTTP::Protocole::Messages::Message(Type::CLE_PUBLIQUE),
-                _cle{ cle.write(OpenPGP::PGP::Armored::NO) }
+                _cle{ cle.exporter(false) }
             {}
 
             ClePublique::ClePublique()

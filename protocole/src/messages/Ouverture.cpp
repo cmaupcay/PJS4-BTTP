@@ -8,7 +8,7 @@ namespace BTTP
         {
             Ouverture::Ouverture(const Cle::Publique cible, const Cle::Publique client)
                 : BTTP::Protocole::Messages::Message(Type::OUVERTURE),
-                _cible{ cible.fingerprint() }, _client{ client.write(OpenPGP::PGP::Armored::NO) }
+                _cible{ cible.empreinte() }, _client{ client.exporter(false) }
             {}
 
             Ouverture::Ouverture()

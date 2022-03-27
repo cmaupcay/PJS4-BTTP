@@ -164,7 +164,7 @@ namespace BTTP
                  * @return std::ostream& Flux de sortie mis à jour.
                  */
                 inline friend std::ostream& operator<<(std::ostream& os, const Identite& id)
-                { return (os << id.cle_publique().write()); }
+                { return (os << id.cle_publique().exporter(BTTP_IDENTITE_ARMOR)); }
         };
     }
 }

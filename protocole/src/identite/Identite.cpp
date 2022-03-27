@@ -14,7 +14,7 @@ namespace BTTP
 
         std::string Identite::exporter(const bool armor) const
         { 
-            try { return this->_cle_privee.write((armor ? OpenPGP::PGP::Armored::YES : OpenPGP::PGP::Armored::NO)); }
+            try { return this->_cle_privee.exporter(armor); }
             catch (std::exception& err) { throw Erreur::Identite::Exportation(err.what()); }
         }
 

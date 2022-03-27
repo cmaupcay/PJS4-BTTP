@@ -16,7 +16,7 @@ namespace BTTP
                     )
                     : Messages::TMessage<_Type>(type)
                 { 
-                    this->_destinataire = destinataire.fingerprint();
+                    this->_destinataire = destinataire.empreinte();
                     this->_message = signataire->chiffrer(message->construire(), destinataire, mdp);
                 }
 

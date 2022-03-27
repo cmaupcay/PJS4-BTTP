@@ -1,13 +1,11 @@
 <?php
     
 
-    function scripts_publiques(&$resultat){
+    function scripts_publiques(&$resultat = array()){
 
         require('connectBD.php');
 
         $sql = " SELECT nom, publication, `version` FROM `script_publique`";
-
-        $resultat = array();
 
         try {
 
@@ -15,7 +13,7 @@
             $bool = $commande->execute();
             if($bool)
                 $resultat = $commande->fetchAll(PDO::FETCH_ASSOC);
-
+            return $resultat;
         } catch(PDOException $e) {
 
             $msg = utf8_encode("Echec de select : " . $e->getMessage() . "\n");
@@ -27,6 +25,3 @@
     function code_source() {
 
     }
-
-
-?>

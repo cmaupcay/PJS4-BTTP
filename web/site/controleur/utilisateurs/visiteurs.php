@@ -69,37 +69,33 @@
 
         require_once './modele/marketplace.php';
 
-        scripts_publiques($scripts);
+        $scriptsRecuperes = scripts_publiques();
 
         require './vue/marketplace.tpl';
 
 
-        $s = "a";
         echo '<div class="container py-5 bg-light">';
         echo '<div class="row">';
 
             
-                foreach($scripts as $script) {
+                foreach($scriptsRecuperes as $script) {
                     echo('<div class="col-md-4 col-sm-4">');
                     echo('<div class="card mb-4 shadow-sm">');
-                    echo('<div class="card-body"');
-
+                    echo('<div class="card-body">');
+                    $i = 0;
                     foreach($script as $scr => $s) {
-                        $str = '';
-                        switch($s) {
-                            case "nom" : 
-                                $str = '<p class="card-text"> Nom : ' . $s . '</p>';
-                                break;
-                            case "publication" :
-                                $str = '<p class="card-text"> Date de publication : ' . $s . '</p>';
-                                break;
-                            case "version" :
-                                $str ='<p class="card-text"> Version : ' . $s . '</p>';
-                                break;
+                        if($i == 0){
+                            echo'<p class="card-text"> Nom : ' . $s . '</p>';
                         }
-                        echo $str;
+                        if($i == 1){
+                            echo'<p class="card-text"> Date de publication : ' . $s . '</p>';
+                        }
+                        if($i == 2){
+                            echo'<p class="card-text"> Version : ' . $s . '</p>';
+                        }
+                            $i++; 
                     }
-                    echo '<button type="button" class="btn btn-sm btn-outline-secondary"> Télécharger </button>'; //pq ça s'affiche pas ??? t bizarre
+                    echo '<button type="button" class="btn btn-sm btn-outline-secondary"> Télécharger </button>';
                     echo '<button type="button" class="btn btn-sm btn-outline-secondary"> Code source </button>';
                     echo '</div>';
                     echo '</div>';

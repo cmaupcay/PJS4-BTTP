@@ -11,13 +11,13 @@ namespace BTTP
                 template <class _Type>
                 TMessage<_Type>::TMessage(
                         const _Type type, 
-                        const IMessage* message, const Cle::Publique destinataire,
-                        const Identite* signataire, const std::string mdp
+                        const IMessage& message, const Cle::Publique destinataire,
+                        const Identite& signataire, const std::string mdp
                     )
                     : Messages::TMessage<_Type>(type)
                 { 
                     this->_destinataire = destinataire.empreinte();
-                    this->_message = signataire->chiffrer(message->construire(), destinataire, mdp);
+                    this->_message = signataire.chiffrer(message.construire(), destinataire, mdp);
                 }
 
                 template <class _Type>

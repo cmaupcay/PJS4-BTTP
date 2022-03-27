@@ -40,8 +40,8 @@ namespace BTTP
                      * @param mdp Mot de passe du signataire.
                      */
                     Ouverture(
-                        const IMessage* message, const Cle::Publique destinataire,
-                        const Identite* signataire, const std::string mdp
+                        const IMessage& message, const Cle::Publique destinataire,
+                        const Identite& signataire, const std::string mdp
                     ) : Message(Type::OUVERTURE, message, destinataire, signataire, mdp)
                     {}
 

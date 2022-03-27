@@ -39,8 +39,8 @@ namespace BTTP
                      * @param mdp Mot de passe du signataire.
                      */
                     Relais(
-                        const IMessage* message, const Cle::Publique destinataire,
-                        const Identite* signataire, const std::string mdp
+                        const IMessage& message, const Cle::Publique destinataire,
+                        const Identite& signataire, const std::string mdp
                     ) : Message(Type::RELAIS, message, destinataire, signataire, mdp)
                     {}
 

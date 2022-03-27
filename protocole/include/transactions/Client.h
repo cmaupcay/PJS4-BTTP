@@ -31,7 +31,7 @@ namespace BTTP
                  * @param mdp Mot de passe de l'identité locale.
                  * @return const std::string Paquet à envoyer.
                  */
-                const std::string preparer(const Messages::IMessage* message, const std::string& mdp) const;
+                const std::string preparer(const Messages::IMessage& message, const std::string& mdp) const;
 
             protected:
                 /**
@@ -42,8 +42,8 @@ namespace BTTP
                  * @param connexion_controleur Connexion réseau avec l'appareil de contrôle.
                  */
                 Client(
-                    const Identite* identite,
-                    const Cle::Publique& controleur, IConnexion* connexion_controleur
+                    const Identite& identite,
+                    const Cle::Publique& controleur, IConnexion& connexion_controleur
                 );
 
                 // TOTEST
@@ -90,8 +90,8 @@ namespace BTTP
                  * @param connexion_controleur Connexion réseau avec l'appareil de contrôle.
                  */
                 Client(
-                    const Identite* identite, const Cle::Publique& distant, 
-                    const Cle::Publique& controleur, IConnexion* connexion_controleur
+                    const Identite& identite, const Cle::Publique& distant, 
+                    const Cle::Publique& controleur, IConnexion& connexion_controleur
                 );
 
                 // TOTEST Envoi de message
@@ -102,7 +102,7 @@ namespace BTTP
                  * 
                  * @throws BTTP::Erreur::Transactions::Fermee La transaction n'est pas ouverte.
                  */
-                void envoyer(const Messages::IMessage* message, const std::string mdp);
+                void envoyer(const Messages::IMessage& message, const std::string mdp);
 
                 // TOTEST Réception de message
                 /**

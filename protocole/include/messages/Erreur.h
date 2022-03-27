@@ -25,7 +25,7 @@ namespace BTTP
                 /**
                  * @brief Code numérique associé à l'erreur.
                  */
-                int* _code;
+                int _code;
 
                 /**
                  * @brief Retourne le contenu du message.
@@ -44,7 +44,7 @@ namespace BTTP
                  * @brief Construction d'un nouveau message à partir de l'identifiant du message d'exécution auquel répond ce message. 
                  * @param erreur Erreur à sérialiser.
                  */
-                Erreur(const BTTP::Erreur* erreur);
+                Erreur(const BTTP::Erreur& erreur);
                 /**
                  * @brief Construction d'un message vide.
                  */
@@ -71,7 +71,7 @@ namespace BTTP
                  * @brief Retourne le code numérique de l'erreur.
                  * @return const int& Code numérique associé à l'erreur.
                  */
-                inline const int& code() const { return *this->_code; }
+                inline const int& code() const { return this->_code; }
             };
         }
     }

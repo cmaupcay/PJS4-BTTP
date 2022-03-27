@@ -49,8 +49,8 @@ namespace BTTP
                      */
                     TMessage(
                         const _Type type, 
-                        const IMessage* message, const Cle::Publique destinataire,
-                        const Identite* signataire, const std::string mdp
+                        const IMessage& message, const Cle::Publique destinataire,
+                        const Identite& signataire, const std::string mdp
                     );
                     /**
                      * @brief Construction d'un nouveau message de contrôle à partir d'un paquet.
@@ -139,8 +139,8 @@ namespace BTTP
                      */
                     Message(
                         const Type type, 
-                        const IMessage* message, const Cle::Publique destinataire,
-                        const Identite* signataire, const std::string mdp
+                        const IMessage& message, const Cle::Publique destinataire,
+                        const Identite& signataire, const std::string mdp
                     ) : TMessage<Type>(type, message, destinataire, signataire, mdp)
                     {}
 

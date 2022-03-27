@@ -30,7 +30,7 @@ namespace BTTP
                 const Cle::Publique& _distant;
                 
                 /** Connexion réseau avec l'appareil distant. */
-                IConnexion* _connexion_distant;
+                IConnexion& _connexion_distant;
                 
                 /** Message à relayer à l'appareil distant. */
                 std::string _message_a_relayer_a_distant;
@@ -60,7 +60,7 @@ namespace BTTP
                  * @return true Un message a été lu et enregistré.
                  * @return false Aucun message n'a été lu.
                  */
-                const bool prochain_message(std::string& stockage_message, IConnexion* connexion);
+                const bool prochain_message(std::string& stockage_message, IConnexion& connexion);
 
                 // TOTEST
                 /**
@@ -85,7 +85,7 @@ namespace BTTP
                  * @return true Le message a été relayé.
                  * @return false Le message est vide et n'a pas été relayé.
                  */
-                const bool relayer(const Cle::Publique& destinataire, IConnexion* connexion, std::string& message, const std::string mdp);
+                const bool relayer(const Cle::Publique& destinataire, IConnexion& connexion, std::string& message, const std::string mdp);
 
             protected:
                 /**
@@ -107,9 +107,9 @@ namespace BTTP
                  * @param connexion_distant Connexion réseau avce l'appareil distant.
                  */
                 Controle(
-                    const Identite* identite, const std::string& message_ouverture,
-                    const Cle::Publique& client, IConnexion* connexion_client, 
-                    const Cle::Publique& distant, IConnexion* connexion_distant
+                    const Identite& identite, const std::string& message_ouverture,
+                    const Cle::Publique& client, IConnexion& connexion_client, 
+                    const Cle::Publique& distant, IConnexion& connexion_distant
                 );
 
                 /**
@@ -118,7 +118,7 @@ namespace BTTP
                  * @return false Aucun message n'a été lu.
                  */
                 inline const bool prochain_message_client()
-                { return this->prochain_message(this->_message_a_relayer_a_distant, &this->connexion()); }
+                { return this->prochain_message(this->_message_a_relayer_a_distant, this->connexion()); }
                 /**
                  * @brief Lit l'entête du dernier message reçu de la part de l'appareil client.
                  * @param mdp Mot de passe de l'identité locale.
@@ -156,7 +156,7 @@ namespace BTTP
                  * @return false Le message cible est vide.
                  */
                 inline const bool relayer_a_client(const std::string mdp)
-                { return this->relayer(this->_client, &this->connexion(), this->_message_a_relayer_a_client, mdp); }
+                { return this->relayer(this->_client, this->connexion(), this->_message_a_relayer_a_client, mdp); }
 
             };
         }

@@ -32,7 +32,7 @@ namespace BTTP
             const Script ajouter(
                 const std::string nom, const std::string contenu,
                 const Serveurs::Serveur& serveur,
-                const Protocole::Identite* identite, const std::string mdp,
+                const Protocole::Identite& identite, const std::string mdp,
                 const std::string dossier = BTTP_SCRIPT_DOSSIER, 
                 const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT,
                 const bool creer_chemin = BTTP_CREATION_CHEMIN_PAR_DEFAUT
@@ -52,7 +52,7 @@ namespace BTTP
             const bool supprimer(
                 const Script script,
                 const Serveurs::Serveur& serveur,
-                const Protocole::Identite* identite, const std::string mdp,
+                const Protocole::Identite& identite, const std::string mdp,
                 const std::string dossier = BTTP_SCRIPT_DOSSIER, 
                 const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT
             );

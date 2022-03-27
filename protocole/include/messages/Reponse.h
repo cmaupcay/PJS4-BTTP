@@ -35,6 +35,9 @@ namespace BTTP
                  */
                 void deconstruction(const std::string contenu) override;
 
+            protected:
+                inline void ajouter_data(const std::string data) { this->_data += data; }
+
             public:
                 /**
                  * @brief Construction du message à partir du nom du champs et des données associées.

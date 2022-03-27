@@ -17,7 +17,7 @@ namespace BTTP
                     ReponseEmpreinteCle(const Protocole::Cle::Publique& cle)
                         : Protocole::Messages::Reponse(
                             BTTP_DEMANDE_EMPREINTE_CLE,
-                            cle.fingerprint()
+                            cle.empreinte()
                         )
                     {}
 

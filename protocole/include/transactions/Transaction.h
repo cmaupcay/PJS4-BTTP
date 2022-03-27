@@ -51,10 +51,10 @@ namespace BTTP
                 bool _ouverte;
 
                 /** Connexion réseau. */
-                IConnexion* _connexion;
+                IConnexion& _connexion;
 
                 /** Identité locale. */
-                const Identite* _identite;
+                const Identite& _identite;
 
             protected:
                 /**
@@ -63,18 +63,18 @@ namespace BTTP
                  * @param connexion Connexion réseau à utiliser.
                  * @param identite Identité locale.
                  */
-                _Transaction(IConnexion* connexion, const Identite* identite);
+                _Transaction(IConnexion& connexion, const Identite& identite);
 
                 /**
                  * @brief Retourne l'identité locale utilisée par la transaction.
                  * @return const Identite& Identité locale.
                  */
-                inline const Identite& identite() const { return *this->_identite; }
+                inline const Identite& identite() const { return this->_identite; }
                 /**
                  * @brief Retourne la connexion réseau utilisée par la transaction.
                  * @return IConnexion& Connexion réseau.
                  */
-                inline IConnexion& connexion() const { return *this->_connexion; }
+                inline IConnexion& connexion() const { return this->_connexion; }
 
                 /**
                  * @brief Procédure d'ouverture de la transaction.

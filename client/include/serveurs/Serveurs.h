@@ -3,6 +3,9 @@
 
 #include "Serveur.h"
 #include "../Fichiers.h"
+#include "messages/ReponseAppareils.h"
+#include "messages/ReponseScripts.h"
+
 
 namespace BTTP
 {
@@ -23,7 +26,7 @@ namespace BTTP
              */
             const bool ajout(
                 Serveur& serveur,
-                const Protocole::Identite* identite, const std::string mdp,
+                const Protocole::Identite& identite, const std::string mdp,
                 const std::string dossier = BTTP_SERVEUR_DOSSIER, 
                 const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT,
                 const bool creer_chemin = BTTP_CREATION_CHEMIN_PAR_DEFAUT
@@ -69,6 +72,25 @@ namespace BTTP
                 const std::string dossier = BTTP_SERVEUR_DOSSIER, 
                 const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT
             );
+        
+            /**
+             * @brief Demande au serveur la liste des appareils distants disponibles associés à l'identité locale.
+             * @param serveur Serveur de contrôle.
+             * @param identite Identité locale.
+             * @param mdp Mot de passe de l'identité locale.
+             * @return const std::vector<Appareil> Liste des appareils distants disponibles.
+             */
+            const std::vector<Appareil> appareils(const Serveur& serveur, const Protocole::Identite& identite, const std::string mdp);
+
+            /**
+             * @brief Demande au serveur la liste des scripts disponibles sur l'appareil distant cible.
+             * @param appareil Appareil distant cible.
+             * @param serveur Serveur de contrôle.
+             * @param identite Identité locale.
+             * @param mdp Mot de passe de l'identité locale.
+             * @return const std::vector<Script> Liste des scripts disponibles sur l'appareil cible.
+             */
+            const std::vector<Script> scripts(const Appareil& appareil, const Serveur& serveur, const Protocole::Identite& identite, const std::string mdp);
         }
     }
 }

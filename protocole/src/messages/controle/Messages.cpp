@@ -25,9 +25,9 @@ namespace BTTP
                     return nullptr;
                 }
 
-                Message* generer(const IMessage* message, const Cle::Publique destinataire, const Identite* signataire, const std::string mdp)
+                Message* generer(const IMessage& message, const Cle::Publique destinataire, const Identite& signataire, const std::string mdp)
                 {
-                    switch (message->type_c())
+                    switch (message.type_c())
                     {
                     case static_cast<char>(Messages::Type::OUVERTURE):
                         return new Ouverture(message, destinataire, signataire, mdp);

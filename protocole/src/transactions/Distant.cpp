@@ -28,28 +28,29 @@ namespace BTTP
                         reponse = new Messages::Pret();
                     }
                     else reponse = new Messages::Erreur(
-                        new Erreur::Identite::Dechiffrement(
+                        Erreur::Identite::Dechiffrement(
                             "La signature du message d'ouverture n'est pas valide.",
                             message_ouverture.clair()
                         )
                     );
                 }
                 else reponse = new Messages::Erreur(
-                    new Erreur::Transactions::OuvertureNonAutorisee(&message_ouverture_clair)
+                    Erreur::Transactions::OuvertureNonAutorisee(&message_ouverture_clair)
                 );
-                this->envoyer(reponse, mdp);
+                this->envoyer(*reponse, mdp);
+                delete reponse;
             }
 
             void Distant::fermeture(const std::string& mdp)
             {
                 // Envoi du message de confirmation.
                 const Messages::Pret message;
-                this->envoyer(&message, mdp);
+                this->envoyer(message, mdp);
             }
 
             Distant::Distant(
-                const Identite* identite, const std::string& message_ouverture,
-                const Cle::Publique& controleur, IConnexion* connexion_controleur
+                const Identite& identite, const std::string& message_ouverture,
+                const Cle::Publique& controleur, IConnexion& connexion_controleur
             )
                 : Client(identite, controleur, connexion_controleur),
                 _message_ouverture{ message_ouverture }

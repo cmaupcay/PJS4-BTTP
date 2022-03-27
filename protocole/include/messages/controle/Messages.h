@@ -36,8 +36,8 @@ namespace BTTP
                  * @return Message* Message contruit.
                  */
                 Message* generer(
-                    const IMessage* message, const Cle::Publique destinataire,
-                    const Identite* signataire, const std::string mdp
+                    const IMessage& message, const Cle::Publique destinataire,
+                    const Identite& signataire, const std::string mdp
                 );
             }
         }

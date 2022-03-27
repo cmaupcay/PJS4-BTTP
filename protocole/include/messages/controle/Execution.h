@@ -45,8 +45,8 @@ namespace BTTP
                      * @param mdp Mot de passe du signataire.
                      */
                     Execution(
-                        const IMessage* message, const Cle::Publique destinataire,
-                        const Identite* signataire, const std::string mdp
+                        const IMessage& message, const Cle::Publique destinataire,
+                        const Identite& signataire, const std::string mdp
                     );
                     /**
                      * @brief Construction d'un nouveau message de contrôle à partir d'un paquet.

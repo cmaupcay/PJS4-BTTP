@@ -54,8 +54,8 @@ namespace BTTP
                  * @param connexion_controleur Connexion réseau avec l'appareil de contrôle.
                  */
                 Distant(
-                    const Identite* identite, const std::string& message_ouverture,
-                    const Cle::Publique& controleur, IConnexion* connexion_controleur
+                    const Identite& identite, const std::string& message_ouverture,
+                    const Cle::Publique& controleur, IConnexion& connexion_controleur
                 );
 
                 /**

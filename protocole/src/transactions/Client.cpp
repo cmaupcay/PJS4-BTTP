@@ -6,10 +6,10 @@ namespace BTTP
     {
         namespace Transactions
         {
-            const std::string Client::preparer(const Messages::IMessage* message, const std::string& mdp) const
+            const std::string Client::preparer(const Messages::IMessage& message, const std::string& mdp) const
             {
                 // Génération du message de contrôle adapté au message passé en paramètre
-                const std::string message_controle = (Messages::Controle::generer(message, *this->_distant, &this->identite(), mdp))->construire();
+                const std::string message_controle = (Messages::Controle::generer(message, *this->_distant, this->identite(), mdp))->construire();
                 // Chiffrement de l'entete du message
                 return this->identite().chiffrer(extraire_entete(message_controle), this->_controleur, mdp)
                        + BTTP_MESSAGE_CONTROLE_SEP + retirer_entete(message_controle);
@@ -19,7 +19,7 @@ namespace BTTP
             {
                 // Envoi du message d'ouverture.
                 const Messages::Ouverture message{ *this->_distant, this->identite().cle_publique() };
-                this->envoyer(&message, mdp);
+                this->envoyer(message, mdp);
                 // Attente de la réponse du terminal distant.
                 const Messages::IMessage* reponse = this->recevoir(mdp);
                 // Si le message reçu n'est pas de type PRET, on lève une erreur.
@@ -31,7 +31,7 @@ namespace BTTP
             {
                 // Envoi du message de fermeture.
                 const Messages::Fermeture message;
-                this->envoyer(&message, mdp);
+                this->envoyer(message, mdp);
                 // Attente de la réponse du terminal distant.
                 const Messages::IMessage* reponse = this->recevoir(mdp);
                 // Si le message reçu n'est pas de type PRET, on lève une erreur.
@@ -40,22 +40,22 @@ namespace BTTP
             }
 
             Client::Client(
-                const Identite* identite,
-                const Cle::Publique& controleur, IConnexion* connexion_controleur
+                const Identite& identite,
+                const Cle::Publique& controleur, IConnexion& connexion_controleur
             )
                 : _Transaction(connexion_controleur, identite), 
                 _distant{ nullptr }, _controleur{ controleur }
             {}
 
             Client::Client(
-                const Identite* identite, const Cle::Publique& distant,
-                const Cle::Publique& controleur, IConnexion* connexion_controleur
+                const Identite& identite, const Cle::Publique& distant,
+                const Cle::Publique& controleur, IConnexion& connexion_controleur
             )
                 : _Transaction(connexion_controleur, identite), 
                 _distant{ &distant }, _controleur{ controleur }
             {}
 
-            void Client::envoyer(const Messages::IMessage* message, const std::string mdp)
+            void Client::envoyer(const Messages::IMessage& message, const std::string mdp)
             {
                 if (!this->ouverte()) throw Erreur::Transactions::Fermee(true);
                 this->connexion().envoyer(this->preparer(message, mdp));

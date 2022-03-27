@@ -17,7 +17,7 @@ namespace BTTP
             static void initialiser(const std::string dossier = "");
             inline static const std::string& dossier() {return _dossier;}
 
-            inline static const Protocole::Identite* identite() { return _id; }
+            inline static const Protocole::Identite& identite() { return *_id; }
             inline static void modifier_identite(const Protocole::Identite* id) { _id = id; }
         };
     }

@@ -2,6 +2,7 @@
 #define H_BTTP_CLIENT_SERVEUR
 
 #include "../Connexion.h"
+#include "Serialisable.h"
 #include "messages/ReponseEmpreinteCle.h"
 #include "messages/ReponseUtilisateur.h"
 #include "messages/ReponseMotDePasse.h"
@@ -15,7 +16,7 @@ namespace BTTP
             /**
              * @brief Représentation d'un serveur BTTP enregistré localement.
              */
-            class Serveur
+            class Serveur : public ISerialisable
             {
             private:
                 /** Nom d'affichage du serveur et nom du fichier local. */
@@ -93,7 +94,7 @@ namespace BTTP
                  * @brief Retourne la connexion réseau avec le serveur.
                  * @return Protocole::IConnexion* Connexion avec le serveur.
                  */
-                inline Protocole::IConnexion* connexion() const { return this->_connexion; }
+                inline Protocole::IConnexion& connexion() const { return *this->_connexion; }
 
                 /**
                  * @brief Indique si l'appareil local a été authenitfié auprès du serveur.
@@ -132,7 +133,7 @@ namespace BTTP
                  * @brief Sérialisation des informations du serveur. Utilisé lors de l'export dans un fichier notamment.
                  * @return const std::string Informations sérialisées du serveur.
                  */
-                const std::string serialiser() const;
+                const std::string serialiser() const override;
 
                 inline const std::string informations() const
                 { return this->_nom + " (" + this->_adresse + ':' + std::to_string(this->_port) + ')'; }

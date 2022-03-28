@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_const, avoid_print, prefer_const_constructors
+
 import 'main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -41,12 +43,12 @@ class _SettingsPage extends State<SettingsPage> {
       backgroundColor: screen,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: bars,
+//        backgroundColor: bars,
         leading: IconButton(
           // ignore: prefer_const_constructors
           icon: Icon(
             Icons.arrow_back,
-            color: Colors.black,
+//           color: Colors.black,
             size: 30,
           ),
           onPressed: () {
@@ -56,26 +58,28 @@ class _SettingsPage extends State<SettingsPage> {
         title: Text(
           'Settings',
           style: GoogleFonts.poppins(
-            color: Colors.white,
+//            color: Colors.white,
             fontSize: 22,
             fontWeight: FontWeight.w800,
           ),
         ),
       ),
-      body: Column(
-        children: [
-          Row(children: const <Widget>[
-            Expanded(
-              child: Text('Dark mode', textAlign: TextAlign.center),
-            ),
-            Expanded(
-              child: ElevatedButton(
-                onPressed: changetheme,
-                child: Text('change'),
-              ),
-            ),
-          ]),
-        ],
+      body: SwitchListTile(
+        title: Text('Mode sombre'),
+        activeColor: Colors.orange,
+        secondary: const Icon(Icons.nightlight_round),
+        value: darkmode,
+        onChanged: (bool value) {
+          print(value);
+          if (value == true) {
+            AdaptiveTheme.of(context).setDark();
+          } else {
+            AdaptiveTheme.of(context).setLight();
+          }
+          setState(() {
+            darkmode = value;
+          });
+        },
       ),
     );
   }

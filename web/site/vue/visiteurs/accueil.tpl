@@ -35,8 +35,13 @@
 						<li class="nav-item">
 							<a class="nav-link" href="?controle=visiteurs&action=produits">Produits</a>
 						</li>
+						<!--
 						<li class="nav-item">
 							<a class="nav-link" href="?controle=visiteurs&action=marketplace">Marketplace</a>
+						</li>
+						-->
+						<li class="nav-item">
+							<a class="nav-link" href="pornhub.com">Marketplace</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="?controle=visiteurs&action=informations">Informations</a>

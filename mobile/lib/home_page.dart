@@ -66,8 +66,8 @@ class HomePageState extends State<HomePage> {
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: this.selectedIndex,
-        backgroundColor: bars,
-        selectedItemColor: Colors.white,
+//        backgroundColor: bars,
+//      selectedItemColor: Colors.white,
         selectedFontSize: 16,
         unselectedItemColor: Colors.grey[400],
         items: [
@@ -133,11 +133,11 @@ class MyScriptsAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: bars,
+//      backgroundColor: bars,
       title: Text(
         'My Scripts',
         style: GoogleFonts.poppins(
-          color: Colors.white,
+//          color: Colors.white,
           fontSize: 22,
           fontWeight: FontWeight.w800,
         ),
@@ -154,7 +154,7 @@ class MyScriptsAppBar extends StatelessWidget implements PreferredSizeWidget {
           },
           icon: Icon(
             Icons.settings,
-            color: Colors.white,
+//            color: Colors.white,
             size: 20,
           ),
         )
@@ -170,11 +170,11 @@ class AddScriptAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: bars,
+//      backgroundColor: bars,
       title: Text(
         'Add Script',
         style: GoogleFonts.poppins(
-          color: Colors.white,
+//          color: Colors.white,
           fontSize: 22,
           fontWeight: FontWeight.w800,
         ),
@@ -184,7 +184,7 @@ class AddScriptAppBar extends StatelessWidget implements PreferredSizeWidget {
           onPressed: null,
           icon: Icon(
             Icons.settings,
-            color: Colors.white,
+//            color: Colors.white,
             size: 20,
           ),
         )
@@ -201,11 +201,11 @@ class MyProfileAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       automaticallyImplyLeading: false,
-      backgroundColor: bars,
+//      backgroundColor: bars,
       title: Text(
         'My Profile',
         style: GoogleFonts.poppins(
-          color: Colors.white,
+//          color: Colors.white,
           fontSize: 22,
           fontWeight: FontWeight.w800,
         ),
@@ -222,7 +222,7 @@ class MyProfileAppBar extends StatelessWidget implements PreferredSizeWidget {
           },
           icon: Icon(
             Icons.settings,
-            color: Colors.white,
+//            color: Colors.white,
             size: 20,
           ),
         )
@@ -240,7 +240,7 @@ class MyScripts extends StatelessWidget {
       title: Text(
         'My Scripts',
         style: GoogleFonts.poppins(
-          color: Colors.white,
+//          color: Colors.white,
           fontSize: 22,
           fontWeight: FontWeight.w800,
         ),
@@ -257,7 +257,7 @@ class MyScripts extends StatelessWidget {
           },
           icon: Icon(
             Icons.settings,
-            color: Colors.white,
+//            color: Colors.white,
             size: 20,
           ),
         )
@@ -302,7 +302,7 @@ class FilScript extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(10),
-      color: screen,
+//      color: screen,
       child: Column(
         children: [
           Column(
@@ -318,7 +318,6 @@ class FilScript extends StatelessWidget {
 
 class ScriptCard extends StatelessWidget {
   final Map scriptData;
-  bool _hasBeenPressed = false;
   ScriptCard(this.scriptData);
   @override
   Widget build(BuildContext context) {
@@ -327,7 +326,7 @@ class ScriptCard extends StatelessWidget {
       height: 230,
       width: double.infinity,
       decoration: BoxDecoration(
-        color: bars,
+//        color: bars,
         borderRadius: BorderRadius.all(Radius.circular(18)),
         boxShadow: [
           BoxShadow(
@@ -387,7 +386,7 @@ class ScriptCard extends StatelessWidget {
                   },
                   icon: Icon(
                     Icons.arrow_forward_ios_rounded,
-                    color: Colors.green,
+                    //                  color: Colors.green,
                     size: 30,
                   ),
                 )
@@ -400,7 +399,7 @@ class ScriptCard extends StatelessWidget {
               onPressed: null,
               icon: Icon(
                 Icons.add_circle_outline,
-                color: Colors.green,
+//                color: Colors.green,
                 size: 30,
               ),
             ),

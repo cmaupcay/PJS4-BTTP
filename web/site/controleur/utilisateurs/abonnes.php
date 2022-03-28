@@ -52,8 +52,9 @@ function appareils() {
                     $i++;
             }
 
-            echo '<a href="#"><button class="btn btn-sm btn-outline-secondary"> Supprimer </button></a>';
-            echo '<a href="#"><button class="btn btn-sm btn-outline-secondary"> Scripts </button></a>';
+            //TODO : faire passer l'id du terminal pour l'envoyer dans la fonction supprimer_terminal
+            echo '<a href="?controle=abonnes?action=supprimer"><button class="btn btn-sm btn-outline-secondary"> Supprimer </button></a>';
+            echo '<a href="?controle=abonnes?action=scripts"><button class="btn btn-sm btn-outline-secondary"> Scripts </button></a>';
 
             echo '</div>';
             echo '</div>';
@@ -62,6 +63,16 @@ function appareils() {
         }
     echo '</div>';
     echo '</div>';
+}
+
+function supprimer($idTerminal) {
+    require './modele/terminal.php';
+
+    supprimer_terminal($idTerminal);
+
+    require_once './modele/appareils.tpl';
+
+    echo 'suppression réussie'; //juste pour tester 
 }
 
 function marketplace() {
@@ -112,7 +123,7 @@ function deconnexion() {
     $_SESSION['profil'] = array();
     setcookie("Jeton", "", time() - 3600);
 
-    $url = "index.php?controle=visiteurs&action=accueil";
+    $url = "?controle=visiteurs&action=accueil";
     header("Location:" . $url);
 
 }

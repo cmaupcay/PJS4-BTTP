@@ -43,26 +43,6 @@
              $msg = utf8_encode("Echec de select : " . $e->getMessage() . "\n");
              die($msg);
          }
-        /*
-        
-
-        require 'connectBD.php';
-
-        $sql = "SELECT * FROM `terminal_client` WHERE id_proprietaire=:id_propritaire";
-
-        try {
-            $commande = $pdo->prepare($sql);
-            $commande->bindParam(":id_proprietaire", $id_proprietaire);
-            $bool = $commande->execute();
-
-            if($bool)
-                $resultat = $commande->fetchAll(PDO::FETCH_ASSOC);
-        } catch(PDOException $e) {
-            $msg = "Echec de select : " . $e->getMessage() . "\n";
-            die($msg);
-        }
-         */
-
     }
 
     //TODO : changer le mot de passe d'un utilisateur

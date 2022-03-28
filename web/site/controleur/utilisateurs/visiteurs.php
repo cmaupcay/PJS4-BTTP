@@ -70,7 +70,7 @@
 
         $scriptsRecuperes = scripts_publiques();
 
-        require './vue/visiteurs/marketplace.tpl';
+        require_once './vue/visiteurs/marketplace.tpl';
 
 
         echo '<div class="container py-5 bg-light">';
@@ -100,7 +100,7 @@
                     echo '<a href="controleur/general/download.php?file=' . $toShow . '"><button class="btn btn-sm btn-outline-secondary">Telecharger</button></a>';
                     
 
-                    echo '<button type="button" class="btn btn-sm btn-outline-secondary"> Code source </button>';
+                    echo '<button type="button" class="btn btn-sm btn-outline-secondary" href=?controle=visiteurs&action=code_source> Code source </button>';
                     readfile($toShow);
                     echo '</div>';
                     echo '</div>';
@@ -109,7 +109,16 @@
                 }
         echo '</div>';
         echo '</div>';
-        
+    }
+
+    //TODO : faire marcher cette fonction lorsqu'on clique sur le bouton "code source"
+    function source() {
+
+        require_once './vue/visiteurs/marketplace.tpl';
+
+        code_source();
+
+
     }
 
     function produits() {

@@ -12,7 +12,7 @@ namespace BTTP
                 {
                     const std::vector<Client::Serveurs::Serveur> serveurs = Client::Serveurs::liste();
                     const size_t n = serveurs.size();
-                    if (n == 0) throw BTTP::Erreur("BTTP/Client/CLI/Commandes/Execution", "Aucun serveur disponible."); // TODO Erreur dédiée.
+                    if (n == 0) throw Erreur::Commandes::Execution::AucunServeur();
                     else if (n == 1) return serveurs[0];
                     else
                     {

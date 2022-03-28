@@ -62,6 +62,7 @@ CREATE TABLE bttp.script_publique (
     id_format INT NOT NULL, /* Identifiant numérique unique du format du script */
     telechargements INT NOT NULL DEFAULT 0, /* Nombre total de téléchargement du script (ajout dans les scripts privés) */ 
     somme INT NOT NULL, /* Somme de contrôle du code source */
+    description VARCHAR(40),
     chemin_code_source VARCHAR(256), /* Chemin du code source sur le serveur */
     PRIMARY KEY(id),
     UNIQUE(nom, id_auteur, id_format), /* Un même utilisateur ne peut pas publier deux scripts ayant le même nom et le même format */

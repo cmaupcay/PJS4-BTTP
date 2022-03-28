@@ -1,17 +1,50 @@
 <?php
 
-
-    //TODO : récupèrele pseudo de la personne connectée
-    function getPseudo() {
+    function getId() {
         
-        $pseudo = isset($_POST['pseudo'])?($_POST['pseudo']):'';
+        require 'connectBD.php';
 
-        return $pseudo;
+        $sql = "SELECT id FROM `utilisateur` WHERE pseudo=:pseudo";
+
+        $resultat = array();
+
+        try {
+            $commande = $pdo->prepare($sql);
+            $commande->bindParam(':pseudo', $_SESSION['pseudo']);
+            $bool = $commande->execute();
+            if($bool) {
+                $resultat = $commande->fetchAll(PDO::FETCH_ASSOC)[0];
+            }
+        } catch(PDOException $e) {
+            $msg = utf8_encode("Echec de select : " . $e->getMessage() . "\n");
+            die($msg);
+        }
+        return $resultat['id'];
     }
 
-    //renvoie la liste des appareils d'un utilisateur à partir de son id 
-    //TOTEST
-    function getAppareils($id_proprietaire, &$resultat) {
+    function getAppareils(){
+
+        require 'connectBD.php';
+
+        $id_proprietaire = getId();
+
+        $resultat = array();
+
+        $sql = "SELECT cle_publique_empreinte, nom, ajout, derniere_connexion FROM `terminal_client` WHERE id_proprietaire=:id_proprietaire";
+         try {
+             $commande = $pdo->prepare($sql);
+             $commande->bindParam(':id_proprietaire', $id_proprietaire);
+             $bool = $commande->execute();
+             if($bool) {
+                 $resultat = $commande->fetchAll(PDO::FETCH_ASSOC);
+             return $resultat;
+            }
+         } catch(PDOException $e) {
+             $msg = utf8_encode("Echec de select : " . $e->getMessage() . "\n");
+             die($msg);
+         }
+        /*
+        
 
         require 'connectBD.php';
 
@@ -28,6 +61,8 @@
             $msg = "Echec de select : " . $e->getMessage() . "\n";
             die($msg);
         }
+         */
+
     }
 
     //TODO : changer le mot de passe d'un utilisateur

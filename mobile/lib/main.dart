@@ -12,7 +12,6 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    /*
     return AdaptiveTheme(
       light: ThemeData(
         brightness: Brightness.light,
@@ -30,21 +29,14 @@ class MyApp extends StatelessWidget {
         darkTheme: darkTheme,
         home: WelcomePage(),
       ),
-    );*/
+    ); /*
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'BTTP',
-      //theme: lightTheme,
-      //darkTheme: darkTheme,
-      //themeMode: _themeManager.themeMode,
+      theme: ThemeData(),
+      darkTheme: ThemeData.dark(),
       home: WelcomePage(),
-    );
-  }
-
-  @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
-    throw UnimplementedError();
+    );*/
   }
 }
 
@@ -69,8 +61,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-*/
-/*
+
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -316,6 +307,4 @@ class MyAppBarTop extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: true,
       backgroundColor: bars,
     );
-  }
-}
-*/
+  }*/

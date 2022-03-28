@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, use_key_in_widget_constructors, prefer_const_constructors_in_immutables, unnecessary_this, prefer_final_fields, unnecessary_new
 
+import 'package:adaptive_theme/adaptive_theme.dart';
+
 import 'main.dart';
 import 'package:flutter/material.dart';
 import 'delayed_animation.dart';
@@ -29,6 +31,8 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
+  bool darkmode = false;
+  dynamic savedThemeMode;
   int selectedIndex = 0;
   Widget _myScripts = MyScripts();
   Widget _addScript = AddScript();
@@ -36,6 +40,23 @@ class HomePageState extends State<HomePage> {
   Widget _myScriptsAppBar = MyScriptsAppBar();
   Widget _addScriptAppBar = AddScriptAppBar();
   Widget _myProfileAppBar = MyProfileAppBar();
+  void initState() {
+    super.initState();
+    getCurrentTheme();
+  }
+
+  Future getCurrentTheme() async {
+    savedThemeMode = await AdaptiveTheme.getThemeMode();
+    if (savedThemeMode.toString() == 'AdaptiveThemeMode.dark') {
+      setState(() {
+        darkmode = true;
+      });
+    } else {
+      setState(() {
+        darkmode = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

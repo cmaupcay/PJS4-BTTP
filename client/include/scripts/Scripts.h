@@ -8,6 +8,8 @@
 
 #include "erreur/Execution.h"
 #include "erreur/Ajout.h"
+#include "erreur/Inexistant.h"
+#include "erreur/SupressionFichierSortie.h"
 
 namespace BTTP
 {

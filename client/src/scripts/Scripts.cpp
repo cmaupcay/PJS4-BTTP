@@ -41,8 +41,7 @@ namespace BTTP
 
                 // Suppression du fichier local s'il existe.
                 try {Fichiers::supprimer(script.reference(), dossier, utiliser_contexte);}
-                catch (Erreur::Fichiers::Inexistant& e) {} // TODO Erreur supression script
-
+                catch (Erreur::Fichiers::Inexistant& e) { throw Erreur::Scripts::Inexistant(script); }
                 const Messages::DemandeSuppression message{ script };
                 serveur.connexion().envoyer(
                     identite.chiffrer(message.construire(), serveur.cle(), mdp)
@@ -77,7 +76,7 @@ namespace BTTP
                         Fichiers::supprimer(nom_fichier_sortie, dossier, utiliser_contexte);
                         return sortie;
                     }
-                    catch (Erreur::Fichiers::Inexistant& e) {}  // TODO Erreur suppression fichier_sortie script
+                    catch (Erreur::Fichiers::Inexistant& e) { throw Erreur::Scripts::SupressionFichierSortie(nom_fichier_sortie); } 
                 }
                 throw Erreur::Scripts::Execution(script);
             }

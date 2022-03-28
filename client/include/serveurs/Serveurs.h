@@ -5,6 +5,7 @@
 #include "../Fichiers.h"
 #include "messages/ReponseAppareils.h"
 #include "messages/ReponseScripts.h"
+#include "serveurs/erreur/DejaPresent.h"
 
 
 namespace BTTP
@@ -13,7 +14,6 @@ namespace BTTP
     {
         namespace Serveurs
         {
-            // TODO Peut-être remplacer le booléen par void et lever des exceptions en cas d'erreur.
             /**
              * @brief Ajout d'un serveur de contrôle et récupération de la clé publique. L'appareil s'annonce au serveur.
              * @param serveur Serveur de contrôle à ajouter et dont on souhaite mettre à jour la clé publique enregistrée localement.

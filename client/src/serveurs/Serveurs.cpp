@@ -15,7 +15,7 @@ namespace BTTP
             )
             {
                 // Vérification de l'inexistence du serveur dans les fichiers.
-                if (Fichiers::existe(serveur.nom(), dossier, utiliser_contexte)) {} // TODO Erreur serveur déjà présent;
+                if (Fichiers::existe(serveur.nom(), dossier, utiliser_contexte)) throw Erreur::Serveurs::DejaPresent(serveur);
                 // Ouverture de la connexion.
                 if (!serveur.connexion().ouverte()) serveur.connexion().ouvrir();
                 // Récéption de la clé publique du serveur (envoyée en clair).

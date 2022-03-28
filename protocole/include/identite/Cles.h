@@ -63,7 +63,7 @@ namespace BTTP
                  * @brief Retourne l'empreinte permettant d'identifier la clé publique.
                  * @return const std::string Empreinte de la clé.
                  */
-                inline const std::string empreinte() const { return this->fingerprint(); }
+                inline const std::string empreinte() const { return hexlify(this->fingerprint()); }
 
                 /**
                  * @brief Retourne la clé en un format exportable PGP.
@@ -88,7 +88,7 @@ namespace BTTP
                  * @brief Retourne l'empreinte permettant d'identifier la clé privéee.
                  * @return const std::string Empreinte de la clé.
                  */
-                inline const std::string empreinte() const { return this->fingerprint(); }
+                inline const std::string empreinte() const { return hexlify(this->fingerprint()); }
 
                 /**
                  * @brief Retourne la clé en un format exportable PGP.

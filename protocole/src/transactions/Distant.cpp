@@ -6,6 +6,14 @@ namespace BTTP
     {
         namespace Transactions
         {
+            const bool Distant::verifier_autorisation(const Cle::Publique cle) const
+            {
+                const std::string empreinte = cle.empreinte();
+                for (const std::string& cle : this->_cles_autorisees)
+                    if (empreinte == cle) return true;
+                return false;
+            }
+
             void Distant::ouverture(const std::string& mdp)
             {
                 const Identite::MessageNonVerifie message_ouverture{
@@ -50,10 +58,11 @@ namespace BTTP
 
             Distant::Distant(
                 const Identite& identite, const std::string& message_ouverture,
-                const Cle::Publique& controleur, IConnexion& connexion_controleur
+                const Cle::Publique& controleur, IConnexion& connexion_controleur,
+                const std::vector<std::string>& cles_autorisees
             )
                 : Client(identite, controleur, connexion_controleur),
-                _message_ouverture{ message_ouverture }
+                _message_ouverture{ message_ouverture }, _cles_autorisees{ cles_autorisees }
             {}
         }
     }

@@ -31,7 +31,7 @@ namespace BTTP
                      */
                     Dechiffrement(const std::string details, const std::string& message_echec)
                         : Erreur(
-                            "Identite/Dechiffrement", "Le déchiffrement du message à donné un résultat invalide.\n\tDétails : " + details,
+                            "Identite/Dechiffrement", "Le déchiffrement du message a donné un résultat invalide.\n\tDétails : " + details,
                             BTTP_IDENTITE_DECHIFFREMENT_CODE
                         ), _message_echec{ message_echec }
                     {}

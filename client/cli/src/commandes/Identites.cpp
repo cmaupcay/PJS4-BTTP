@@ -26,7 +26,7 @@ namespace BTTP
                 const int Identites::ajout(const std::string cible) const
                 {
                     if (Client::Identites::existe(cible)) throw Erreur::Commandes::Identites::DejaExistante(cible);
-                    Console::afficher("> Nouvelle identité nommée '" + cible + "' : ");
+                    Console::afficher("> Nouvelle identité nommée \"" + cible + "\" : ");
                     const std::string contact = Console::demander("\tContact associé : ");
                     // TODO Créer une fonction permettant de taper un mot de passe dans le terminal et demander confirmation du mot de passe.
                     const std::string mdp = Console::demander("\tMot de passe : ");
@@ -40,7 +40,7 @@ namespace BTTP
 
                 const int Identites::suppression(const std::string cible) const
                 {
-                    Console::afficher("> Suppression de l'identité '" + cible + "'...");
+                    Console::afficher("> Suppression de l'identité \"" + cible + "\"...");
                     // TODO Demander mot de passe de l'identité ?
                     if (Client::Identites::supprimer(cible))
                     {
@@ -48,6 +48,19 @@ namespace BTTP
                         return 0;
                     }
                     else throw Erreur::Commandes::Identites::Inexistante(cible);
+                }
+
+                const int Identites::exportation(const std::string cible) const
+                {
+                    // TODO Demander mot de passe de l'identité ?
+                    Protocole::Identite identite = Client::Identites::importer(cible);
+                    Console::afficher("> Identité importée.");
+                    Console::afficher("> Exportation de l'identité \"" + cible + "\"...");
+                    std::string destination = Console::demander("\tDossier de destination : ");
+                    if (destination.size() == 0) destination = ".";
+                    Fichiers::ecrire(identite.cle_publique().exporter(false), cible, destination, false, true, false, true);
+                    Console::afficher("> Identité exportée.");
+                    return 0;
                 }
 
                 const int Identites::executer(const int argc, const char** argv) const
@@ -60,13 +73,24 @@ namespace BTTP
                             return this->ajout(argv[3]);
                         else if (strcmp(argv[2], BTTP_COMMANDE_IDENTITES_SUPPRESSION) == 0)
                             return this->suppression(argv[3]);
+                        else if (strcmp(argv[2], BTTP_COMMANDE_IDENTITES_EXPORT) == 0)
+                            return this->exportation(argv[3]);
                     }
                     throw Erreur::Commandes::Syntaxe(this);
                 }
 
                 const std::string Identites::aide() const
                 {
-                    return "Usage : bttp-cli id [+|- nom]";
+                    std::string aide = "Usage : bttp-cli ";
+                    aide += BTTP_COMMANDE_IDENTITES;
+                    aide += " [";
+                    aide += BTTP_COMMANDE_IDENTITES_AJOUT;
+                    aide += "|";
+                    aide += BTTP_COMMANDE_IDENTITES_SUPPRESSION;
+                    aide += "|";
+                    aide += BTTP_COMMANDE_IDENTITES_EXPORT;
+                    aide += " <nom>]";
+                    return aide;
                 }
             }
         }

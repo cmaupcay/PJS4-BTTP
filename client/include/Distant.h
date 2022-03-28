@@ -1,8 +1,6 @@
 #ifndef H_BTTP_CLIENT_DISTANT
 #define H_BTTP_CLIENT_DISTANT
 
-#include <thread>
-
 #include "serveurs/Serveur.h"
 #include "transactions/Distant.h"
 

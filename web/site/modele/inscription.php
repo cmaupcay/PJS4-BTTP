@@ -1,10 +1,13 @@
 <?php
 
+
+
     /**
      * Vérifie s'il n'y a pas déjà un utilisateur avec le même pseudo
      */
     function verif_inscription($pseudo) {
-        require('connectBD.php');
+        $RACINE = "C:\wamp64\www\PJS4\web\site";
+        require $RACINE . '/modele/connectBD.php';
 
         $sql = "SELECT id FROM `utilisateur` WHERE pseudo=:pseudo";
 
@@ -30,7 +33,8 @@
      * insert dans la bd le nouvel utilisateur
      */
     function insertion_bd($pseudo, $mdp) {
-        require('connectBD.php');
+        $RACINE = "C:\wamp64\www\PJS4\web\site";
+        require $RACINE . '/modele/connectBD.php';
 
         $sql = "INSERT INTO `utilisateur` (pseudo, mdp) VALUES (:pseudo, :mdp)";
 

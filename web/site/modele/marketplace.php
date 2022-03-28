@@ -1,9 +1,8 @@
 <?php
-    
 
     function scripts_publiques(&$resultat = array()){
-
-        require('connectBD.php');
+        $RACINE = "C:\wamp64\www\PJS4\web\site";
+        require $RACINE . '/modele/connectBD.php';
 
         $sql = " SELECT nom, publication, `version`, chemin_code_source FROM `script_publique`";
         try {

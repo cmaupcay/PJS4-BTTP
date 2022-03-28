@@ -1,8 +1,11 @@
 <?php
 
+
+
 function verif_utilisateur($pseudo, $mdp, &$resultat = array())
 {
-    require('connectBD.php');
+    $RACINE = "C:\wamp64\www\PJS4\web\site";
+    require $RACINE . '/modele/connectBD.php';
 
     $sql = 'SELECT * FROM `utilisateur` WHERE `pseudo`=:pseudo AND `mdp`=:mdp';
 

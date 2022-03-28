@@ -1,8 +1,8 @@
 <?php
 
     function getId() {
-        
-        require 'connectBD.php';
+        $RACINE = "C:\wamp64\www\PJS4\web\site";
+        require $RACINE . '/modele/connectBD.php';
 
         $sql = "SELECT id FROM `utilisateur` WHERE pseudo=:pseudo";
 
@@ -23,14 +23,14 @@
     }
 
     function getAppareils(){
-
-        require 'connectBD.php';
+        $RACINE = "C:\wamp64\www\PJS4\web\site";
+        require $RACINE . '/modele/connectBD.php';
 
         $id_proprietaire = getId();
 
         $resultat = array();
 
-        $sql = "SELECT cle_publique_empreinte, nom, ajout, derniere_connexion FROM `terminal_client` WHERE id_proprietaire=:id_proprietaire";
+        $sql = "SELECT cle_publique, nom, ajout, derniere_connexion, id FROM `terminal_client` WHERE id_proprietaire=:id_proprietaire";
          try {
              $commande = $pdo->prepare($sql);
              $commande->bindParam(':id_proprietaire', $id_proprietaire);
@@ -51,8 +51,8 @@
     }
 
     function nb_apapreils($id_proprietaire) {
-
-        require 'connectBD.php';
+        $RACINE = "C:\wamp64\www\PJS4\web\site";
+        require $RACINE . '/modele/connectBD.php';
 
         $sql = "SELECT COUNT(*) FROM `terminal_client` WHERE id_proprietaire=:id_proprietaire";
 

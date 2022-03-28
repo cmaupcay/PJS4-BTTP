@@ -6,7 +6,7 @@ namespace BTTP
     {
         namespace Scripts
         {
-            Script::Script(const Serveurs::Serveur& serveur, const uint64_t id, const std::string nom)
+            Script::Script(const Serveurs::Serveur& serveur, const uint32_t id, const std::string nom)
                 : _serveur{ serveur }, _id{ id }, _nom{ nom }
             {}
 
@@ -14,7 +14,7 @@ namespace BTTP
                 : _serveur{ serveur }
             {
                 const std::vector<std::string> elements = Protocole::Messages::decouper(reference, '.');
-                this->_id = (uint64_t)std::atol(elements[0].c_str());
+                this->_id = (uint32_t)std::atol(elements[0].c_str());
                 this->_nom = elements[1];
             }
         }

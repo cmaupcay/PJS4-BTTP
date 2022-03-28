@@ -5,7 +5,7 @@ namespace BTTP
     namespace Client 
     {
         std::string Contexte::_dossier = "";
-        const Protocole::Identite* Contexte::_id = nullptr;
+        std::shared_ptr<Protocole::Identite> Contexte::_id = nullptr;
 
         void Contexte::initialiser(const std::string dossier)
         {

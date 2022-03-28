@@ -29,7 +29,7 @@ namespace BTTP
                         )
                     {}
 
-                    inline const uint64_t id_script() const { return std::atol(this->args()[0].valeur.c_str()); }
+                    inline const uint32_t id_script() const { return std::atoi(this->args()[0].valeur.c_str()); }
                 };
             }
         }

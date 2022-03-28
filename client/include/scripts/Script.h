@@ -15,7 +15,7 @@ namespace BTTP
                 /** Serveur de référence du script. */
                 const Serveurs::Serveur& _serveur;
                 /** Identifiant numérique du script commun avec le serveur. */
-                uint64_t _id;
+                uint32_t _id;
                 /** Nom d'affichage du script. */
                 std::string _nom;
             
@@ -27,7 +27,7 @@ namespace BTTP
                  * @param id Identifiant numérique unique et commun avec le serveur.
                  * @param nom Nom d'affichage du script.
                  */
-                Script(const Serveurs::Serveur& serveur, const uint64_t id, const std::string nom);
+                Script(const Serveurs::Serveur& serveur, const uint32_t id, const std::string nom);
 
                 // TOTEST
                 /**
@@ -45,9 +45,9 @@ namespace BTTP
 
                 /**
                  * @brief Retourne l'identifiant numérique UNIQUE du script et commun avec le serveur.
-                 * @return const uint64_t& Identifiant numérique du script.
+                 * @return const uint32_t& Identifiant numérique du script.
                  */
-                inline const uint64_t& id() const { return this->_id; }
+                inline const uint32_t& id() const { return this->_id; }
                 /**
                  * @brief Retourne le nom d'affichage du script.
                  * @return const std::string& Nom d'affichage du script.

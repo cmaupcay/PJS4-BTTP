@@ -36,6 +36,7 @@ function appareils() {
             echo('<div class="card mb-4 shadow-sm">');
             echo('<div class="card-body">');
             $i = 0;
+            $toDel;
             foreach($appareil as $ap => $a) {
                 if($i == 0){
                     echo'<p class="card-text"> Empreinte de la clé publique : ' . $a . '</p>';
@@ -49,11 +50,15 @@ function appareils() {
                 if($i == 3){
                     echo'<p class="card-text"> Dernière connexion : ' . $a . '</p>';
                 }
+                if($i == 4){
+                    $toDel = $a;
+                }
                     $i++;
             }
 
             //TODO : faire passer l'id du terminal pour l'envoyer dans la fonction supprimer_terminal
-            echo '<a href="?controle=abonnes?action=supprimer"><button class="btn btn-sm btn-outline-secondary"> Supprimer </button></a>';
+            echo '<a href="controleur/general/delete.php?idTerminal=' . $toDel . '"><button class="btn btn-sm btn-outline-secondary">Supprimer</button></a>';
+
             echo '<a href="?controle=abonnes?action=scripts"><button class="btn btn-sm btn-outline-secondary"> Scripts </button></a>';
 
             echo '</div>';

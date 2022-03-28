@@ -50,34 +50,7 @@
                     <button class="btn btn-outline-secondary" type="submit" style="background-color:#00A8E8; color:aliceblue; width:10em;"> Rechercher </button>
 				</form>
 
-				<?php
-                if(isset($_POST['submit'])) {
-
-                    $scripts = recherche_scripts($_POST['submit']);
-                    foreach($scripts as $script) {
-							echo 'sara';
-                            echo('<div class="col-md-4 col-sm-4">');
-                            echo('<div class="card mb-4 shadow-sm">');
-                            echo('<div class="card-body">');
-                            $i = 0;
-                            foreach($script as $scr => $s) {
-                                if($i == 0){
-                                    echo'<p class="card-text"> Nom : ' . $s . '</p>';
-                                }
-                                if($i == 1){
-                                    echo'<p class="card-text"> Date de publication : ' . $s . '</p>';
-                                }
-                                if($i == 2){
-                                    echo'<p class="card-text"> Version : ' . $s . '</p>';
-                                }
-                                if($i == 3){
-                                    $toShow = $s;
-                                }
-                                    $i++;
-                            }
-                    }
-                }
-				?>
+				
         </div>
 
 </body>

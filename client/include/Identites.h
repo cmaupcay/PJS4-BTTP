@@ -60,12 +60,12 @@ namespace BTTP
              * @return true L'identité a été supprimé.
              * @return false L'identité n'a pas pu être supprimé.
              */
-            inline const bool supprimer(
+            inline void supprimer(
                 const std::string nom,
                 const std::string dossier = BTTP_IDENTITE_DOSSIER,
                 const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT
             )
-            { return Fichiers::supprimer(nom + '.' + BTTP_IDENTITE_EXT, dossier, utiliser_contexte); }
+            { Fichiers::supprimer(nom + '.' + BTTP_IDENTITE_EXT, dossier, utiliser_contexte); }
 
             /**
              * @brief Vérifie l'existence d'une identité locale.

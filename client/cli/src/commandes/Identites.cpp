@@ -38,16 +38,13 @@ namespace BTTP
                     return 0;
                 }
 
-                const int Identites::suppression(const std::string cible) const
+                void Identites::suppression(const std::string cible) const
                 {
                     Console::afficher("> Suppression de l'identité \"" + cible + "\"...");
                     // TODO Demander mot de passe de l'identité ?
-                    if (Client::Identites::supprimer(cible))
-                    {
-                        Console::afficher("> Identité supprimée.");
-                        return 0;
-                    }
-                    else throw Erreur::Commandes::Identites::Inexistante(cible);
+                    try { Client::Identites::supprimer(cible);}
+                    catch (BTTP::Client::Erreur::Fichiers::Inexistant& e) { throw Erreur::Commandes::Identites::Inexistante(cible);}
+                    Console::afficher("> Identité supprimée.");
                 }
 
                 const int Identites::exportation(const std::string cible) const

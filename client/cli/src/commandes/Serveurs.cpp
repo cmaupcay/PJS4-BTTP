@@ -23,7 +23,7 @@ namespace BTTP
 
                 }
 
-                const int Serveurs::ajout(const std::string cible) const
+                void Serveurs::ajout(const std::string cible) const
                 {
                     Console::afficher("> Ajout du serveur \"" + cible + "\" : ");
                     const std::string adresse = Console::demander("\tAdresse : ");
@@ -34,24 +34,18 @@ namespace BTTP
                     Console::afficher("> Ajout du serveur...");
                     const std::string mdp = Console::demander("\tMot de passe de l'identité : ");
                     Console::afficher("> Connexion au serveur...");
-                    if (Client::Serveurs::ajout(serveur, Contexte::identite(), mdp))
-                    {
-                        Console::afficher("> Serveur de contrôle ajouté avec succès.");
-                        return 0;
-                    }
-                    else return -1;
+                    Client::Serveurs::ajout(serveur, Contexte::identite(), mdp);
+                    Console::afficher("> Serveur de contrôle ajouté avec succès.");
+
                 }
 
-                const int Serveurs::suppression(const std::string cible) const
+                void Serveurs::suppression(const std::string cible) const
                 {
                     Console::afficher("> Suppression du serveur \"" + cible + "\"...");
                     const Client::Serveurs::Serveur serveur = Client::Serveurs::charger(cible);
-                    if (Client::Serveurs::suppression(serveur))
-                    {
-                        Console::afficher("> Serveur supprimé avec succès.");
-                        return 0;
-                    }
-                    else return -1;
+                    Client::Serveurs::suppression(serveur);
+                    Console::afficher("> Serveur supprimé avec succès.");
+
                 }
 
                 void Serveurs::executer(const int argc, const char** argv) const

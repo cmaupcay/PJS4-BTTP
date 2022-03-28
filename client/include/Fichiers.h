@@ -132,15 +132,14 @@ namespace BTTP
              * @param fichier Nom du fichier cible.
              * @param dossier Dossier contenant le fichier.
              * @param utiliser_contexte Défini si le chemin est relatif au dossier du contexte client.
-             * @return true Le fichier a été supprimé.
-             * @return false La suppression du fichier a échoué.
+             * @throw Erreur::Fichiers::Inexistant si le fichier n'est pas trouvé
              */
-            inline const bool supprimer(
+            inline void supprimer(
                 const std::string fichier,
                 const std::string dossier = BTTP_DOSSIER,
                 const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT
             )
-            { return std::filesystem::remove(chemin(fichier, dossier, utiliser_contexte)); }
+            { if(!std::filesystem::remove(chemin(fichier, dossier, utiliser_contexte))) throw Erreur::Fichiers::Inexistant(fichier);}
         }
     }
 }

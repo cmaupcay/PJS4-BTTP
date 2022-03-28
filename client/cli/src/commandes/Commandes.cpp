@@ -26,7 +26,11 @@ namespace BTTP
                         for (const Commande* c : com)
                             if (argv[1] == c->nom())
                             {
-                                try { return c->executer(argc, argv); }
+                                try 
+                                { 
+                                    c->executer(argc, argv);
+                                    return EXIT_SUCCESS; 
+                                }
                                 catch (Erreur::Commandes::Syntaxe& err)
                                 {
                                     Console::afficher(c->aide());

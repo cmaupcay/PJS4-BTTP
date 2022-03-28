@@ -19,7 +19,6 @@ namespace BTTP
                     std::string contenu = Fichiers::lire(BTTP_AUTORISATIONS_FICHIER, dossier, false, utiliser_contexte);
                     // contenu = identite.dechiffrer(contenu, identite.cle_publique(), mdp);
                     cles = Protocole::Messages::decouper(contenu, "\n");
-                    std::cout << cles.size() << std::endl;
                 }
                 return cles;
             }

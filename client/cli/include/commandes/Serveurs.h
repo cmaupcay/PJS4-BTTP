@@ -25,7 +25,7 @@ namespace BTTP
                 public:
                     Serveurs() : Commande(BTTP_COMMANDE_SERVEURS) {}
 
-                    const int executer(const int argc, const char** argv) const override;
+                    void executer(const int argc, const char** argv) const override;
                     const std::string aide() const override;
                 };
             }

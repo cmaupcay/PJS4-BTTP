@@ -86,7 +86,7 @@ namespace BTTP
                     }
                 }
 
-                const int Execution::executer(const int argc, const char** argv) const
+                void Execution::executer(const int argc, const char** argv) const
                 {
                     if (argc == 2)
                     {
@@ -116,13 +116,15 @@ namespace BTTP
                                 Console::afficher("\t" + resultat.resultat());
                                 Console::saut();
                             }
-                            return 0;
                         }
-                        return -1; // TODO Erreur dédiée.
-                    }        
-                    
-                    Console::saut();
-                    throw Erreur::Commandes::Syntaxe(this);
+                        // TODO Else Erreur dédiée.
+                    }  
+                    else
+                    {
+                        Console::saut();
+                        throw Erreur::Commandes::Syntaxe(this);
+                    }      
+
                 }
 
                 const std::string Execution::aide() const

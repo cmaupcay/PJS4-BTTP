@@ -63,20 +63,21 @@ namespace BTTP
                     return 0;
                 }
 
-                const int Identites::executer(const int argc, const char** argv) const
+                void Identites::executer(const int argc, const char** argv) const
                 {
                     if (argc == 2)      // Format : bttp-cli id            ->      Affichage de la liste des identités locales.
-                        return this->liste();
+                        this->liste();
                     else if (argc == 4) // Format : bttp-cli id +/- <nom>  ->      Ajout ou suppression d'une identité locale.
                     {
                         if (strcmp(argv[2], BTTP_COMMANDE_IDENTITES_AJOUT) == 0)
-                            return this->ajout(argv[3]);
+                            this->ajout(argv[3]);
                         else if (strcmp(argv[2], BTTP_COMMANDE_IDENTITES_SUPPRESSION) == 0)
-                            return this->suppression(argv[3]);
+                            this->suppression(argv[3]);
                         else if (strcmp(argv[2], BTTP_COMMANDE_IDENTITES_EXPORT) == 0)
-                            return this->exportation(argv[3]);
+                            this->exportation(argv[3]);
+                        else throw Erreur::Commandes::Syntaxe(this);
                     }
-                    throw Erreur::Commandes::Syntaxe(this);
+                    else throw Erreur::Commandes::Syntaxe(this);
                 }
 
                 const std::string Identites::aide() const

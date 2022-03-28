@@ -19,7 +19,7 @@ namespace BTTP
                     Commande(const std::string nom) : _nom{ nom } {}
 
                 public:
-                    virtual const int executer(const int argc, const char** argv) const = 0;
+                    virtual void executer(const int argc, const char** argv) const = 0;
                     virtual const std::string aide() const = 0;
 
                     inline const std::string& nom() const { return this->_nom; }

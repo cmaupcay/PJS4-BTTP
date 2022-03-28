@@ -29,7 +29,7 @@ namespace BTTP
                 public:
                     Identites() : Commande(BTTP_COMMANDE_IDENTITES) {}
 
-                    const int executer(const int argc, const char** argv) const override;
+                    void executer(const int argc, const char** argv) const override;
                     const std::string aide() const override;
                 };
             }

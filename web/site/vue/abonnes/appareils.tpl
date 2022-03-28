@@ -14,9 +14,9 @@
 
 </head>
 
-<body>
+<body style="background-color:#003459">
 
-<div class="container-fluid banner" style="background-color:#003459">
+<div class="container-fluid banner">
 		<div class="row">
 			<div class="col-md-12">
 				<nav class="navbar navbar-md">
@@ -45,60 +45,6 @@
         <h2 class="display-5 text-center" style="padding-top:5%"> Voici tous vos appareils </h2>
 
         <br>
-    <div class="container py-5 bg-light"> 
-
-        <div class="row">
-
-            <div class="col-md-4 col-sm-4">
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-body">
-                        <!--TODO : utiliser une fonction php de modèle qui récupère tous les terminaux d'un utilisateur puis les afficher avec un foreach -->
-                        <p class="card-text"> Nom : PC1 </p>
-                        <p class="card-text"> Etat : Disponible </p>
-
-                        <button type="button" class="btn btn-sm btn-outline-secondary">
-                            Supprimer
-                        </button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">
-                            Scripts
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-4">
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-body">
-                        <!--TODO : utiliser une fonction php de modèle qui récupère tous les terminaux d'un utilisateur puis les afficher avec un foreach -->
-                        <p class="card-text"> Nom : PC2 </p>
-                        <p class="card-text"> Etat : Indisponible </p>
-
-                        <button type="button" class="btn btn-sm btn-outline-secondary">
-                            Supprimer
-                        </button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">
-                            Scripts
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 col-sm-4">
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-body">
-                        <!--TODO : utiliser une fonction php de modèle qui récupère tous les terminaux d'un utilisateur puis les afficher avec un foreach -->
-                        <p class="card-text"> Nom : PC3 </p>
-                        <p class="card-text"> Etat : Disponible </p>
-
-                        <button type="button" class="btn btn-sm btn-outline-secondary">
-                            Supprimer
-                        </button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">
-                            Scripts
-                        </button>
-                    </div>
-                </div>
-            </div>
-    </div>
 
 </body>
 

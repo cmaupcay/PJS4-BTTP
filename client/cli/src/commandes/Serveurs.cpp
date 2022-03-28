@@ -25,7 +25,7 @@ namespace BTTP
 
                 const int Serveurs::ajout(const std::string cible) const
                 {
-                    Console::afficher("> Ajout du serveur '" + cible + "' : ");
+                    Console::afficher("> Ajout du serveur \"" + cible + "\" : ");
                     const std::string adresse = Console::demander("\tAdresse : ");
                     const std::string port = Console::demander(
                         "\tPort de conenxion (" + std::to_string(BTTP_PORT) + " par défaut) : "
@@ -43,7 +43,7 @@ namespace BTTP
 
                 const int Serveurs::suppression(const std::string cible) const
                 {
-                    Console::afficher("> Suppression du serveur '" + cible + "'...");
+                    Console::afficher("> Suppression du serveur \"" + cible + "\"...");
                     const Client::Serveurs::Serveur serveur = Client::Serveurs::charger(cible);
                     if (Client::Serveurs::suppression(serveur))
                     {
@@ -69,7 +69,14 @@ namespace BTTP
 
                 const std::string Serveurs::aide() const
                 {
-                    return "Usage : bttp-cli srv [+|- nom]";
+                    std::string aide = "Usage : bttp-cli ";
+                    aide += BTTP_COMMANDE_SERVEURS;
+                    aide += " [";
+                    aide += BTTP_COMMANDE_SERVEURS_AJOUT;
+                    aide += "|";
+                    aide += BTTP_COMMANDE_SERVEURS_SUPPRESSION;
+                    aide += " <nom>]";
+                    return aide;
                 }
             }
         }

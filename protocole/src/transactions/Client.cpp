@@ -61,7 +61,7 @@ namespace BTTP
                 this->connexion().envoyer(this->preparer(message, mdp));
             }
 
-            const Messages::IMessage* Client::recevoir(const std::string mdp)
+            const std::string Client::recevoir_brut(const std::string mdp)
             {
                 if (!this->ouverte()) throw Erreur::Transactions::Fermee(false);
                 const std::string paquet = this->connexion().recevoir();
@@ -73,7 +73,7 @@ namespace BTTP
                     const std::string contenu = this->identite().dechiffrer(
                         retirer_entete(paquet), *this->_distant, mdp
                     );
-                    return Messages::resoudre(contenu);
+                    return contenu;
                 }
                 else throw new Erreur::Transactions::EnteteInvalide(entete);
             }

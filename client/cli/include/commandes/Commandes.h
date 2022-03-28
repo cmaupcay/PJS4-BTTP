@@ -3,6 +3,7 @@
 
 #include "Serveurs.h"
 #include "Identites.h"
+#include "Autorisations.h"
 
 #include "erreur/Inconnue.h"
 

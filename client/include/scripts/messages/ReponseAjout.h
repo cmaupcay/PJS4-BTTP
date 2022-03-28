@@ -14,7 +14,7 @@ namespace BTTP
                 class ReponseAjout : public Protocole::Messages::Reponse
                 {
                 public:
-                    ReponseAjout(const uint64_t id_script)
+                    ReponseAjout(const uint32_t id_script)
                         : Protocole::Messages::Reponse(
                             BTTP_DEMANDE_SCRIPT_AJOUT,
                             std::to_string(id_script)
@@ -25,7 +25,7 @@ namespace BTTP
                         : Protocole::Messages::Reponse(paquet)
                     {}
 
-                    inline const uint64_t id_script() const { return std::atol(this->data().c_str()); }
+                    inline const uint32_t id_script() const { return std::atoi(this->data().c_str()); }
                 };
             }
         }

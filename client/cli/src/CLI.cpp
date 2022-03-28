@@ -51,7 +51,7 @@ namespace BTTP
                 if (argc > 1 && strcmp(argv[1], BTTP_COMMANDE_IDENTITES) != 0)
                 {
                     const Protocole::Identite id = definir_identite();
-                    Client::Contexte::modifier_identite(&id);
+                    Client::Contexte::modifier_identite(id);
                     // Affichage de l'identité courante.
                     Console::saut();
                     Console::afficher("Identité : " + Protocole::Meta(id.cle_publique()).afficher());

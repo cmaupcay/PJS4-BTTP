@@ -11,8 +11,9 @@ namespace BTTP
                 const std::vector<Commande*> commandes()
                 {
                     std::vector<Commande*> c;
-                    c.push_back(new Serveurs());
+                    c.push_back(new Autorisations());
                     c.push_back(new Identites());
+                    c.push_back(new Serveurs());
                     return c;
                 }
 

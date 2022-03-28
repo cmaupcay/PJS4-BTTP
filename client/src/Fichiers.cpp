@@ -7,7 +7,7 @@ namespace BTTP
         namespace Fichiers
         {
             const std::string chemin(const std::string fichier, const std::string dossier, const bool utiliser_contexte)
-            { return (utiliser_contexte ? Contexte::dossier() + '/' : "") + dossier + '/' + fichier; }
+            { return (utiliser_contexte ? Contexte::dossier() + '/' : "") + (dossier.size() > 0 ? dossier + '/' : "") + fichier; }
 
             const std::string dossier(const std::string fichier)
             { return fichier.substr(0, fichier.find_last_of('/')); }
@@ -41,7 +41,7 @@ namespace BTTP
                 flux.close();
             }
 
-            const std::ifstream lecture(
+            std::ifstream lecture(
                 const std::string fichier, const std::string dossier, 
                 const bool binaire, const bool utiliser_contexte
             )

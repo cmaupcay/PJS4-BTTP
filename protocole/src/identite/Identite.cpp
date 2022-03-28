@@ -56,7 +56,7 @@ namespace BTTP
         const std::string Identite::chiffrer(const std::string message, const Cle::Publique destinataire, const std::string mdp) const
         {
             // Configuration du chiffrement
-            Cle::Privee::Ptr signataire = std::make_shared<Cle::Privee>(_cle_privee);
+            Cle::Privee::Ptr signataire = std::make_shared<Cle::Privee>(this->_cle_privee);
             if (!signataire->meaningful()) throw Erreur::Identite::Chiffrement("La clé privée est incohérente.", message);
             const OpenPGP::Encrypt::Args args("", message, Cle::Config::SYM, Cle::Config::COMP, true, signataire, mdp, Cle::Config::HASH);
             if (!args.valid()) throw Erreur::Identite::Chiffrement("Les arguments de chiffrement sont invalides.", message);

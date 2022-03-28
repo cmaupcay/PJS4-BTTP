@@ -19,7 +19,7 @@ namespace BTTP
                 /** Nom d'affichage du script. */
                 std::string _nom;
                 /** Identifiant numérique unique du script. */
-                uint64_t _id;
+                uint32_t _id;
 
             public:
                 /**
@@ -44,9 +44,9 @@ namespace BTTP
                 
                 /**
                  * @brief Retourne l'identifiant unique du script.
-                 * @return const uint64_t& Identifiant numérique du script.
+                 * @return const uint32_t& Identifiant numérique du script.
                  */
-                inline const uint64_t& id() const { return this->_id; }
+                inline const uint32_t& id() const { return this->_id; }
 
                 /**
                  * @brief Sérialisation des informations du script.

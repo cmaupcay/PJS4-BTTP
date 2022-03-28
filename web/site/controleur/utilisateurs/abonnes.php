@@ -17,8 +17,6 @@ function profil() {
 
     require_once './modele/utilisateur.php';
 
-    $pseudo = isset($_POST['pseudo'])?($_POST['pseudo']):'';
-
     require_once './vue/abonnes/profil.tpl';
 }
 
@@ -26,8 +24,44 @@ function appareils() {
 
     require_once './modele/utilisateur.php';
 
+    $appareils = getAppareils();
+
     require_once("./vue/abonnes/appareils.tpl");
     
+    echo '<div class="container py-5 bg-light">';
+    echo '<div class="row">';
+
+        foreach($appareils as $appareil) {
+            echo('<div class="col-md-4 col-sm-4">');
+            echo('<div class="card mb-4 shadow-sm">');
+            echo('<div class="card-body">');
+            $i = 0;
+            foreach($appareil as $ap => $a) {
+                if($i == 0){
+                    echo'<p class="card-text"> Empreinte de la clé publique : ' . $a . '</p>';
+                }
+                if($i == 1){
+                    echo'<p class="card-text"> Nom: ' . $a . '</p>';
+                }
+                if($i == 2){
+                    echo'<p class="card-text"> Date d\'ajout : ' . $a . '</p>';
+                }
+                if($i == 3){
+                    echo'<p class="card-text"> Dernière connexion : ' . $a . '</p>';
+                }
+                    $i++;
+            }
+
+            echo '<a href="#"><button class="btn btn-sm btn-outline-secondary"> Supprimer </button></a>';
+            echo '<a href="#"><button class="btn btn-sm btn-outline-secondary"> Scripts </button></a>';
+
+            echo '</div>';
+            echo '</div>';
+            echo '</div>';
+
+        }
+    echo '</div>';
+    echo '</div>';
 }
 
 function marketplace() {

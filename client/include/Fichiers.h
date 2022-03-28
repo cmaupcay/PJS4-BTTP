@@ -91,9 +91,9 @@ namespace BTTP
              * @param dossier Dossier contenant le fichier.
              * @param binaire Ouvrir le fichier en mode binaire.
              * @param utiliser_contexte Défini si le chemin est relatif au dossier du contexte client. 
-             * @return const std::ifstream Flux d'entrée sur le fichier cible.
+             * @return std::ifstream Flux d'entrée sur le fichier cible.
              */
-            const std::ifstream lecture(
+            std::ifstream lecture(
                 const std::string fichier,
                 const std::string dossier = BTTP_DOSSIER,
                 const bool binaire = false,

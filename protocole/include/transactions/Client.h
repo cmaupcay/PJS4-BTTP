@@ -80,6 +80,16 @@ namespace BTTP
                  */
                 virtual const bool verifier_entete(const std::string& entete) = 0;
 
+                /**
+                 * @brief Lecture d'un message sur la transaction.
+                 * @param mdp Mot de passe de l'identité locale.
+                 * @return const std::string Contenu du paquet lu.
+                 * 
+                 * @throws BTTP::Erreur::Transactions::Fermee La transaction n'est pas ouverte.
+                 * @throws BTTP::Erreur::Transactions::EnteteInvalide L'entête de vérification du message est invalide.
+                 */
+                const std::string recevoir_brut(const std::string mdp);
+
             public:
                 // TOTEST
                 /**
@@ -113,7 +123,8 @@ namespace BTTP
                  * @throws BTTP::Erreur::Transactions::Fermee La transaction n'est pas ouverte.
                  * @throws BTTP::Erreur::Transactions::EnteteInvalide L'entête de vérification du message est invalide.
                  */
-                const Messages::IMessage* recevoir(const std::string mdp);
+                inline const Messages::IMessage* recevoir(const std::string mdp)
+                { return Messages::resoudre(this->recevoir_brut(mdp)); }
             };
         }
     }

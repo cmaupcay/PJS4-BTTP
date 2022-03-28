@@ -24,25 +24,18 @@ CREATE TABLE bttp.utilisateur (
 
 CREATE TABLE bttp.terminal_client (
     id INT AUTO_INCREMENT, /* Identifiant numérique unique du terminal */
-    cle_publique VARCHAR(4096) NOT NULL, /* Clé publique propre au terminal */
-    cle_publique_empreinte VARCHAR(40) NOT NULL, /* Empreinte de la clé publique */
+    cle_publique VARCHAR(512) NOT NULL, /* Clé publique propre au terminal */
     nom VARCHAR(64) NOT NULL, /* Nom du terminal */
+    disponible BOOLEAN NOT NULL DEFAULT 0, /* Indique si le terminal est disponible pour une transaction */
     id_proprietaire INT NOT NULL, /* Identifiant numérique unique du proprietaire */
     ajout DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, /* Date et heure d'ajout du terminal */
     derniere_connexion DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, /* Date et heure de la dernière connexion avec le terminal */
     favori BOOLEAN NOT NULL DEFAULT 0, /* Indique si l'utilisateur a ajouté le terminal à ses favoris */
     meta VARCHAR(512) NOT NULL, /* Meta données du terminal au format JSON */
     PRIMARY KEY(id),
-    UNIQUE(cle_publique, cle_publique_empreinte),
+    UNIQUE(cle_publique),
     FOREIGN KEY(id_proprietaire) REFERENCES bttp.utilisateur(id) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=1;
-
-CREATE TABLE bttp.terminal_distant (
-    id INT, /* Identifiant numérique unique du terminal */
-    disponible BOOLEAN NOT NULL DEFAULT 0, /* Indique si le terminal est disponible pour une transaction */
-    PRIMARY KEY(id),
-    FOREIGN KEY(id) REFERENCES bttp.terminal_client(id) ON DELETE CASCADE /* Un terminal distant est forcément un terminal client */
-) ENGINE=InnoDB;
 
 CREATE TABLE bttp.categorie_script (
     id INT AUTO_INCREMENT, /* Identifiant numérique unique de la catégorie */
@@ -62,7 +55,6 @@ CREATE TABLE bttp.script_publique (
     id INT AUTO_INCREMENT, /* Identifiant numérique unique du script publique */
     nom VARCHAR(64) NOT NULL, /* Nom du script publique */
     version VARCHAR(16) NOT NULL, /* Version du script publique */ /* TODO Externaliser les versions dans un table */
-    description TEXT NOT NULL, /* Description du script */
     id_auteur INT, /* Idenitifiant numérique unique de l'utilisateur ayant publié le script */
     publication DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, /* Date et heure de publication du script */
     verifie BOOLEAN NOT NULL DEFAULT 0, /* Indique si le code source du script a été verifié par un tiers */
@@ -82,10 +74,9 @@ CREATE TABLE bttp.script (
     id INT AUTO_INCREMENT, /* Identifiant numérique unique du script */
     id_hote INT NOT NULL, /* Identifiant numérique du terminal distant hébergeant ce script */
     nom VARCHAR(64) NOT NULL, /* Nom du script */
-    description TEXT NOT NULL, /* Description du script */
     ajout DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, /* Date et heure d'ajout du script */
     somme INT NOT NULL, /* Somme de contrôle du code source hébergé localement */
-    id_script_publique INT, /* Identifiant numérique du script publique auquel est lié ce script (peut être nul) */
+    id_script_publique INT, /* Identifiant numérique du script publique auquel est lié ce script (peu être nul) */
     PRIMARY KEY(id),
     FOREIGN KEY(id_hote) REFERENCES bttp.terminal_distant(id) ON DELETE CASCADE,
     FOREIGN KEY(id_script_publique) REFERENCES bttp.script_publique(id) ON DELETE SET NULL

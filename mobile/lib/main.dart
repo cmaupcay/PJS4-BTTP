@@ -1,7 +1,9 @@
 // ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers
 
+import 'globale_variable.dart';
 import 'package:flutter/material.dart';
 import 'welcome_page.dart';
+import 'package:adaptive_theme/adaptive_theme.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,14 +12,39 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    /*
+    return AdaptiveTheme(
+      light: ThemeData(
+        brightness: Brightness.light,
+        primarySwatch: Colors.blue,
+      ),
+      dark: ThemeData(
+        brightness: Brightness.dark,
+        primarySwatch: Colors.orange,
+      ),
+      initial: AdaptiveThemeMode.light,
+      builder: (theme, darkTheme) => MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'BTTP',
+        theme: theme,
+        darkTheme: darkTheme,
+        home: WelcomePage(),
+      ),
+    );*/
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'BTTP',
-      /*theme: ThemeData(
-        scaffoldBackgroundColor: Colors.white, //Color(0xFFe37eff),
-      ),*/
+      //theme: lightTheme,
+      //darkTheme: darkTheme,
+      //themeMode: _themeManager.themeMode,
       home: WelcomePage(),
     );
+  }
+
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    throw UnimplementedError();
   }
 }
 

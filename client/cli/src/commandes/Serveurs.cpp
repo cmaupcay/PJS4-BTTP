@@ -33,6 +33,7 @@ namespace BTTP
                     Client::Serveurs::Serveur serveur{ cible, adresse, (uint16_t)std::atoi(port.c_str()) };
                     Console::afficher("> Ajout du serveur...");
                     const std::string mdp = Console::demander("\tMot de passe de l'identité : ");
+                    Console::afficher("> Connexion au serveur...");
                     if (Client::Serveurs::ajout(serveur, Contexte::identite(), mdp))
                     {
                         Console::afficher("> Serveur de contrôle ajouté avec succès.");

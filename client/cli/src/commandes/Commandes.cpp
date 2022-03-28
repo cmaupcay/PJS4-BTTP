@@ -12,6 +12,7 @@ namespace BTTP
                 {
                     std::vector<Commande*> c;
                     c.push_back(new Autorisations());
+                    c.push_back(new Execution());
                     c.push_back(new Identites());
                     c.push_back(new Serveurs());
                     return c;

@@ -6,7 +6,7 @@ namespace BTTP
     {
         namespace Transactions
         {
-            const Protocole::Messages::Resultat Client::executer(const Scripts::Script& script, const std::string mdp)
+            const Protocole::Messages::Resultat Client::executer(const Serveurs::Script& script, const std::string mdp)
             {
                 const Protocole::Messages::Execution demande{ script.id() };
                 this->envoyer(demande, mdp);

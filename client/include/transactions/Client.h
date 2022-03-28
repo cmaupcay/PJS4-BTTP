@@ -18,7 +18,7 @@ namespace BTTP
              * @return true L'entête est valide.
              * @return false L'entête n'est pas valide.
              */
-            const bool verifier_entete_controle(const std::string& entete);
+            static const bool verifier_entete_controle(const std::string& entete) { return true; }
 
             class Client : public Protocole::Transactions::Client
             {
@@ -53,7 +53,7 @@ namespace BTTP
                  * @param script Script cible.
                  * @param mdp Mot de passe de l'identité local.
                  */
-                const Protocole::Messages::Resultat executer(const Scripts::Script& script, const std::string mdp);
+                const Protocole::Messages::Resultat executer(const Serveurs::Script& script, const std::string mdp);
             };
         }
     }

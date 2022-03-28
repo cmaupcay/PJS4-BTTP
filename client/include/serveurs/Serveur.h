@@ -62,22 +62,12 @@ namespace BTTP
                  * @return const std::string& Adresse du serveur.
                  */
                 inline const std::string& adresse() const { return this->_adresse; }
-                /**
-                 * @brief Modification de l'adresse du serveur.
-                 * @param adresse Nouvelle adresse du serveur. Il peut s'agir d'un nom d'hôte ou d'une adresse IP.
-                 */
-                inline void modifier_adresse(const std::string adresse) { this->_adresse = adresse; }
 
                 /**
                  * @brief Retourne le port de connexion à l'application BTTP sur le serveur.
                  * @return const uint16_t& Port de connexion BTTP.
                  */
                 inline const uint16_t& port() const { return this->_port; }
-                /**
-                 * @brief Modification du port de connexion du serveur.
-                 * @param port Nouveau port de connexion à l'application BTTP sur le serveur.
-                 */
-                inline void modifier_port(const uint16_t port) { this->_port = port; }
 
                 /**
                  * @brief Retourne la clé publique du serveur.

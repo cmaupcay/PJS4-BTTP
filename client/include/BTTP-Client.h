@@ -7,9 +7,8 @@
 
 #include "serveurs/Serveurs.h"
 
-#include "scripts/Scripts.h"
 #include "scripts/Autorisations.h"
 
-#include "transactions/Client.h"
+#include "Distant.h"
 
 #endif

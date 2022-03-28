@@ -3,6 +3,7 @@
 
 #include "serveurs/Serveur.h"
 #include "transactions/Distant.h"
+#include "transactions/messages/DemandeDistant.h"
 
 namespace BTTP
 {
@@ -16,7 +17,9 @@ namespace BTTP
             const Serveurs::Serveur& _serveur;
             const std::vector<std::string>& _cles_autorisees;
 
-            void processus(const std::string mdp) noexcept;
+            void annonce(const std::string mdp);
+
+            std::string _status;
 
         public:
             Distant(
@@ -25,6 +28,9 @@ namespace BTTP
             )
                 : _identite{ identite }, _serveur{ serveur }, _cles_autorisees{ cles_autorisees }
             {}
+
+            void processus(const std::string mdp);
+            inline const std::string& status() const { return this->_status; }
 
             inline const Protocole::Identite& identite() const { return this->_identite; }
             inline const Serveurs::Serveur& serveur() const { return this->_serveur; }

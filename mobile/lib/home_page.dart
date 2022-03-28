@@ -242,10 +242,173 @@ class MyScripts extends StatelessWidget {
         )
       ],
     );
-    return Center(
-      child: Text("MyScripts"),
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            FilScript(),
+          ],
+        ),
+      ),
     );
   }
+}
+
+class FilScript extends StatelessWidget {
+  final List scriptList = [
+    {
+      'title': 'Script1',
+      'description': "lalalaalalalal",
+      'variables': true,
+    },
+    {
+      'title': 'Script2',
+      'description': "lalzeczczcl",
+      'variables': false,
+    },
+    {
+      'title': 'Script3',
+      'description': "lacedcdcdcddl",
+      'variables': false,
+    },
+    {
+      'title': 'Script4',
+      'description': "lyj,hkygfvdl",
+      'variables': true,
+    }
+  ];
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(10),
+      color: screen,
+      child: Column(
+        children: [
+          Column(
+            children: scriptList.map((scripts) {
+              return ScriptCard(scripts);
+            }).toList(),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ScriptCard extends StatelessWidget {
+  final Map scriptData;
+  bool _hasBeenPressed = false;
+  ScriptCard(this.scriptData);
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.all(10),
+      height: 230,
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: bars,
+        borderRadius: BorderRadius.all(Radius.circular(18)),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.shade200,
+            spreadRadius: 4,
+            blurRadius: 6,
+            offset: Offset(0, 3),
+          )
+        ],
+      ),
+      child: Column(
+        children: [
+          Container(
+            margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  scriptData['title'],
+                  style: GoogleFonts.nunito(
+                    fontSize: 22,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ), /*
+                MaterialButton(
+                  color: Colors.white,
+                  shape: CircleBorder(),
+                  onPressed: () {},
+                  child: Icon(
+                    Icons.favorite_outline_rounded,
+                    color: bars,
+                    size: 20,
+                  ),
+                )*/
+              ],
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.fromLTRB(10, 25, 10, 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  scriptData['description'],
+                  style: GoogleFonts.nunito(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) =>
+                          _buildPopupDialog(context),
+                    );
+                  },
+                  icon: Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    color: Colors.green,
+                    size: 30,
+                  ),
+                )
+              ],
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.fromLTRB(100, 10, 10, 10),
+            child: IconButton(
+              onPressed: null,
+              icon: Icon(
+                Icons.add_circle_outline,
+                color: Colors.green,
+                size: 30,
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+Widget _buildPopupDialog(BuildContext context) {
+  return new AlertDialog(
+    title: const Text('Popup example'),
+    content: new Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text("Hello"),
+      ],
+    ),
+    actions: <Widget>[
+      new ElevatedButton(
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+        child: const Text('Close'),
+      ),
+    ],
+  );
 }
 
 class AddScript extends StatelessWidget {

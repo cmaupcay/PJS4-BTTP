@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'globale_variable.dart';
 import 'home_page.dart';
+import 'package:adaptive_theme/adaptive_theme.dart';
 
 class SettingsPage extends StatelessWidget {
   @override
@@ -42,9 +43,9 @@ class SettingsPage extends StatelessWidget {
               child: Text('Dark mode', textAlign: TextAlign.center),
             ),
             Expanded(
-              child: OutlinedButton(
+              child: ElevatedButton(
                 onPressed: changetheme,
-                child: Text('appui'),
+                child: Text('change'),
               ),
             ),
           ]),

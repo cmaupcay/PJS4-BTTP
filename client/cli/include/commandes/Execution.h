@@ -2,6 +2,9 @@
 #define H_BTTP_CLIENT_CLI_COMMANDE_EXECUTION
 
 #include "erreur/Syntaxe.h"
+#include "erreur/execution/AucunServeur.h"
+#include "erreur/execution/AucunAppareil.h"
+#include "erreur/execution/OuvertureTransaction.h"
 
 #define BTTP_COMMANDE_EXECUTION "exe"
 

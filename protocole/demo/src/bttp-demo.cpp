@@ -44,5 +44,4 @@ int main(const int argc, const char** args)
 
     }
     catch (BTTP::Erreur& err) { std::cout << err; }
-
 }

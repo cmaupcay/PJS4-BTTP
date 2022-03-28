@@ -14,19 +14,28 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <title>Connexion</title>
     <link rel="stylesheet" type="text/css" href="style.css">
+
+    <style>
+        .banner {
+            background: #003459;
+        }
+    </style>
+
 </head>
 
-<body>    
+<body>  
+
+<div class="container-fluid banner">
+
+    <div><a href="?controle=visiteurs&action=accueil" class="nav-link text-uppercase font-weight-bold" style="color:aliceblue"> BTTP </a></div>
+
     <div class="login-form">
         <br><br>
-
-
-            <!-- lorsqu'on envoie le formulaire on va vouloir traiter ces données, donc on va san doute vouloir faire une fonction js pour les traiter on submit
+             <!-- lorsqu'on envoie le formulaire on va vouloir traiter ces données, donc on va san doute vouloir faire une fonction js pour les traiter on submit
             du coup il faut pas oublier de changer ca-->
-
             <form action="?controle=abonnes&action=accueil" method="post">
 
-                <h2 class="text-center"> Connexion </h2>
+                <h2 class="text-center" style="color:#00171F"> Connexion </h2>
                 <div class="form-group">
                     <p><input name="pseudo" type="text" class="form-control" placeholder="Email" autocomplete="off"
                             required><br /></p>
@@ -36,13 +45,13 @@
                             autocomplete="off" required><br /></p>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Se connecter" class="btn btn-primary btn-block">
+                    <input type="submit" value="Se connecter" class="btn btn-primary btn-block" style="background-color:#00A8E8">
                 </div>
             </form>
 
-            <a href="./visiteurs/inscription.tpl"> Inscrivez-vous </a>
+            <p style="font-size:smaller; text-align:center">Vous n'avez pas de compte ? <a href="?controle=visiteurs&action=inscription" style="color:#00A8E8"> Inscrivez-vous </a> </p>
     </div>
-
+</div>
 
 </body>
 

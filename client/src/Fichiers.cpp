@@ -47,10 +47,13 @@ namespace BTTP
             )
             {
                 const std::string cible = chemin(fichier, dossier, utiliser_contexte);
-                if (!std::filesystem::exists(cible)) throw Erreur::Fichiers::Inexistant(cible);
-                std::ifstream flux{ cible, binaire ? std::ios::binary : std::ios::in };
-                if (flux.is_open()) return flux;
-                else throw Erreur::Fichiers::Ouverture(cible);
+                if (existe(fichier, dossier, utiliser_contexte))
+                {
+                    std::ifstream flux{ cible, binaire ? std::ios::binary : std::ios::in };
+                    if (flux.is_open()) return flux;
+                    else throw Erreur::Fichiers::Ouverture(cible);
+                }
+                else throw Erreur::Fichiers::Inexistant(cible);
             }
 
             const std::string lire(
@@ -60,8 +63,7 @@ namespace BTTP
             {
                 std::ifstream flux = lecture(fichier, dossier, binaire, utiliser_contexte);
                 std::string contenu = "", ligne = "";
-                while (std::getline(flux, ligne))
-                    contenu += ligne;
+                while (std::getline(flux, ligne)) contenu += ligne;
                 flux.close();
                 return contenu;
             }
@@ -69,11 +71,14 @@ namespace BTTP
             const std::vector<std::string> liste(const std::string dossier, const bool utiliser_contexte)
             {
                 std::vector<std::string> fichiers;
-                const std::filesystem::directory_iterator idossier{chemin("", dossier, utiliser_contexte)};
-                for (const std::filesystem::directory_entry& fichier : idossier)
+                if (existe("", dossier, utiliser_contexte))
                 {
-                    if (fichier.is_regular_file())
-                        fichiers.push_back(fichier.path().filename());
+                    const std::filesystem::directory_iterator idossier{ chemin("", dossier, utiliser_contexte) };
+                    for (const std::filesystem::directory_entry& fichier : idossier)
+                    {
+                        if (fichier.is_regular_file())
+                            fichiers.push_back(fichier.path().filename());
+                    }
                 }
                 return fichiers;
             }

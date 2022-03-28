@@ -58,6 +58,19 @@ namespace BTTP
             {
             public:
                 explicit Publique(OpenPGP::PublicKey cle) : OpenPGP::PublicKey(cle) {};
+
+                /**
+                 * @brief Retourne l'empreinte permettant d'identifier la clé publique.
+                 * @return const std::string Empreinte de la clé.
+                 */
+                inline const std::string empreinte() const { return this->fingerprint(); }
+
+                /**
+                 * @brief Retourne la clé en un format exportable PGP.
+                 * @param armor Drapeau indiquant l'utilisation du mode Armored d'OpenPGP.
+                 * @return const std::string Clé au format exportable.
+                 */
+                inline const std::string exporter(const bool armor) const { return this->write((armor ? OpenPGP::PGP::Armored::YES : OpenPGP::PGP::Armored::NO)); }
             };
             
             /**
@@ -71,6 +84,19 @@ namespace BTTP
                 explicit Privee() : OpenPGP::SecretKey() {};
                 explicit Privee(OpenPGP::SecretKey cle) : OpenPGP::SecretKey(cle) {};
 
+                /**
+                 * @brief Retourne l'empreinte permettant d'identifier la clé privéee.
+                 * @return const std::string Empreinte de la clé.
+                 */
+                inline const std::string empreinte() const { return this->fingerprint(); }
+
+                /**
+                 * @brief Retourne la clé en un format exportable PGP.
+                 * @param armor Drapeau indiquant l'utilisation du mode Armored d'OpenPGP.
+                 * @return const std::string Clé au format exportable.
+                 */
+                inline const std::string exporter(const bool armor) const { return this->write((armor ? OpenPGP::PGP::Armored::YES : OpenPGP::PGP::Armored::NO)); }
+                
                 static inline Privee generer(Config config)
                 { return Privee(OpenPGP::KeyGen::generate_key(config)); }
             };

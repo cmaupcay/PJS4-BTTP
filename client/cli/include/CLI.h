@@ -2,7 +2,7 @@
 #define H_BTTP_CLIENT_CLI
 
 #include "commandes/Commandes.h"
-#include "Console.h"
+#include "erreur/Identite.h"
 
 #include <stdlib.h>
 
@@ -14,6 +14,8 @@ namespace BTTP
     {
         namespace CLI
         {
+            const Protocole::Identite definir_identite();
+
             const int executer(const int& argc, const char** argv);
         }
     }

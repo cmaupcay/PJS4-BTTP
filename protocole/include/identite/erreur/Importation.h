@@ -24,7 +24,7 @@ namespace BTTP
                      */
                     Importation(const std::string details)
                         : Erreur(
-                            "Identite/Importation", "L'importation de la clé privée a échoué.\n\tDetails : '" + details,
+                            "Identite/Importation", "L'importation de la clé privée a échoué.\n\tDetails : " + details,
                             BTTP_IDENTITE_IMPORTATION_CODE
                         ) {}
                 };

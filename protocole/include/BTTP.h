@@ -2,8 +2,9 @@
 #define H_BTTP
 
 // TOCOMMENT Présentation de la bibliothèque.
+// TODO Destructeurs
 
-#include "transaction/Transactions.h"
+#include "transactions/Transactions.h"
 #include "Contexte.h"
 
 #endif

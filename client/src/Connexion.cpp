@@ -2,41 +2,48 @@
 
 namespace BTTP 
 {
-
     namespace Client
     {
-
-        Connexion::Connexion(const Serveur& serveur) : _serveur { serveur }
-        {
-            asio::io_context contexte;
-            this->_socket = new asio::ip::tcp::socket(contexte);
-
-        }
+        Connexion::Connexion(const std::string adresse, const uint16_t port) 
+            : _adresse{ adresse }, _port{ port }, _socket{ nullptr }
+        {}
 
         void Connexion::ouvrir() 
         {
-
-            asio::ip::tcp::endpoint endpoint(asio::ip::make_address(_serveur.adresse(), _erreur), _serveur.port());
-            this->_socket->connect(endpoint, _erreur); 
-
+            if (this->ouverte()) {} // throw ... // TODO Erreur deja ouvert
+            else
+            {
+                // Résolution de l'adresse de l'hôte.
+                asio::io_context contexte;
+                asio::ip::tcp::resolver resolver{ contexte };
+                const asio::ip::tcp::resolver::results_type resultats = resolver.resolve(
+                    this->_adresse, std::to_string(this->_port), this->_erreur
+                );
+                if (resultats.size() == 0 || this->_erreur) {} // throw ... // TODO Erreur de résolution de l'hôte.
+                else
+                {
+                    // Création du socket et connexion.
+                    const asio::ip::tcp::endpoint hote = *resultats;
+                    this->_socket = new asio::ip::tcp::socket(contexte);
+                    this->_socket->connect(hote, this->_erreur);
+                    // if (this->_erreur) throw ... // TODO Erreur de connexion.
+                }
+            }
         }
 
         void Connexion::envoyer(const std::string message_prepare) 
         {
-            if(this->_socket->is_open()) 
-                this->_socket->write_some(asio::buffer(message_prepare.data(), message_prepare.size()), _erreur);
+            if (this->ouverte()) 
+                this->_socket->write_some(asio::buffer(message_prepare.data(), message_prepare.size()), this->_erreur);
             else
-                throw Erreur::Connexion::Fermee(this->_serveur);
-
+                throw Erreur::Connexion::Fermee(this->_adresse, this->_port);
         }
 
         const std::string Connexion::recevoir() 
         {
-
-            if(this->_socket->is_open())
+            if (this->ouverte())
             {
                 std::string message = "";
-
                 size_t taille;
 
                 const std::chrono::time_point<std::chrono::system_clock> debut = std::chrono::system_clock::now();
@@ -45,29 +52,20 @@ namespace BTTP
 
                 while((taille = this->_socket->available()) == 0) 
                 {
-
                     fin = std::chrono::system_clock::now();
-                    
                     auto temps = std::chrono::duration_cast<std::chrono::milliseconds>(fin - debut);
-
                     if(temps.count() >= tempsMax)
-                        throw Erreur::Connexion::Timeout(this->_serveur);
-
+                        throw Erreur::Connexion::Timeout(this->_adresse, this->_port);
                 }
 
                 std::vector<char> buffer(taille);
-
-                this->_socket->read_some(asio::buffer(buffer.data(), buffer.size()), _erreur);
-
+                this->_socket->read_some(asio::buffer(buffer.data(), buffer.size()), this->_erreur);
                 for(auto c : buffer)
                     message += c;
-
                 return message;
-
             }
             else
-                throw Erreur::Connexion::Fermee(this->_serveur);
-
+                throw Erreur::Connexion::Fermee(this->_adresse, this->_port);
         }
 
     }

@@ -9,7 +9,7 @@ namespace BTTP
     {
         /**
          * @brief Méta-données relatives à une identité.
-         * @details Les méta-données sont basées sur les UID des clés OpenPGP.
+         * @details Les métadonnées sont basées sur les UID des clés OpenPGP.
          */
         struct Meta
         {
@@ -29,13 +29,13 @@ namespace BTTP
             
         public:
             /**
-             * @brief Construction depuis une clé publique avec récupération des méta-données.
+             * @brief Construction depuis une clé publique avec récupération des métadonnées.
              * @param cle_publique Clé publique cible.
              */
             Meta(const Cle::Publique cle_publique);
 
             /**
-             * @brief Construction depuis les méta-données.
+             * @brief Construction depuis les métadonnées.
              * @note Utile pour créer une fonction de type : const Identite nouvelle_identite(const Meta meta, const std::strind mdp);
              * @param nom Nom du propriétaire de la clé.
              * @param contact Contact identifiant le propriétaire.
@@ -62,14 +62,14 @@ namespace BTTP
             inline const std::string& commentaire() const { return this->_commentaire; }
 
             /**
-             * @brief Linéarise les méta-données pour l'affichage.
+             * @brief Linéarise les métadonnées pour l'affichage.
              * @return const std::string au format nom <contact> (commentaire)
              */
             const std::string afficher() const
             { return this->_nom + " <" + this->_contact + "> (" + this->_commentaire + ')'; }
 
             /**
-             * @brief Envoie les méta-données au format d'affichage dans le flux de sortie. 
+             * @brief Envoie les métadonnées au format d'affichage dans le flux de sortie. 
              * @see BTTP::Meta::afficher()
              * @param os Flux de sortie.
              * @param err Erreur à afficher.
@@ -77,6 +77,14 @@ namespace BTTP
              */
             inline friend std::ostream& operator<<(std::ostream& os, const Meta& u)
             { return os << u.afficher(); }
+
+            /**
+             * @brief Comparaison de deux objets de métadonnées.
+             */
+            inline friend const bool operator==(const Meta& a, const Meta& b)
+            { return (
+              a.nom() == b.nom() && a.contact() == b.contact() && a.commentaire() == b.commentaire()  
+            ); }
         };
     }
 }

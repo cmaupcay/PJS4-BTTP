@@ -13,18 +13,25 @@ namespace BTTP
         {
             namespace Erreur
             {
-                class Commande_Inconnue : public Erreur
+                namespace Commandes
                 {
-                private:
-                    const std::string& _mot;
-                public:
-                    Commande_Inconnue(const std::string& mot)
-                        : Erreur("Client/CLI/Commande/Inconnue", "La commande \"" + mot + "\" est inconnue.", BTTP_CLIENT_CLI_COMMANDE_INCONNUE_CODE),
-                        _mot{ mot }
-                    {}
+                    class Inconnue : public Erreur
+                    {
+                    private:
+                        const std::string& _mot;
+                    public:
+                        Inconnue(const std::string& mot)
+                            : Erreur(
+                                "Client/CLI/Commandes/Inconnue",
+                                "La commande \"" + mot + "\" est inconnue.",
+                                BTTP_CLIENT_CLI_COMMANDE_INCONNUE_CODE
+                            ),
+                            _mot{ mot }
+                        {}
 
-                    inline const std::string& mot() const { return this->_mot; }
-                };
+                        inline const std::string& mot() const { return this->_mot; }
+                    };
+                }
             }
         }
     }

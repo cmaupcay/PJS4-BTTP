@@ -3,16 +3,14 @@
 
 #include "Fichiers.h"
 
+#include "erreur/identites/MetaIncorrectes.h"
+
 namespace BTTP
 {
     namespace Client
     {
-        /**
-         * @brief Classe abstraite rassemblant les utilitaires relatifs aux identités locales.
-         */
-        class Identites
+        namespace Identites
         {
-        public:
             /**
              * @brief Exportation d'une identité dans un fichier.
              * @param identite Identité à exporter.
@@ -20,7 +18,7 @@ namespace BTTP
              * @param utiliser_contexte Drapeau indiquant si le dossier est relatif au contexte BTTP.
              * @param creer_chemin Drapeau indiquant si le chemin doit être créé s'il n'existe pas.
              */
-            static void exporter(
+            void exporter(
                 const Protocole::Identite& identite,
                 const std::string dossier = BTTP_IDENTITE_DOSSIER, 
                 const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT,
@@ -32,14 +30,15 @@ namespace BTTP
              * @param nom Nom du fichier cible.
              * @param dossier Dossier cible.
              * @param utiliser_contexte Drapeau indiquant si le dossier est relatif au contexte BTTP.
+             * @param ajouter_extension Drapeau indiquant si l'extension par défaut des identités doit être ajoutée au nom du fichier.
              * @return const Protocole::Identite Identité importée.
              */
-            static const Protocole::Identite importer(
-                const std::string nom, 
+            const Protocole::Identite importer(
+                const std::string nom,
                 const std::string dossier = BTTP_IDENTITE_DOSSIER,
-                const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT
+                const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT,
+                const bool ajouter_extension = true
             );
-            // TODO Vérification des autres métadonnées une fois l'importation réussie (et donc à mettre dans le .cpp).
             /**
              * @brief Importation d'une identité depuis un fichier.
              * @param meta Métadonnées de l'identité à importer. Le nom est utilisé comme nom de fichier cible.
@@ -47,35 +46,49 @@ namespace BTTP
              * @param utiliser_contexte Drapeau indiquant si le dossier est relatif au contexte BTTP.
              * @return const Protocole::Identite Identité importée.
              */
-            inline static const Protocole::Identite importer(
-                const Protocole::Meta& meta,
-                const std::string dossier = BTTP_IDENTITE_DOSSIER,
-                const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT
-            )
-            { return importer(meta.nom(), dossier, utiliser_contexte); }
-
-            // TODO Déplacer et adapter l'implémentation (voir cli/src/CLI.cpp).
-            /**
-             * @brief Tentative d'importation d'une identité. Si introuvable, elle est générée.
-             * @param meta Métadonnées de l'identité à importer. Le nom est utilisé comme nom de fichier cible.
-             * @param dossier Dossier cible.
-             * @param utiliser_contexte Drapeau indiquant si le dossier est relatif au contexte BTTP.
-             * @return const Protocole::Identite Identité importée.
-             */
-            static const Protocole::Identite demarrer(
+            const Protocole::Identite importer(
                 const Protocole::Meta& meta,
                 const std::string dossier = BTTP_IDENTITE_DOSSIER,
                 const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT
             );
 
-            // TODO Implémentation.
+            /**
+             * @brief Suppression d'une identité locale.
+             * @param nom Nom du fichier cible.
+             * @param dossier Dossier cible.
+             * @param utiliser_contexte Drapeau indiquant si le dossier est relatif au contexte BTTP.
+             * @return true L'identité a été supprimé.
+             * @return false L'identité n'a pas pu être supprimé.
+             */
+            inline const bool supprimer(
+                const std::string nom,
+                const std::string dossier = BTTP_IDENTITE_DOSSIER,
+                const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT
+            )
+            { return Fichiers::supprimer(nom + '.' + BTTP_IDENTITE_EXT, dossier, utiliser_contexte); }
+
+            /**
+             * @brief Vérifie l'existence d'une identité locale.
+             * @param nom Nom du fichier cible.
+             * @param dossier Dossier cible.
+             * @param utiliser_contexte Drapeau indiquant si le dossier est relatif au contexte BTTP.
+             * @return true L'identité locale existe.
+             * @return false L'identité locale n'existe pas.
+             */
+            inline const bool existe(
+                const std::string nom,
+                const std::string dossier = BTTP_IDENTITE_DOSSIER,
+                const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT
+            )
+            { return Fichiers::existe(nom + '.' + BTTP_IDENTITE_EXT, dossier, utiliser_contexte); }
+
             /**
              * @brief Retourne la liste des identités disponibles.
              * @param dossier Dossier cible.
              * @param utiliser_contexte Drapeau indiquant si le dossier est relatif au contexte BTTP.
              * @return const std::vector<Protocole::Identite> Liste des identités importées.
              */
-            static const std::vector<Protocole::Identite> disponibles(
+            const std::vector<Protocole::Identite> liste(
                 const std::string dossier = BTTP_IDENTITE_DOSSIER,
                 const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT
             );

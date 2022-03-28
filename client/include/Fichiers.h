@@ -31,6 +31,21 @@ namespace BTTP
              */
             const std::string dossier(const std::string fichier);
 
+            /**
+             * @brief Vérifie l'existence d'un fichier.
+             * @param fichier Nom du fichier cible.
+             * @param dossier Dossier contenant le fichier.
+             * @param utiliser_contexte Défini si le chemin est relatif au dossier du contexte client. 
+             * @return true Le fichier existe.
+             * @return false Le fichier n'existe pas.
+             */
+            inline const bool existe(
+                const std::string fichier,
+                const std::string dossier = BTTP_DOSSIER,
+                const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT
+            )
+            { return std::filesystem::exists(chemin(fichier, dossier, utiliser_contexte)); }
+
             // TOTEST
             /**
              * @brief Fournit un flux d'écriture sur un fichier.

@@ -5,7 +5,7 @@ set(LIBRARY_OUTPUT_PATH ${EXECUTABLE_OUTPUT_PATH}/lib)
 
 # CONSTANTES
 set(BTTP bttp) # Nom du projet CMake
-set(BTTP_VERSION 0.1.2) # Version du protocole
+set(BTTP_VERSION 0.1.4) # Version du protocole
 set(BTTP_DEP OpenPGP segvcatch) # Dépendances
 set(BTTP_RACINE ${CMAKE_CURRENT_LIST_DIR}/include/Racine.h) # En-tête racine (fichier de configuration)
 set(BTTP_LIB ${BTTP} ${BTTP_DEP}) # Importation de la librairie et de ses dépendances

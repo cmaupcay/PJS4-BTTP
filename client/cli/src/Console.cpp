@@ -6,12 +6,22 @@ namespace BTTP
     {
         namespace CLI
         {
-            const std::string Console::demander(const std::string message)
+            namespace Console
             {
-                std::string sortie;
-                std::cout << message;
-                std::getline(std::cin, sortie);
-                return sortie;
+                void afficher(const std::string message, const bool retour)
+                {
+                    std::cout << message;
+                    if (retour) std::cout << std::endl;
+                    std::cout << std::flush;
+                }
+
+                const std::string demander(const std::string message)
+                {
+                    std::string sortie;
+                    std::cout << message;
+                    std::getline(std::cin, sortie);
+                    return sortie;
+                }
             }
         }
     }

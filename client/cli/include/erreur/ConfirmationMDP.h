@@ -1,6 +1,8 @@
 #ifndef H_BTTP_CLIENT_CLI_CONFIRMATION_MDP
 #define H_BTTP_CLIENT_CLI_CONFIRMATION_MDP
 
+#include "../Racine.h"
+
 #define BTTP_CLIENT_CLI_CONFIRMATION_MDP_CODE -11001
 
 namespace BTTP
@@ -11,12 +13,12 @@ namespace BTTP
         {
             namespace Erreur
             {
-                class ConfirmationMdp : public Erreur
+                class ConfirmationMDP : public Erreur
                 {
                 public:
-                    ConfirmationMdp()
+                    ConfirmationMDP()
                         : Erreur(
-                            "Client/CLI/ConfirmationMdp",
+                            "Client/CLI/ConfirmationMDP",
                             "Les mots de passe ne correspondent pas.",
                             BTTP_CLIENT_CLI_CONFIRMATION_MDP_CODE
                         )

@@ -14,6 +14,7 @@ namespace BTTP
             if (this->ouverte()) throw Erreur::Connexion::DejaOuverte(this->_adresse, this->_port); 
             else
             {
+                // TOFIX Voir comment rendre le contexte ASIO indépendant de la connexion.
                 asio::io_context contexte;
                 asio::ip::tcp::resolver resolver{ contexte };
                 const asio::ip::tcp::resolver::results_type resultats = resolver.resolve(

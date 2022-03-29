@@ -10,7 +10,7 @@ namespace BTTP
             {
                 const int Serveurs::liste() const
                 {
-                    const std::vector<Client::Serveurs::Serveur> serveurs = Client::Serveurs::liste();
+                    const std::vector<Client::Serveurs::Serveur> serveurs = Client::Serveurs::liste(BTTP_SERVEUR_DOSSIER, Contexte::client().get());
                     if (serveurs.size() == 0)
                         Console::afficher("> Aucun serveur de contrôle enregistré.");
                     else
@@ -27,14 +27,16 @@ namespace BTTP
                 {
                     Console::afficher("> Ajout du serveur \"" + cible + "\" : ");
                     const std::string adresse = Console::demander("\tAdresse : ");
-                    const std::string port = Console::demander(
-                        "\tPort de conenxion (" + std::to_string(BTTP_PORT) + " par défaut) : "
+                    const std::string port_par_defaut = std::to_string(BTTP_PORT);
+                    std::string port = Console::demander(
+                        "\tPort de connexion (" + port_par_defaut + " par défaut) : "
                     );
+                    if (port.size() == 0) port = port_par_defaut;
                     Client::Serveurs::Serveur serveur{ cible, adresse, (uint16_t)std::atoi(port.c_str()) };
                     Console::afficher("> Ajout du serveur...");
                     const std::string mdp = Console::demander("\tMot de passe de l'identité : ");
                     Console::afficher("> Connexion au serveur...");
-                    Client::Serveurs::ajout(serveur, Contexte::identite(), mdp);
+                    Client::Serveurs::ajout(serveur, *Contexte::client()->identite(), mdp, BTTP_SERVEUR_DOSSIER, Contexte::client().get());
                     Console::afficher("> Serveur de contrôle ajouté avec succès.");
 
                 }
@@ -42,10 +44,9 @@ namespace BTTP
                 void Serveurs::suppression(const std::string cible) const
                 {
                     Console::afficher("> Suppression du serveur \"" + cible + "\"...");
-                    const Client::Serveurs::Serveur serveur = Client::Serveurs::charger(cible);
-                    Client::Serveurs::suppression(serveur);
+                    const Client::Serveurs::Serveur serveur = Client::Serveurs::charger(cible, BTTP_SERVEUR_DOSSIER, Contexte::client().get());
+                    Client::Serveurs::suppression(serveur, BTTP_SERVEUR_DOSSIER, Contexte::client().get());
                     Console::afficher("> Serveur supprimé avec succès.");
-
                 }
 
                 void Serveurs::executer(const int argc, const char** argv) const
@@ -65,7 +66,7 @@ namespace BTTP
 
                 const std::string Serveurs::aide() const
                 {
-                    std::string aide = "Usage : bttp-cli ";
+                    std::string aide = "Gestion des serveurs de contrôle.\nUsage : bttp-cli ";
                     aide += BTTP_COMMANDE_SERVEURS;
                     aide += " [";
                     aide += BTTP_COMMANDE_SERVEURS_AJOUT;

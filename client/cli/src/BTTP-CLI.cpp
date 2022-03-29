@@ -1,4 +1,4 @@
-#include "../include/CLI.h"
+#include "../include/BTTP-CLI.h"
 
 namespace BTTP
 {
@@ -37,21 +37,17 @@ namespace BTTP
 
             const int executer(const int& argc, const char** argv)
             {
-                // Détermination du dossier de travail...
-                Contexte::initialiser(
-                    // On prend le dossier où est situé l'exécutable.
-                    std::filesystem::canonical(Fichiers::dossier(argv[0])).string()
-                );
+                Contexte::initialiser(argc, argv);
 
                 // Affichage introductif
                 Console::afficher(BTTP_CLIENT_CLI_INTRO);
-                Console::afficher("Dossier : " + Contexte::dossier());
+                Console::afficher("Dossier : " + Contexte::client()->dossier());
 
                 // Définition de l'identité, sauf si aucune commande n'est renseignée ou pour la commande de gestion des identités.
                 if (argc > 1 && strcmp(argv[1], BTTP_COMMANDE_IDENTITES) != 0)
                 {
                     const Protocole::Identite id = definir_identite();
-                    Client::Contexte::modifier_identite(id);
+                    Contexte::client()->modifier_identite(id);
                     // Affichage de l'identité courante.
                     Console::saut();
                     Console::afficher("Identité : " + Protocole::Meta(id.cle_publique()).afficher());

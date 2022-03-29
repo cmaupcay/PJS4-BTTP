@@ -9,7 +9,6 @@ namespace BTTP
 {
     namespace Client
     {
-        // TODO A terminer
         class Distant
         {
         private:

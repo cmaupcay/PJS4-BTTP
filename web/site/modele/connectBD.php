@@ -3,7 +3,7 @@
     $hostname="localhost";
     $base="bttp";
     $loginBD="root";
-    $passBD = "";
+    $passBD = "JFBrette2022KFLeS";
 
     try {
         $pdo = new PDO("mysql:host=$hostname; dbname=$base", $loginBD, $passBD);

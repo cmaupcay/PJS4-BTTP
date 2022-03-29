@@ -16,12 +16,12 @@ namespace BTTP
              * @brief Construction du chemin absolu d'un fichier.
              * @param fichier Nom du fichier cible.
              * @param dossier Dossier contenant le fichier.
-             * @param utiliser_contexte Défini si le chemin est relatif au dossier du contexte client. 
+             * @param contexte Défini si le chemin est relatif au dossier du contexte client. 
              * @return const std::string Chemin absolu du fichier.
              */
             const std::string chemin(
                 const std::string fichier, const std::string dossier = BTTP_DOSSIER,
-                const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT
+                const Contexte* contexte = nullptr
             );
 
             /**
@@ -35,16 +35,16 @@ namespace BTTP
              * @brief Vérifie l'existence d'un fichier.
              * @param fichier Nom du fichier cible.
              * @param dossier Dossier contenant le fichier.
-             * @param utiliser_contexte Défini si le chemin est relatif au dossier du contexte client. 
+             * @param contexte Défini si le chemin est relatif au dossier du contexte client. 
              * @return true Le fichier existe.
              * @return false Le fichier n'existe pas.
              */
             inline const bool existe(
                 const std::string fichier,
                 const std::string dossier = BTTP_DOSSIER,
-                const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT
+                const Contexte* contexte = nullptr
             )
-            { return std::filesystem::exists(chemin(fichier, dossier, utiliser_contexte)); }
+            { return std::filesystem::exists(chemin(fichier, dossier, contexte)); }
 
             // TOTEST
             /**
@@ -53,7 +53,7 @@ namespace BTTP
              * @param dossier Dossier contenant le fichier.
              * @param ajouter Ecrire à la suite du contenu actuel du fichier.
              * @param binaire Ouvrir le fichier en mode binaire.
-             * @param utiliser_contexte Défini si le chemin est relatif au dossier du contexte client. 
+             * @param contexte Défini si le chemin est relatif au dossier du contexte client. 
              * @param creer_chemin Défini si BTTP doit tenter de créer le dossier s'il n'existe pas.
              * @return std::ofstream Flux de sortie sur le fichier cible.
              */
@@ -61,7 +61,7 @@ namespace BTTP
                 const std::string fichier,
                 const std::string dossier = BTTP_DOSSIER,
                 const bool ajouter = false, const bool binaire = false,
-                const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT,
+                const Contexte* contexte = nullptr,
                 const bool creer_chemin = BTTP_CREATION_CHEMIN_PAR_DEFAUT
             );
 
@@ -73,14 +73,14 @@ namespace BTTP
              * @param dossier Dossier contenant le fichier.
              * @param ajouter Ecrire à la suite du contenu actuel du fichier.
              * @param binaire Ouvrir le fichier en mode binaire.
-             * @param utiliser_contexte Défini si le chemin est relatif au dossier du contexte client. 
+             * @param contexte Défini si le chemin est relatif au dossier du contexte client. 
              * @param creer_chemin Défini si BTTP doit tenter de créer le dossier s'il n'existe pas.
              */
             void ecrire(
                 const std::string data, const std::string fichier,
                 const std::string dossier = BTTP_DOSSIER,
                 const bool ajouter = false, const bool binaire = false,
-                const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT,
+                const Contexte* contexte = nullptr,
                 const bool creer_chemin = BTTP_CREATION_CHEMIN_PAR_DEFAUT
             );
 
@@ -90,14 +90,14 @@ namespace BTTP
              * @param fichier Nom du fichier cible.
              * @param dossier Dossier contenant le fichier.
              * @param binaire Ouvrir le fichier en mode binaire.
-             * @param utiliser_contexte Défini si le chemin est relatif au dossier du contexte client. 
+             * @param contexte Défini si le chemin est relatif au dossier du contexte client. 
              * @return std::ifstream Flux d'entrée sur le fichier cible.
              */
             std::ifstream lecture(
                 const std::string fichier,
                 const std::string dossier = BTTP_DOSSIER,
                 const bool binaire = false,
-                const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT
+                const Contexte* contexte = nullptr
             );
             
             // TOTEST
@@ -106,40 +106,40 @@ namespace BTTP
              * @param fichier Nom du fichier cible.
              * @param dossier Dossier contenant le fichier.
              * @param binaire Ouvrir le fichier en mode binaire.
-             * @param utiliser_contexte Défini si le chemin est relatif au dossier du contexte client. 
+             * @param contexte Défini si le chemin est relatif au dossier du contexte client. 
              * @return const std::string Données lues dans le dossier.
              */
             const std::string lire(
                 const std::string fichier,
                 const std::string dossier = BTTP_DOSSIER,
                 const bool binaire = false,
-                const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT
+                const Contexte* contexte = nullptr
             );
 
             /**
              * @brief Retourne la liste des fichiers présents dans un dossier.
              * @param dossier Dossier cible.
-             * @param utiliser_contexte Défini si le chemin est relatif au dossier du contexte client. 
+             * @param contexte Défini si le chemin est relatif au dossier du contexte client. 
              * @return const std::vector<std::string> Liste des noms de fichier.
              */
             const std::vector<std::string> liste(
                 const std::string dossier,
-                const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT
+                const Contexte* contexte = nullptr
             );
 
             /**
              * @brief Suppression d'un fichier.
              * @param fichier Nom du fichier cible.
              * @param dossier Dossier contenant le fichier.
-             * @param utiliser_contexte Défini si le chemin est relatif au dossier du contexte client.
+             * @param contexte Défini si le chemin est relatif au dossier du contexte client.
              * @throw Erreur::Fichiers::Inexistant si le fichier n'est pas trouvé
              */
             inline void supprimer(
                 const std::string fichier,
                 const std::string dossier = BTTP_DOSSIER,
-                const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT
+                const Contexte* contexte = nullptr
             )
-            { if(!std::filesystem::remove(chemin(fichier, dossier, utiliser_contexte))) throw Erreur::Fichiers::Inexistant(fichier);}
+            { if(!std::filesystem::remove(chemin(fichier, dossier, contexte))) throw Erreur::Fichiers::Inexistant(fichier);}
         }
     }
 }

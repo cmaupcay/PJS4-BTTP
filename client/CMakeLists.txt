@@ -10,7 +10,7 @@ include(${CMAKE_CURRENT_LIST_DIR}/../protocole/CMakeLists.txt)
 
 # CONSTANTES
 set(BTTP_CLIENT ${BTTP}-client) # Nom du projet CMake
-set(BTTP_CLIENT_VERSION 0.1.3) # Version du client
+set(BTTP_CLIENT_VERSION 0.1.4) # Version du client
 set(BTTP_CLIENT_DEP ${BTTP_LIB} pthread) # Dépendances
 set(BTTP_CLIENT_RACINE ${CMAKE_CURRENT_LIST_DIR}/include/Racine.h) # En-tête racine (fichier de configuration)
 set(BTTP_CLIENT_LIB ${BTTP_CLIENT} ${BTTP_CLIENT_DEP})
@@ -21,6 +21,12 @@ if(NOT DEFINED BTTP_PORT)
 endif()
 if(NOT DEFINED BTTP_TIMEOUT)
     set(BTTP_TIMEOUT 60000) # Temps d'attente maximum en reception (en ms)
+endif()
+if(NOT DEFINED BTTP_SERVEUR_NTP)
+    set(BTTP_SERVEUR_NTP fr.pool.ntp.org) # Serveur NTP pour la récupération de l'horodotage
+endif()
+if(NOT DEFINED BTTP_HORODOTAGE_TTL)
+    set(BTTP_HORODOTAGE_TTL 60000) # Temps maximum avant qu'un message soit considéré comme non viable
 endif()
 ## Dossier & Fichier
 if(NOT DEFINED BTTP_DOSSIER)
@@ -45,9 +51,6 @@ if(NOT DEFINED BTTP_AUTORISATIONS_SEP)
     set(BTTP_AUTORISATIONS_SEP ";") # Séparateur utilisé pour les clés autorisées.
 endif()
 ### Valeurs par défaut
-if(NOT DEFINED BTTP_UTILISER_CONTEXTE_PAR_DEFAUT)
-    set(BTTP_UTILISER_CONTEXTE_PAR_DEFAUT true) # Défini si le client doit utiliser le dossier de contexte par défaut.
-endif()
 if(NOT DEFINED BTTP_CREATION_CHEMIN_PAR_DEFAUT)
     set(BTTP_CREATION_CHEMIN_PAR_DEFAUT true) # Défini si le client doit tenter de créer des chemins non existants.
 endif()

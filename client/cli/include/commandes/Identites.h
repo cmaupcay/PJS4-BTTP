@@ -22,10 +22,10 @@ namespace BTTP
                 class Identites : public Commande
                 {
                 private:
-                    const int liste() const;
-                    const int ajout(const std::string cible) const;
+                    void liste() const;
+                    void ajout(const std::string cible) const;
                     void suppression(const std::string cible) const;
-                    const int exportation(const std::string cible) const;
+                    void exportation(const std::string cible) const;
 
                 public:
                     Identites() : Commande(BTTP_COMMANDE_IDENTITES) {}

@@ -1,7 +1,7 @@
-#ifndef H_BTTP_CLIENT_TRANSACTIONS_TIMESTAMP
-#define H_BTTP_CLIENT_TRANSACTIONS_TIMESTAMP
+#ifndef H_BTTP_CLIENT_TRANSACTIONS_HORODOTAGE
+#define H_BTTP_CLIENT_TRANSACTIONS_HORODOTAGE
 
-#define BTTP_CLIENT_TRANSACTIONS_TIMESTAMP_CODE -3000
+#define BTTP_CLIENT_TRANSACTIONS_HORODOTAGE_CODE -3000
 
 #include "../../Racine.h"
 
@@ -13,14 +13,14 @@ namespace BTTP
         {
             namespace Transactions
             {
-                class Timestamp : public Erreur
+                class Horodotage : public Erreur
                 {
                 private:
                     const std::string _message;
 
                 public:
-                    Timestamp(const std::string message)
-                        : Erreur("Client/Transactions/Timestamp", "Impossible de récupérer le timestamp.", BTTP_CLIENT_TRANSACTIONS_TIMESTAMP_CODE),
+                    Horodotage(const std::string message)
+                        : Erreur("Client/Transactions/Horodotage", "Impossible de récupérer l'horodotage.", BTTP_CLIENT_TRANSACTIONS_HORODOTAGE_CODE),
                         _message{ message }
                     {}
 

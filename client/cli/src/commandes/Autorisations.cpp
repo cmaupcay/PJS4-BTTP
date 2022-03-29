@@ -8,9 +8,11 @@ namespace BTTP
         {
             namespace Commandes
             {
-                const int Autorisations::liste(const std::string mdp) const
+                void Autorisations::liste(const std::string mdp) const
                 {
-                    const std::vector<std::string> cles = Client::Scripts::Autorisations::liste(Contexte::identite(), mdp);
+                    const std::vector<std::string> cles = Client::Scripts::Autorisations::liste(
+                        *Contexte::client()->identite(), mdp, BTTP_AUTORISATIONS_DOSSIER, Contexte::client().get()
+                    );
                     if (cles.size() == 0)
                         Console::afficher("> Aucune autorisation enregistrée.");
                     else
@@ -19,16 +21,16 @@ namespace BTTP
                         for (const std::string& cle : cles)
                             Console::afficher("\t- " + cle);
                     }
-                    return 0;
-
                 }
 
                 void Autorisations::ajout(const std::string mdp, const std::string fichier_cible) const
                 {
                     Console::afficher("> Importation de la clé publique depuis le fichier cible...");
-                    std::ifstream fichier = Fichiers::lecture(fichier_cible, "", true, false);
+                    std::ifstream fichier = Fichiers::lecture(fichier_cible, "", true, Contexte::client().get());
                     const Protocole::Cle::Publique cle{ fichier };
-                    if (Client::Scripts::Autorisations::autoriser(cle, Contexte::identite(), mdp))
+                    if (Client::Scripts::Autorisations::autoriser(
+                            cle, *Contexte::client()->identite(), mdp, BTTP_AUTORISATIONS_DOSSIER, Contexte::client().get()
+                        ))
                         Console::afficher("> Autorisation ajoutée.");
                     else throw Erreur::Commandes::Autorisations::DejaExistante(cle.empreinte());
 
@@ -37,7 +39,9 @@ namespace BTTP
                 void Autorisations::suppression(const std::string mdp, const std::string empreinte) const
                 {
                     Console::afficher("> Suppression de l'autorisation pour l'empreinte \"" + empreinte + "\"...");
-                    if (Client::Scripts::Autorisations::revoquer(empreinte, Contexte::identite(), mdp))
+                    if (Client::Scripts::Autorisations::revoquer(
+                        empreinte, *Contexte::client()->identite(), mdp, BTTP_AUTORISATIONS_DOSSIER, Contexte::client().get()
+                        ))
                         Console::afficher("> Autorisation révoquée.");
                     else throw Erreur::Commandes::Autorisations::Inexistante(empreinte);
                 }
@@ -62,7 +66,7 @@ namespace BTTP
 
                 const std::string Autorisations::aide() const
                 {
-                    std::string aide = "Usage : bttp-cli ";
+                    std::string aide = "Gestion des autorisations d'exécution.\nUsage : bttp-cli ";
                     aide += BTTP_COMMANDE_AUTORISATIONS;
                     aide += " [";
                     aide += BTTP_COMMANDE_AUTORISATIONS_AJOUT;

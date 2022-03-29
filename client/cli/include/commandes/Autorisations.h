@@ -20,7 +20,7 @@ namespace BTTP
                 class Autorisations : public Commande
                 {
                 private:
-                    const int liste(const std::string mdp) const;
+                    void liste(const std::string mdp) const;
                     void ajout(const std::string mdp, const std::string fichier_cible) const;
                     void suppression(const std::string mdp, const std::string empreinte) const;
 

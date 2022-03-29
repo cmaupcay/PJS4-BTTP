@@ -23,17 +23,14 @@ namespace BTTP
                     return sortie;
                 }
 
-                const std::string creationMdp() 
+                const std::string creer_mdp() 
                 {
-
+                    // TODO Fonction demander_mdp dans laquelle l'entrée utilisateur n'est pas affichée. 
                     std::string mdp = demander("\tMot de passe : ");
                     std::string confMdp = demander("\tConfirmation mot de passe : ");
 
-                    if(mdp == confMdp)
-                        return mdp;
-                    
-                    throw Erreur::ConfirmationMdp();
-
+                    if(mdp == confMdp) return mdp;
+                    throw Erreur::ConfirmationMDP();
                 }
 
             }

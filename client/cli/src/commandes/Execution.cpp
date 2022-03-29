@@ -8,33 +8,10 @@ namespace BTTP
         {
             namespace Commandes
             {
-                const Client::Serveurs::Serveur& Execution::definir_serveur() const
-                {
-                    const std::vector<Client::Serveurs::Serveur> serveurs = Client::Serveurs::liste();
-                    const size_t n = serveurs.size();
-                    if (n == 0) throw Erreur::Commandes::Execution::AucunServeur();
-                    else if (n == 1) return serveurs[0];
-                    else
-                    {
-                        size_t i = n;
-                        while (i >= n || i < 0)
-                        {
-                            Console::saut();
-                            Console::afficher("> Sélection du serveur de contrôle : ");
-                            for (size_t s = 0; s < n; s++)
-                                Console::afficher("\t#" + std::to_string(s) + " - " + serveurs[s].informations());
-                            Console::saut();
-                            // Sélection dans la liste.
-                            i = std::atol(Console::demander("Serveur à utiliser : ").c_str());
-                        }
-                        return serveurs[i];
-                    }
-                }
-
                 const Appareil& Execution::definir_appareil(const Client::Serveurs::Serveur& serveur, const std::string mdp) const
                 {
                     Console::afficher("> Récupération de la liste des appareils...");
-                    const std::vector<Appareil> appareils = Client::Serveurs::appareils(serveur, Contexte::identite(), mdp);
+                    const std::vector<Appareil> appareils = Client::Serveurs::appareils(serveur, *Contexte::client()->identite(), mdp);
                     const size_t n = appareils.size();
                     if (n == 0) throw Erreur::Commandes::Execution::AucunAppareil();
                     else if (n == 1) return appareils[0];
@@ -58,7 +35,7 @@ namespace BTTP
                 const Client::Serveurs::Script* Execution::definir_script(const Client::Serveurs::Serveur& serveur, const Appareil& appareil, const std::string mdp) const
                 {
                     Console::afficher("> Récupération de la liste des scripts...");
-                    const std::vector<Client::Serveurs::Script> scripts = Client::Serveurs::scripts(appareil, serveur, Contexte::identite(), mdp);
+                    const std::vector<Client::Serveurs::Script> scripts = Client::Serveurs::scripts(appareil, serveur, *Contexte::client()->identite(), mdp);
                     const size_t n = scripts.size();
                     if (n == 0)
                     {
@@ -90,34 +67,41 @@ namespace BTTP
                 {
                     if (argc == 2)
                     {
-                        const Client::Serveurs::Serveur& serveur = this->definir_serveur();
+                        Client::Serveurs::Serveur serveur = Commande::definir_serveur();
                         Console::afficher("> Serveur : " + serveur.informations());
-                        Console::saut();
+                        Console::afficher("> Connexion au serveur...");
+                        serveur.connexion().ouvrir();
 
                         const std::string mdp = Console::demander("> Mot de passe de l'identité locale : ");
+                        Commande::authentification(serveur, mdp);
 
-                        const Appareil& appareil = this->definir_appareil(serveur, mdp);
-                        Console::afficher("> Appareil : " + appareil.informations());
-                        Console::saut();
-
-                        Console::afficher("> Ouverture de la transaction...");
-                        Transactions::Client transaction{ Contexte::identite(), appareil, serveur };
-                        transaction.ouvrir(mdp);
-                        if (transaction.ouverte())
+                        if (serveur.authentifie())
                         {
-                            Console::afficher("> Transaction ouverte avec succès.");
-                            const Client::Serveurs::Script* script = nullptr;
-                            while ((script = this->definir_script(serveur, appareil, mdp)) != nullptr)
-                            { 
-                                Console::saut();
-                                Console::afficher("> Execution du script \"" + script->nom() + "\"...");
-                                const Protocole::Messages::Resultat resultat = transaction.executer(*script, mdp);
-                                Console::afficher("> Résultat d'exécution #" + std::to_string(resultat.id()) + " : ");
-                                Console::afficher("\t" + resultat.resultat());
-                                Console::saut();
+                            const Appareil& appareil = this->definir_appareil(serveur, mdp);
+                            Console::afficher("> Appareil : " + appareil.informations());
+
+                            Console::afficher("> Ouverture de la transaction...");
+                            Transactions::Client transaction{ *Contexte::client()->identite(), appareil, serveur };
+                            transaction.ouvrir(mdp);
+                            if (transaction.ouverte())
+                            {
+                                Console::afficher("> Transaction ouverte avec succès.");
+                                const Client::Serveurs::Script* script = nullptr;
+                                while ((script = this->definir_script(serveur, appareil, mdp)) != nullptr)
+                                { 
+                                    Console::saut();
+                                    Console::afficher("> Execution du script \"" + script->nom() + "\"...");
+                                    const Protocole::Messages::Resultat resultat = transaction.executer(*script, mdp);
+                                    Console::afficher("> Résultat d'exécution #" + std::to_string(resultat.id()) + " : ");
+                                    Console::afficher("\t" + resultat.resultat());
+                                    Console::saut();
+                                }
                             }
+                            else throw Erreur::Commandes::Execution::OuvertureTransaction(transaction);
                         }
-                        else throw Erreur::Commandes::Execution::OuvertureTransaction(transaction);
+
+                        Console::afficher("> Fermeture de la connexion...");
+                        serveur.connexion().fermer();
                     }  
                     else
                     {
@@ -129,7 +113,7 @@ namespace BTTP
 
                 const std::string Execution::aide() const
                 {
-                    std::string aide = "Usage : bttp-cli ";
+                    std::string aide = "Lancement d'une procédure d'exécution.\nUsage : bttp-cli ";
                     aide += BTTP_COMMANDE_EXECUTION;
                     return aide;
                 }

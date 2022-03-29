@@ -111,7 +111,7 @@
     }
     
     function montrer_code() {
-        require_once './vue/visiteurs/marketplace.tpl';
+        require_once './vue/visiteurs/codeSource.tpl';
         require_once './modele/marketplace.php';
 
         $source = code_source();

@@ -45,8 +45,8 @@ function code_source()
 
                 echo '<div class="container py-5 bg-light">';
                 echo '<div class="row">';
-                echo ('<div class="col-md-4 col-sm-4">');
-                echo ('<div class="card mb-4 shadow-sm">');
+                echo ('<div class="col-md-12 col-sm-12">');
+                echo ('<div class="card mb-12 shadow-sm">');
                 echo ('<div class="card-body">');
                 echo '<p class="card-text">';
 
@@ -64,7 +64,7 @@ function code_source()
                 echo '</div>';
                 echo '</div>';
                 echo '</div>';
-                
+
             } else {
                 http_response_code(404);
                 die();

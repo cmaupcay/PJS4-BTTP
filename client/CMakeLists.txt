@@ -22,6 +22,12 @@ endif()
 if(NOT DEFINED BTTP_TIMEOUT)
     set(BTTP_TIMEOUT 60000) # Temps d'attente maximum en reception (en ms)
 endif()
+if(NOT DEFINED BTTP_SERVEUR_NTP)
+    set(BTTP_SERVEUR_NTP fr.pool.ntp.org) # Serveur NTP pour la récupération de l'horodotage
+endif()
+if(NOT DEFINED BTTP_HORODOTAGE_TTL)
+    set(BTTP_HORODOTAGE_TTL 60000) # Temps maximum avant qu'un message soit considéré comme non viable
+endif()
 ## Dossier & Fichier
 if(NOT DEFINED BTTP_DOSSIER)
     set(BTTP_DOSSIER .bttp) # Nom du dossier de travail du client

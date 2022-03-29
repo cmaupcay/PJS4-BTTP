@@ -3,7 +3,6 @@
 
 #include "Racine.h"
 #include "erreur/ConfirmationMdp.h"
-
 #include <iostream>
 
 namespace BTTP

@@ -4,7 +4,7 @@
 #include "../serveurs/Appareil.h"
 #include "../serveurs/Serveur.h"
 #include "../serveurs/Script.h"
-#include "erreur/Timestamp.h"
+#include "erreur/Horodotage.h"
 #include <asio.hpp>
 
 namespace BTTP
@@ -13,13 +13,20 @@ namespace BTTP
     {
         namespace Transactions
         {
+
+            /**
+             * @brief Demande l'horodotage à un serveur NTP distant
+             * @return const time_t retourne l'horodotage (Unix)
+             */
+            const time_t horodotage();
+
             /**
              * @brief Vérification d'une entête de vérification ajouté à un message de contrôle par l'appareil de contrôle.
              * @param entete Entête à vérifier.
              * @return true L'entête est valide.
              * @return false L'entête n'est pas valide.
              */
-            static const bool verifier_entete_controle(const std::string& entete) { return true; }
+            const bool verifier_entete_controle(const std::string& entete);
 
             class Client : public Protocole::Transactions::Client
             {
@@ -55,13 +62,6 @@ namespace BTTP
                  * @param mdp Mot de passe de l'identité local.
                  */
                 const Protocole::Messages::Resultat executer(const Serveurs::Script& script, const std::string mdp);
-
-                /**
-                 * @brief Demande le timestamp à un serveur NTP distant
-                 * @return const time_t retourne le timestamp (Unix)
-                 */
-                const time_t timestamp();
-
             };
         }
     }

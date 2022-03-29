@@ -17,6 +17,7 @@ namespace BTTP
                 this->_port = (uint16_t)std::atoi(serialisation.substr(fin_premiere_ligne + 1, fin_deuxieme_ligne - (fin_premiere_ligne + 1)).c_str());
                 // Reste du fichier = clé publique.
                 this->_cle = new Protocole::Cle::Publique(serialisation.substr(fin_deuxieme_ligne + 1));
+                this->_connexion = new Connexion(this->_adresse, this->_port);
             }
 
             const std::string Serveur::serialiser() const

@@ -20,14 +20,14 @@ namespace BTTP
              * @param identite Identité locale.
              * @param mdp Mot de passe de l'identité locale.
              * @param dossier Dossier de destination.
-             * @param utiliser_contexte Drapeau indiquant si le dossier est relatif au contexte BTTP.
+             * @param contexte Contexte BTTP à utiliser.
              * @throw Type::Incoherent ou Type::Erreur
              */
             void ajout(
                 Serveur& serveur,
                 const Protocole::Identite& identite, const std::string mdp,
                 const std::string dossier = BTTP_SERVEUR_DOSSIER, 
-                const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT,
+                const Contexte* contexte = nullptr,
                 const bool creer_chemin = BTTP_CREATION_CHEMIN_PAR_DEFAUT
             );
 
@@ -35,41 +35,41 @@ namespace BTTP
              * @brief Importation des informations d'un serveur de contrôle enregistré localement et précédemment ajouté.
              * @param nom Nom du serveur à 
              * @param dossier Dossier de destination.
-             * @param utiliser_contexte Drapeau indiquant si le dossier est relatif au contexte BTTP.
+             * @param contexte Contexte BTTP à utiliser.
              * @return const Serveur Serveur importé.
              */
             inline const Serveur charger(
                 const std::string nom,
                 const std::string dossier = BTTP_SERVEUR_DOSSIER, 
-                const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT
+                Contexte* contexte = nullptr
             )
-            { return Serveur(nom, Fichiers::lire(nom, dossier, false, utiliser_contexte)); }
+            { return Serveur(nom, Fichiers::lire(nom, dossier, false, contexte)); }
 
             // TODO Annoncement de la suppression au serveur cible.
             /**
              * @brief Suppression d'un serveur de contrôle.
              * @param serveur Serveur de contrôle à supprimer.
              * @param dossier Dossier de destination.
-             * @param utiliser_contexte Drapeau indiquant si le dossier est relatif au contexte BTTP.
+             * @param contexte Contexte BTTP à utiliser.
              * @return true Le serveur a été supprimé localement.
              * @return false La suppression du serveur a échoué.
              */
             inline void suppression(
                 const Serveur& serveur,
                 const std::string dossier = BTTP_SERVEUR_DOSSIER, 
-                const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT
+                const Contexte* contexte = nullptr
             )
-            { Fichiers::supprimer(serveur.nom(), dossier, utiliser_contexte); }
+            { Fichiers::supprimer(serveur.nom(), dossier, contexte); }
 
             /**
              * @brief Retourne la liste des serveurs enregistrés localement.
              * @param dossier Dossier de destination.
-             * @param utiliser_contexte Drapeau indiquant si le dossier est relatif au contexte BTTP.
+             * @param contexte Contexte BTTP à utiliser.
              * @return const std::vector<Serveur> 
              */
             const std::vector<Serveur> liste(
                 const std::string dossier = BTTP_SERVEUR_DOSSIER, 
-                const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT
+                Contexte* contexte = nullptr
             );
         
             /**

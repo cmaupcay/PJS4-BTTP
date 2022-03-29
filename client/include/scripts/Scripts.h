@@ -25,7 +25,7 @@ namespace BTTP
              * @param identite Identité locale.
              * @param mdp Mot de passe de l'identité locale.
              * @param dossier Dossier de destination.
-             * @param utiliser_contexte Drapeau indiquant si le dossier est relatif au contexte BTTP.
+             * @param contexte Contexte BTTP à utiliser.
              * @param creer_chemin Drapeau indiquant si le chemin doit être créé s'il n'existe pas.
              * @return const Script Métadonnées du script ajouté.
              * 
@@ -36,7 +36,7 @@ namespace BTTP
                 const Serveurs::Serveur& serveur,
                 const Protocole::Identite& identite, const std::string mdp,
                 const std::string dossier = BTTP_SCRIPT_DOSSIER, 
-                const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT,
+                const Contexte* contexte = nullptr,
                 const bool creer_chemin = BTTP_CREATION_CHEMIN_PAR_DEFAUT
             );
 
@@ -47,7 +47,7 @@ namespace BTTP
              * @param identite Identité locale.
              * @param mdp Mot de passe de l'identité locale.
              * @param dossier Dossier de destination.
-             * @param utiliser_contexte Drapeau indiquant si le dossier est relatif au contexte BTTP.
+             * @param contexte Contexte BTTP à utiliser.
              * @throw Type::Incoherent ou Type::Erreur
              */
             void supprimer(
@@ -55,14 +55,14 @@ namespace BTTP
                 const Serveurs::Serveur& serveur,
                 const Protocole::Identite& identite, const std::string mdp,
                 const std::string dossier = BTTP_SCRIPT_DOSSIER, 
-                const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT
+                const Contexte* contexte = nullptr
             );
 
             /**
              * @brief Exécution d'un script.
              * @param script Métadonnées du script à lancer.
              * @param dossier Dossier de destination.
-             * @param utiliser_contexte Drapeau indiquant si le dossier est relatif au contexte BTTP.
+             * @param contexte Contexte BTTP à utiliser.
              * @return std::string Sortie.
              * 
              * @throws BTTP::Client::Erreur::Scripts::Execution L'exécution a engendré une erreur.
@@ -70,20 +70,20 @@ namespace BTTP
             const std::string executer(
                 const Script script,
                 const std::string dossier = BTTP_SCRIPT_DOSSIER, 
-                const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT
+                const Contexte* contexte = nullptr
             );
 
             /**
              * @brief Retourne la liste des scripts locaux relatifs à un serveur.
              * @param serveur Serveur cible.
              * @param dossier Dossier de destination.
-             * @param utiliser_contexte Drapeau indiquant si le dossier est relatif au contexte BTTP.
+             * @param contexte Contexte BTTP à utiliser.
              * @return const std::vector<Script> Liste des scripts locaux relatis au serveur cible.
              */
             const std::vector<Script> liste(
                 const Serveurs::Serveur& serveur,
                 const std::string dossier = BTTP_SCRIPT_DOSSIER, 
-                const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT
+                const Contexte* contexte = nullptr
             );
         }
     }

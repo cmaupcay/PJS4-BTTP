@@ -14,12 +14,12 @@ namespace BTTP
             private:
                 static std::vector<std::string> lire(
                     const Protocole::Identite& identite, const std::string mdp,
-                    const std::string dossier, const bool utiliser_contexte
+                    const std::string dossier, const Contexte* contexte
                 );
                 static void ecrire(
                     const std::vector<std::string>& cles,
                     const Protocole::Identite& identite, const std::string mdp,
-                    const std::string dossier, const bool utiliser_contexte,
+                    const std::string dossier, const Contexte* contexte,
                     const bool creer_chemin
                 );
 
@@ -33,7 +33,7 @@ namespace BTTP
                  * @param identite Identité locale.
                  * @param mdp Mot de passe de l'identité locale.
                  * @param dossier Dossier de destination.
-                 * @param utiliser_contexte Drapeau indiquant si le dossier est relatif au contexte BTTP.
+                 * @param contexte Contexte BTTP à utiliser.
                  * @param creer_chemin Drapeau indiquant si le chemin doit être créé s'il n'existe pas.
                  * @return true La clé publique a été ajouté aux clés autorisées.
                  * @return false L'ajout de la clé a échoué.
@@ -42,7 +42,7 @@ namespace BTTP
                     const Protocole::Cle::Publique& cle,
                     const Protocole::Identite& identite, const std::string mdp,
                     const std::string dossier = BTTP_AUTORISATIONS_DOSSIER, 
-                    const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT,
+                    const Contexte* contexte = nullptr,
                     const bool creer_chemin = BTTP_CREATION_CHEMIN_PAR_DEFAUT
                 );
 
@@ -52,7 +52,7 @@ namespace BTTP
                  * @param identite Identité locale.
                  * @param mdp Mot de passe de l'identité locale.
                  * @param dossier Dossier de destination.
-                 * @param utiliser_contexte Drapeau indiquant si le dossier est relatif au contexte BTTP.
+                 * @param contexte Contexte BTTP à utiliser.
                  * @return true L'autorisation a été révoqué.
                  * @return false La suppression de l'autorisation a échoué.
                  */
@@ -60,7 +60,7 @@ namespace BTTP
                     const std::string empreinte,
                     const Protocole::Identite& identite, const std::string mdp,
                     const std::string dossier = BTTP_AUTORISATIONS_DOSSIER, 
-                    const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT
+                    const Contexte* contexte = nullptr
                 );
 
                 /**
@@ -68,15 +68,15 @@ namespace BTTP
                  * @param identite Identité locale.
                  * @param mdp Mot de passe de l'identité locale.
                  * @param dossier Dossier de destination.
-                 * @param utiliser_contexte Drapeau indiquant si le dossier est relatif au contexte BTTP.
+                 * @param contexte Contexte BTTP à utiliser.
                  * @return const std::vector<Script> Liste des clés publiques des appareils autorisés.
                  */
                 inline static const std::vector<std::string> liste(
                     const Protocole::Identite& identite, const std::string mdp,
                     const std::string dossier = BTTP_AUTORISATIONS_DOSSIER, 
-                    const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT
+                    const Contexte* contexte = nullptr
                 )
-                { return lire(identite, mdp, dossier, utiliser_contexte); }
+                { return lire(identite, mdp, dossier, contexte); }
             };
         }
     }

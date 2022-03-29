@@ -1,14 +1,13 @@
 #ifndef H_BTTP_CLIENT_CONNEXION
 #define H_BTTP_CLIENT_CONNEXION
 
-#include "Racine.h"
+#include "Contexte.h"
 #include "erreur/connexion/Fermee.h"
 #include "erreur/connexion/Timeout.h"
 #include "erreur/connexion/DejaOuverte.h"
 #include "erreur/connexion/Resolution.h"
 #include "erreur/connexion/Ouverture.h"
 #include <chrono>
-#include <asio.hpp>
 
 namespace BTTP
 {

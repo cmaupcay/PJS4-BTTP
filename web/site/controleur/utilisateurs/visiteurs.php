@@ -97,10 +97,10 @@
                         }
                             $i++;
                     }
-                    echo '<a href="controleur/general/download.php?file=' . $toShow . '"><button class="btn btn-sm btn-outline-secondary">Telecharger</button></a>';
+                    echo '<a href="controleur/general/download.php?file=' . $toShow . '"><button class="btn btn-sm btn-outline-secondary"">Telecharger</button></a>';
                     
 
-                    echo '<a href="controleur/general/codeSource.php?file=' . $toShow . '" target="_blank"><button type="button" class="btn btn-sm btn-outline-secondary"> Code source </button></a>';
+                    echo '<a action="?controle=visiteurs&action=code_source?file=' . $toShow . '" target="_blank"><button type="button" class="btn btn-sm btn-outline-secondary"> Code source </button></a>';
                     echo '</div>';
                     echo '</div>';
                     echo '</div>';
@@ -110,6 +110,16 @@
         echo '</div>';
     }
     
+    function code_source() {
+
+        require_once './modele/marketplace.php';
+
+        $source = code_source();
+
+        //TODO rajouter le html
+
+
+    }
     function produits() {
 
         require './vue/visiteurs/produits.tpl';

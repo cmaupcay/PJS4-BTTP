@@ -27,9 +27,11 @@ namespace BTTP
                 {
                     Console::afficher("> Ajout du serveur \"" + cible + "\" : ");
                     const std::string adresse = Console::demander("\tAdresse : ");
-                    const std::string port = Console::demander(
-                        "\tPort de conenxion (" + std::to_string(BTTP_PORT) + " par défaut) : "
+                    const std::string port_par_defaut = std::to_string(BTTP_PORT);
+                    std::string port = Console::demander(
+                        "\tPort de connexion (" + port_par_defaut + " par défaut) : "
                     );
+                    if (port.size() == 0) port = port_par_defaut;
                     Client::Serveurs::Serveur serveur{ cible, adresse, (uint16_t)std::atoi(port.c_str()) };
                     Console::afficher("> Ajout du serveur...");
                     const std::string mdp = Console::demander("\tMot de passe de l'identité : ");
@@ -65,7 +67,7 @@ namespace BTTP
 
                 const std::string Serveurs::aide() const
                 {
-                    std::string aide = "Usage : bttp-cli ";
+                    std::string aide = "Gestion des serveurs de contrôle.\nUsage : bttp-cli ";
                     aide += BTTP_COMMANDE_SERVEURS;
                     aide += " [";
                     aide += BTTP_COMMANDE_SERVEURS_AJOUT;

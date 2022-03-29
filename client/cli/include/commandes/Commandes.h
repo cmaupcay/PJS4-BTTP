@@ -5,6 +5,7 @@
 #include "Distant.h"
 #include "Execution.h"
 #include "Identites.h"
+#include "Scripts.h"
 #include "Serveurs.h"
 
 #include "erreur/Inconnue.h"

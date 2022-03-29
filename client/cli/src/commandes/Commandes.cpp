@@ -15,6 +15,7 @@ namespace BTTP
                     c.push_back(new Distant());
                     c.push_back(new Execution());
                     c.push_back(new Identites());
+                    c.push_back(new Scripts());
                     c.push_back(new Serveurs());
                     return c;
                 }

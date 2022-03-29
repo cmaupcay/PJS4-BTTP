@@ -3,6 +3,8 @@
 
 #include "../Console.h"
 
+#include "erreur/AucunServeur.h"
+
 namespace BTTP
 {
     namespace Client
@@ -11,12 +13,17 @@ namespace BTTP
         {
             namespace Commandes
             {
+                // TODO fonctions de sous séquence (ex: ajout, suppression, liste) -> fonctions statiques publiques comme authentification.
                 class Commande
                 {
                 private:
                     const std::string _nom;
+
                 protected:
                     Commande(const std::string nom) : _nom{ nom } {}
+
+                    static const Client::Serveurs::Serveur definir_serveur();
+                    static void authentification(Client::Serveurs::Serveur& serveur, const std::string mdp);
 
                 public:
                     virtual void executer(const int argc, const char** argv) const = 0;

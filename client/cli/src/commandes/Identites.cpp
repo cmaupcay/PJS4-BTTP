@@ -8,7 +8,7 @@ namespace BTTP
         {
             namespace Commandes
             {
-                const int Identites::liste() const
+                void Identites::liste() const
                 {
                     const std::vector<Protocole::Identite> identites = Client::Identites::liste();
                     if (identites.size() == 0)
@@ -19,22 +19,20 @@ namespace BTTP
                         for (const Protocole::Identite& identite : identites)
                             Console::afficher("\t- " + Protocole::Meta(identite.cle_publique()).afficher());
                     }
-                    return 0;
 
                 }
 
-                const int Identites::ajout(const std::string cible) const
+                void Identites::ajout(const std::string cible) const
                 {
                     if (Client::Identites::existe(cible)) throw Erreur::Commandes::Identites::DejaExistante(cible);
                     Console::afficher("> Nouvelle identité nommée \"" + cible + "\" : ");
                     const std::string contact = Console::demander("\tContact associé : ");
-                    const std::string mdp = Console::creationMdp();
+                    const std::string mdp = Console::creer_mdp();
                     Console::afficher("> Génération de votre identité...");
                     const Protocole::Identite identite{ cible, contact, mdp };
                     Console::afficher("> Exportation de la nouvelle identité...");
                     Client::Identites::exporter(identite);
                     Console::afficher("> Identité créée avec succès.");
-                    return 0;
                 }
 
                 void Identites::suppression(const std::string cible) const
@@ -45,16 +43,15 @@ namespace BTTP
                     Console::afficher("> Identité supprimée.");
                 }
 
-                const int Identites::exportation(const std::string cible) const
+                void Identites::exportation(const std::string cible) const
                 {
                     Protocole::Identite identite = Client::Identites::importer(cible);
                     Console::afficher("> Identité importée.");
                     Console::afficher("> Exportation de l'identité \"" + cible + "\"...");
                     std::string destination = Console::demander("\tDossier de destination : ");
                     if (destination.size() == 0) destination = ".";
-                    Fichiers::ecrire(identite.cle_publique().exporter(false), cible, destination, false, true, false, true);
+                    Fichiers::ecrire(identite.cle_publique().exporter(false), cible, destination, false, true, false);
                     Console::afficher("> Identité exportée.");
-                    return 0;
                 }
 
                 void Identites::executer(const int argc, const char** argv) const
@@ -76,7 +73,7 @@ namespace BTTP
 
                 const std::string Identites::aide() const
                 {
-                    std::string aide = "Usage : bttp-cli ";
+                    std::string aide = "Gestion des identités de l'appareil.\nUsage : bttp-cli ";
                     aide += BTTP_COMMANDE_IDENTITES;
                     aide += " [";
                     aide += BTTP_COMMANDE_IDENTITES_AJOUT;

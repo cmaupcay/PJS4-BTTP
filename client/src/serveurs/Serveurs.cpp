@@ -29,7 +29,6 @@ namespace BTTP
 
                     const Protocole::Messages::Erreur erreur {confirmation};
                     throw BTTP::Erreur(erreur.nom(), erreur.message(), erreur.code());
-
                 }
                 else if (confirmation[0] != static_cast<char>(Protocole::Messages::Type::PRET))
                     throw Protocole::Erreur::Messages::Type::Incoherent(confirmation[0], confirmation);                
@@ -51,6 +50,7 @@ namespace BTTP
 
             const std::vector<Appareil> appareils(const Serveur& serveur, const Protocole::Identite& identite, const std::string mdp)
             {
+                // if (!serveur.authentifie()) throw // TODO Erreur NonAuthentifie
                 const Messages::DemandeAppareils demande;
                 serveur.connexion().envoyer(identite.chiffrer(demande.construire(), serveur.cle(), mdp));
                 const std::string paquet_reponse = identite.dechiffrer(serveur.connexion().recevoir(), serveur.cle(), mdp);
@@ -60,6 +60,7 @@ namespace BTTP
 
             const std::vector<Script> scripts(const Appareil& appareil, const Serveur& serveur, const Protocole::Identite& identite, const std::string mdp)
             {
+                // if (!serveur.authentifie()) throw // TODO Erreur NonAuthentifie
                 const Messages::DemandeScripts demande{ appareil };
                 serveur.connexion().envoyer(identite.chiffrer(demande.construire(), serveur.cle(), mdp));
                 const std::string paquet_reponse = identite.dechiffrer(serveur.connexion().recevoir(), serveur.cle(), mdp);

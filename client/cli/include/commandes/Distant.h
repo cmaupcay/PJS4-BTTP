@@ -2,7 +2,6 @@
 #define H_BTTP_CLIENT_CLI_COMMANDE_DISTANT
 
 #include "erreur/Syntaxe.h"
-#include "erreur/execution/AucunServeur.h"
 
 #define BTTP_COMMANDE_DISTANT "distant"
 
@@ -16,9 +15,6 @@ namespace BTTP
             {
                 class Distant : public Commande
                 {
-                private:
-                    const Client::Serveurs::Serveur& definir_serveur() const;
-
                 public:
                     Distant() : Commande(BTTP_COMMANDE_DISTANT) {}
 

@@ -15,6 +15,7 @@ namespace BTTP
                 const bool creer_chemin
             )
             {
+                // if (!serveur.authentifie()) throw // TODO Erreur NonAuthentifie
                 // Annonce de l'ajout du script
                 const Messages::DemandeAjout message{ nom };
                 serveur.connexion().envoyer(
@@ -26,6 +27,7 @@ namespace BTTP
                 const Script script{ serveur, message_reponse.id_script(), nom };
                 // Enregistrement du fichier en local.
                 Fichiers::ecrire(contenu, script.reference(), dossier, false, false, utiliser_contexte, creer_chemin);
+                // TODO Ajout du droit d'execution POSIX
                 return script;
             }
 
@@ -38,7 +40,7 @@ namespace BTTP
                 const bool utiliser_contexte
             )
             {
-
+                // if (!serveur.authentifie()) throw // TODO Erreur NonAuthentifie
                 // Suppression du fichier local s'il existe.
                 try {Fichiers::supprimer(script.reference(), dossier, utiliser_contexte);}
                 catch (Erreur::Fichiers::Inexistant& e) { throw Erreur::Scripts::Inexistant(script); }
@@ -63,6 +65,7 @@ namespace BTTP
                 const bool utiliser_contexte
             )
             {
+                // if (!serveur.authentifie()) throw // TODO Erreur NonAuthentifie
                 const std::string nom_fichier_sortie = script.nom() + "_tmp";
                 const std::string fichier_sortie = Fichiers::chemin(nom_fichier_sortie, dossier, utiliser_contexte);
                 const std::string reference = script.reference();

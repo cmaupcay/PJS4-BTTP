@@ -8,7 +8,7 @@ namespace BTTP
         {
             namespace Commandes
             {
-                const int Autorisations::liste(const std::string mdp) const
+                void Autorisations::liste(const std::string mdp) const
                 {
                     const std::vector<std::string> cles = Client::Scripts::Autorisations::liste(Contexte::identite(), mdp);
                     if (cles.size() == 0)
@@ -19,8 +19,6 @@ namespace BTTP
                         for (const std::string& cle : cles)
                             Console::afficher("\t- " + cle);
                     }
-                    return 0;
-
                 }
 
                 void Autorisations::ajout(const std::string mdp, const std::string fichier_cible) const
@@ -62,7 +60,7 @@ namespace BTTP
 
                 const std::string Autorisations::aide() const
                 {
-                    std::string aide = "Usage : bttp-cli ";
+                    std::string aide = "Gestion des autorisations d'exécution.\nUsage : bttp-cli ";
                     aide += BTTP_COMMANDE_AUTORISATIONS;
                     aide += " [";
                     aide += BTTP_COMMANDE_AUTORISATIONS_AJOUT;

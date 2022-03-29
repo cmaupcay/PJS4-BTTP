@@ -10,7 +10,7 @@ namespace BTTP
             {
                 void Scripts::liste() const
                 {
-                    const std::vector<Client::Serveurs::Serveur> serveurs = Client::Serveurs::liste();
+                    const std::vector<Client::Serveurs::Serveur> serveurs = Client::Serveurs::liste(BTTP_SERVEUR_DOSSIER, Contexte::client().get());
                     if (serveurs.size() == 0) 
                         Console::afficher("> Aucun serveur de contrôle enregistré.");
                     else
@@ -22,12 +22,12 @@ namespace BTTP
                 void Scripts::liste(const std::string serveur) const
                 {
                     // TODO Erreur spécifique si le serveur n'existe pas.
-                    const Client::Serveurs::Serveur serveur_obj = Client::Serveurs::charger(serveur);
+                    const Client::Serveurs::Serveur serveur_obj = Client::Serveurs::charger(serveur, BTTP_SERVEUR_DOSSIER, Contexte::client().get());
                     this->liste(serveur_obj);
                 }
                 void Scripts::liste(const Client::Serveurs::Serveur& serveur) const
                 {
-                    const std::vector<Client::Scripts::Script> scripts = Client::Scripts::liste(serveur);
+                    const std::vector<Client::Scripts::Script> scripts = Client::Scripts::liste(serveur, BTTP_SCRIPT_DOSSIER, Contexte::client().get());
                     const size_t n = scripts.size();
                     if (n == 0) Console::afficher("> Aucun script enregistré pour \"" + serveur.nom() + "\".");
                     else
@@ -63,7 +63,7 @@ namespace BTTP
 
                 const Client::Scripts::Script Scripts::charger(const Client::Serveurs::Serveur& serveur, const std::string script) const
                 {
-                    const std::vector<Client::Scripts::Script> scripts = Client::Scripts::liste(serveur);
+                    const std::vector<Client::Scripts::Script> scripts = Client::Scripts::liste(serveur, BTTP_SCRIPT_DOSSIER, Contexte::client().get());
                     for (const Client::Scripts::Script& s : scripts)
                         if (s.nom() == script) return s;
                     // throw // TODO Erreur Scripts::Inexistant

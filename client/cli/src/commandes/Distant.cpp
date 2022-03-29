@@ -14,7 +14,9 @@ namespace BTTP
                     {
                         const std::string mdp = Console::demander("> Mot de passe de l'identité locale : ");
                         Console::afficher("> Récupération des autorisations...");
-                        const std::vector<std::string> autorisations = Client::Scripts::Autorisations::liste(*Contexte::client()->identite(), mdp);
+                        const std::vector<std::string> autorisations = Client::Scripts::Autorisations::liste(
+                            *Contexte::client()->identite(), mdp, BTTP_AUTORISATIONS_DOSSIER, Contexte::client().get()
+                        );
 
                         Client::Serveurs::Serveur serveur = Commande::definir_serveur();
                         Console::afficher("> Serveur : " + serveur.informations());

@@ -10,7 +10,7 @@ namespace BTTP
             {
                 const Client::Serveurs::Serveur Commande::definir_serveur()
                 {
-                    const std::vector<Client::Serveurs::Serveur> serveurs = Client::Serveurs::liste();
+                    const std::vector<Client::Serveurs::Serveur> serveurs = Client::Serveurs::liste(BTTP_SERVEUR_DOSSIER, Contexte::client().get());
                     const size_t n = serveurs.size();
                     if (n == 0) throw Erreur::Commandes::AucunServeur();
                     else if (n == 1) return serveurs[0];

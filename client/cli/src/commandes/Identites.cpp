@@ -10,7 +10,7 @@ namespace BTTP
             {
                 void Identites::liste() const
                 {
-                    const std::vector<Protocole::Identite> identites = Client::Identites::liste();
+                    const std::vector<Protocole::Identite> identites = Client::Identites::liste(BTTP_IDENTITE_DOSSIER, Contexte::client().get());
                     if (identites.size() == 0)
                         Console::afficher("> Aucune identité locale enregistrée.");
                     else
@@ -24,28 +24,29 @@ namespace BTTP
 
                 void Identites::ajout(const std::string cible) const
                 {
-                    if (Client::Identites::existe(cible)) throw Erreur::Commandes::Identites::DejaExistante(cible);
+                    if (Client::Identites::existe(cible, BTTP_IDENTITE_DOSSIER, Contexte::client().get())) 
+                        throw Erreur::Commandes::Identites::DejaExistante(cible);
                     Console::afficher("> Nouvelle identité nommée \"" + cible + "\" : ");
                     const std::string contact = Console::demander("\tContact associé : ");
                     const std::string mdp = Console::creer_mdp();
                     Console::afficher("> Génération de votre identité...");
                     const Protocole::Identite identite{ cible, contact, mdp };
                     Console::afficher("> Exportation de la nouvelle identité...");
-                    Client::Identites::exporter(identite);
+                    Client::Identites::exporter(identite, BTTP_IDENTITE_DOSSIER, Contexte::client().get());
                     Console::afficher("> Identité créée avec succès.");
                 }
 
                 void Identites::suppression(const std::string cible) const
                 {
                     Console::afficher("> Suppression de l'identité \"" + cible + "\"...");
-                    try { Client::Identites::supprimer(cible);}
+                    try { Client::Identites::supprimer(cible, BTTP_IDENTITE_DOSSIER, Contexte::client().get());}
                     catch (BTTP::Client::Erreur::Fichiers::Inexistant& e) { throw Erreur::Commandes::Identites::Inexistante(cible);}
                     Console::afficher("> Identité supprimée.");
                 }
 
                 void Identites::exportation(const std::string cible) const
                 {
-                    Protocole::Identite identite = Client::Identites::importer(cible);
+                    Protocole::Identite identite = Client::Identites::importer(cible, BTTP_IDENTITE_DOSSIER, Contexte::client().get());
                     Console::afficher("> Identité importée.");
                     Console::afficher("> Exportation de l'identité \"" + cible + "\"...");
                     std::string destination = Console::demander("\tDossier de destination : ");

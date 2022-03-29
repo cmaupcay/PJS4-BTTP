@@ -10,7 +10,9 @@ namespace BTTP
             {
                 void Autorisations::liste(const std::string mdp) const
                 {
-                    const std::vector<std::string> cles = Client::Scripts::Autorisations::liste(*Contexte::client()->identite(), mdp);
+                    const std::vector<std::string> cles = Client::Scripts::Autorisations::liste(
+                        *Contexte::client()->identite(), mdp, BTTP_AUTORISATIONS_DOSSIER, Contexte::client().get()
+                    );
                     if (cles.size() == 0)
                         Console::afficher("> Aucune autorisation enregistrée.");
                     else
@@ -26,7 +28,9 @@ namespace BTTP
                     Console::afficher("> Importation de la clé publique depuis le fichier cible...");
                     std::ifstream fichier = Fichiers::lecture(fichier_cible, "", true, Contexte::client().get());
                     const Protocole::Cle::Publique cle{ fichier };
-                    if (Client::Scripts::Autorisations::autoriser(cle, *Contexte::client()->identite(), mdp))
+                    if (Client::Scripts::Autorisations::autoriser(
+                            cle, *Contexte::client()->identite(), mdp, BTTP_AUTORISATIONS_DOSSIER, Contexte::client().get()
+                        ))
                         Console::afficher("> Autorisation ajoutée.");
                     else throw Erreur::Commandes::Autorisations::DejaExistante(cle.empreinte());
 
@@ -35,7 +39,9 @@ namespace BTTP
                 void Autorisations::suppression(const std::string mdp, const std::string empreinte) const
                 {
                     Console::afficher("> Suppression de l'autorisation pour l'empreinte \"" + empreinte + "\"...");
-                    if (Client::Scripts::Autorisations::revoquer(empreinte, *Contexte::client()->identite(), mdp))
+                    if (Client::Scripts::Autorisations::revoquer(
+                        empreinte, *Contexte::client()->identite(), mdp, BTTP_AUTORISATIONS_DOSSIER, Contexte::client().get()
+                        ))
                         Console::afficher("> Autorisation révoquée.");
                     else throw Erreur::Commandes::Autorisations::Inexistante(empreinte);
                 }

@@ -1,5 +1,7 @@
 // ignore_for_file: unnecessary_const, avoid_print, prefer_const_constructors
 
+import 'package:bttp/theme_color.dart';
+
 import 'main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,31 +10,29 @@ import 'globale_variable.dart';
 import 'home_page.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
 
+ThemeColor lightMode = ThemeColor(
+  fond: const Color(0xFF00A8E8),
+  textColor: const Color(0xFF003459),
+  bar: const Color(0xFFFFFFFF),
+  button: const Color(0xFF007E7A),
+);
+
+ThemeColor darkMode = ThemeColor(
+  fond: const Color(0xFF1d1d1d),
+  textColor: const Color(0xFF003459),
+  bar: const Color(0xFF3a3d4b),
+  button: const Color(0xFF23ebd1),
+);
+
 class SettingsPage extends StatefulWidget {
   @override
   _SettingsPage createState() => _SettingsPage();
 }
 
 class _SettingsPage extends State<SettingsPage> {
-  bool darkmode = false;
-  dynamic savedThemeMode;
-
+  @override
   void initState() {
     super.initState();
-    getCurrentTheme();
-  }
-
-  Future getCurrentTheme() async {
-    savedThemeMode = await AdaptiveTheme.getThemeMode();
-    if (savedThemeMode.toString() == 'AdaptiveThemeMode.dark') {
-      setState(() {
-        darkmode = true;
-      });
-    } else {
-      setState(() {
-        darkmode = false;
-      });
-    }
   }
 
   @override
@@ -40,46 +40,54 @@ class _SettingsPage extends State<SettingsPage> {
     SystemChrome.setPreferredOrientations(
         [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
     return Scaffold(
-      backgroundColor: screen,
+      backgroundColor: isDarkMode ? darkMode.fond : lightMode.textColor,
       appBar: AppBar(
         elevation: 0,
-//        backgroundColor: bars,
+        backgroundColor: isDarkMode ? darkMode.bar : lightMode.bar,
         leading: IconButton(
-          // ignore: prefer_const_constructors
           icon: Icon(
             Icons.arrow_back,
-//           color: Colors.black,
+            color: isDarkMode ? darkMode.button : lightMode.textColor,
             size: 30,
           ),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => HomePage(),
+              ),
+            );
           },
         ),
         title: Text(
           'Settings',
           style: GoogleFonts.poppins(
-//            color: Colors.white,
+            color: isDarkMode ? darkMode.button : lightMode.textColor,
             fontSize: 22,
             fontWeight: FontWeight.w800,
           ),
         ),
       ),
-      body: SwitchListTile(
-        title: Text('Mode sombre'),
-        activeColor: Colors.orange,
-        secondary: const Icon(Icons.nightlight_round),
-        value: darkmode,
-        onChanged: (bool value) {
-          print(value);
-          if (value == true) {
-            AdaptiveTheme.of(context).setDark();
-          } else {
-            AdaptiveTheme.of(context).setLight();
-          }
-          setState(() {
-            darkmode = value;
-          });
-        },
+      body: SingleChildScrollView(
+        child: SwitchListTile(
+          title: Text(
+            'Mode sombre',
+            style: GoogleFonts.poppins(
+              color: isDarkMode ? darkMode.button : lightMode.textColor,
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          tileColor: isDarkMode ? darkMode.textColor : lightMode.fond,
+          activeColor: darkMode.button,
+          secondary: const Icon(Icons.nightlight_round),
+          value: isDarkMode,
+          onChanged: (bool value) {
+            setIsDarkMode();
+            setState(() {});
+            print('cc');
+          },
+        ),
       ),
     );
   }

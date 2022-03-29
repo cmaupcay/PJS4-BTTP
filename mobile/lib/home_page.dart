@@ -10,18 +10,21 @@ import 'social_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'globale_variable.dart';
 import 'settings_page.dart';
+import 'theme_color.dart';
 
-/*class HomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    SystemChrome.setPreferredOrientations(
-        [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-    return Scaffold(
-      backgroundColor: Color(0xFF000010),
-      bottomNavigationBar: BottomNavBarSection(),
-    );
-  }
-}*/
+ThemeColor lightMode = ThemeColor(
+  fond: const Color(0xFF00A8E8),
+  textColor: const Color(0xFF003459),
+  bar: const Color(0xFFFFFFFF),
+  button: const Color(0xFF007E7A),
+);
+
+ThemeColor darkMode = ThemeColor(
+  fond: const Color(0xFF1d1d1d),
+  textColor: const Color(0xFF003459),
+  bar: const Color(0xFF3a3d4b),
+  button: const Color(0xFF23ebd1),
+);
 
 class HomePage extends StatefulWidget {
   @override
@@ -31,8 +34,36 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
-  bool darkmode = false;
-  dynamic savedThemeMode;
+  /*ThemeColor lightMode = ThemeColor(
+    fond: const Color(0xFF00171F),
+    textColor: const Color(0xFF003459),
+    bar: const Color(0xFFFFFFFF),
+    button: const Color(0xFF007E7A),
+    /*shadow: const [
+      BoxShadow(
+        color: const Color(0xFFd8d7da),
+        spreadRadius: 5,
+        blurRadius: 10,
+        offset: Offset(0, 5),
+      ),
+    ],*/
+  );
+
+  ThemeColor darkMode = ThemeColor(
+    fond: const Color(0xFF1a1110),
+    textColor: const Color(0xFF003459),
+    bar: const Color(0xFF3a3d4b),
+    button: const Color(0xFF23ebd1),
+    /*shadow: const [
+      BoxShadow(
+        color: const Color(0xFFd8d7da),
+        spreadRadius: 5,
+        blurRadius: 10,
+        offset: Offset(0, 5),
+      ),
+    ],*/
+  ); */
+
   int selectedIndex = 0;
   Widget _myScripts = MyScripts();
   Widget _addScript = AddScript();
@@ -40,55 +71,35 @@ class HomePageState extends State<HomePage> {
   Widget _myScriptsAppBar = MyScriptsAppBar();
   Widget _addScriptAppBar = AddScriptAppBar();
   Widget _myProfileAppBar = MyProfileAppBar();
-  void initState() {
-    super.initState();
-    getCurrentTheme();
-  }
-
-  Future getCurrentTheme() async {
-    savedThemeMode = await AdaptiveTheme.getThemeMode();
-    if (savedThemeMode.toString() == 'AdaptiveThemeMode.dark') {
-      setState(() {
-        darkmode = true;
-      });
-    } else {
-      setState(() {
-        darkmode = false;
-      });
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyProfileAppBar(),
+      appBar: MyScriptsAppBar(),
       body: this.getBody(),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: this.selectedIndex,
-        backgroundColor: Theme.of(context).primaryColor,
-        selectedItemColor: Theme.of(context).bottomAppBarColor,
+        backgroundColor: isDarkMode ? darkMode.bar : lightMode.bar,
+        selectedItemColor: isDarkMode ? darkMode.button : lightMode.textColor,
         selectedFontSize: 16,
         unselectedItemColor: Colors.grey[400],
         items: [
           BottomNavigationBarItem(
             icon: Icon(
               Icons.search,
-//              color: Colors.white,
             ),
             label: 'My Scripts',
           ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.shopping_cart_outlined,
-//              color: Colors.white,
             ),
             label: 'Market place',
           ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.account_circle_outlined,
-//              color: Colors.white,
             ),
             label: 'Profile',
           ),
@@ -127,17 +138,28 @@ class HomePageState extends State<HomePage> {
   }
 }
 
-class MyScriptsAppBar extends StatelessWidget implements PreferredSizeWidget {
+String getPage(index) {
+  if (index == 0) {
+    return 'Mes scripts';
+  } else if (index == 1) {
+    return 'Market Place';
+  } else if (index == 2) {
+    return 'Profile';
+  }
+  return 'Mes scripts';
+}
+
+class AppBarHome extends StatelessWidget implements PreferredSizeWidget {
   @override
-  Size get preferredSize => new Size.fromHeight(50);
+  Size get preferredSize => new Size.fromHeight(kToolbarHeight);
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Theme.of(context).primaryColor,
+      backgroundColor: isDarkMode ? darkMode.bar : lightMode.bar,
       title: Text(
-        'My Scripts',
+        getPage(0),
         style: GoogleFonts.poppins(
-          color: Theme.of(context).bottomAppBarColor,
+          color: isDarkMode ? darkMode.button : lightMode.textColor,
           fontSize: 22,
           fontWeight: FontWeight.w800,
         ),
@@ -154,8 +176,46 @@ class MyScriptsAppBar extends StatelessWidget implements PreferredSizeWidget {
           },
           icon: Icon(
             Icons.settings,
-            color: Theme.of(context).bottomAppBarColor,
-            size: 20,
+            color: isDarkMode ? darkMode.textColor : lightMode.textColor,
+            size: 30,
+          ),
+        )
+      ],
+      centerTitle: true,
+    );
+  }
+}
+
+class MyScriptsAppBar extends StatelessWidget implements PreferredSizeWidget {
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      automaticallyImplyLeading: false,
+      backgroundColor: isDarkMode ? darkMode.bar : lightMode.bar,
+      title: Text(
+        'My Scripts',
+        style: GoogleFonts.poppins(
+          color: isDarkMode ? darkMode.button : lightMode.textColor,
+          fontSize: 22,
+          fontWeight: FontWeight.w800,
+        ),
+      ),
+      actions: [
+        IconButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => SettingsPage(),
+              ),
+            );
+          },
+          icon: Icon(
+            Icons.settings,
+            color: isDarkMode ? darkMode.button : lightMode.textColor,
+            size: 30,
           ),
         )
       ],
@@ -166,46 +226,15 @@ class MyScriptsAppBar extends StatelessWidget implements PreferredSizeWidget {
 
 class AddScriptAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
-  Size get preferredSize => new Size.fromHeight(50);
+  Size get preferredSize => const Size.fromHeight(100);
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Theme.of(context).primaryColor,
+      backgroundColor: isDarkMode ? darkMode.bar : lightMode.bar,
       title: Text(
-        'Add Script',
+        'Market Place',
         style: GoogleFonts.poppins(
-          color: Theme.of(context).bottomAppBarColor,
-          fontSize: 22,
-          fontWeight: FontWeight.w800,
-        ),
-      ),
-      actions: [
-        IconButton(
-          onPressed: null,
-          icon: Icon(
-            Icons.settings,
-            color: Theme.of(context).bottomAppBarColor,
-            size: 20,
-          ),
-        )
-      ],
-      centerTitle: true,
-    );
-  }
-}
-
-class MyProfileAppBar extends StatelessWidget implements PreferredSizeWidget {
-  @override
-  Size get preferredSize => new Size.fromHeight(50);
-  @override
-  Widget build(BuildContext context) {
-    return AppBar(
-      automaticallyImplyLeading: false,
-      backgroundColor: Theme.of(context).primaryColor,
-      title: Text(
-        'My Profile',
-        style: GoogleFonts.poppins(
-          color: Theme.of(context).bottomAppBarColor,
+          color: isDarkMode ? darkMode.textColor : lightMode.textColor,
           fontSize: 22,
           fontWeight: FontWeight.w800,
         ),
@@ -222,8 +251,46 @@ class MyProfileAppBar extends StatelessWidget implements PreferredSizeWidget {
           },
           icon: Icon(
             Icons.settings,
-            color: Theme.of(context).bottomAppBarColor,
-            size: 20,
+            color: isDarkMode ? darkMode.textColor : lightMode.textColor,
+            size: 30,
+          ),
+        )
+      ],
+      centerTitle: true,
+    );
+  }
+}
+
+class MyProfileAppBar extends StatelessWidget implements PreferredSizeWidget {
+  @override
+  Size get preferredSize => const Size.fromHeight(100);
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      automaticallyImplyLeading: false,
+      backgroundColor: isDarkMode ? darkMode.bar : lightMode.bar,
+      title: Text(
+        'Profile',
+        style: GoogleFonts.poppins(
+          color: isDarkMode ? darkMode.button : lightMode.textColor,
+          fontSize: 22,
+          fontWeight: FontWeight.w800,
+        ),
+      ),
+      actions: [
+        IconButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => SettingsPage(),
+              ),
+            );
+          },
+          icon: Icon(
+            Icons.settings,
+            color: isDarkMode ? darkMode.button : lightMode.textColor,
+            size: 30,
           ),
         )
       ],
@@ -236,11 +303,11 @@ class MyScripts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AppBar(
-      backgroundColor: Theme.of(context).primaryColor,
+      backgroundColor: isDarkMode ? darkMode.bar : lightMode.bar,
       title: Text(
         'My Scripts',
         style: GoogleFonts.poppins(
-          color: Theme.of(context).bottomAppBarColor,
+          color: isDarkMode ? darkMode.button : lightMode.textColor,
           fontSize: 22,
           fontWeight: FontWeight.w800,
         ),
@@ -257,14 +324,15 @@ class MyScripts extends StatelessWidget {
           },
           icon: Icon(
             Icons.settings,
-            color: Theme.of(context).bottomAppBarColor,
-            size: 20,
+            color: isDarkMode ? darkMode.textColor : lightMode.textColor,
+            size: 30,
           ),
         )
       ],
+      centerTitle: true,
     );
     return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
+      backgroundColor: isDarkMode ? darkMode.textColor : lightMode.textColor,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -280,22 +348,22 @@ class FilScript extends StatelessWidget {
   final List scriptList = [
     {
       'title': 'Script1',
-      'description': "lalalaalalalal",
+      'description': "lalalaalalalalalallalalaalalalal",
       'variables': true,
     },
     {
       'title': 'Script2',
-      'description': "lalzeczczcl",
+      'description': "lalzelalalaalalalalalalalczczcl",
       'variables': false,
     },
     {
       'title': 'Script3',
-      'description': "lacedcdcdcddl",
+      'description': "lacedcdcalalallalalaalalalalcddl",
       'variables': false,
     },
     {
       'title': 'Script4',
-      'description': "lyj,hkygfvdl",
+      'description': "lyj,hkylaalalalalgfvdl",
       'variables': true,
     }
   ];
@@ -303,7 +371,7 @@ class FilScript extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(10),
-      color: Theme.of(context).backgroundColor,
+      color: isDarkMode ? darkMode.fond : lightMode.fond,
       child: Column(
         children: [
           Column(
@@ -328,13 +396,13 @@ class ScriptCard extends StatelessWidget {
       width: double.infinity,
       decoration: BoxDecoration(
 //        color: bars,
-        color: Theme.of(context).primaryColor,
+        color: isDarkMode ? darkMode.bar : lightMode.bar,
         borderRadius: BorderRadius.all(Radius.circular(18)),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.shade200,
-            spreadRadius: 4,
-            blurRadius: 6,
+            color: Colors.grey.shade600,
+            spreadRadius: 1,
+            blurRadius: 2,
             offset: Offset(0, 3),
           )
         ],
@@ -349,6 +417,7 @@ class ScriptCard extends StatelessWidget {
                 Text(
                   scriptData['title'],
                   style: GoogleFonts.nunito(
+                    color: isDarkMode ? darkMode.button : lightMode.textColor,
                     fontSize: 22,
                     fontWeight: FontWeight.w800,
                   ),
@@ -374,7 +443,7 @@ class ScriptCard extends StatelessWidget {
                 Text(
                   scriptData['description'],
                   style: GoogleFonts.nunito(
-                    color: Theme.of(context).focusColor,
+                    color: isDarkMode ? darkMode.button : lightMode.textColor,
                     fontSize: 18,
                     fontWeight: FontWeight.w600,
                   ),
@@ -389,7 +458,7 @@ class ScriptCard extends StatelessWidget {
                   },
                   icon: Icon(
                     Icons.arrow_forward_ios_rounded,
-                    color: Theme.of(context).cardColor,
+                    color: isDarkMode ? darkMode.button : lightMode.fond,
                     size: 30,
                   ),
                 )
@@ -402,7 +471,7 @@ class ScriptCard extends StatelessWidget {
               onPressed: null,
               icon: Icon(
                 Icons.add_circle_outline,
-                color: Theme.of(context).cardColor,
+                color: isDarkMode ? darkMode.button : lightMode.fond,
                 size: 30,
               ),
             ),

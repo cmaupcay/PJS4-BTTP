@@ -5,25 +5,229 @@ import 'package:flutter/material.dart';
 import 'welcome_page.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
 
-Map<int, Color> color = {
-  50: const Color(0xFF00A8E8).withOpacity(0.5),
-  100: const Color(0xFF007EA7).withOpacity(0.5),
-  200: const Color(0xFF003459).withOpacity(0.5),
-  300: const Color(0xFF00171F).withOpacity(0.5),
-  400: const Color(0xFF23ebd1).withOpacity(0.5),
-  500: const Color(0xFF3a3d4b).withOpacity(0.5),
-  600: const Color(0xFF11141b).withOpacity(0.5),
-  700: const Color(0xFFFFFFFF).withOpacity(0.5),
+/*
+Map<int, Color> bleu1 = {
+  50: Color.fromRGBO(0, 168, 232, .1),
+  100: Color.fromRGBO(0, 168, 232, .2),
+  200: Color.fromRGBO(0, 168, 232, .3),
+  300: Color.fromRGBO(0, 168, 232, .4),
+  400: Color.fromRGBO(0, 168, 232, .5),
+  500: Color.fromRGBO(0, 168, 232, .6),
+  600: Color.fromRGBO(0, 168, 232, .7),
+  700: Color.fromRGBO(0, 168, 232, .8),
+  800: Color.fromRGBO(0, 168, 232, .9),
+  900: Color.fromRGBO(0, 168, 232, 1),
 };
-MaterialColor blanc = MaterialColor(0xFFFFFFF, color);
-MaterialColor bleu1 = MaterialColor(0xFF00A8E8, color);
-MaterialColor bleu2 = MaterialColor(0xFF007EA7, color);
-MaterialColor bleu3 = MaterialColor(0xFF003459, color);
-MaterialColor bleuNuit = MaterialColor(0xFF00171F, color);
-MaterialColor vertFluo = MaterialColor(0xFF23ebd1, color);
-MaterialColor gris = MaterialColor(0xFF3a3d4b, color);
-MaterialColor noir = MaterialColor(0xFF3a3d4b, color);
+Map<int, Color> bleu2 = {
+  50: Color.fromRGBO(0, 126, 167, .1),
+  100: Color.fromRGBO(0, 126, 167, .2),
+  200: Color.fromRGBO(0, 126, 167, .3),
+  300: Color.fromRGBO(0, 126, 167, .4),
+  400: Color.fromRGBO(0, 126, 167, .5),
+  500: Color.fromRGBO(0, 126, 167, .6),
+  600: Color.fromRGBO(0, 126, 167, .7),
+  700: Color.fromRGBO(0, 126, 167, .8),
+  800: Color.fromRGBO(0, 126, 167, .9),
+  900: Color.fromRGBO(0, 126, 167, 1),
+};
 
+Map<int, Color> bleu3 = {
+  50: Color.fromRGBO(0, 52, 89, .1),
+  100: Color.fromRGBO(0, 52, 89, .2),
+  200: Color.fromRGBO(0, 52, 89, .3),
+  300: Color.fromRGBO(0, 52, 89, .4),
+  400: Color.fromRGBO(0, 52, 89, .5),
+  500: Color.fromRGBO(0, 52, 89, .6),
+  600: Color.fromRGBO(0, 52, 89, .7),
+  700: Color.fromRGBO(0, 52, 89, .8),
+  800: Color.fromRGBO(0, 52, 89, .9),
+  900: Color.fromRGBO(0, 52, 89, 1),
+};
+
+Map<int, Color> blanc = {
+  50: Color.fromRGBO(255, 255, 255, .1),
+  100: Color.fromRGBO(255, 255, 255, .2),
+  200: Color.fromRGBO(255, 255, 255, .3),
+  300: Color.fromRGBO(255, 255, 255, .4),
+  400: Color.fromRGBO(255, 255, 255, .5),
+  500: Color.fromRGBO(255, 255, 255, .6),
+  600: Color.fromRGBO(255, 255, 255, .7),
+  700: Color.fromRGBO(255, 255, 255, .8),
+  800: Color.fromRGBO(255, 255, 255, .9),
+  900: Color.fromRGBO(255, 255, 255, 1),
+};
+
+Map<int, Color> bleuNuit = {
+  50: Color.fromRGBO(0, 23, 31, .1),
+  100: Color.fromRGBO(0, 23, 31, .2),
+  200: Color.fromRGBO(0, 23, 31, .3),
+  300: Color.fromRGBO(0, 23, 31, .4),
+  400: Color.fromRGBO(0, 23, 31, .5),
+  500: Color.fromRGBO(0, 23, 31, .6),
+  600: Color.fromRGBO(0, 23, 31, .7),
+  700: Color.fromRGBO(0, 23, 31, .8),
+  800: Color.fromRGBO(0, 23, 31, .9),
+  900: Color.fromRGBO(0, 23, 31, 1),
+};
+
+Map<int, Color> vertFluo = {
+  50: Color.fromRGBO(35, 235, 209, .1),
+  100: Color.fromRGBO(35, 235, 209, .2),
+  200: Color.fromRGBO(35, 235, 209, .3),
+  300: Color.fromRGBO(35, 235, 209, .4),
+  400: Color.fromRGBO(35, 235, 209, .5),
+  500: Color.fromRGBO(35, 235, 209, .6),
+  600: Color.fromRGBO(35, 235, 209, .7),
+  700: Color.fromRGBO(35, 235, 209, .8),
+  800: Color.fromRGBO(35, 235, 209, .9),
+  900: Color.fromRGBO(35, 235, 209, 1),
+};
+
+Map<int, Color> gris = {
+  50: Color.fromRGBO(58, 61, 75, .1),
+  100: Color.fromRGBO(58, 61, 75, .2),
+  200: Color.fromRGBO(58, 61, 75, .3),
+  300: Color.fromRGBO(58, 61, 75, .4),
+  400: Color.fromRGBO(58, 61, 75, .5),
+  500: Color.fromRGBO(58, 61, 75, .6),
+  600: Color.fromRGBO(58, 61, 75, .7),
+  700: Color.fromRGBO(58, 61, 75, .8),
+  800: Color.fromRGBO(58, 61, 75, .9),
+  900: Color.fromRGBO(58, 61, 75, 1),
+};
+
+Map<int, Color> noir = {
+  50: Color.fromRGBO(58, 61, 75, .1),
+  100: Color.fromRGBO(58, 61, 75, .2),
+  200: Color.fromRGBO(58, 61, 75, .3),
+  300: Color.fromRGBO(58, 61, 75, .4),
+  400: Color.fromRGBO(58, 61, 75, .5),
+  500: Color.fromRGBO(58, 61, 75, .6),
+  600: Color.fromRGBO(58, 61, 75, .7),
+  700: Color.fromRGBO(58, 61, 75, .8),
+  800: Color.fromRGBO(58, 61, 75, .9),
+  900: Color.fromRGBO(58, 61, 75, 1),
+};
+
+MaterialColor customblanc = MaterialColor(
+  0xFFFFFFF,
+  const <int, Color>{
+    50: Color.fromRGBO(255, 255, 255, .1),
+    100: Color.fromRGBO(255, 255, 255, .2),
+    200: Color.fromRGBO(255, 255, 255, .3),
+    300: Color.fromRGBO(255, 255, 255, .4),
+    400: Color.fromRGBO(255, 255, 255, .5),
+    500: Color.fromRGBO(255, 255, 255, .6),
+    600: Color.fromRGBO(255, 255, 255, .7),
+    700: Color.fromRGBO(255, 255, 255, .8),
+    800: Color.fromRGBO(255, 255, 255, .9),
+    900: Color.fromRGBO(255, 255, 255, 1),
+  },
+);
+MaterialColor custombleu1 = MaterialColor(
+  0xFF00A8E8,
+  const <int, Color>{
+    50: Color.fromRGBO(0, 168, 232, .1),
+    100: Color.fromRGBO(0, 168, 232, .2),
+    200: Color.fromRGBO(0, 168, 232, .3),
+    300: Color.fromRGBO(0, 168, 232, .4),
+    400: Color.fromRGBO(0, 168, 232, .5),
+    500: Color.fromRGBO(0, 168, 232, .6),
+    600: Color.fromRGBO(0, 168, 232, .7),
+    700: Color.fromRGBO(0, 168, 232, .8),
+    800: Color.fromRGBO(0, 168, 232, .9),
+    900: Color.fromRGBO(0, 168, 232, 1),
+  },
+);
+MaterialColor custombleu2 = MaterialColor(
+  0xFF007EA7,
+  const <int, Color>{
+    50: Color.fromRGBO(0, 126, 167, .1),
+    100: Color.fromRGBO(0, 126, 167, .2),
+    200: Color.fromRGBO(0, 126, 167, .3),
+    300: Color.fromRGBO(0, 126, 167, .4),
+    400: Color.fromRGBO(0, 126, 167, .5),
+    500: Color.fromRGBO(0, 126, 167, .6),
+    600: Color.fromRGBO(0, 126, 167, .7),
+    700: Color.fromRGBO(0, 126, 167, .8),
+    800: Color.fromRGBO(0, 126, 167, .9),
+    900: Color.fromRGBO(0, 126, 167, 1),
+  },
+);
+MaterialColor custombleu3 = MaterialColor(
+  0xFF003459,
+  const <int, Color>{
+    50: Color.fromRGBO(0, 52, 89, .1),
+    100: Color.fromRGBO(0, 52, 89, .2),
+    200: Color.fromRGBO(0, 52, 89, .3),
+    300: Color.fromRGBO(0, 52, 89, .4),
+    400: Color.fromRGBO(0, 52, 89, .5),
+    500: Color.fromRGBO(0, 52, 89, .6),
+    600: Color.fromRGBO(0, 52, 89, .7),
+    700: Color.fromRGBO(0, 52, 89, .8),
+    800: Color.fromRGBO(0, 52, 89, .9),
+    900: Color.fromRGBO(0, 52, 89, 1),
+  },
+);
+MaterialColor custombleuNuit = MaterialColor(
+  0xFF00171F,
+  const <int, Color>{
+    50: Color.fromRGBO(0, 23, 31, .1),
+    100: Color.fromRGBO(0, 23, 31, .2),
+    200: Color.fromRGBO(0, 23, 31, .3),
+    300: Color.fromRGBO(0, 23, 31, .4),
+    400: Color.fromRGBO(0, 23, 31, .5),
+    500: Color.fromRGBO(0, 23, 31, .6),
+    600: Color.fromRGBO(0, 23, 31, .7),
+    700: Color.fromRGBO(0, 23, 31, .8),
+    800: Color.fromRGBO(0, 23, 31, .9),
+    900: Color.fromRGBO(0, 23, 31, 1),
+  },
+);
+MaterialColor customvertFluo = MaterialColor(
+  0xFF23ebd1,
+  const <int, Color>{
+    100: Color.fromRGBO(35, 235, 209, .2),
+    200: Color.fromRGBO(35, 235, 209, .3),
+    300: Color.fromRGBO(35, 235, 209, .4),
+    400: Color.fromRGBO(35, 235, 209, .5),
+    500: Color.fromRGBO(35, 235, 209, .6),
+    600: Color.fromRGBO(35, 235, 209, .7),
+    700: Color.fromRGBO(35, 235, 209, .8),
+    800: Color.fromRGBO(35, 235, 209, .9),
+    900: Color.fromRGBO(35, 235, 209, 1),
+  },
+);
+MaterialColor customgris = MaterialColor(
+  0xFF3a3d4b,
+  const <int, Color>{
+    50: Color.fromRGBO(58, 61, 75, .1),
+    100: Color.fromRGBO(58, 61, 75, .2),
+    200: Color.fromRGBO(58, 61, 75, .3),
+    300: Color.fromRGBO(58, 61, 75, .4),
+    400: Color.fromRGBO(58, 61, 75, .5),
+    500: Color.fromRGBO(58, 61, 75, .6),
+    600: Color.fromRGBO(58, 61, 75, .7),
+    700: Color.fromRGBO(58, 61, 75, .8),
+    800: Color.fromRGBO(58, 61, 75, .9),
+    900: Color.fromRGBO(58, 61, 75, 1),
+  },
+);
+MaterialColor customnoir = MaterialColor(
+  0xFF3a3d4b,
+  const <int, Color>{
+    50: Color.fromRGBO(58, 61, 75, .1),
+    100: Color.fromRGBO(58, 61, 75, .2),
+    200: Color.fromRGBO(58, 61, 75, .3),
+    300: Color.fromRGBO(58, 61, 75, .4),
+    400: Color.fromRGBO(58, 61, 75, .5),
+    500: Color.fromRGBO(58, 61, 75, .6),
+    600: Color.fromRGBO(58, 61, 75, .7),
+    700: Color.fromRGBO(58, 61, 75, .8),
+    800: Color.fromRGBO(58, 61, 75, .9),
+    900: Color.fromRGBO(58, 61, 75, 1),
+  },
+); */
 void main() {
   runApp(MyApp());
 }
@@ -31,24 +235,24 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return AdaptiveTheme(
+    /*return AdaptiveTheme(
       light: ThemeData(
         brightness: Brightness.light,
-        primarySwatch: blanc,
-        primaryColor: blanc,
-        backgroundColor: bleu1,
-        bottomAppBarColor: bleu3,
-        cardColor: bleu2,
-        focusColor: bleuNuit,
+        primarySwatch: customblanc,
+        primaryColor: customblanc,
+        backgroundColor: custombleu1,
+        bottomAppBarColor: custombleu3,
+        cardColor: custombleu2,
+        focusColor: custombleuNuit,
       ),
       dark: ThemeData(
         brightness: Brightness.dark,
-        primaryColor: gris,
-        primarySwatch: gris,
-        backgroundColor: noir,
-        bottomAppBarColor: gris,
-        cardColor: vertFluo,
-        focusColor: blanc,
+        primaryColor: customgris,
+        primarySwatch: customgris,
+        backgroundColor: customnoir,
+        bottomAppBarColor: customgris,
+        cardColor: customvertFluo,
+        focusColor: customblanc,
       ),
       initial: AdaptiveThemeMode.light,
       builder: (theme, darkTheme) => MaterialApp(
@@ -58,14 +262,12 @@ class MyApp extends StatelessWidget {
         darkTheme: darkTheme,
         home: WelcomePage(),
       ),
-    ); /*
+    ); */
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'BTTP',
-      theme: ThemeData(),
-      darkTheme: ThemeData.dark(),
       home: WelcomePage(),
-    );*/
+    );
   }
 }
 

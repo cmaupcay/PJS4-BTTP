@@ -12,8 +12,12 @@ namespace BTTP
     {
         class Contexte
         {
+        private:
+            static bool _initialise;
+
         public:
             static void initialiser();
+            static const bool& initialise() { return _initialise; }
         };
     }
 }

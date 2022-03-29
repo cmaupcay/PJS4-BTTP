@@ -40,6 +40,9 @@
         }  elseif ($controle=="visiteurs" && $action == "marketplace"){
             require('controleur/utilisateurs/visiteurs.php');
             marketplace();
+        }  elseif ($controle=="visiteurs" && $action == "code_source"){
+            require('controleur/utilisateurs/visiteurs.php');
+            montrer_code();
         } elseif ($controle == "abonnes" && $action == "accueil" && $identifie) { //on rajoute l'identification pour acceder à la page abonné
             require('controleur/utilisateurs/abonnes.php');
             accueil();

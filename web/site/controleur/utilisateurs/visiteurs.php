@@ -100,7 +100,7 @@
                     echo '<a href="controleur/general/download.php?file=' . $toShow . '"><button class="btn btn-sm btn-outline-secondary"">Telecharger</button></a>';
                     
 
-                    echo '<a action="?controle=visiteurs&action=code_source?file=' . $toShow . '" target="_blank"><button type="button" class="btn btn-sm btn-outline-secondary"> Code source </button></a>';
+                    echo '<a href="?controle=visiteurs&action=code_source&file=' . $toShow . '" target="_blank"><button type="button" class="btn btn-sm btn-outline-secondary"> Code source </button></a>';
                     echo '</div>';
                     echo '</div>';
                     echo '</div>';
@@ -110,8 +110,8 @@
         echo '</div>';
     }
     
-    function code_source() {
-
+    function montrer_code() {
+        require_once './vue/visiteurs/marketplace.tpl';
         require_once './modele/marketplace.php';
 
         $source = code_source();

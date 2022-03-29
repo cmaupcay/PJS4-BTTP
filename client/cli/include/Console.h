@@ -2,6 +2,7 @@
 #define H_BTTP_CLIENT_CLI_CONSOLE
 
 #include "Racine.h"
+#include "erreur/ConfirmationMdp.h"
 
 #include <iostream>
 
@@ -18,6 +19,9 @@ namespace BTTP
                 inline void saut() { std::cout << std::endl << std::flush; }
 
                 const std::string demander(const std::string message);
+
+                const std::string creationMdp();
+
             };
         }
     }

@@ -28,8 +28,7 @@ namespace BTTP
                     if (Client::Identites::existe(cible)) throw Erreur::Commandes::Identites::DejaExistante(cible);
                     Console::afficher("> Nouvelle identité nommée \"" + cible + "\" : ");
                     const std::string contact = Console::demander("\tContact associé : ");
-                    // TODO Créer une fonction permettant de taper un mot de passe dans le terminal et demander confirmation du mot de passe.
-                    const std::string mdp = Console::demander("\tMot de passe : ");
+                    const std::string mdp = Console::creationMdp();
                     Console::afficher("> Génération de votre identité...");
                     const Protocole::Identite identite{ cible, contact, mdp };
                     Console::afficher("> Exportation de la nouvelle identité...");
@@ -41,7 +40,6 @@ namespace BTTP
                 void Identites::suppression(const std::string cible) const
                 {
                     Console::afficher("> Suppression de l'identité \"" + cible + "\"...");
-                    // TODO Demander mot de passe de l'identité ?
                     try { Client::Identites::supprimer(cible);}
                     catch (BTTP::Client::Erreur::Fichiers::Inexistant& e) { throw Erreur::Commandes::Identites::Inexistante(cible);}
                     Console::afficher("> Identité supprimée.");
@@ -49,7 +47,6 @@ namespace BTTP
 
                 const int Identites::exportation(const std::string cible) const
                 {
-                    // TODO Demander mot de passe de l'identité ?
                     Protocole::Identite identite = Client::Identites::importer(cible);
                     Console::afficher("> Identité importée.");
                     Console::afficher("> Exportation de l'identité \"" + cible + "\"...");

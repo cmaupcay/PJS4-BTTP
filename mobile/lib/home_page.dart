@@ -66,29 +66,29 @@ class HomePageState extends State<HomePage> {
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: this.selectedIndex,
-//        backgroundColor: bars,
-//      selectedItemColor: Colors.white,
+        backgroundColor: Theme.of(context).primaryColor,
+        selectedItemColor: Theme.of(context).bottomAppBarColor,
         selectedFontSize: 16,
         unselectedItemColor: Colors.grey[400],
         items: [
           BottomNavigationBarItem(
             icon: Icon(
               Icons.search,
-              color: Colors.white,
+//              color: Colors.white,
             ),
             label: 'My Scripts',
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.add,
-              color: Colors.white,
+              Icons.shopping_cart_outlined,
+//              color: Colors.white,
             ),
-            label: 'Add Script',
+            label: 'Market place',
           ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.account_circle_outlined,
-              color: Colors.white,
+//              color: Colors.white,
             ),
             label: 'Profile',
           ),
@@ -133,11 +133,11 @@ class MyScriptsAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-//      backgroundColor: bars,
+      backgroundColor: Theme.of(context).primaryColor,
       title: Text(
         'My Scripts',
         style: GoogleFonts.poppins(
-//          color: Colors.white,
+          color: Theme.of(context).bottomAppBarColor,
           fontSize: 22,
           fontWeight: FontWeight.w800,
         ),
@@ -154,7 +154,7 @@ class MyScriptsAppBar extends StatelessWidget implements PreferredSizeWidget {
           },
           icon: Icon(
             Icons.settings,
-//            color: Colors.white,
+            color: Theme.of(context).bottomAppBarColor,
             size: 20,
           ),
         )
@@ -170,11 +170,11 @@ class AddScriptAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-//      backgroundColor: bars,
+      backgroundColor: Theme.of(context).primaryColor,
       title: Text(
         'Add Script',
         style: GoogleFonts.poppins(
-//          color: Colors.white,
+          color: Theme.of(context).bottomAppBarColor,
           fontSize: 22,
           fontWeight: FontWeight.w800,
         ),
@@ -184,7 +184,7 @@ class AddScriptAppBar extends StatelessWidget implements PreferredSizeWidget {
           onPressed: null,
           icon: Icon(
             Icons.settings,
-//            color: Colors.white,
+            color: Theme.of(context).bottomAppBarColor,
             size: 20,
           ),
         )
@@ -201,11 +201,11 @@ class MyProfileAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       automaticallyImplyLeading: false,
-//      backgroundColor: bars,
+      backgroundColor: Theme.of(context).primaryColor,
       title: Text(
         'My Profile',
         style: GoogleFonts.poppins(
-//          color: Colors.white,
+          color: Theme.of(context).bottomAppBarColor,
           fontSize: 22,
           fontWeight: FontWeight.w800,
         ),
@@ -222,7 +222,7 @@ class MyProfileAppBar extends StatelessWidget implements PreferredSizeWidget {
           },
           icon: Icon(
             Icons.settings,
-//            color: Colors.white,
+            color: Theme.of(context).bottomAppBarColor,
             size: 20,
           ),
         )
@@ -236,11 +236,11 @@ class MyScripts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AppBar(
-      backgroundColor: bars,
+      backgroundColor: Theme.of(context).primaryColor,
       title: Text(
         'My Scripts',
         style: GoogleFonts.poppins(
-//          color: Colors.white,
+          color: Theme.of(context).bottomAppBarColor,
           fontSize: 22,
           fontWeight: FontWeight.w800,
         ),
@@ -257,13 +257,14 @@ class MyScripts extends StatelessWidget {
           },
           icon: Icon(
             Icons.settings,
-//            color: Colors.white,
+            color: Theme.of(context).bottomAppBarColor,
             size: 20,
           ),
         )
       ],
     );
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -302,7 +303,7 @@ class FilScript extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(10),
-//      color: screen,
+      color: Theme.of(context).backgroundColor,
       child: Column(
         children: [
           Column(
@@ -327,6 +328,7 @@ class ScriptCard extends StatelessWidget {
       width: double.infinity,
       decoration: BoxDecoration(
 //        color: bars,
+        color: Theme.of(context).primaryColor,
         borderRadius: BorderRadius.all(Radius.circular(18)),
         boxShadow: [
           BoxShadow(
@@ -372,6 +374,7 @@ class ScriptCard extends StatelessWidget {
                 Text(
                   scriptData['description'],
                   style: GoogleFonts.nunito(
+                    color: Theme.of(context).focusColor,
                     fontSize: 18,
                     fontWeight: FontWeight.w600,
                   ),
@@ -386,7 +389,7 @@ class ScriptCard extends StatelessWidget {
                   },
                   icon: Icon(
                     Icons.arrow_forward_ios_rounded,
-                    //                  color: Colors.green,
+                    color: Theme.of(context).cardColor,
                     size: 30,
                   ),
                 )
@@ -399,7 +402,7 @@ class ScriptCard extends StatelessWidget {
               onPressed: null,
               icon: Icon(
                 Icons.add_circle_outline,
-//                color: Colors.green,
+                color: Theme.of(context).cardColor,
                 size: 30,
               ),
             ),

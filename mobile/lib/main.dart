@@ -5,6 +5,25 @@ import 'package:flutter/material.dart';
 import 'welcome_page.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
 
+Map<int, Color> color = {
+  50: const Color(0xFF00A8E8).withOpacity(0.5),
+  100: const Color(0xFF007EA7).withOpacity(0.5),
+  200: const Color(0xFF003459).withOpacity(0.5),
+  300: const Color(0xFF00171F).withOpacity(0.5),
+  400: const Color(0xFF23ebd1).withOpacity(0.5),
+  500: const Color(0xFF3a3d4b).withOpacity(0.5),
+  600: const Color(0xFF11141b).withOpacity(0.5),
+  700: const Color(0xFFFFFFFF).withOpacity(0.5),
+};
+MaterialColor blanc = MaterialColor(0xFFFFFFF, color);
+MaterialColor bleu1 = MaterialColor(0xFF00A8E8, color);
+MaterialColor bleu2 = MaterialColor(0xFF007EA7, color);
+MaterialColor bleu3 = MaterialColor(0xFF003459, color);
+MaterialColor bleuNuit = MaterialColor(0xFF00171F, color);
+MaterialColor vertFluo = MaterialColor(0xFF23ebd1, color);
+MaterialColor gris = MaterialColor(0xFF3a3d4b, color);
+MaterialColor noir = MaterialColor(0xFF3a3d4b, color);
+
 void main() {
   runApp(MyApp());
 }
@@ -15,11 +34,21 @@ class MyApp extends StatelessWidget {
     return AdaptiveTheme(
       light: ThemeData(
         brightness: Brightness.light,
-        primarySwatch: Colors.blue,
+        primarySwatch: blanc,
+        primaryColor: blanc,
+        backgroundColor: bleu1,
+        bottomAppBarColor: bleu3,
+        cardColor: bleu2,
+        focusColor: bleuNuit,
       ),
       dark: ThemeData(
         brightness: Brightness.dark,
-        primarySwatch: Colors.orange,
+        primaryColor: gris,
+        primarySwatch: gris,
+        backgroundColor: noir,
+        bottomAppBarColor: gris,
+        cardColor: vertFluo,
+        focusColor: blanc,
       ),
       initial: AdaptiveThemeMode.light,
       builder: (theme, darkTheme) => MaterialApp(

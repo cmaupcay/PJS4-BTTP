@@ -4,6 +4,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
+var DarkGreen = Color(0xFF0cd146);
+var DarkScreen = Color(0xFF070225);
 var fond = Color(0xFF191970);
 var screen = Colors.white;
 var bars = Color(0xFF2154a2);

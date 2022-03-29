@@ -1,9 +1,9 @@
 <?php
 
-    $hostname="bdd_mysql";
+    $hostname="localhost";
     $base="bttp";
-    $loginBD="bd";
-    $passBD = "JFBrette2022KFLeS";
+    $loginBD="root";
+    $passBD = "";
 
     try {
         $pdo = new PDO("mysql:host=$hostname; dbname=$base", $loginBD, $passBD);

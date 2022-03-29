@@ -43,12 +43,16 @@
         } elseif ($controle == "abonnes" && $action == "accueil" && $identifie) { //on rajoute l'identification pour acceder à la page abonné
             require('controleur/utilisateurs/abonnes.php');
             accueil();
-        } elseif($controle=="abonnes" && $action == "deconnexion") {
+        } elseif($controle=="abonnes" && $action == "deconnexion" && $identifie) {
             require('controleur/utilisateurs/abonnes.php');
             deconnexion();
-        } elseif($controle=="abonnes"&&$action="appareils") {
+        } elseif($controle == "abonnes" && $action == "appareils" && $identifie) {
             require('controleur/utilisateurs/abonnes.php');
             appareils();
+        }
+        elseif ($controle=="abonnes" && $action == "marketplace" && $identifie){
+            require('controleur/utilisateurs/abonnes.php');
+            marketplace();
         }
         else {
             require('erreur404.tpl');

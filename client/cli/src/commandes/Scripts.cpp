@@ -42,7 +42,7 @@ namespace BTTP
                 {
                     const std::string fichier_source = Console::demander("> Fichier source : ");
                     Console::afficher("> Lecture du fichier source...");
-                    const std::string source = Fichiers::lire(fichier_source, "", false, false);
+                    const std::string source = Fichiers::lire(fichier_source, "", false, Contexte::client().get());
 
                     Client::Serveurs::Serveur serveur = Commande::definir_serveur();
                     Console::afficher("> Serveur : " + serveur.informations());
@@ -53,8 +53,9 @@ namespace BTTP
                     Commande::authentification(serveur, mdp);
 
                     Console::afficher("> Ajout du script \"" + script + "\"...");
-                    const Client::Scripts::Script script_obj = Client::Scripts::ajouter(script, source, serveur, Contexte::identite(), mdp);
-                    Console::afficher("> Script ajouté ! Fichier local : " + Fichiers::chemin(script_obj.reference(), BTTP_SCRIPT_DOSSIER, false));
+                    const Client::Scripts::Script script_obj = Client::Scripts::ajouter(script, source, serveur, *Contexte::client()->identite(), mdp);
+                    Console::afficher("> Script ajouté !");
+                    Console::afficher("\tFichier local : " + Fichiers::chemin(script_obj.reference(), BTTP_SCRIPT_DOSSIER, Contexte::client().get()));
 
                     Console::afficher("> Fermeture de la connexion...");
                     serveur.connexion().fermer();
@@ -80,7 +81,7 @@ namespace BTTP
 
                     Console::afficher("> Suppression du script \"" + script + "\"...");
                     const Client::Scripts::Script script_obj = this->charger(serveur, script);
-                    Client::Scripts::supprimer(script_obj, serveur, Contexte::identite(), mdp);
+                    Client::Scripts::supprimer(script_obj, serveur, *Contexte::client()->identite(), mdp);
                     Console::afficher("> Script supprimé.");
 
                     Console::afficher("> Fermeture de la connexion...");
@@ -98,7 +99,7 @@ namespace BTTP
 
                     Console::afficher("> Exportation...");
                     const std::string dossier = Console::demander("\tDossier de destination : ");
-                    Fichiers::ecrire(contenu, script, dossier, false, true, false);
+                    Fichiers::ecrire(contenu, script, dossier, false, true);
                     Console::afficher("> Script exporté.");
                 }
 

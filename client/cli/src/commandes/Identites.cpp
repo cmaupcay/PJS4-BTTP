@@ -50,7 +50,7 @@ namespace BTTP
                     Console::afficher("> Exportation de l'identité \"" + cible + "\"...");
                     std::string destination = Console::demander("\tDossier de destination : ");
                     if (destination.size() == 0) destination = ".";
-                    Fichiers::ecrire(identite.cle_publique().exporter(false), cible, destination, false, true, false);
+                    Fichiers::ecrire(identite.cle_publique().exporter(false), cible, destination, false, false);
                     Console::afficher("> Identité exportée.");
                 }
 

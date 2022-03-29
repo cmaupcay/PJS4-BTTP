@@ -1,4 +1,4 @@
-#include "../include/CLI.h"
+#include "../include/BTTP-CLI.h"
 
 int main(const int argc, const char** argv)
 {

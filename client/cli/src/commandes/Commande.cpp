@@ -35,7 +35,7 @@ namespace BTTP
                 {
                     Console::afficher("> Authentification de l'identité...");
                     bool authentification = false;
-                    try {  authentification = serveur.authentification(Contexte::identite(), mdp); }
+                    try {  authentification = serveur.authentification(*Contexte::client()->identite(), mdp); }
                     catch (const BTTP::Erreur& erreur) {}
                     if (!authentification)
                     {
@@ -43,7 +43,7 @@ namespace BTTP
                         const std::string utilisateur = Console::demander("\tUtilisateur : "); 
                         const std::string mdp_utilisateur = Console::demander("\tMot de passe : ");
                         Console::afficher("\t> Authentification du compte...");
-                        if (!serveur.authentification(Contexte::identite(), mdp, utilisateur, mdp_utilisateur))
+                        if (!serveur.authentification(*Contexte::client()->identite(), mdp, utilisateur, mdp_utilisateur))
                             Console::afficher("\t> L'authentification a échoué.");
                     }
                 }

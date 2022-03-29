@@ -14,7 +14,7 @@ namespace BTTP
                     {
                         const std::string mdp = Console::demander("> Mot de passe de l'identité locale : ");
                         Console::afficher("> Récupération des autorisations...");
-                        const std::vector<std::string> autorisations = Client::Scripts::Autorisations::liste(Contexte::identite(), mdp);
+                        const std::vector<std::string> autorisations = Client::Scripts::Autorisations::liste(*Contexte::client()->identite(), mdp);
 
                         Client::Serveurs::Serveur serveur = Commande::definir_serveur();
                         Console::afficher("> Serveur : " + serveur.informations());
@@ -24,7 +24,7 @@ namespace BTTP
                         Commande::authentification(serveur, mdp);
 
                         Console::afficher("> Lancement du processus...");
-                        Client::Distant distant{ Contexte::identite(), serveur, autorisations };
+                        Client::Distant distant{ *Contexte::client()->identite(), serveur, autorisations };
                         distant.processus(mdp); // TODO Lancement dans un daemon.
 
                         Console::afficher("> Fermeture de la connexion...");

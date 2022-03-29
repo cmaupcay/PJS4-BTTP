@@ -11,7 +11,7 @@ namespace BTTP
                 const Appareil& Execution::definir_appareil(const Client::Serveurs::Serveur& serveur, const std::string mdp) const
                 {
                     Console::afficher("> Récupération de la liste des appareils...");
-                    const std::vector<Appareil> appareils = Client::Serveurs::appareils(serveur, Contexte::identite(), mdp);
+                    const std::vector<Appareil> appareils = Client::Serveurs::appareils(serveur, *Contexte::client()->identite(), mdp);
                     const size_t n = appareils.size();
                     if (n == 0) throw Erreur::Commandes::Execution::AucunAppareil();
                     else if (n == 1) return appareils[0];
@@ -35,7 +35,7 @@ namespace BTTP
                 const Client::Serveurs::Script* Execution::definir_script(const Client::Serveurs::Serveur& serveur, const Appareil& appareil, const std::string mdp) const
                 {
                     Console::afficher("> Récupération de la liste des scripts...");
-                    const std::vector<Client::Serveurs::Script> scripts = Client::Serveurs::scripts(appareil, serveur, Contexte::identite(), mdp);
+                    const std::vector<Client::Serveurs::Script> scripts = Client::Serveurs::scripts(appareil, serveur, *Contexte::client()->identite(), mdp);
                     const size_t n = scripts.size();
                     if (n == 0)
                     {
@@ -81,7 +81,7 @@ namespace BTTP
                             Console::afficher("> Appareil : " + appareil.informations());
 
                             Console::afficher("> Ouverture de la transaction...");
-                            Transactions::Client transaction{ Contexte::identite(), appareil, serveur };
+                            Transactions::Client transaction{ *Contexte::client()->identite(), appareil, serveur };
                             transaction.ouvrir(mdp);
                             if (transaction.ouverte())
                             {

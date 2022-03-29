@@ -2,6 +2,7 @@
 #define H_BTTP_CLIENT_CLI_COMMANDE
 
 #include "../Console.h"
+#include "../Contexte.h"
 
 #include "erreur/AucunServeur.h"
 

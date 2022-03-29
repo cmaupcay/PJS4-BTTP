@@ -36,7 +36,7 @@ namespace BTTP
                     Console::afficher("> Ajout du serveur...");
                     const std::string mdp = Console::demander("\tMot de passe de l'identité : ");
                     Console::afficher("> Connexion au serveur...");
-                    Client::Serveurs::ajout(serveur, Contexte::identite(), mdp);
+                    Client::Serveurs::ajout(serveur, *Contexte::client()->identite(), mdp);
                     Console::afficher("> Serveur de contrôle ajouté avec succès.");
 
                 }
@@ -47,7 +47,6 @@ namespace BTTP
                     const Client::Serveurs::Serveur serveur = Client::Serveurs::charger(cible);
                     Client::Serveurs::suppression(serveur);
                     Console::afficher("> Serveur supprimé avec succès.");
-
                 }
 
                 void Serveurs::executer(const int argc, const char** argv) const

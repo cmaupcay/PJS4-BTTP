@@ -23,6 +23,9 @@ namespace BTTP
                     const bool creer_chemin
                 );
 
+                inline static const std::string nom_fichier(const Protocole::Identite& identite)
+                { return Protocole::Meta(identite.cle_publique()).nom(); }
+
             public:
                 /**
                  * @brief Autorisation d'un nouvelle clé publique.
@@ -38,7 +41,7 @@ namespace BTTP
                 static const bool autoriser(
                     const Protocole::Cle::Publique& cle,
                     const Protocole::Identite& identite, const std::string mdp,
-                    const std::string dossier = BTTP_DOSSIER, 
+                    const std::string dossier = BTTP_AUTORISATIONS_DOSSIER, 
                     const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT,
                     const bool creer_chemin = BTTP_CREATION_CHEMIN_PAR_DEFAUT
                 );
@@ -56,7 +59,7 @@ namespace BTTP
                 static const bool revoquer(
                     const std::string empreinte,
                     const Protocole::Identite& identite, const std::string mdp,
-                    const std::string dossier = BTTP_DOSSIER, 
+                    const std::string dossier = BTTP_AUTORISATIONS_DOSSIER, 
                     const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT
                 );
 
@@ -70,7 +73,7 @@ namespace BTTP
                  */
                 inline static const std::vector<std::string> liste(
                     const Protocole::Identite& identite, const std::string mdp,
-                    const std::string dossier = BTTP_DOSSIER, 
+                    const std::string dossier = BTTP_AUTORISATIONS_DOSSIER, 
                     const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT
                 )
                 { return lire(identite, mdp, dossier, utiliser_contexte); }

@@ -23,7 +23,7 @@ namespace BTTP
 
                 }
 
-                const int Serveurs::ajout(const std::string cible) const
+                void Serveurs::ajout(const std::string cible) const
                 {
                     Console::afficher("> Ajout du serveur \"" + cible + "\" : ");
                     const std::string adresse = Console::demander("\tAdresse : ");
@@ -33,38 +33,34 @@ namespace BTTP
                     Client::Serveurs::Serveur serveur{ cible, adresse, (uint16_t)std::atoi(port.c_str()) };
                     Console::afficher("> Ajout du serveur...");
                     const std::string mdp = Console::demander("\tMot de passe de l'identité : ");
-                    if (Client::Serveurs::ajout(serveur, Contexte::identite(), mdp))
-                    {
-                        Console::afficher("> Serveur de contrôle ajouté avec succès.");
-                        return 0;
-                    }
-                    else return -1;
+                    Console::afficher("> Connexion au serveur...");
+                    Client::Serveurs::ajout(serveur, Contexte::identite(), mdp);
+                    Console::afficher("> Serveur de contrôle ajouté avec succès.");
+
                 }
 
-                const int Serveurs::suppression(const std::string cible) const
+                void Serveurs::suppression(const std::string cible) const
                 {
                     Console::afficher("> Suppression du serveur \"" + cible + "\"...");
                     const Client::Serveurs::Serveur serveur = Client::Serveurs::charger(cible);
-                    if (Client::Serveurs::suppression(serveur))
-                    {
-                        Console::afficher("> Serveur supprimé avec succès.");
-                        return 0;
-                    }
-                    else return -1;
+                    Client::Serveurs::suppression(serveur);
+                    Console::afficher("> Serveur supprimé avec succès.");
+
                 }
 
-                const int Serveurs::executer(const int argc, const char** argv) const
+                void Serveurs::executer(const int argc, const char** argv) const
                 {
                     if (argc == 2)      // Format : bttp-cli srv            ->      Affichage de la liste des serveurs.
-                        return this->liste();
+                        this->liste();
                     else if (argc == 4) // Format : bttp-cli srv +/- <nom>  ->      Ajout ou suppression d'un serveur.
                     {
                         if (strcmp(argv[2], BTTP_COMMANDE_SERVEURS_AJOUT) == 0)
-                            return this->ajout(argv[3]);
+                            this->ajout(argv[3]);
                         else if (strcmp(argv[2], BTTP_COMMANDE_SERVEURS_SUPPRESSION) == 0)
-                            return this->suppression(argv[3]);
+                            this->suppression(argv[3]);
+                        else throw Erreur::Commandes::Syntaxe(this);
                     }
-                    throw Erreur::Commandes::Syntaxe(this);
+                    else throw Erreur::Commandes::Syntaxe(this);
                 }
 
                 const std::string Serveurs::aide() const

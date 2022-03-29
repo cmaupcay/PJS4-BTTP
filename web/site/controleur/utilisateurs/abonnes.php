@@ -36,6 +36,7 @@ function appareils() {
             echo('<div class="card mb-4 shadow-sm">');
             echo('<div class="card-body">');
             $i = 0;
+            $toDel;
             foreach($appareil as $ap => $a) {
                 if($i == 0){
                     echo'<p class="card-text"> Empreinte de la clé publique : ' . $a . '</p>';
@@ -49,11 +50,15 @@ function appareils() {
                 if($i == 3){
                     echo'<p class="card-text"> Dernière connexion : ' . $a . '</p>';
                 }
+                if($i == 4){
+                    $toDel = $a;
+                }
                     $i++;
             }
 
             //TODO : faire passer l'id du terminal pour l'envoyer dans la fonction supprimer_terminal
-            echo '<a href="?controle=abonnes?action=supprimer"><button class="btn btn-sm btn-outline-secondary"> Supprimer </button></a>';
+            echo '<a href="controleur/general/delete.php?idTerminal=' . $toDel . '"><button class="btn btn-sm btn-outline-secondary">Supprimer</button></a>';
+
             echo '<a href="?controle=abonnes?action=scripts"><button class="btn btn-sm btn-outline-secondary"> Scripts </button></a>';
 
             echo '</div>';
@@ -83,32 +88,40 @@ function marketplace() {
 
     require_once './vue/abonnes/marketplace.tpl';
 
+
     echo '<div class="container py-5 bg-light">';
     echo '<div class="row">';
 
-    foreach($scriptsRecuperes as $script) {
-        echo('<div class="col-md-4 col-sm-4">');
-        echo('<div class="card mb-4 shadow-sm">');
-        echo('<div class="card-body"');
-        $i = 0;
-        foreach($script as $scr=>$s) {
-            if($i == 0) {
-                echo '<p class="card-text"> Nom : ' . $s . '</p>';
+        
+            foreach($scriptsRecuperes as $script) {
+                echo('<div class="col-md-4 col-sm-4">');
+                echo('<div class="card mb-4 shadow-sm">');
+                echo('<div class="card-body">');
+                $i = 0;
+                foreach($script as $scr => $s) {
+                    if($i == 0){
+                        echo'<p class="card-text"> Nom : ' . $s . '</p>';
+                    }
+                    if($i == 1){
+                        echo'<p class="card-text"> Date de publication : ' . $s . '</p>';
+                    }
+                    if($i == 2){
+                        echo'<p class="card-text"> Version : ' . $s . '</p>';
+                    }
+                    if($i == 3){
+                        $toShow = $s;
+                    }
+                        $i++;
+                }
+                echo '<a href="controleur/general/download.php?file=' . $toShow . '"><button class="btn btn-sm btn-outline-secondary">Telecharger</button></a>';
+                
+
+                echo '<a href="controleur/general/codeSource.php?file=' . $toShow . '" target="_blank"><button type="button" class="btn btn-sm btn-outline-secondary"> Code source </button></a>';
+                echo '</div>';
+                echo '</div>';
+                echo '</div>';
+
             }
-            if($i == 1) {
-                echo '<p class="card-text"> Date de publication : ' . $s . '</p>';
-            }
-            if($i==2) {
-                echo '<p class="card-text"> Version : ' . $s . '</p>';
-            }
-                $i++;
-        }
-        echo '<button type="button" class="btn btn-sm btn-outline-secondary"> Télécharger </button>';
-        echo '<button type="button" class="btn btn-sm btn-outline-secondary"> Code source </button>';
-        echo '</div>';
-        echo '</div>';
-        echo '</div>';
-    }
     echo '</div>';
     echo '</div>';
 }

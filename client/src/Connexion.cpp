@@ -8,25 +8,25 @@ namespace BTTP
             : _adresse{ adresse }, _port{ port }, _socket{ nullptr }
         {}
 
+
         void Connexion::ouvrir() 
         {
-            if (this->ouverte()) {} // throw ... // TODO Erreur deja ouvert
+            if (this->ouverte()) throw Erreur::Connexion::DejaOuverte(this->_adresse, this->_port); 
             else
             {
-                // Résolution de l'adresse de l'hôte.
                 asio::io_context contexte;
                 asio::ip::tcp::resolver resolver{ contexte };
                 const asio::ip::tcp::resolver::results_type resultats = resolver.resolve(
                     this->_adresse, std::to_string(this->_port), this->_erreur
                 );
-                if (resultats.size() == 0 || this->_erreur) {} // throw ... // TODO Erreur de résolution de l'hôte.
+                if (resultats.size() == 0 || this->_erreur) throw Erreur::Connexion::Resolution(this->_adresse, this->_port);
                 else
                 {
                     // Création du socket et connexion.
                     const asio::ip::tcp::endpoint hote = *resultats;
                     this->_socket = new asio::ip::tcp::socket(contexte);
                     this->_socket->connect(hote, this->_erreur);
-                    // if (this->_erreur) throw ... // TODO Erreur de connexion.
+                    if (this->_erreur) throw Erreur::Connexion::Ouverture(this->_adresse, this->_port);
                 }
             }
         }

@@ -2,6 +2,7 @@
 #define H_BTTP_CLIENT_TRANSACTION_DISTANT
 
 #include "Client.h"
+#include "../scripts/Scripts.h"
 
 namespace BTTP
 {
@@ -20,6 +21,8 @@ namespace BTTP
                  */
                 const bool verifier_entete(const std::string& entete) override { return verifier_entete_controle(entete); }
 
+                const Serveurs::Serveur& _serveur;
+
             public:
                 /**
                  * @brief Construction d'une nouvelle transaction distante.
@@ -35,10 +38,10 @@ namespace BTTP
                     identite, message_ouverture,
                     controleur.cle(), controleur.connexion(),
                     cles_autorisees
-                )
+                ), _serveur{ controleur }
                 {}
 
-                void lancer(const std::string mdp) noexcept;
+                void processus(const std::string mdp, std::string& status) noexcept;
             };
         }
     }

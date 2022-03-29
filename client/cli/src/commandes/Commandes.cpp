@@ -12,6 +12,8 @@ namespace BTTP
                 {
                     std::vector<Commande*> c;
                     c.push_back(new Autorisations());
+                    c.push_back(new Distant());
+                    c.push_back(new Execution());
                     c.push_back(new Identites());
                     c.push_back(new Serveurs());
                     return c;
@@ -25,7 +27,11 @@ namespace BTTP
                         for (const Commande* c : com)
                             if (argv[1] == c->nom())
                             {
-                                try { return c->executer(argc, argv); }
+                                try 
+                                { 
+                                    c->executer(argc, argv);
+                                    return EXIT_SUCCESS; 
+                                }
                                 catch (Erreur::Commandes::Syntaxe& err)
                                 {
                                     Console::afficher(c->aide());

@@ -26,7 +26,7 @@ namespace BTTP
                         Console::saut();
                         Console::afficher("> Sélection de l'identité : ");
                         for (size_t i = 0; i < n_identites; i++)
-                            std::cout << "\t#" << i << " - " << Protocole::Meta(identites[i].cle_publique()) << std::endl;
+                            Console::afficher("\t#" + std::to_string(i) + " - " + Protocole::Meta(identites[i].cle_publique()).afficher());
                         Console::saut();
                         // Sélection dans la liste.
                         i_identite = std::atol(Console::demander("Identite à utiliser : ").c_str());

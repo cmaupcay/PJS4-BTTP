@@ -46,75 +46,12 @@
 
         <div class="input-group mb-3 center-block" style="padding-top:3%; padding-bottom:5%; width:50%; margin-left:auto; margin-right:auto">
             <input type="text" class="form-control" placeholder="Recherchez des scripts ..." aria-label="Recherchez des scripts ..." aria-describedby="basic-addon2" style="border-radius:10px">
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" style="background-color:#00A8E8; color:aliceblue; width:10em;"> Rechercher </button>
-                 </div>
+                <form id="form" method="post">
+                    <button class="btn btn-outline-secondary" type="submit" style="background-color:#00A8E8; color:aliceblue; width:10em;"> Rechercher </button>
+				</form>
+
+				
         </div>
-        <br>
-    <div class="container py-5 bg-light"> 
-
-        <div class="row">
-        </div>
-            <!--
-<div class="col-md-4 col-sm-4">
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-body">
-
-                        <p class="card-text"> Nom : Téléchargement </p>
-                        <p class="card-text"> Catégorie : Téléchargement </p>
-                        <p class="card-text"> Auteur : saralaresta </p>
-                        <p class="card-text"> Version : 1.0.2 </p>
-
-                        <button type="button" class="btn btn-sm btn-outline-secondary">
-                            Code source
-                        </button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">
-                            Télécharger
-                        </button>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 col-sm-4">
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-body">
-                        <p class="card-text"> Nom : mini drive </p>
-                        <p class="card-text"> Catégorie : raccourci </p>
-                        <p class="card-text"> Auteur : clément le boss </p>
-                        <p class="card-text"> Version : 3.0 </p>
-                        
-                        <button type="button" class="btn btn-sm btn-outline-secondary">
-                            Code source
-                        </button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">
-                            Télécharger
-                        </button>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 col-sm-4">
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-body">
-
-                        <p class="card-text"> Nom : Gestionnaire de mdp </p>
-                        <p class="card-text"> Catégorie : Notification </p>
-                        <p class="card-text"> Auteur : Lucastor </p>
-                        <p class="card-text"> Version : 4.0 </p>
-
-                        <button type="button" class="btn btn-sm btn-outline-secondary">
-                            Code source
-                        </button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">
-                            Télécharger
-                        </button>
-
-                    </div>
-                </div>
-            -->
-    </div>
 
 </body>
 

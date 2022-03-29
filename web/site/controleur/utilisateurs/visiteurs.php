@@ -70,7 +70,7 @@
 
         $scriptsRecuperes = scripts_publiques();
 
-        require './vue/visiteurs/marketplace.tpl';
+        require_once './vue/visiteurs/marketplace.tpl';
 
 
         echo '<div class="container py-5 bg-light">';
@@ -97,11 +97,10 @@
                         }
                             $i++;
                     }
-                    echo '<a href="controleur/general/download.php?file=' . $toShow . '"><button class="btn btn-sm btn-outline-secondary">Telecharger</button></a>';
+                    echo '<a href="controleur/general/download.php?file=' . $toShow . '"><button class="btn btn-sm btn-outline-secondary"">Telecharger</button></a>';
                     
 
-                    echo '<button type="button" class="btn btn-sm btn-outline-secondary"> Code source </button>';
-                    readfile($toShow);
+                    echo '<a action="?controle=visiteurs&action=code_source?file=' . $toShow . '" target="_blank"><button type="button" class="btn btn-sm btn-outline-secondary"> Code source </button></a>';
                     echo '</div>';
                     echo '</div>';
                     echo '</div>';
@@ -109,9 +108,18 @@
                 }
         echo '</div>';
         echo '</div>';
-        
     }
+    
+    function code_source() {
 
+        require_once './modele/marketplace.php';
+
+        $source = code_source();
+
+        //TODO rajouter le html
+
+
+    }
     function produits() {
 
         require './vue/visiteurs/produits.tpl';

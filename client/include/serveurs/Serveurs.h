@@ -5,6 +5,7 @@
 #include "../Fichiers.h"
 #include "messages/ReponseAppareils.h"
 #include "messages/ReponseScripts.h"
+#include "serveurs/erreur/DejaPresent.h"
 
 
 namespace BTTP
@@ -13,7 +14,6 @@ namespace BTTP
     {
         namespace Serveurs
         {
-            // TODO Peut-être remplacer le booléen par void et lever des exceptions en cas d'erreur.
             /**
              * @brief Ajout d'un serveur de contrôle et récupération de la clé publique. L'appareil s'annonce au serveur.
              * @param serveur Serveur de contrôle à ajouter et dont on souhaite mettre à jour la clé publique enregistrée localement.
@@ -21,10 +21,9 @@ namespace BTTP
              * @param mdp Mot de passe de l'identité locale.
              * @param dossier Dossier de destination.
              * @param utiliser_contexte Drapeau indiquant si le dossier est relatif au contexte BTTP.
-             * @return true Le serveur a été ajouté localement et a enregistré la clé publique de l'appareil.
-             * @return false La procédure d'ajout n'a pas pu être finalisé.
+             * @throw Type::Incoherent ou Type::Erreur
              */
-            const bool ajout(
+            void ajout(
                 Serveur& serveur,
                 const Protocole::Identite& identite, const std::string mdp,
                 const std::string dossier = BTTP_SERVEUR_DOSSIER, 
@@ -55,12 +54,12 @@ namespace BTTP
              * @return true Le serveur a été supprimé localement.
              * @return false La suppression du serveur a échoué.
              */
-            inline const bool suppression(
+            inline void suppression(
                 const Serveur& serveur,
                 const std::string dossier = BTTP_SERVEUR_DOSSIER, 
                 const bool utiliser_contexte = BTTP_UTILISER_CONTEXTE_PAR_DEFAUT
             )
-            { return Fichiers::supprimer(serveur.nom(), dossier, utiliser_contexte); }
+            { Fichiers::supprimer(serveur.nom(), dossier, utiliser_contexte); }
 
             /**
              * @brief Retourne la liste des serveurs enregistrés localement.

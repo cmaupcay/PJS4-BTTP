@@ -7,7 +7,7 @@ namespace BTTP
         namespace Serveurs
         {
 
-            const bool ajout(
+            void ajout(
                 Serveur& serveur,
                 const Protocole::Identite& identite, const std::string mdp,
                 const std::string dossier, const bool utiliser_contexte,
@@ -15,7 +15,7 @@ namespace BTTP
             )
             {
                 // Vérification de l'inexistence du serveur dans les fichiers.
-                if (Fichiers::existe(serveur.nom(), dossier, utiliser_contexte)) return false;
+                if (Fichiers::existe(serveur.nom(), dossier, utiliser_contexte)) throw Erreur::Serveurs::DejaPresent(serveur);
                 // Ouverture de la connexion.
                 if (!serveur.connexion().ouverte()) serveur.connexion().ouvrir();
                 // Récéption de la clé publique du serveur (envoyée en clair).
@@ -25,14 +25,18 @@ namespace BTTP
                 serveur.connexion().envoyer(identite.chiffrer(reponse.construire(), cle_serveur, mdp));
                 // Confirmation de l'ajout.
                 const std::string confirmation = identite.dechiffrer(serveur.connexion().recevoir(), cle_serveur, mdp);
-                if (confirmation[0] == static_cast<char>(Protocole::Messages::Type::PRET))
-                {
-                    // Enregistrement local des informations du serveur.
-                    serveur.modifier_cle(&cle_serveur);
-                    Fichiers::ecrire(serveur.serialiser(), serveur.nom(), dossier, false, false, utiliser_contexte, creer_chemin);
-                    return true;
+                if(confirmation[0] == static_cast<char>(Protocole::Messages::Type::ERREUR)){
+
+                    const Protocole::Messages::Erreur erreur {confirmation};
+                    throw BTTP::Erreur(erreur.nom(), erreur.message(), erreur.code());
+
                 }
-                return false;
+                else if (confirmation[0] != static_cast<char>(Protocole::Messages::Type::PRET))
+                    throw Protocole::Erreur::Messages::Type::Incoherent(confirmation[0], confirmation);                
+            
+                // Enregistrement local des informations du serveur.
+                serveur.modifier_cle(&cle_serveur);
+                Fichiers::ecrire(serveur.serialiser(), serveur.nom(), dossier, false, false, utiliser_contexte, creer_chemin);
             }
 
             const std::vector<Serveur> liste(const std::string dossier, const bool utiliser_contexte)

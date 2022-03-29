@@ -14,12 +14,12 @@ namespace BTTP
             )
             {
                 std::vector<std::string> cles;
-                if (Fichiers::existe(BTTP_AUTORISATIONS_FICHIER, dossier, utiliser_contexte))
+                const std::string fichier = nom_fichier(identite);
+                if (Fichiers::existe(fichier, dossier, utiliser_contexte))
                 {
-                    std::string contenu = Fichiers::lire(BTTP_AUTORISATIONS_FICHIER, dossier, false, utiliser_contexte);
+                    std::string contenu = Fichiers::lire(fichier, dossier, false, utiliser_contexte);
                     // contenu = identite.dechiffrer(contenu, identite.cle_publique(), mdp);
-                    cles = Protocole::Messages::decouper(contenu, "\n");
-                    std::cout << cles.size() << std::endl;
+                    cles = Protocole::Messages::decouper(contenu, BTTP_AUTORISATIONS_SEP);
                 }
                 return cles;
             }
@@ -36,10 +36,10 @@ namespace BTTP
                 for (size_t c = 0; c < n; c++)
                 {
                     contenu += cles[c];
-                    if (c < n - 1) contenu += "\n";
+                    if (c < n - 1) contenu += BTTP_AUTORISATIONS_SEP;
                 }
                 // contenu = identite.chiffrer(contenu, identite.cle_publique(), mdp);
-                Fichiers::ecrire(contenu, BTTP_AUTORISATIONS_FICHIER, dossier, false, false, utiliser_contexte, creer_chemin);
+                Fichiers::ecrire(contenu, nom_fichier(identite), dossier, false, false, utiliser_contexte, creer_chemin);
             }
 
             const bool Autorisations::autoriser(

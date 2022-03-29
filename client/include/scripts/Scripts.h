@@ -8,6 +8,8 @@
 
 #include "erreur/Execution.h"
 #include "erreur/Ajout.h"
+#include "erreur/Inexistant.h"
+#include "erreur/SupressionFichierSortie.h"
 
 namespace BTTP
 {
@@ -46,10 +48,9 @@ namespace BTTP
              * @param mdp Mot de passe de l'identité locale.
              * @param dossier Dossier de destination.
              * @param utiliser_contexte Drapeau indiquant si le dossier est relatif au contexte BTTP.
-             * @return true Le script a été supprimé localement et sur le serveur. Le fichier associé a été supprimé localement.
-             * @return false La suppression du script a échoué.
+             * @throw Type::Incoherent ou Type::Erreur
              */
-            const bool supprimer(
+            void supprimer(
                 const Script script,
                 const Serveurs::Serveur& serveur,
                 const Protocole::Identite& identite, const std::string mdp,

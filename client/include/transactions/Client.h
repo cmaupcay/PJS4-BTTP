@@ -4,6 +4,8 @@
 #include "../serveurs/Appareil.h"
 #include "../serveurs/Serveur.h"
 #include "../serveurs/Script.h"
+#include "erreur/Timestamp.h"
+#include <asio.hpp>
 
 namespace BTTP
 {
@@ -11,14 +13,13 @@ namespace BTTP
     {
         namespace Transactions
         {
-            // TODO Synchronisation des horloges via serveur RTC
             /**
              * @brief Vérification d'une entête de vérification ajouté à un message de contrôle par l'appareil de contrôle.
              * @param entete Entête à vérifier.
              * @return true L'entête est valide.
              * @return false L'entête n'est pas valide.
              */
-            const bool verifier_entete_controle(const std::string& entete);
+            static const bool verifier_entete_controle(const std::string& entete) { return true; }
 
             class Client : public Protocole::Transactions::Client
             {
@@ -53,7 +54,14 @@ namespace BTTP
                  * @param script Script cible.
                  * @param mdp Mot de passe de l'identité local.
                  */
-                const Protocole::Messages::Resultat executer(const Scripts::Script& script, const std::string mdp);
+                const Protocole::Messages::Resultat executer(const Serveurs::Script& script, const std::string mdp);
+
+                /**
+                 * @brief Demande le timestamp à un serveur NTP distant
+                 * @return const time_t retourne le timestamp (Unix)
+                 */
+                const time_t timestamp();
+
             };
         }
     }

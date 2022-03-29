@@ -17,7 +17,7 @@ set(BTTP_CLIENT_LIB ${BTTP_CLIENT} ${BTTP_CLIENT_DEP})
 # Paramètres
 ## Réseau
 if(NOT DEFINED BTTP_PORT)
-    set(BTTP_PORT 1414) # Port par défaut des applications BTTP.
+    set(BTTP_PORT 420) # Port par défaut des applications BTTP.
 endif()
 if(NOT DEFINED BTTP_TIMEOUT)
     set(BTTP_TIMEOUT 60000) # Temps d'attente maximum en reception (en ms)
@@ -38,8 +38,11 @@ endif()
 if(NOT DEFINED BTTP_SCRIPT_DOSSIER)
     set(BTTP_SCRIPT_DOSSIER src) # Nom du dossier où sont stockées les scripts (relatif à BTTP_DOSSIER)
 endif()
-if(NOT DEFINED BTTP_AUTORISATIONS_FICHIER)
-    set(BTTP_AUTORISATIONS_FICHIER autorisations) # Nom du fichier où sont stockées les clés autorisées (relatif à BTTP_DOSSIER)
+if(NOT DEFINED BTTP_AUTORISATIONS_DOSSIER)
+    set(BTTP_AUTORISATIONS_DOSSIER auth) # Nom du dossier où sont stockées les clés autorisées (relatif à BTTP_DOSSIER)
+endif()
+if(NOT DEFINED BTTP_AUTORISATIONS_SEP)
+    set(BTTP_AUTORISATIONS_SEP ";") # Séparateur utilisé pour les clés autorisées.
 endif()
 ### Valeurs par défaut
 if(NOT DEFINED BTTP_UTILISER_CONTEXTE_PAR_DEFAUT)

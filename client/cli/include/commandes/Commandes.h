@@ -1,9 +1,11 @@
 #ifndef H_BTTP_CLIENT_CLI_COMMANDES
 #define H_BTTP_CLIENT_CLI_COMMANDES
 
-#include "Serveurs.h"
-#include "Identites.h"
 #include "Autorisations.h"
+#include "Distant.h"
+#include "Execution.h"
+#include "Identites.h"
+#include "Serveurs.h"
 
 #include "erreur/Inconnue.h"
 

@@ -4,6 +4,7 @@
 #include "erreur/Syntaxe.h"
 #include "erreur/identites/DejaExistante.h"
 #include "erreur/identites/Inexistante.h"
+#include "erreur/fichiers/Inexistant.h"
 
 #define BTTP_COMMANDE_IDENTITES "id"
 #define BTTP_COMMANDE_IDENTITES_AJOUT "+"
@@ -23,13 +24,13 @@ namespace BTTP
                 private:
                     const int liste() const;
                     const int ajout(const std::string cible) const;
-                    const int suppression(const std::string cible) const;
+                    void suppression(const std::string cible) const;
                     const int exportation(const std::string cible) const;
 
                 public:
                     Identites() : Commande(BTTP_COMMANDE_IDENTITES) {}
 
-                    const int executer(const int argc, const char** argv) const override;
+                    void executer(const int argc, const char** argv) const override;
                     const std::string aide() const override;
                 };
             }

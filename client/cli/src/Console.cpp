@@ -22,6 +22,20 @@ namespace BTTP
                     std::getline(std::cin, sortie);
                     return sortie;
                 }
+
+                const std::string creationMdp() 
+                {
+
+                    std::string mdp = demander("\tMot de passe : ");
+                    std::string confMdp = demander("\tConfirmation mot de passe : ");
+
+                    if(mdp == confMdp)
+                        return mdp;
+                    
+                    throw Erreur::ConfirmationMdp();
+
+                }
+
             }
         }
     }

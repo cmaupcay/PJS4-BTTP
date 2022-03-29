@@ -36,7 +36,7 @@ namespace BTTP
                         reponse = new Messages::Pret();
                     }
                     else reponse = new Messages::Erreur(
-                        Erreur::Identite::Dechiffrement(
+                        Erreur::Identite::Dechiffrement( 
                             "La signature du message d'ouverture n'est pas valide.",
                             message_ouverture.clair()
                         )

@@ -28,6 +28,7 @@
         $controle = $_GET['controle'];
         $action = $_GET['action'];
 
+        //visiteurs
         if($controle=="visiteurs" && $action == "accueil") {
             require('controleur/utilisateurs/visiteurs.php');
             accueil();
@@ -43,7 +44,9 @@
         }  elseif ($controle=="visiteurs" && $action == "code_source"){
             require('controleur/utilisateurs/visiteurs.php');
             montrer_code();
-        } elseif ($controle == "abonnes" && $action == "accueil" && $identifie) { //on rajoute l'identification pour acceder à la page abonné
+        } 
+        //abonnés
+        elseif ($controle == "abonnes" && $action == "accueil" && $identifie) { //on rajoute l'identification pour acceder à la page abonné
             require('controleur/utilisateurs/abonnes.php');
             accueil();
         } elseif($controle=="abonnes" && $action == "deconnexion" && $identifie) {
@@ -56,6 +59,9 @@
         elseif ($controle=="abonnes" && $action == "marketplace" && $identifie){
             require('controleur/utilisateurs/abonnes.php');
             marketplace();
+        } elseif($controle=="abonnes" && $action == "informations" & $identifie) {
+            require('controleur/utilisateurs/abonnes.php');
+            informations();
         }
         else {
             require('erreur404.tpl');

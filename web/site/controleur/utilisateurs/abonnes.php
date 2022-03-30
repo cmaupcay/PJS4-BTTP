@@ -131,6 +131,18 @@ function informations() {
     require_once './vue/abonnes/informations.tpl';
 }
 
+function montrer_code() {
+
+    require_once './vue/abonnes/codeSource.tpl';
+    require_once './modele/marketplace.php';
+
+    $source = code_source();
+
+    //TODO rajouter le html
+
+}
+
+//TODO : faire fonctionner la déconnexion (pas de variable session profil)
 function deconnexion() {
 
     $_SESSION['profil'] = array();

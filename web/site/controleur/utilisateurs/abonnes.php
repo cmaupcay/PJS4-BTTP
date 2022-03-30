@@ -149,10 +149,25 @@ function montrer_code()
 //TODO : faire fonctionner la déconnexion (pas de variable session profil)
 function deconnexion()
 {
-
-    $_SESSION['profil'] = array();
-    setcookie("Jeton", "", time() - 3600);
+    setcookie("pseudo", "", time() - 3600, "/");
+    setcookie("mdp", "", time() - 3600, "/");
+    session_start();
+    unset($_SESSION["pseudo"]);
+    unset($_SESSION["mdp"]);
 
     $url = "?controle=visiteurs&action=accueil";
+    header("Location:" . $url);
+}
+
+function mdpOublie(){
+    require('./vue/abonnes/mdpOublie.tpl');
+}
+
+function changeMdp($pseudoToRescue, $mdpToChange){
+    require('./modele/utilisateur.php');
+    setMdp($pseudoToRescue, $mdpToChange);
+    
+
+    $url = "?controle=visiteurs&action=connexion";
     header("Location:" . $url);
 }

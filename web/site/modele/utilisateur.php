@@ -54,7 +54,8 @@ function setMdp($pseudo, $mdp)
     require $RACINE . '/modele/connectBD.php';
 
     $sql = "UPDATE `utilisateur` SET mdp =:mdp WHERE pseudo=:pseudo";
-
+    $mdp = hash('sha256', $mdp);
+    
     try {
         $commande = $pdo->prepare($sql);
         $commande->bindParam(":mdp", $mdp);

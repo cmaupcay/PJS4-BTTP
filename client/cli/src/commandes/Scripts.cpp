@@ -21,9 +21,12 @@ namespace BTTP
                 }
                 void Scripts::liste(const std::string serveur) const
                 {
-                    // TODO Erreur spécifique si le serveur n'existe pas.
-                    const Client::Serveurs::Serveur serveur_obj = Client::Serveurs::charger(serveur, BTTP_SERVEUR_DOSSIER, Contexte::client().get());
-                    this->liste(serveur_obj);
+                    try 
+                    {
+                        const Client::Serveurs::Serveur serveur_obj = Client::Serveurs::charger(serveur, BTTP_SERVEUR_DOSSIER, Contexte::client().get());
+                        this->liste(serveur_obj);
+                    } 
+                    catch (Client::Erreur::Fichiers::Inexistant& e) { throw Erreur::Commandes::Scripts::ServeurInexistant(serveur); }
                 }
                 void Scripts::liste(const Client::Serveurs::Serveur& serveur) const
                 {
@@ -66,7 +69,7 @@ namespace BTTP
                     const std::vector<Client::Scripts::Script> scripts = Client::Scripts::liste(serveur, BTTP_SCRIPT_DOSSIER, Contexte::client().get());
                     for (const Client::Scripts::Script& s : scripts)
                         if (s.nom() == script) return s;
-                    // throw // TODO Erreur Scripts::Inexistant
+                    throw Erreur::Commandes::Scripts::Inexistant(script);
                 }
 
                 void Scripts::suppression(const std::string script) const

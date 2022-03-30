@@ -2,6 +2,8 @@
 #define H_BTTP_CLIENT_CONTEXTE
 
 #include "Racine.h"
+#include "erreur/contexte/VariableInexistante.h"
+#include "erreur/contexte/VariableDejaExistante.h"
 #include <asio.hpp>
 
 namespace BTTP

@@ -30,12 +30,12 @@ namespace BTTP
         {
             const size_t v = this->index_variable(nom_variable);
             if (v < this->_variables.size()) return this->_variables[v];
-            // else throw // TODO Erreur dédiée.
+            else throw Erreur::Contexte::VariableInexistante(nom_variable);
         }
 
         void Contexte::ajouter_variable(const Contexte::Variable variable)
         {
-            if (this->verifier_variable(variable.nom)) { /** throw .. */ } // TODO Erreur DejaExistante;
+            if (this->verifier_variable(variable.nom)) throw Erreur::Contexte::VariableDejaExistante(variable.nom);
             else this->_variables.push_back(variable);
         }
 

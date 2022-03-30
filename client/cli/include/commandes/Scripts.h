@@ -2,6 +2,8 @@
 #define H_BTTP_CLIENT_CLI_COMMANDE_SCRIPTS
 
 #include "erreur/Syntaxe.h"
+#include "erreur/scripts/ServeurInexistant.h"
+#include "erreur/scripts/Inexistant.h"
 
 #define BTTP_COMMANDE_SCRIPTS "src"
 #define BTTP_COMMANDE_SCRIPTS_AJOUT "+"

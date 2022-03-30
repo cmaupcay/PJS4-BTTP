@@ -57,18 +57,25 @@
 			<br>
 			<p style="padding-left:5%; padding-right:5%; color:black">La particularité de BTTP est sa sécurité. En effet, les messages échangés sont cryptés. 
 				Ils passent par un terminal de contrôle qui a le rôle d’intermédiaire dans ce système. 
-				Il s’assure notamment que l’émetteur est bien authentique.  
+				Il s’assure notamment que l’émetteur est bien authentique.  Ainsi, vous pouvez exécuter des scripts de manière sécurisée.
+				Le but de notre projet était de rendre possible l'exécution de script à distance depuis un smartphone. On voulait rendre notre système accessible au grand public, et de ne pas se limiter aux développeurs. Notre site permet de rendre notre système plus accessible et facile d'utilisation.
 			</p>
 
 			<h3 style="padding-top:3%; padding-left:8%; color:#003459"> Qui sommes nous ? </h3>
 			<br>
-			<p style="padding-left:5%; padding-right:5%; color:black"> Nous sommes une équipe de 5 étudiants en DUT Informatique à l’IUT de Paris Rives de Seine. Pour notre dernier projet, nous avons choisi de développer ce projet ambitieux. (à compélter) 
+			<p style="padding-left:5%; padding-right:5%; color:black"> Nous sommes une équipe de 5 étudiants en DUT Informatique à l’IUT de Paris Rives de Seine. Pour notre dernier projet, nous avons choisi de développer ce projet ambitieux. 
+			En effet, nous avions 7 semaines pour le développer, sachant que notre application compote la conception du protocole d'échange de messages, la conception de l'application ainsi que le site web. Clément Mauperon et Luca Randazzo ont principalement travaillé sur la conception du protocole (complétez moi).
+			Robin Landais était chargé du développement de notre applciation. Elle nous permet d'envoyer des scripts à un PC distant.
+			Sara Zaibet et Clément Prost ont développé le site web, qui sert de site vitrine à notre projet. En effet, sur notre site, vous pouvez consulter la marketplace contenant les scripts publiques. Vous pouvez les télécharger ou consulter leur code source associé.
+			Si vous avez un compte, vous pouvez consulter vos appareils, les supprimer, et consulter leurs scripts associés. Vous avez la possibilité de changer votre mot de passe également.
 			</p>
 
 			<h3 style="padding-top:3%; padding-left:8%; color:#003459"> Quel futur pour BTTP ? </h3>
 			<br>
-			<p style="padding-left:5%; padding-right:5%; padding-bottom:3%; color:black"> CLEMENT EST AU MIC
+			<p style="padding-left:5%; padding-right:5%; padding-bottom:6%; color:black"> Notre système peut être utilisé dans le domaine de l'IOT. En effet, on pourrait contrôler des objets connectés depuis notre application. Par exemple, on pourrait envoyer une requête à une lampe connectée pour que celle-ci change de couleur.
 			</p>
 
 		</div>
 </div>
+</body>
+</html>

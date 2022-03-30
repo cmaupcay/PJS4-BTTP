@@ -1,9 +1,11 @@
-les app bar top 
-market place long buttton download button + pop up descriptuion
+les app bar top OK
+market place long buttton download button + pop up descriptuion OK
 profil pp téléchargeable 
     nombre de scripts lancés ?
     nb de terminaux et de scripts  
-    
+
+
+PAGE TERMINAUX
 
 
 theme OKK

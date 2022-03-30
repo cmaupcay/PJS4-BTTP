@@ -66,16 +66,16 @@ class HomePageState extends State<HomePage> {
 
   int selectedIndex = 0;
   Widget _myScripts = MyScripts();
-  Widget _addScript = AddScript();
+  Widget _marketScript = MarketScript();
   Widget _myProfile = MyProfile();
-  Widget _myScriptsAppBar = MyScriptsAppBar();
+  /*Widget _myScriptsAppBar = MyScriptsAppBar();
   Widget _addScriptAppBar = AddScriptAppBar();
   Widget _myProfileAppBar = MyProfileAppBar();
-
+*/
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyScriptsAppBar(),
+      appBar: AppBarHome(),
       body: this.getBody(),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
@@ -115,12 +115,12 @@ class HomePageState extends State<HomePage> {
     if (this.selectedIndex == 0) {
       return this._myScripts;
     } else if (this.selectedIndex == 1) {
-      return this._addScript;
+      return this._marketScript;
     } else {
       return this._myProfile;
     }
   }
-
+/*
   Widget getAppBar() {
     if (this.selectedIndex == 0) {
       return this._myScriptsAppBar;
@@ -129,7 +129,7 @@ class HomePageState extends State<HomePage> {
     } else {
       return this._myProfileAppBar;
     }
-  }
+  }*/
 
   void onTapHandler(int index) {
     this.setState(() {
@@ -138,26 +138,16 @@ class HomePageState extends State<HomePage> {
   }
 }
 
-String getPage(index) {
-  if (index == 0) {
-    return 'Mes scripts';
-  } else if (index == 1) {
-    return 'Market Place';
-  } else if (index == 2) {
-    return 'Profile';
-  }
-  return 'Mes scripts';
-}
-
 class AppBarHome extends StatelessWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize => new Size.fromHeight(kToolbarHeight);
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      automaticallyImplyLeading: false,
       backgroundColor: isDarkMode ? darkMode.bar : lightMode.bar,
       title: Text(
-        getPage(0),
+        'BTTP',
         style: GoogleFonts.poppins(
           color: isDarkMode ? darkMode.button : lightMode.textColor,
           fontSize: 22,
@@ -176,7 +166,7 @@ class AppBarHome extends StatelessWidget implements PreferredSizeWidget {
           },
           icon: Icon(
             Icons.settings,
-            color: isDarkMode ? darkMode.textColor : lightMode.textColor,
+            color: isDarkMode ? darkMode.button : lightMode.textColor,
             size: 30,
           ),
         )
@@ -185,7 +175,7 @@ class AppBarHome extends StatelessWidget implements PreferredSizeWidget {
     );
   }
 }
-
+/*
 class MyScriptsAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
@@ -195,7 +185,7 @@ class MyScriptsAppBar extends StatelessWidget implements PreferredSizeWidget {
       automaticallyImplyLeading: false,
       backgroundColor: isDarkMode ? darkMode.bar : lightMode.bar,
       title: Text(
-        'My Scripts',
+        'BTTP',
         style: GoogleFonts.poppins(
           color: isDarkMode ? darkMode.button : lightMode.textColor,
           fontSize: 22,
@@ -297,40 +287,11 @@ class MyProfileAppBar extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: true,
     );
   }
-}
+}*/
 
 class MyScripts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    AppBar(
-      backgroundColor: isDarkMode ? darkMode.bar : lightMode.bar,
-      title: Text(
-        'My Scripts',
-        style: GoogleFonts.poppins(
-          color: isDarkMode ? darkMode.button : lightMode.textColor,
-          fontSize: 22,
-          fontWeight: FontWeight.w800,
-        ),
-      ),
-      actions: [
-        IconButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => SettingsPage(),
-              ),
-            );
-          },
-          icon: Icon(
-            Icons.settings,
-            color: isDarkMode ? darkMode.textColor : lightMode.textColor,
-            size: 30,
-          ),
-        )
-      ],
-      centerTitle: true,
-    );
     return Scaffold(
       backgroundColor: isDarkMode ? darkMode.textColor : lightMode.textColor,
       body: SingleChildScrollView(
@@ -503,11 +464,191 @@ Widget _buildPopupDialog(BuildContext context) {
   );
 }
 
-class AddScript extends StatelessWidget {
+class MarketScript extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text("AddScript"));
+    return Scaffold(
+      backgroundColor: isDarkMode ? darkMode.textColor : lightMode.textColor,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            MarketScriptCard(),
+          ],
+        ),
+      ),
+    );
   }
+}
+
+class MarketScriptCard extends StatelessWidget {
+  final List marketScriptList = [
+    {
+      'title': 'Script1',
+      'description': "lalalaalalalalalallalalaalalalal",
+      'variables': true,
+    },
+    {
+      'title': 'Script2',
+      'description': "lalzelalalaalalalalalalalczczcl",
+      'variables': false,
+    },
+    {
+      'title': 'Script3',
+      'description': "lacedcdcalalallalalaalalalalcddl",
+      'variables': false,
+    },
+    {
+      'title': 'Script4',
+      'description': "lyj,hkylaalalalalgfvdl",
+      'variables': true,
+    },
+    {
+      'title': 'Script5',
+      'description': "lyj,hkylaalalalalgfvdl",
+      'variables': true,
+    },
+    {
+      'title': 'Script6',
+      'description': "lyj,hkylaalalalalgfvdl",
+      'variables': true,
+    },
+    {
+      'title': 'Script7',
+      'description': "lyj,hkylaalalalalgfvdl",
+      'variables': true,
+    },
+    {
+      'title': 'Script8',
+      'description': "lyj,hkylaalalalalgfvdl",
+      'variables': true,
+    },
+    {
+      'title': 'Script9',
+      'description': "lyj,hkylaalalalalgfvdl",
+      'variables': true,
+    },
+    {
+      'title': 'Script10',
+      'description': "lyj,hkylaalalalalgfvdl",
+      'variables': true,
+    },
+    {
+      'title': 'Script11',
+      'description': "lyj,hkylaalalalalgfvdl",
+      'variables': true,
+    }
+  ];
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(10),
+      color: isDarkMode ? darkMode.fond : lightMode.fond,
+      child: Column(
+        children: [
+          Column(
+            children: marketScriptList.map((marketscripts) {
+              return MarketCard(marketscripts);
+            }).toList(),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class MarketCard extends StatelessWidget {
+  final Map MarketscriptData;
+  MarketCard(this.MarketscriptData);
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.all(10),
+      height: 70,
+      width: double.infinity,
+      decoration: BoxDecoration(
+//        color: bars,
+        color: isDarkMode ? darkMode.bar : lightMode.bar,
+        borderRadius: BorderRadius.all(Radius.circular(18)),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.shade600,
+            spreadRadius: 1,
+            blurRadius: 2,
+            offset: Offset(0, 3),
+          )
+        ],
+      ),
+      child: Column(
+        children: [
+          Container(
+            margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  MarketscriptData['title'],
+                  style: GoogleFonts.nunito(
+                    color: isDarkMode ? darkMode.button : lightMode.textColor,
+                    fontSize: 22,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) => _buildPopupDialogInfo(
+                          context, MarketscriptData['description']),
+                    );
+                  },
+                  icon: Icon(
+                    Icons.info,
+                    color: isDarkMode ? darkMode.button : lightMode.fond,
+                    size: 30,
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) => _buildPopupDialogInfo(
+                          context, MarketscriptData['description']),
+                    );
+                  },
+                  icon: Icon(
+                    Icons.download_for_offline,
+                    color: isDarkMode ? darkMode.button : lightMode.fond,
+                    size: 30,
+                  ),
+                )
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+Widget _buildPopupDialogInfo(BuildContext context, String description) {
+  return new AlertDialog(
+    title: const Text('Description'),
+    content: new Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(description),
+      ],
+    ),
+    actions: <Widget>[
+      new ElevatedButton(
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+        child: const Text('Close'),
+      ),
+    ],
+  );
 }
 
 class MyProfile extends StatelessWidget {

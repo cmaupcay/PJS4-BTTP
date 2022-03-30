@@ -2,7 +2,7 @@
 
 function getId()
 {
-    $RACINE = "C:\wamp64\www\PJS4\web\site";
+    $RACINE = ".";
     require $RACINE . '/modele/connectBD.php';
 
     $sql = "SELECT id FROM `utilisateur` WHERE pseudo=:pseudo";
@@ -25,7 +25,7 @@ function getId()
 
 function getAppareils()
 {
-    $RACINE = "C:\wamp64\www\PJS4\web\site";
+    $RACINE = ".";
     require $RACINE . '/modele/connectBD.php';
 
     $id_proprietaire = getId();
@@ -50,12 +50,12 @@ function getAppareils()
 //TODO : changer le mot de passe d'un utilisateur
 function setMdp($pseudo, $mdp)
 {
-    $RACINE = "C:\wamp64\www\PJS4\web\site";
+    $RACINE = ".";
     require $RACINE . '/modele/connectBD.php';
 
     $sql = "UPDATE `utilisateur` SET mdp =:mdp WHERE pseudo=:pseudo";
     $mdp = hash('sha256', $mdp);
-    
+
     try {
         $commande = $pdo->prepare($sql);
         $commande->bindParam(":mdp", $mdp);
@@ -72,7 +72,7 @@ function setMdp($pseudo, $mdp)
 
 function nb_apapreils($id_proprietaire)
 {
-    $RACINE = "C:\wamp64\www\PJS4\web\site";
+    $RACINE = ".";
     require $RACINE . '/modele/connectBD.php';
 
     $sql = "SELECT COUNT(*) FROM `terminal_client` WHERE id_proprietaire=:id_proprietaire";

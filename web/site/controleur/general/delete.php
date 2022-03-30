@@ -1,6 +1,6 @@
 <?php
 
-$RACINE = "C:\wamp64\www\PJS4\web\site";
+$RACINE = ".";
 
     require($RACINE . '/modele/terminal.php');
     if(isset($_GET["idTerminal"])){

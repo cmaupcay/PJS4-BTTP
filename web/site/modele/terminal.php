@@ -3,7 +3,7 @@
 
 function supprimer_terminal($idTerminal)
 {
-    $RACINE = "C:\wamp64\www\PJS4\web\site";
+    $RACINE = ".";
     require $RACINE . '/modele/connectBD.php';
 
     $sql = "DELETE FROM `terminal_client` WHERE id=:idTerminal";

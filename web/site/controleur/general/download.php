@@ -1,7 +1,7 @@
 <?php
 ob_start();
 
-$RACINE = "C:\wamp64\www\PJS4\web\site";
+$RACINE = ".";
 
 if (isset($_GET["file"])) {
     $file = $_GET["file"];

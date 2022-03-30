@@ -34,7 +34,7 @@ function verif_inscription($pseudo)
  */
 function insertion_bd($pseudo, $mdp)
 {
-    $RACINE = "C:\wamp64\www\PJS4\web\site";
+    $RACINE = ".";
     require $RACINE . '/modele/connectBD.php';
 
     $sql = "INSERT INTO `utilisateur` (pseudo, mdp) VALUES (:pseudo, :mdp)";

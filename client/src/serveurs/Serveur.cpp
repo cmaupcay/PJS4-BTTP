@@ -6,7 +6,7 @@ namespace BTTP
     {
         namespace Serveurs
         {
-            Serveur::Serveur(const std::string nom, const std::string serialisation)
+            Serveur::Serveur(const std::string nom, const std::string serialisation, asio::io_context& contexte)
                 : _nom{ nom }, _cle{ nullptr }, _connexion{ nullptr }, _auth{ false }
             {
                 const size_t fin_premiere_ligne = serialisation.find_first_of('\n');
@@ -17,7 +17,7 @@ namespace BTTP
                 this->_port = (uint16_t)std::atoi(serialisation.substr(fin_premiere_ligne + 1, fin_deuxieme_ligne - (fin_premiere_ligne + 1)).c_str());
                 // Reste du fichier = clé publique.
                 this->_cle = new Protocole::Cle::Publique(serialisation.substr(fin_deuxieme_ligne + 1));
-                this->_connexion = new Connexion(this->_adresse, this->_port);
+                this->_connexion = new Connexion(this->_adresse, this->_port, contexte);
             }
 
             const std::string Serveur::serialiser() const

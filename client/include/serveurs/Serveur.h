@@ -40,9 +40,9 @@ namespace BTTP
                  * @param adresse Adresse du serveur.
                  * @param port Port de connexion à l'application BTTP.
                  */
-                Serveur(const std::string nom, const std::string adresse, const uint16_t port)
+                Serveur(const std::string nom, const std::string adresse, const uint16_t port, asio::io_context& contexte)
                     : _nom{ nom }, _adresse{ adresse }, _port{ port }, _cle{ nullptr },
-                    _connexion{ new Connexion(adresse, port) }, _auth{ false }
+                    _connexion{ new Connexion(adresse, port, contexte) }, _auth{ false }
                 {}
                 // TOTEST
                 /**
@@ -50,7 +50,7 @@ namespace BTTP
                  * @param nom Nom d'affichage du serveur et nom du fichier local.
                  * @param serialisation Informations sérialisées du serveur.
                  */
-                Serveur(const std::string nom, const std::string serialisation);
+                Serveur(const std::string nom, const std::string serialisation, asio::io_context& contexte);
 
                 /**
                  * @brief Retourne le nom d'affichage du serveur.

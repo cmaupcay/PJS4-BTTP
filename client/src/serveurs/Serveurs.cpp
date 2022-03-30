@@ -33,13 +33,13 @@ namespace BTTP
                 Fichiers::ecrire(serveur.serialiser(), serveur.nom(), dossier, false, false, contexte, creer_chemin);
             }
 
-            const std::vector<Serveur> liste(const std::string dossier, Contexte* contexte)
+            const std::vector<Serveur> liste(asio::io_context& contexte_asio, const std::string dossier, Contexte* contexte)
             {
                 std::vector<Serveur> serveurs;
                 const std::vector<std::string> fichiers = Fichiers::liste(dossier, contexte);
                 std::string contenu;
                 for (const std::string& fichier : fichiers)
-                    serveurs.push_back(charger(fichier, dossier, contexte));
+                    serveurs.push_back(charger(fichier, contexte_asio, dossier, contexte));
                 return serveurs;
             }   
 

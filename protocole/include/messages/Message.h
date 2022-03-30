@@ -125,11 +125,6 @@ namespace BTTP
             enum class Type
             {
                 /**
-                 * @brief Annoncement d'une clé publique.
-                 * @see ./ClePublique.h
-                 */
-                CLE_PUBLIQUE = '!',
-                /**
                  * @brief Demande de données.
                  * @see ./Demande.h
                  */

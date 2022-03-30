@@ -3,6 +3,7 @@
 
 #include "../Connexion.h"
 #include "Serialisable.h"
+#include "messages/DemandeAuthentification.h"
 #include "messages/ReponseEmpreinteCle.h"
 #include "messages/ReponseUtilisateur.h"
 #include "messages/ReponseMotDePasse.h"
@@ -99,6 +100,7 @@ namespace BTTP
                  * @brief Procédure d'authentification de l'appareil depuis le couple utilisateur/mot de passe de son propriétaire.
                  * Correspond à la toute première authentification auprès du serveur et permet à celui-ci d'attribuer un propriétaire au
                  * nouvel appareil.
+                 * @warning Elle est inititée par le serveur et doit toujours précéder une tentative d'authentification par empreinte.
                  * @param identite Identité locale à authentifier.
                  * @param mdp Mot de passe de l'identité.
                  * @param utilisateur Nom d'utilisateur sur le serveur.

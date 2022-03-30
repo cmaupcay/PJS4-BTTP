@@ -1,7 +1,6 @@
 #ifndef H_BTTP_MESSAGES
 #define H_BTTP_MESSAGES
 
-#include "ClePublique.h"
 #include "Demande.h"
 #include "Reponse.h"
 #include "Pret.h"

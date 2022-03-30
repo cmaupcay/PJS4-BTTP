@@ -3,8 +3,10 @@
 
 #include "Serveur.h"
 #include "../Fichiers.h"
+#include "messages/ReponseClePublique.h"
 #include "messages/ReponseAppareils.h"
 #include "messages/ReponseScripts.h"
+
 #include "serveurs/erreur/DejaPresent.h"
 
 

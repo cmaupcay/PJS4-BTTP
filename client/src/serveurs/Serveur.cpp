@@ -35,9 +35,15 @@ namespace BTTP
             {
                 // Si la clé du serveur est inconnue ou que l'appareil est déjà authentifié, on arrête là.
                 if (this->_cle == nullptr || this->_auth) return false;
+                // Envoi de la demande d'authentification.
+                Client::Serveurs::Messages::DemandeAuthentification demande_auth;
+                this->_connexion->envoyer(
+                    identite.chiffrer(demande_auth.construire(), *this->_cle, mdp)
+                );
                 // Réception de la demande du nom d'utilisateur.
-                // TOFIX Trouver comment ne pas transmettre la demande en clair !
-                Protocole::Messages::Demande demande{ this->_connexion->recevoir() };
+                Protocole::Messages::Demande demande{ 
+                    identite.dechiffrer(this->_connexion->recevoir(), *this->_cle, mdp)
+                };
                 if (demande.champs() == BTTP_DEMANDE_UTILISATEUR)
                 {
                     // Envoi de la réponse contenant l'empreinte de la clé.
@@ -82,8 +88,9 @@ namespace BTTP
                 // Si la clé du serveur est inconnue ou que l'appareil est déjà authentifié, on arrête là.
                 if (this->_cle == nullptr || this->_auth) return false;
                 // Réception de la demande de l'empreinte de la clé publique locale.
-                // TOFIX Trouver comment ne pas transmettre la demande en clair !
-                const Protocole::Messages::Demande demande{ this->_connexion->recevoir() };
+                const Protocole::Messages::Demande demande{
+                    identite.chiffrer(this->_connexion->recevoir(), *this->_cle, mdp)
+                };
                 if (demande.champs() == BTTP_DEMANDE_EMPREINTE_CLE)
                 {
                     // Envoi de la réponse contenant l'empreinte de la clé.

@@ -11,8 +11,6 @@ namespace BTTP
                 if (paquet.length() > 0)
                     switch (static_cast<Type>(paquet[0]))
                     {
-                    case Type::CLE_PUBLIQUE:
-                        return new ClePublique(paquet);
                     case Type::DEMANDE:
                         return new Demande(paquet);
                     case Type::REPONSE:

@@ -11,6 +11,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'globale_variable.dart';
 import 'settings_page.dart';
 import 'theme_color.dart';
+import 'profile_widget.dart';
 
 ThemeColor lightMode = ThemeColor(
   fond: const Color(0xFF00A8E8),
@@ -654,6 +655,20 @@ Widget _buildPopupDialogInfo(BuildContext context, String description) {
 class MyProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text("profile"));
+    return Scaffold(
+      body: ListView(
+        physics: BouncingScrollPhysics(),
+        children: [
+          ProfileWidget(
+            imagePath: 'images/profi.jpg',
+            onClicked: () {},
+          ),
+          const SizedBox(
+            height: 24,
+          ),
+          Text('Likir09'),
+        ],
+      ),
+    );
   }
 }

@@ -17,9 +17,9 @@ namespace BTTP
             {}
 
             Demande::Demande(const std::string paquet)
-                : BTTP::Protocole::Messages::Message(Type::DEMANDE, paquet), 
+                : BTTP::Protocole::Messages::Message(Type::DEMANDE), 
                 _champs{ "" }
-            {}
+            { this->deconstruire(paquet); }
 
             const std::string Demande::contenu() const
             {

@@ -17,7 +17,7 @@ namespace BTTP
                     ReponseClePublique(const Protocole::Cle::Publique& cle)
                         : Protocole::Messages::Reponse(
                             BTTP_DEMANDE_CLE_PUBLIQUE,
-                            cle.exporter(false)
+                            cle.exporter()
                         )
                     {}
 

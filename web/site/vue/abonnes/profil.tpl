@@ -54,7 +54,7 @@
 
         <div class="row" style="padding-top:3%">
             <div class="col-md-12" style="padding-left:10%; padding-right: 10%; margin-left:auto; margin-right:bottom">
-                <p> Pseudo : </p> <!-- TODO: afficher le nom de la personne connectée -->
+                <p> Pseudo : <?php echo $_SESSION['pseudo']?> </p> <!-- TODO: afficher le nom de la personne connectée -->
 
                 <p> Consulter la page <a href="?controle=abonnes&action=appareils"; style="color:#00A8E8"> Appareils </a> pour gérer vos terminaux </p>
                 <p> Vous voulez changer de mot de passe ? </p>

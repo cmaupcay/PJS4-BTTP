@@ -35,6 +35,8 @@ namespace BTTP
                             BTTP_IDENTITE_DECHIFFREMENT_CODE
                         ), _message_echec{ message_echec }
                     {}
+
+                    inline const std::string& message_echec() const { return this->_message_echec; }
                 };
             }
         }

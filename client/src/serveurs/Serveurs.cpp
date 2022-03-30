@@ -30,7 +30,7 @@ namespace BTTP
                 );
                 // Enregistrement local des informations du serveur.
                 serveur.modifier_cle(&cle_serveur);
-                Fichiers::ecrire(serveur.serialiser(), serveur.nom(), dossier, false, false, contexte, creer_chemin);
+                Fichiers::ecrire(serveur.serialiser(), serveur.nom(), dossier, false, true, contexte, creer_chemin);
             }
 
             const std::vector<Serveur> liste(asio::io_context& contexte_asio, const std::string dossier, Contexte* contexte)

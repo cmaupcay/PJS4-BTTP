@@ -2,7 +2,6 @@
 #define H_BTTP_TEST_RACINE
 
 #include <gtest/gtest.h>
-#include <iostream>
 
 #include "../../include/Racine.h"
 

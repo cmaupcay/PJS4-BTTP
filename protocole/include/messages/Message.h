@@ -70,14 +70,6 @@ namespace BTTP
                  * @param type Type du message.
                  */
                 TMessage(const _Type type) : _type{ type } {}
-                /**
-                 * @brief Construction du message depuis un paquet.
-                 * @param type Type du message.
-                 * @param paquet Paquet à déconstruire.
-                 */
-                TMessage(const _Type type, const std::string paquet)
-                    : IMessage(paquet), _type{ type }
-                { this->deconstruire(paquet); }
 
                 /**
                  * @brief Retourne le contenu du message à ajouter au paquet.
@@ -180,14 +172,6 @@ namespace BTTP
                  * @param type Type du message.
                  */
                 Message(const Type type) : TMessage(type) {}
-                /**
-                 * @brief Construction du message depuis un paquet.
-                 * @param type Type du message.
-                 * @param paquet Paquet à déconstruire.
-                 */
-                Message(const Type type, const std::string paquet)
-                    : TMessage(type, paquet)
-                {}
             };
 
             // TOTEST

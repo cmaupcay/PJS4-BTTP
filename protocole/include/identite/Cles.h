@@ -70,7 +70,8 @@ namespace BTTP
                  * @param armor Drapeau indiquant l'utilisation du mode Armored d'OpenPGP.
                  * @return const std::string Clé au format exportable.
                  */
-                inline const std::string exporter(const bool armor) const { return this->write((armor ? OpenPGP::PGP::Armored::YES : OpenPGP::PGP::Armored::NO)); }
+                inline const std::string exporter(const bool armor = BTTP_ARMOR) const 
+                { return this->write((armor ? OpenPGP::PGP::Armored::YES : OpenPGP::PGP::Armored::NO)); }
             };
             
             /**
@@ -95,7 +96,8 @@ namespace BTTP
                  * @param armor Drapeau indiquant l'utilisation du mode Armored d'OpenPGP.
                  * @return const std::string Clé au format exportable.
                  */
-                inline const std::string exporter(const bool armor) const { return this->write((armor ? OpenPGP::PGP::Armored::YES : OpenPGP::PGP::Armored::NO)); }
+                inline const std::string exporter(const bool armor = BTTP_ARMOR) const
+                { return this->write((armor ? OpenPGP::PGP::Armored::YES : OpenPGP::PGP::Armored::NO)); }
                 
                 static inline Privee generer(Config config)
                 { return Privee(OpenPGP::KeyGen::generate_key(config)); }

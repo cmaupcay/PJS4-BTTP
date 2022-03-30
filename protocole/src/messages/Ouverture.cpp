@@ -8,7 +8,7 @@ namespace BTTP
         {
             Ouverture::Ouverture(const Cle::Publique cible, const Cle::Publique client)
                 : BTTP::Protocole::Messages::Message(Type::OUVERTURE),
-                _cible{ cible.empreinte() }, _client{ client.exporter(false) }
+                _cible{ cible.empreinte() }, _client{ client.exporter() }
             {}
 
             Ouverture::Ouverture()
@@ -17,9 +17,9 @@ namespace BTTP
             {}
 
             Ouverture::Ouverture(const std::string paquet)
-                : BTTP::Protocole::Messages::Message(Type::OUVERTURE, paquet), 
+                : BTTP::Protocole::Messages::Message(Type::OUVERTURE), 
                 _cible{ "" }, _client{ "" }
-            {}
+            { this->deconstruire(paquet); }
 
             //TOTEST
             const std::string Ouverture::contenu() const 

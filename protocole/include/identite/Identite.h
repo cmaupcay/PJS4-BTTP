@@ -105,7 +105,7 @@ namespace BTTP
                  * @param armor Mode structuré.
                  * @return std::string Clé privée.
                  */
-                std::string exporter(const bool armor = BTTP_IDENTITE_ARMOR) const;
+                std::string exporter(const bool armor = BTTP_ARMOR) const;
                 
                 /**
                  * @brief Retourne la clé publique de l'identité.
@@ -164,7 +164,7 @@ namespace BTTP
                  * @return std::ostream& Flux de sortie mis à jour.
                  */
                 inline friend std::ostream& operator<<(std::ostream& os, const Identite& id)
-                { return (os << id.cle_publique().exporter(BTTP_IDENTITE_ARMOR)); }
+                { return (os << id.cle_publique().exporter()); }
         };
     }
 }

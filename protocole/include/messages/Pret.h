@@ -33,7 +33,8 @@ namespace BTTP
                  * @brief Construction d'un message et déconstruction d'un paquet.
                  * @param paquet Paquet à déconstruire.
                  */
-                Pret(const std::string paquet) : Message(Type::PRET, paquet) {}
+                Pret(const std::string paquet) : Message(Type::PRET) 
+                { this->deconstruire(paquet); }
             };
         }
     }

@@ -3,6 +3,10 @@
 
 #define BTTP_SERVEUR_VERSION "${BTTP_SERVEUR_VERSION}"
 
-#include <BTTP.h>
+#define BTTP_SERVEUR_IDENTITE_PAR_DEFAUT "${BTTP_SERVEUR_IDENTITE_PAR_DEFAUT}"
+#define BTTP_SERVEUR_IDENTITE_CONTACT_PAR_DEFAUT "${BTTP_SERVEUR_IDENTITE_CONTACT_PAR_DEFAUT}"
+#define BTTP_SERVEUR_IDENITITE_VAR_MDP "${BTTP_SERVEUR_IDENITITE_VAR_MDP}" // Nom de la variable de contexte contenant le mot de passe de l'identité.
+
+#include <BTTP-Client.h>
 
 #endif

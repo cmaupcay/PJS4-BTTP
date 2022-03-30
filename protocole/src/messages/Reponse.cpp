@@ -17,9 +17,9 @@ namespace BTTP
             {}
 
             Reponse::Reponse(const std::string paquet)
-                : BTTP::Protocole::Messages::Message(Type::REPONSE, paquet), 
+                : BTTP::Protocole::Messages::Message(Type::REPONSE), 
                 _champs{ "" }, _data{ "" }
-            {}
+            { this->deconstruire(paquet); }
 
             const std::string Reponse::contenu() const
             // TOFIX Remplacer les occurences du séparateur dans _data.

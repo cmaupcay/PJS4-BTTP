@@ -11,7 +11,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'globale_variable.dart';
 import 'settings_page.dart';
 import 'theme_color.dart';
-import 'profile_widget.dart';
 
 ThemeColor lightMode = ThemeColor(
   fond: const Color(0xFF00A8E8),
@@ -656,18 +655,116 @@ class MyProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
-        physics: BouncingScrollPhysics(),
-        children: [
-          ProfileWidget(
-            imagePath: 'images/profi.jpg',
-            onClicked: () {},
+      body: Container(
+        color: isDarkMode ? darkMode.fond : lightMode.fond,
+        padding: EdgeInsets.only(left: 16, top: 25, right: 16),
+        child: GestureDetector(
+          onTap: () {
+            FocusScope.of(context).unfocus();
+          },
+          child: ListView(
+            children: [
+              Text(
+                "Edit Profile",
+                style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.w500,
+                  color: isDarkMode ? darkMode.button : lightMode.textColor,
+                ),
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Center(
+                child: Stack(
+                  children: [
+                    Container(
+                      width: 130,
+                      height: 130,
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                              width: 4,
+                              color: Theme.of(context).scaffoldBackgroundColor),
+                          boxShadow: [
+                            BoxShadow(
+                                spreadRadius: 2,
+                                blurRadius: 10,
+                                color: Colors.black.withOpacity(0.1),
+                                offset: Offset(0, 10))
+                          ],
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: NetworkImage(
+                                "https://yt3.ggpht.com/ytc/AKedOLS-uPKnNFdAC-foMxhkDZjWDleDIJptDrXg_hLYfA=s88-c-k-c0x00ffffff-no-rj",
+                              ))),
+                    ),
+                    Positioned(
+                        bottom: 0,
+                        right: 0,
+                        child: Container(
+                          height: 40,
+                          width: 40,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              width: 4,
+                              color: Theme.of(context).scaffoldBackgroundColor,
+                            ),
+                            color: isDarkMode
+                                ? darkMode.button
+                                : lightMode.textColor,
+                          ),
+                          child: Icon(
+                            Icons.edit,
+                            color: Colors.white,
+                          ),
+                        )),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 35,
+              ),
+              SizedBox(
+                height: 35,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  OutlineButton(
+                    padding: EdgeInsets.symmetric(horizontal: 50),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)),
+                    onPressed: () {},
+                    child: Text("CANCEL",
+                        style: TextStyle(
+                          fontSize: 14,
+                          letterSpacing: 2.2,
+                          color:
+                              isDarkMode ? lightMode.bar : lightMode.textColor,
+                        )),
+                  ),
+                  RaisedButton(
+                    onPressed: () {},
+                    color: Colors.green,
+                    padding: EdgeInsets.symmetric(horizontal: 50),
+                    elevation: 2,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)),
+                    child: Text(
+                      "SAVE",
+                      style: TextStyle(
+                          fontSize: 14,
+                          letterSpacing: 2.2,
+                          color: Colors.white),
+                    ),
+                  )
+                ],
+              )
+            ],
           ),
-          const SizedBox(
-            height: 24,
-          ),
-          Text('Likir09'),
-        ],
+        ),
       ),
     );
   }

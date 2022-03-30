@@ -37,6 +37,7 @@ dependencies:
   google_fonts: ^2.1.0
   font_awesome_flutter: ^9.2.0
   adaptive_theme: ^1.1.0
+  flutter_svg: ^1.0.3
 
 dev_dependencies:
   flutter_test:

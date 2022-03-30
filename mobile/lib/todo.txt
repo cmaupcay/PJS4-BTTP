@@ -9,3 +9,5 @@ PAGE TERMINAUX
 
 
 theme OKK
+connection/inscription
+    ptite base user

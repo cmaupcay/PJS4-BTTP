@@ -22,9 +22,10 @@ CREATE TABLE bttp.utilisateur (
     CHECK(pseudo=LOWER(pseudo))
 ) ENGINE=InnoDB AUTO_INCREMENT=1;
 
-CREATE TABLE bttp.terminal_client (
+CREATE TABLE bttp.terminal (
     id INT AUTO_INCREMENT, /* Identifiant numérique unique du terminal */
     cle_publique VARCHAR(512) NOT NULL, /* Clé publique propre au terminal */
+    empreinte_cle_publique VARCHAR(64) NOT NULL, /* Empreinte (long KeyID) de la clé publique. */
     nom VARCHAR(64) NOT NULL, /* Nom du terminal */
     disponible BOOLEAN NOT NULL DEFAULT 0, /* Indique si le terminal est disponible pour une transaction */
     id_proprietaire INT NOT NULL, /* Identifiant numérique unique du proprietaire */

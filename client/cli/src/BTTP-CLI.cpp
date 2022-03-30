@@ -9,7 +9,7 @@ namespace BTTP
             const Protocole::Identite definir_identite()
             {
 
-                std::vector<Protocole::Identite> identites = Client::Identites::liste();
+                std::vector<Protocole::Identite> identites = Client::Identites::liste(BTTP_IDENTITE_DOSSIER, Contexte::client().get());
                 size_t n_identites = identites.size();
                 if (n_identites == 0)
                 {

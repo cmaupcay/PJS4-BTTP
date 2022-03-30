@@ -17,7 +17,7 @@ set(BTTP_CLIENT_LIB ${BTTP_CLIENT} ${BTTP_CLIENT_DEP})
 # Paramètres
 ## Réseau
 if(NOT DEFINED BTTP_PORT)
-    set(BTTP_PORT 420) # Port par défaut des applications BTTP.
+    set(BTTP_PORT 1414) # Port par défaut des applications BTTP.
 endif()
 if(NOT DEFINED BTTP_TIMEOUT)
     set(BTTP_TIMEOUT 60000) # Temps d'attente maximum en reception (en ms)

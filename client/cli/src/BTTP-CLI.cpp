@@ -54,7 +54,8 @@ namespace BTTP
                 }
                 
                 Console::saut();
-                const int code = Commandes::resoudre(argc, argv);
+                asio::io_context contexte;
+                const int code = Commandes::resoudre(argc, argv, contexte);
                 Console::saut();
 
                 return code;

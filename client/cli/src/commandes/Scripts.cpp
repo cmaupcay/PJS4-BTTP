@@ -8,9 +8,9 @@ namespace BTTP
         {
             namespace Commandes
             {
-                void Scripts::liste() const
+                void Scripts::liste(asio::io_context& contexte) const
                 {
-                    const std::vector<Client::Serveurs::Serveur> serveurs = Client::Serveurs::liste(BTTP_SERVEUR_DOSSIER, Contexte::client().get());
+                    const std::vector<Client::Serveurs::Serveur> serveurs = Client::Serveurs::liste(contexte, BTTP_SERVEUR_DOSSIER, Contexte::client().get());
                     if (serveurs.size() == 0) 
                         Console::afficher("> Aucun serveur de contrôle enregistré.");
                     else
@@ -19,11 +19,11 @@ namespace BTTP
                             this->liste(serveur);
                     }
                 }
-                void Scripts::liste(const std::string serveur) const
+                void Scripts::liste(asio::io_context& contexte, const std::string serveur) const
                 {
                     try 
                     {
-                        const Client::Serveurs::Serveur serveur_obj = Client::Serveurs::charger(serveur, BTTP_SERVEUR_DOSSIER, Contexte::client().get());
+                        const Client::Serveurs::Serveur serveur_obj = Client::Serveurs::charger(serveur, contexte, BTTP_SERVEUR_DOSSIER, Contexte::client().get());
                         this->liste(serveur_obj);
                     } 
                     catch (Client::Erreur::Fichiers::Inexistant& e) { throw Erreur::Commandes::Scripts::ServeurInexistant(serveur); }
@@ -41,13 +41,13 @@ namespace BTTP
                     }
                 }
 
-                void Scripts::ajout(const std::string script) const
+                void Scripts::ajout(asio::io_context& contexte, const std::string script) const
                 {
                     const std::string fichier_source = Console::demander("> Fichier source : ");
                     Console::afficher("> Lecture du fichier source...");
                     const std::string source = Fichiers::lire(fichier_source, "", false, Contexte::client().get());
 
-                    Client::Serveurs::Serveur serveur = Commande::definir_serveur();
+                    Client::Serveurs::Serveur serveur = Commande::definir_serveur(contexte);
                     Console::afficher("> Serveur : " + serveur.informations());
                     Console::afficher("> Connexion au serveur...");
                     serveur.connexion().ouvrir();
@@ -72,9 +72,9 @@ namespace BTTP
                     throw Erreur::Commandes::Scripts::Inexistant(script);
                 }
 
-                void Scripts::suppression(const std::string script) const
+                void Scripts::suppression(asio::io_context& contexte, const std::string script) const
                 {
-                    Client::Serveurs::Serveur serveur = Commande::definir_serveur();
+                    Client::Serveurs::Serveur serveur = Commande::definir_serveur(contexte);
                     Console::afficher("> Serveur : " + serveur.informations());
                     Console::afficher("> Connexion au serveur...");
                     serveur.connexion().ouvrir();
@@ -91,9 +91,9 @@ namespace BTTP
                     serveur.connexion().fermer();
                 }
 
-                void Scripts::exportation(const std::string script) const
+                void Scripts::exportation(asio::io_context& contexte, const std::string script) const
                 {
-                    Client::Serveurs::Serveur serveur = Commande::definir_serveur();
+                    Client::Serveurs::Serveur serveur = Commande::definir_serveur(contexte);
                     Console::afficher("> Serveur : " + serveur.informations());
 
                     Console::afficher("> Lecture du fichier cible...");
@@ -106,20 +106,20 @@ namespace BTTP
                     Console::afficher("> Script exporté.");
                 }
 
-                void Scripts::executer(const int argc, const char** argv) const
+                void Scripts::executer(const int argc, const char** argv, asio::io_context& contexte) const
                 {
                     if (argc == 2)      // Format : bttp-cli src            ->      Affichage de la liste des scripts par serveur.
-                        this->liste();
+                        this->liste(contexte);
                     else if (argc == 3) // Format : bttp-cli src <nom>      ->      Affichage de la liste des scripts pour le serveur cible.
-                        this->liste(argv[2]);
+                        this->liste(contexte, argv[2]);
                     else if (argc == 4) // Format : bttp-cli src +/- <nom>  ->      Ajout, suppression ou exportation d'un script.
                     {
                         if (strcmp(argv[2], BTTP_COMMANDE_SCRIPTS_AJOUT) == 0)
-                            this->ajout(argv[3]);
+                            this->ajout(contexte, argv[3]);
                         else if (strcmp(argv[2], BTTP_COMMANDE_SCRIPTS_SUPPRESSION) == 0)
-                            this->suppression(argv[3]);
+                            this->suppression(contexte, argv[3]);
                         else if (strcmp(argv[2], BTTP_COMMANDE_SCRIPTS_EXPORT) == 0)
-                            this->exportation(argv[3]);
+                            this->exportation(contexte, argv[3]);
                         else throw Erreur::Commandes::Syntaxe(this);
                     }
                     else throw Erreur::Commandes::Syntaxe(this);

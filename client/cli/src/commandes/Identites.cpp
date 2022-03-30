@@ -55,7 +55,7 @@ namespace BTTP
                     Console::afficher("> Identité exportée.");
                 }
 
-                void Identites::executer(const int argc, const char** argv) const
+                void Identites::executer(const int argc, const char** argv, asio::io_context& contexte) const
                 {
                     if (argc == 2)      // Format : bttp-cli id            ->      Affichage de la liste des identités locales.
                         this->liste();

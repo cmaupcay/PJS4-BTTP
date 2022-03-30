@@ -63,11 +63,11 @@ namespace BTTP
                     }
                 }
 
-                void Execution::executer(const int argc, const char** argv) const
+                void Execution::executer(const int argc, const char** argv, asio::io_context& contexte) const
                 {
                     if (argc == 2)
                     {
-                        Client::Serveurs::Serveur serveur = Commande::definir_serveur();
+                        Client::Serveurs::Serveur serveur = Commande::definir_serveur(contexte);
                         Console::afficher("> Serveur : " + serveur.informations());
                         Console::afficher("> Connexion au serveur...");
                         serveur.connexion().ouvrir();

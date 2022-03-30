@@ -18,14 +18,14 @@ namespace BTTP
                 class Serveurs : public Commande
                 {
                 private:
-                    const int liste() const;
-                    void ajout(const std::string cible) const;
-                    void suppression(const std::string cible) const;
+                    const int liste(asio::io_context& contexte) const;
+                    void ajout(asio::io_context& contexte, const std::string cible) const;
+                    void suppression(asio::io_context& contexte, const std::string cible) const;
 
                 public:
                     Serveurs() : Commande(BTTP_COMMANDE_SERVEURS) {}
 
-                    void executer(const int argc, const char** argv) const override;
+                    void executer(const int argc, const char** argv, asio::io_context& contexte) const override;
                     const std::string aide() const override;
                 };
             }

@@ -51,11 +51,11 @@ namespace BTTP
                     Console::afficher("> Exportation de l'identité \"" + cible + "\"...");
                     std::string destination = Console::demander("\tDossier de destination : ");
                     if (destination.size() == 0) destination = ".";
-                    Fichiers::ecrire(identite.cle_publique().exporter(false), cible, destination, false, false);
+                    Fichiers::ecrire(identite.cle_publique().exporter(), cible, destination, false, false);
                     Console::afficher("> Identité exportée.");
                 }
 
-                void Identites::executer(const int argc, const char** argv) const
+                void Identites::executer(const int argc, const char** argv, asio::io_context& contexte) const
                 {
                     if (argc == 2)      // Format : bttp-cli id            ->      Affichage de la liste des identités locales.
                         this->liste();

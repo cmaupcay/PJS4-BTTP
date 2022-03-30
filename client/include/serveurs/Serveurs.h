@@ -3,8 +3,10 @@
 
 #include "Serveur.h"
 #include "../Fichiers.h"
+#include "messages/ReponseClePublique.h"
 #include "messages/ReponseAppareils.h"
 #include "messages/ReponseScripts.h"
+
 #include "serveurs/erreur/DejaPresent.h"
 
 
@@ -40,10 +42,11 @@ namespace BTTP
              */
             inline const Serveur charger(
                 const std::string nom,
+                asio::io_context& contexte_asio,
                 const std::string dossier = BTTP_SERVEUR_DOSSIER, 
                 Contexte* contexte = nullptr
             )
-            { return Serveur(nom, Fichiers::lire(nom, dossier, false, contexte)); }
+            { return Serveur(nom, Fichiers::lire(nom, dossier, false, contexte), contexte_asio); }
 
             // TODO Annoncement de la suppression au serveur cible.
             /**
@@ -68,6 +71,7 @@ namespace BTTP
              * @return const std::vector<Serveur> 
              */
             const std::vector<Serveur> liste(
+                asio::io_context& contexte_asio,
                 const std::string dossier = BTTP_SERVEUR_DOSSIER, 
                 Contexte* contexte = nullptr
             );

@@ -8,7 +8,7 @@ namespace BTTP
         {
             namespace Commandes
             {
-                void Distant::executer(const int argc, const char** argv) const
+                void Distant::executer(const int argc, const char** argv, asio::io_context& contexte) const
                 {
                     if (argc == 2)
                     {
@@ -18,7 +18,7 @@ namespace BTTP
                             *Contexte::client()->identite(), mdp, BTTP_AUTORISATIONS_DOSSIER, Contexte::client().get()
                         );
 
-                        Client::Serveurs::Serveur serveur = Commande::definir_serveur();
+                        Client::Serveurs::Serveur serveur = Commande::definir_serveur(contexte);
                         Console::afficher("> Serveur : " + serveur.informations());
 
                         Console::afficher("> Connexion au serveur...");

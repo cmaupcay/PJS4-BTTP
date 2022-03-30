@@ -16,29 +16,33 @@ namespace BTTP
         class Connexion : public Protocole::IConnexion
         {
             private:
+                asio::io_context& _contexte;
                 /** Socket de la connexion. */
-                asio::ip::tcp::socket* _socket;
+                asio::ip::tcp::socket _socket;
                 /** Adresse de connexion. */
-                const std::string _adresse;
+                std::string _adresse;
                 /** Port de connexion. */
-                const uint16_t _port;
+                uint16_t _port;
                 /** pour la gestion des erreurs avec asio.*/
                 asio::error_code _erreur;
 
+            protected:
+                inline const asio::error_code& erreur() const { return this->_erreur; }
+
             public:
+                Connexion(asio::ip::tcp::socket socket, asio::io_context& contexte);
                 /**
                  * @brief Construction d'un nouvel objet représentant une connexion.
                  * @param adresse Adresse de connexion.
                  * @param port Port de connexion.
                  */
-                Connexion(const std::string adresse, const uint16_t port);
+                Connexion(const std::string adresse, const uint16_t port, asio::io_context& contexte);
                 /**
                 * @brief Vérifie si la connexion est ouverte.
                 * @return true La connexion est ouverte.
                 * @return false La connexion est fermée.
                 */
-                inline const bool ouverte() override 
-                { return (this->_socket == nullptr ? false : this->_socket->is_open()); }
+                inline const bool ouverte() override { return this->_socket.is_open(); }
                 /**
                 * @brief Ouvre une nouvelle connexion.
                 */
@@ -46,7 +50,7 @@ namespace BTTP
                 /**
                 * @brief Ferme la connexion.
                 */
-                inline void fermer() override { this->_socket->close(); }
+                inline void fermer() override { this->_socket.close(); }
                 /**
                 * @brief Envoie un message sur la connexion.
                 * @param message_prepare Le message à envoyer.
@@ -57,6 +61,9 @@ namespace BTTP
                 * @return Retourne le message reçu.
                 */
                 const std::string recevoir() override;
+
+                inline const std::string& adresse() const { return this->_adresse; }
+                inline const uint16_t& port() const { return this->_port; }
         };
     }
 }

@@ -6,7 +6,7 @@ namespace BTTP
     {
         namespace Serveurs
         {
-            Serveur::Serveur(const std::string nom, const std::string serialisation)
+            Serveur::Serveur(const std::string nom, const std::string serialisation, asio::io_context& contexte)
                 : _nom{ nom }, _cle{ nullptr }, _connexion{ nullptr }, _auth{ false }
             {
                 const size_t fin_premiere_ligne = serialisation.find_first_of('\n');
@@ -17,7 +17,7 @@ namespace BTTP
                 this->_port = (uint16_t)std::atoi(serialisation.substr(fin_premiere_ligne + 1, fin_deuxieme_ligne - (fin_premiere_ligne + 1)).c_str());
                 // Reste du fichier = clé publique.
                 this->_cle = new Protocole::Cle::Publique(serialisation.substr(fin_deuxieme_ligne + 1));
-                this->_connexion = new Connexion(this->_adresse, this->_port);
+                this->_connexion = new Connexion(this->_adresse, this->_port, contexte);
             }
 
             const std::string Serveur::serialiser() const
@@ -35,9 +35,14 @@ namespace BTTP
             {
                 // Si la clé du serveur est inconnue ou que l'appareil est déjà authentifié, on arrête là.
                 if (this->_cle == nullptr || this->_auth) return false;
+                // Envoi de la demande d'authentification.
+                Client::Serveurs::Messages::DemandeAuthentification demande_auth;
+                this->_connexion->envoyer(
+                    identite.chiffrer(demande_auth.construire(), *this->_cle, mdp)
+                );
                 // Réception de la demande du nom d'utilisateur.
-                Protocole::Messages::Demande demande{
-                    identite.dechiffrer(this->_connexion->recevoir(), *this->_cle ,mdp)
+                Protocole::Messages::Demande demande{ 
+                    identite.dechiffrer(this->_connexion->recevoir(), *this->_cle, mdp)
                 };
                 if (demande.champs() == BTTP_DEMANDE_UTILISATEUR)
                 {
@@ -84,7 +89,7 @@ namespace BTTP
                 if (this->_cle == nullptr || this->_auth) return false;
                 // Réception de la demande de l'empreinte de la clé publique locale.
                 const Protocole::Messages::Demande demande{
-                    identite.dechiffrer(this->_connexion->recevoir(), *this->_cle ,mdp)
+                    identite.chiffrer(this->_connexion->recevoir(), *this->_cle, mdp)
                 };
                 if (demande.champs() == BTTP_DEMANDE_EMPREINTE_CLE)
                 {

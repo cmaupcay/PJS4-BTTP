@@ -4,7 +4,7 @@
 function scripts_publiques(&$resultat = array())
 {
 
-    $RACINE = "C:\wamp64\www\PJS4\web\site";
+    $RACINE = ".";
     require $RACINE . '/modele/connectBD.php';
 
     $sql = " SELECT nom, publication, `version`, chemin_code_source FROM `script_publique`";
@@ -28,7 +28,7 @@ function code_source()
 
     ob_start();
 
-    $RACINE = "C:\wamp64\www\PJS4\web\site";
+    $RACINE = ".";
 
     if (isset($_GET["file"])) {
         $file = $_GET["file"];
@@ -79,7 +79,7 @@ function code_source()
 function recherche_scripts($recherche)
 {
 
-    $RACINE = "C:\wamp64\www\PJS4\web\site";
+    $RACINE = ".";
     require $RACINE . '/modele/connectBD.php';
 
     $sql = "SELECT nom FROM `scripts_publiques` WHERE nom=:nom";

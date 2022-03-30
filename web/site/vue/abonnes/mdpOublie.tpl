@@ -27,35 +27,31 @@
 
 <div class="container-fluid banner">
 
-    <div><a href="?controle=visiteurs&action=accueil" class="nav-link text-uppercase font-weight-bold" style="color:aliceblue"> BTTP </a></div>
+    <div><a href="?controle=abonnes&action=changeMdp" class="nav-link text-uppercase font-weight-bold" style="color:aliceblue"> BTTP </a></div>
 
     <div class="login-form">
         <br><br>
              <!-- lorsqu'on envoie le formulaire on va vouloir traiter ces données, donc on va san doute vouloir faire une fonction js pour les traiter on submit
             du coup il faut pas oublier de changer ca-->
-            <form action="?controle=abonnes&action=accueil" method="post">
+            <form action="?controle=visiteurs&action=changeMdp" method="post">
 
-                <h2 class="text-center" style="color:#00171F"> Connexion </h2>
+                <h2 class="text-center" style="color:#00171F"> Mot de passe oublié </h2>
                 <div class="form-group">
-                    <p><input name="pseudo" type="text" class="form-control" placeholder="Email" autocomplete="off"
+                    <p><input name="pseudoToRescue" type="text" class="form-control" placeholder="Email" autocomplete="off"
                             required><br /></p>
                 </div>
+
                 <div class="form-group">
-                    <p><input name="mdp" type="password" class="form-control" placeholder="Mot de passe"
-                            autocomplete="off" required><br /></p>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Se connecter" class="btn btn-primary btn-block" style="background-color:#00A8E8">
+                    <p><input name="mdpToChange" type="text" class="form-control" placeholder="Nouveau mot de passe" autocomplete="off"
+                            required><br /></p>
                 </div>
 
-                <div>
-                    <input type="checkbox" id="stayConnect" name="stayConnect" value="ResterConnecté">
-                    <label for="subscribeNews" style="color:#00171F">Rester connecté ?</label>
-                  </div>
+                <div class="form-group">
+                    <input type="submit" value="Changer mot de passe" class="btn btn-primary btn-block" style="background-color:#00A8E8">
+                </div>
+
             </form>
 
-            <p style="font-size:smaller; text-align:center">Vous n'avez pas de compte ? <a href="?controle=visiteurs&action=inscription" style="color:#00A8E8"> Inscrivez-vous </a> </p>
-            <p style="font-size:smaller; text-align:center">Mot de passe oublié ? <a href="?controle=visiteurs&action=mdpOublie" style="color:#00A8E8"> Changez-le </a> </p>
     </div>
 </div>
 

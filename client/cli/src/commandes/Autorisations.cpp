@@ -46,7 +46,7 @@ namespace BTTP
                     else throw Erreur::Commandes::Autorisations::Inexistante(empreinte);
                 }
 
-                void Autorisations::executer(const int argc, const char** argv) const
+                void Autorisations::executer(const int argc, const char** argv, asio::io_context& contexte) const
                 {
                     const std::string mdp = ""; // Console::demander("> Mot de passe de l'identité : ");
 

@@ -20,7 +20,7 @@ namespace BTTP
                     return c;
                 }
 
-                const int resoudre(const int argc, const char** argv)
+                const int resoudre(const int argc, const char** argv, asio::io_context& contexte)
                 {
                     if (argc > 1)
                     {
@@ -30,7 +30,7 @@ namespace BTTP
                             {
                                 try 
                                 { 
-                                    c->executer(argc, argv);
+                                    c->executer(argc, argv, contexte);
                                     return EXIT_SUCCESS; 
                                 }
                                 catch (Erreur::Commandes::Syntaxe& err)

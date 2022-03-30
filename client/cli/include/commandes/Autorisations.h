@@ -27,7 +27,7 @@ namespace BTTP
                 public:
                     Autorisations() : Commande(BTTP_COMMANDE_AUTORISATIONS) {}
 
-                    void executer(const int argc, const char** argv) const override;
+                    void executer(const int argc, const char** argv, asio::io_context& contexte) const override;
                     const std::string aide() const override;
                 };
             }

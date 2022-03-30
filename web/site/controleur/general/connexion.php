@@ -9,5 +9,3 @@
     require './modele/connexion.php';
 
     }
-
-?>

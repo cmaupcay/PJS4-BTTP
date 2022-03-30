@@ -19,7 +19,7 @@ namespace BTTP
             namespace Commandes
             {
                 const std::vector<Commande*> commandes();
-                const int resoudre(const int argc, const char** argv);
+                const int resoudre(const int argc, const char** argv, asio::io_context& contexte);
                 const std::string aide();
             }
         }

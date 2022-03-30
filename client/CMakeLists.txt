@@ -10,14 +10,14 @@ include(${CMAKE_CURRENT_LIST_DIR}/../protocole/CMakeLists.txt)
 
 # CONSTANTES
 set(BTTP_CLIENT ${BTTP}-client) # Nom du projet CMake
-set(BTTP_CLIENT_VERSION 0.1.4) # Version du client
+set(BTTP_CLIENT_VERSION 0.1.5) # Version du client
 set(BTTP_CLIENT_DEP ${BTTP_LIB} pthread) # Dépendances
 set(BTTP_CLIENT_RACINE ${CMAKE_CURRENT_LIST_DIR}/include/Racine.h) # En-tête racine (fichier de configuration)
 set(BTTP_CLIENT_LIB ${BTTP_CLIENT} ${BTTP_CLIENT_DEP})
 # Paramètres
 ## Réseau
 if(NOT DEFINED BTTP_PORT)
-    set(BTTP_PORT 420) # Port par défaut des applications BTTP.
+    set(BTTP_PORT 1414) # Port par défaut des applications BTTP.
 endif()
 if(NOT DEFINED BTTP_TIMEOUT)
     set(BTTP_TIMEOUT 60000) # Temps d'attente maximum en reception (en ms)

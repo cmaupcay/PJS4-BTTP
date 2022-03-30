@@ -18,33 +18,28 @@ namespace BTTP
                 if (Fichiers::existe(serveur.nom(), dossier, contexte)) throw Erreur::Serveurs::DejaPresent(serveur);
                 // Ouverture de la connexion.
                 if (!serveur.connexion().ouverte()) serveur.connexion().ouvrir();
-                // Récéption de la clé publique du serveur (envoyée en clair).
-                const Protocole::Cle::Publique cle_serveur = Protocole::Messages::ClePublique(serveur.connexion().recevoir()).cle();
-                // Envoi de la clé publique de l'identité locale.
-                const Protocole::Messages::ClePublique reponse{ identite.cle_publique() };
-                serveur.connexion().envoyer(identite.chiffrer(reponse.construire(), cle_serveur, mdp));
-                // Confirmation de l'ajout.
-                const std::string confirmation = identite.dechiffrer(serveur.connexion().recevoir(), cle_serveur, mdp);
-                if(confirmation[0] == static_cast<char>(Protocole::Messages::Type::ERREUR)){
-
-                    const Protocole::Messages::Erreur erreur {confirmation};
-                    throw BTTP::Erreur(erreur.nom(), erreur.message(), erreur.code());
-                }
-                else if (confirmation[0] != static_cast<char>(Protocole::Messages::Type::PRET))
-                    throw Protocole::Erreur::Messages::Type::Incoherent(confirmation[0], confirmation);                
-            
+                // Demande de la clé publique.
+                const Messages::DemandeClePublique demande;
+                serveur.connexion().envoyer(demande.construire());
+                // Récéption de la clé publique du serveur (en clair).
+                const Protocole::Cle::Publique cle_serveur = Messages::ReponseClePublique(serveur.connexion().recevoir()).cle();
+                // Envoi d'une confirmation.
+                const Protocole::Messages::Pret reponse;
+                serveur.connexion().envoyer(
+                    identite.chiffrer(reponse.construire(), cle_serveur, mdp)
+                );
                 // Enregistrement local des informations du serveur.
                 serveur.modifier_cle(&cle_serveur);
                 Fichiers::ecrire(serveur.serialiser(), serveur.nom(), dossier, false, false, contexte, creer_chemin);
             }
 
-            const std::vector<Serveur> liste(const std::string dossier, Contexte* contexte)
+            const std::vector<Serveur> liste(asio::io_context& contexte_asio, const std::string dossier, Contexte* contexte)
             {
                 std::vector<Serveur> serveurs;
                 const std::vector<std::string> fichiers = Fichiers::liste(dossier, contexte);
                 std::string contenu;
                 for (const std::string& fichier : fichiers)
-                    serveurs.push_back(charger(fichier, dossier, contexte));
+                    serveurs.push_back(charger(fichier, contexte_asio, dossier, contexte));
                 return serveurs;
             }   
 

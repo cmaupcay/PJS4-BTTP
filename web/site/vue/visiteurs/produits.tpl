@@ -56,8 +56,8 @@
             <div class="col-md-12 text-center" style="padding-top:5%">
                 <p> BTTP propose une application mobile ainsi qu'une application client à installer sur votre PC distant. </p>
                 <p> Vous trouverez ci-dessous les liens pour télécharger chacun de nos produits : </p>
-                <p style="padding-top:4%"> Pour télécharger le client cliquez <a href="#"> ici </a></p>
-                <p style="padding-top:2%"> Pour télécharger notre application mobile, cliquez <a href="#"> ici </a></p>
+                <p style="padding-top:4%"><img src="./vue/visiteurs/linux.jpeg" style="width:4%"> Pour télécharger le client cliquez <a href="#" style="font-size:20px; color:aqua"> ici </a></p>
+                <p style="padding-top:4%"><img src="./vue/visiteurs/android.jpeg" style="width:4%"> Pour télécharger le client cliquez <a href="#" style="font-size:20px; color:aqua"> ici </a></p>
             </div>
         </div>
     </div>

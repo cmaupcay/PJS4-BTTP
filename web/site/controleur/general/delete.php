@@ -6,6 +6,3 @@ $RACINE = "C:\wamp64\www\PJS4\web\site";
     if(isset($_GET["idTerminal"])){
         supprimer_terminal($_GET["idTerminal"]);
     }
-    
-
-?>

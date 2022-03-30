@@ -10,7 +10,7 @@ function verif_utilisateur($pseudo, $mdp, &$resultat = array())
     $sql = 'SELECT * FROM `utilisateur` WHERE `pseudo`=:pseudo AND `mdp`=:mdp';
 
     $mdp = hash('sha256', $mdp);
-    
+
     try {
         $commande = $pdo->prepare($sql);
         $commande->bindParam(":pseudo", $pseudo);
@@ -24,4 +24,3 @@ function verif_utilisateur($pseudo, $mdp, &$resultat = array())
         die();
     }
 }
-

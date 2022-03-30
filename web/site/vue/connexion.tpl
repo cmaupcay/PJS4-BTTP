@@ -47,6 +47,11 @@
                 <div class="form-group">
                     <input type="submit" value="Se connecter" class="btn btn-primary btn-block" style="background-color:#00A8E8">
                 </div>
+
+                <div>
+                    <input type="checkbox" id="stayConnect" name="stayConnect" value="ResterConnecté">
+                    <label for="subscribeNews" style="color:#00171F">Rester connecté ?</label>
+                  </div>
             </form>
 
             <p style="font-size:smaller; text-align:center">Vous n'avez pas de compte ? <a href="?controle=visiteurs&action=inscription" style="color:#00A8E8"> Inscrivez-vous </a> </p>

@@ -1,8 +1,8 @@
 <?php
 
-$hostname = "localhost";
+$hostname = "bdd_mysql";
 $base = "bttp";
-$loginBD = "root";
+$loginBD = "bd";
 $passBD = "JFBrette2022KFLeS";
 
 try {

@@ -61,6 +61,12 @@ if (isset($_GET['controle']) && isset($_GET['action'])) {
     } elseif ($controle == "visiteurs" && $action == "code_source") {
         require('controleur/utilisateurs/visiteurs.php');
         montrer_code();
+    } elseif($controle=="visiteurs" && $action=="informations") {
+        require 'controleur/utilisateurs/visiteurs.php';
+        informations();
+    } elseif($controle=="visiteurs" && $action == "produits") {
+        require 'controleur/utilisateurs/visiteurs.php';
+        produits();
     }
     elseif ($controle == "visiteurs" && $action == "mdpOublie") {
         require('controleur/utilisateurs/abonnes.php');
@@ -76,6 +82,9 @@ if (isset($_GET['controle']) && isset($_GET['action'])) {
     } elseif ($controle == "abonnes" && $action == "deconnexion" && $identifie) {
         require('controleur/utilisateurs/abonnes.php');
         deconnexion();
+    } elseif($controle=="abonnes" && $action =="profil") {
+        require 'controleur/utilisateurs/abonnes.php';
+        profil();  
     } elseif ($controle == "abonnes" && $action == "appareils" && $identifie) {
         require('controleur/utilisateurs/abonnes.php');
         appareils();

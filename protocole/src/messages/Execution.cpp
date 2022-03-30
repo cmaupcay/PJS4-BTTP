@@ -19,9 +19,9 @@ namespace BTTP
             {}
 
             Execution::Execution(const std::string paquet)
-                : Message(Type::EXECUTION, paquet),
+                : Message(Type::EXECUTION),
                 _id{ nullptr }, _id_script{ nullptr }
-            {}
+            { this->deconstruire(paquet); }
 
             Execution::~Execution()
             {

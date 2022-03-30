@@ -17,7 +17,7 @@ namespace BTTP
             {
                 std::string nom_fichier = nom;
                 if (ajouter_extension) nom_fichier += "." + std::string(BTTP_IDENTITE_EXT);
-                std::ifstream fichier = Fichiers::lecture(nom_fichier, dossier, true, contexte); 
+                std::ifstream fichier = Fichiers::lecture(nom_fichier, dossier, true, contexte);
                 return Protocole::Identite(fichier);
             }
 

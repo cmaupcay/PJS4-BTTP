@@ -66,7 +66,7 @@ namespace BTTP
             catch (std::exception& e) { throw Erreur::Identite::Chiffrement(e.what(), message); }
             if (!message_chiffre.meaningful()) throw Erreur::Identite::Chiffrement("L'intégrité du message n'a pu être vérifiée.", message);
             // Retour au format brut
-            return message_chiffre.raw();
+            return message_chiffre.write(BTTP_ARMOR ? OpenPGP::PGP::Armored::YES : OpenPGP::PGP::Armored::NO);
         }
 
         const OpenPGP::Message Identite::dechiffrement(const std::string message, const std::string mdp) const

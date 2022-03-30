@@ -9,22 +9,25 @@ namespace BTTP
             Serveur::Serveur(const std::string nom, const std::string serialisation, asio::io_context& contexte)
                 : _nom{ nom }, _cle{ nullptr }, _connexion{ nullptr }, _auth{ false }
             {
-                const size_t fin_premiere_ligne = serialisation.find_first_of('\n');
-                const size_t fin_deuxieme_ligne = serialisation.find_first_of('\n', fin_premiere_ligne + 1);
+                const size_t taille_sep = std::string(BTTP_MESSAGE_SEP).size();
+                const size_t fin_adresse = serialisation.find_first_of(BTTP_MESSAGE_SEP);
+                const size_t debut_port = fin_adresse + taille_sep;
+                const size_t fin_port = serialisation.find_first_of(BTTP_MESSAGE_SEP, debut_port);
+                const size_t debut_cle = fin_port + taille_sep;
                 // Adresse sur la première ligne.
-                this->_adresse = serialisation.substr(0, fin_premiere_ligne);
+                this->_adresse = serialisation.substr(0, fin_adresse);
                 // Port sur la deuxième ligne.
-                this->_port = (uint16_t)std::atoi(serialisation.substr(fin_premiere_ligne + 1, fin_deuxieme_ligne - (fin_premiere_ligne + 1)).c_str());
+                this->_port = (uint16_t)std::atoi(serialisation.substr(debut_port, fin_port - debut_port).c_str());
                 // Reste du fichier = clé publique.
-                this->_cle = new Protocole::Cle::Publique(serialisation.substr(fin_deuxieme_ligne + 1));
+                this->_cle = new Protocole::Cle::Publique(serialisation.substr(debut_cle));
                 this->_connexion = new Connexion(this->_adresse, this->_port, contexte);
             }
 
             const std::string Serveur::serialiser() const
             {
-                std::string infos = this->_adresse;
-                infos += "\n" + std::to_string(this->_port);
-                infos += "\n" + this->_cle->write(BTTP_IDENTITE_ARMOR ? OpenPGP::PGP::Armored::YES : OpenPGP::PGP::Armored::NO);
+                std::string infos = this->_adresse + BTTP_MESSAGE_SEP;
+                infos += std::to_string(this->_port) + BTTP_MESSAGE_SEP;
+                infos += this->_cle->exporter();
                 return infos;
             }
 

@@ -12,9 +12,9 @@ namespace BTTP
             {}
 
             Fermeture::Fermeture(const std::string paquet)
-                : BTTP::Protocole::Messages::Message(Type::FERMETURE, paquet),
+                : BTTP::Protocole::Messages::Message(Type::FERMETURE),
                 _message{ BTTP_MESSAGE_FERMETURE_MESSAGE_DEFAUT }
-            {}
+            { this->deconstruire(paquet); }
         }
     }
 }

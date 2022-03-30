@@ -46,7 +46,7 @@ namespace BTTP
                 const std::string dossier = BTTP_SERVEUR_DOSSIER, 
                 Contexte* contexte = nullptr
             )
-            { return Serveur(nom, Fichiers::lire(nom, dossier, false, contexte), contexte_asio); }
+            { return Serveur(nom, Fichiers::lire(nom, dossier, true, contexte), contexte_asio); }
 
             // TODO Annoncement de la suppression au serveur cible.
             /**

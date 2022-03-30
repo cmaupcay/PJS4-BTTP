@@ -11,9 +11,22 @@ include(${CMAKE_CURRENT_LIST_DIR}/../client/CMakeLists.txt)
 
 # CONSTANTES
 set(BTTP_SERVEUR ${BTTP}-srv) # Nom du projet CMake
-set(BTTP_SERVEUR_VERSION 0.0.1) # Version du serveur
-set(BTTP_SERVEUR_DEP ${BTTP_LIB}) # Dépendances
+set(BTTP_SERVEUR_VERSION 0.0.2) # Version du serveur
+set(BTTP_SERVEUR_DEP ${BTTP_CLIENT_LIB}) # Dépendances
 set(BTTP_SERVEUR_RACINE ${CMAKE_CURRENT_LIST_DIR}/include/Racine.h) # En-tête racine (fichier de configuration)
+set(BTTP_SERVEUR_MAIN ${CMAKE_CURRENT_LIST_DIR}/src/bttp-srv.cpp)
+
+# Paramètres
+## Identité
+if(NOT DEFINED BTTP_SERVEUR_IDENTITE_PAR_DEFAUT)
+    set(BTTP_SERVEUR_IDENTITE_PAR_DEFAUT srv) # Nom de l'identité par défaut des serveurs BTTP.
+endif()
+if(NOT DEFINED BTTP_SERVEUR_IDENTITE_CONTACT_PAR_DEFAUT)
+    set(BTTP_SERVEUR_IDENTITE_CONTACT_PAR_DEFAUT dont@contact.me) # Contact l'identité par défaut des serveurs BTTP.
+endif()
+if(NOT DEFINED BTTP_SERVEUR_IDENITITE_VAR_MDP)
+    set(BTTP_SERVEUR_IDENITITE_VAR_MDP srv.mdp) # Champs de la variable de contexte contenant le mot de passe de l'identité.
+endif()
 
 # PROJET
 project(${BTTP_SERVEUR} LANGUAGES CXX VERSION ${BTTP_SERVEUR_VERSION})

@@ -20,9 +20,9 @@ namespace BTTP
 
             //TOTEST
             Resultat::Resultat(const std::string paquet)
-                : Message(Type::RESULTAT, paquet),
+                : Message(Type::RESULTAT),
                 _id{ nullptr }, _resultat { "" }
-            {}
+            { this->deconstruire(paquet); }
 
             //TOTEST
             const std::string Resultat::contenu() const 

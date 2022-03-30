@@ -18,9 +18,9 @@ namespace BTTP
             {}
 
             Erreur::Erreur(const std::string paquet)
-                : Message(Type::ERREUR, paquet),
+                : Message(Type::ERREUR),
                 _nom{ "" }, _message{ "" }, _code{ 0 }
-            {}
+            { this->deconstruire(paquet); }
 
             //TOTEST
             const std::string Erreur::contenu() const 

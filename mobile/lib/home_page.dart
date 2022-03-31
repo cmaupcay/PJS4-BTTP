@@ -77,39 +77,42 @@ class HomePageState extends State<HomePage> {
 */
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBarHome(),
-      body: this.getBody(),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        currentIndex: this.selectedIndex,
-        backgroundColor: isDarkMode ? darkMode.bar : lightMode.bar,
-        selectedItemColor: isDarkMode ? darkMode.button : lightMode.textColor,
-        selectedFontSize: 16,
-        unselectedItemColor: Colors.grey[400],
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.search,
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: new Scaffold(
+        appBar: AppBarHome(),
+        body: this.getBody(),
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          currentIndex: this.selectedIndex,
+          backgroundColor: isDarkMode ? darkMode.bar : lightMode.bar,
+          selectedItemColor: isDarkMode ? darkMode.button : lightMode.textColor,
+          selectedFontSize: 16,
+          unselectedItemColor: Colors.grey[400],
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.search,
+              ),
+              label: 'My Scripts',
             ),
-            label: 'My Scripts',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.shopping_cart_outlined,
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.shopping_cart_outlined,
+              ),
+              label: 'Market place',
             ),
-            label: 'Market place',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.account_circle_outlined,
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.account_circle_outlined,
+              ),
+              label: 'Profile',
             ),
-            label: 'Profile',
-          ),
-        ],
-        onTap: (int index) {
-          this.onTapHandler(index);
-        },
+          ],
+          onTap: (int index) {
+            this.onTapHandler(index);
+          },
+        ),
       ),
     );
   }
@@ -312,21 +315,25 @@ class FilScript extends StatelessWidget {
   final List scriptList = [
     {
       'title': 'Script1',
+      'terminal': 'Terminal 1',
       'description': "lalalaalalalalalallalalaalalalal",
       'variables': true,
     },
     {
       'title': 'Script2',
+      'terminal': 'Terminal 3',
       'description': "lalzelalalaalalalalalalalczczcl",
       'variables': false,
     },
     {
       'title': 'Script3',
+      'terminal': 'Terminal 2',
       'description': "lacedcdcalalallalalaalalalalcddl",
       'variables': false,
     },
     {
       'title': 'Script4',
+      'terminal': 'Terminal 1',
       'description': "lyj,hkylaalalalalgfvdl",
       'variables': true,
     }
@@ -385,22 +392,42 @@ class ScriptCard extends StatelessWidget {
                     fontSize: 22,
                     fontWeight: FontWeight.w800,
                   ),
-                ), /*
-                MaterialButton(
-                  color: Colors.white,
-                  shape: CircleBorder(),
-                  onPressed: () {},
-                  child: Icon(
-                    Icons.favorite_outline_rounded,
-                    color: bars,
-                    size: 20,
-                  ),
-                )*/
+                ),
               ],
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(10, 25, 10, 10),
+            margin: EdgeInsets.fromLTRB(10, 25, 10, 5),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  scriptData['terminal'],
+                  style: GoogleFonts.nunito(
+                    color: isDarkMode ? darkMode.button : lightMode.textColor,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) =>
+                          _buildPopupDialog(context),
+                    );
+                  },
+                  icon: Icon(
+                    Icons.arrow_forward_ios,
+                    color: isDarkMode ? darkMode.button : lightMode.fond,
+                    size: 30,
+                  ),
+                )
+              ],
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.fromLTRB(10, 5, 10, 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -421,7 +448,7 @@ class ScriptCard extends StatelessWidget {
                     );
                   },
                   icon: Icon(
-                    Icons.arrow_forward_ios_rounded,
+                    Icons.add_circle_outline_rounded,
                     color: isDarkMode ? darkMode.button : lightMode.fond,
                     size: 30,
                   ),
@@ -429,17 +456,6 @@ class ScriptCard extends StatelessWidget {
               ],
             ),
           ),
-          Container(
-            margin: EdgeInsets.fromLTRB(100, 10, 10, 10),
-            child: IconButton(
-              onPressed: null,
-              icon: Icon(
-                Icons.add_circle_outline,
-                color: isDarkMode ? darkMode.button : lightMode.fond,
-                size: 30,
-              ),
-            ),
-          )
         ],
       ),
     );
@@ -743,22 +759,17 @@ class MyProfile extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 18,
                         letterSpacing: 2.2,
-                        color:
-                            isDarkMode ? darkMode.button : lightMode.textColor,
+                        color: isDarkMode ? darkMode.button : lightMode.bar,
                       )),
                   Text("Likir09",
                       style: TextStyle(
                         fontSize: 16,
                         letterSpacing: 2.2,
-                        color:
-                            isDarkMode ? darkMode.button : lightMode.textColor,
+                        color: isDarkMode ? darkMode.button : lightMode.bar,
                       )),
                 ],
               ),
-              SizedBox(
-                height: 35,
-              ),
-              Row(
+              /*Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text("Clé PGP:",
@@ -776,7 +787,7 @@ class MyProfile extends StatelessWidget {
                             isDarkMode ? darkMode.button : lightMode.textColor,
                       )),
                 ],
-              ),
+              ),*/
               SizedBox(
                 height: 35,
               ),
@@ -787,15 +798,13 @@ class MyProfile extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 18,
                         letterSpacing: 2.2,
-                        color:
-                            isDarkMode ? darkMode.button : lightMode.textColor,
+                        color: isDarkMode ? darkMode.button : lightMode.bar,
                       )),
                   IconButton(
                       onPressed: () {},
                       icon: Icon(
                         Icons.lock,
-                        color:
-                            isDarkMode ? darkMode.button : lightMode.textColor,
+                        color: isDarkMode ? darkMode.button : lightMode.bar,
                         size: 30,
                       )),
                 ],
@@ -810,15 +819,13 @@ class MyProfile extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 18,
                         letterSpacing: 2.2,
-                        color:
-                            isDarkMode ? darkMode.button : lightMode.textColor,
+                        color: isDarkMode ? darkMode.button : lightMode.bar,
                       )),
                   IconButton(
                       onPressed: () {},
                       icon: Icon(
                         Icons.logout_outlined,
-                        color:
-                            isDarkMode ? darkMode.button : lightMode.textColor,
+                        color: isDarkMode ? darkMode.button : lightMode.bar,
                         size: 30,
                       )),
                 ],

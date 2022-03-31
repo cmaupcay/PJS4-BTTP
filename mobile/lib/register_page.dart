@@ -65,7 +65,7 @@ class RegisterPage extends StatelessWidget {
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     shape: StadiumBorder(),
-                    primary: bars,
+                    primary: barLight,
                     padding: EdgeInsets.symmetric(
                       horizontal: 125,
                       vertical: 13,

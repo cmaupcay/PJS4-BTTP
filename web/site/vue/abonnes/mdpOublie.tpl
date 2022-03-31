@@ -37,7 +37,7 @@
 
                 <h2 class="text-center" style="color:#00171F"> Mot de passe oublié </h2>
                 <div class="form-group">
-                    <p><input name="pseudoToRescue" type="text" class="form-control" placeholder="Email" autocomplete="off"
+                    <p><input name="pseudoToRescue" type="text" class="form-control" placeholder="Pseudo" autocomplete="off"
                             required><br /></p>
                 </div>
 

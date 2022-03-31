@@ -35,7 +35,7 @@ class LoginPage extends StatelessWidget {
                       delay: 500,
                       child: Text(
                         "Connectez-vous",
-                        style: GoogleFonts.poppins(
+                        style: GoogleFonts.raleway(
                           color: textColorLight,
                           fontSize: 25,
                           fontWeight: FontWeight.w600,
@@ -62,7 +62,7 @@ class LoginPage extends StatelessWidget {
                   ),
                   child: Text(
                     'CONFIRMER',
-                    style: GoogleFonts.poppins(
+                    style: GoogleFonts.raleway(
                       color: textColorLight,
                       fontSize: 15,
                       fontWeight: FontWeight.w500,
@@ -79,33 +79,6 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 90),
-              /*Align(
-              alignment: Alignment.centerRight,
-              child: Padding(
-                padding: EdgeInsets.only(right: 35),
-                child: TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => HomePage(),
-                      ),
-                    );
-                  },
-                  child: DelayedAnimation(
-                    delay: 3000,
-                    child: Text(
-                      "SKIP",
-                      style: GoogleFonts.poppins(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),*/
             ],
           ),
         ),
@@ -132,15 +105,15 @@ class _LoginFormState extends State<LoginForm> {
           DelayedAnimation(
             delay: 1500,
             child: TextField(
-              style: TextStyle(
+              style: GoogleFonts.raleway(
                 color: textColorLight,
               ),
               cursorColor: textColorLight,
               decoration: InputDecoration(
                 fillColor: Colors.white,
                 filled: true,
-                labelText: 'Vôtre pseudo',
-                labelStyle: TextStyle(
+                labelText: 'Votre pseudo',
+                labelStyle: GoogleFonts.raleway(
                   color: textColorLight,
                 ),
               ),
@@ -150,7 +123,7 @@ class _LoginFormState extends State<LoginForm> {
           DelayedAnimation(
             delay: 2000,
             child: TextField(
-              style: TextStyle(
+              style: GoogleFonts.raleway(
                 color: textColorLight,
               ),
               cursorColor: textColorLight,
@@ -158,7 +131,7 @@ class _LoginFormState extends State<LoginForm> {
               decoration: InputDecoration(
                 fillColor: Colors.white,
                 filled: true,
-                labelStyle: TextStyle(
+                labelStyle: GoogleFonts.raleway(
                   color: textColorLight,
                 ),
                 labelText: 'Mot de passe',

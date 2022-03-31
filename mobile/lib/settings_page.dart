@@ -61,7 +61,7 @@ class _SettingsPage extends State<SettingsPage> {
         ),
         title: Text(
           'Settings',
-          style: GoogleFonts.poppins(
+          style: GoogleFonts.raleway(
             color: isDarkMode ? darkMode.button : lightMode.textColor,
             fontSize: 22,
             fontWeight: FontWeight.w800,
@@ -72,7 +72,7 @@ class _SettingsPage extends State<SettingsPage> {
         child: SwitchListTile(
           title: Text(
             'Mode sombre',
-            style: GoogleFonts.poppins(
+            style: GoogleFonts.raleway(
               color: isDarkMode ? darkMode.button : lightMode.textColor,
               fontSize: 16,
               fontWeight: FontWeight.w500,

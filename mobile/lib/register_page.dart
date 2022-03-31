@@ -35,7 +35,7 @@ class RegisterPage extends StatelessWidget {
                       delay: 500,
                       child: Text(
                         "Inscrivez-vous",
-                        style: GoogleFonts.poppins(
+                        style: GoogleFonts.raleway(
                           color: textColorLight,
                           fontSize: 25,
                           fontWeight: FontWeight.w600,
@@ -43,17 +43,6 @@ class RegisterPage extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 22),
-                    DelayedAnimation(
-                      delay: 1000,
-                      child: Text(
-                        "Ne partagez jamais ces informations.",
-                        style: GoogleFonts.poppins(
-                          color: Colors.grey[500],
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ),
                   ],
                 ),
               ),
@@ -73,7 +62,7 @@ class RegisterPage extends StatelessWidget {
                   ),
                   child: Text(
                     'CONFIRMER',
-                    style: GoogleFonts.poppins(
+                    style: GoogleFonts.raleway(
                       color: textColorLight,
                       fontSize: 15,
                       fontWeight: FontWeight.w500,
@@ -90,33 +79,6 @@ class RegisterPage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 90),
-              /*Align(
-              alignment: Alignment.centerRight,
-              child: Padding(
-                padding: EdgeInsets.only(right: 35),
-                child: TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => HomePage(),
-                      ),
-                    );
-                  },
-                  child: DelayedAnimation(
-                    delay: 3000,
-                    child: Text(
-                      "SKIP",
-                      style: GoogleFonts.poppins(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),*/
             ],
           ),
         ),
@@ -143,15 +105,15 @@ class _LoginFormState extends State<LoginForm> {
           DelayedAnimation(
             delay: 1500,
             child: TextField(
-              style: TextStyle(
+              style: GoogleFonts.raleway(
                 color: textColorLight,
               ),
               cursorColor: textColorLight,
               decoration: InputDecoration(
                 fillColor: Colors.white,
                 filled: true,
-                labelText: 'Vôtre pseudo',
-                labelStyle: TextStyle(
+                labelText: 'Votre pseudo',
+                labelStyle: GoogleFonts.raleway(
                   color: textColorLight,
                 ),
               ),
@@ -161,7 +123,7 @@ class _LoginFormState extends State<LoginForm> {
           DelayedAnimation(
             delay: 2000,
             child: TextField(
-              style: TextStyle(
+              style: GoogleFonts.raleway(
                 color: textColorLight,
               ),
               cursorColor: textColorLight,
@@ -169,10 +131,40 @@ class _LoginFormState extends State<LoginForm> {
               decoration: InputDecoration(
                 fillColor: Colors.white,
                 filled: true,
-                labelStyle: TextStyle(
+                labelStyle: GoogleFonts.raleway(
                   color: textColorLight,
                 ),
                 labelText: 'Mot de passe',
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    Icons.visibility,
+                    color: textColorLight,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _obscureText = !_obscureText;
+                    });
+                  },
+                ),
+              ),
+            ),
+          ),
+          SizedBox(height: 30),
+          DelayedAnimation(
+            delay: 2000,
+            child: TextField(
+              style: GoogleFonts.raleway(
+                color: textColorLight,
+              ),
+              cursorColor: textColorLight,
+              obscureText: _obscureText,
+              decoration: InputDecoration(
+                fillColor: Colors.white,
+                filled: true,
+                labelStyle: GoogleFonts.raleway(
+                  color: textColorLight,
+                ),
+                labelText: 'vérification mot de passe',
                 suffixIcon: IconButton(
                   icon: Icon(
                     Icons.visibility,

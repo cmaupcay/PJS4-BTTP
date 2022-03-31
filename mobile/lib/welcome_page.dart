@@ -31,7 +31,7 @@ class WelcomePage extends StatelessWidget {
                   padding: EdgeInsets.all(13),
                   color: fondLight,
                   height: 400,
-                  child: Image.asset('images/logo-clair.png'),
+                  child: Image.asset('images/logoTrans.png'),
                 ),
               ),
               DelayedAnimation(
@@ -44,7 +44,7 @@ class WelcomePage extends StatelessWidget {
                   child: Text(
                     "Découvrez la meilleure Application de gestion de script: BTTP",
                     textAlign: TextAlign.center,
-                    style: GoogleFonts.poppins(
+                    style: GoogleFonts.raleway(
                       color: textColorLight,
                       fontSize: 16,
                     ),
@@ -63,7 +63,7 @@ class WelcomePage extends StatelessWidget {
                     ),
                     child: Text(
                       'COMMENCER',
-                      style: TextStyle(
+                      style: GoogleFonts.raleway(
                         color: textColorLight,
                       ),
                     ),

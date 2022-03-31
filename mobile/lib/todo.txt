@@ -5,13 +5,13 @@ profil pp téléchargeable
     nb de terminaux et de scripts  
 
 
-PAGE TERMINAUX
+PAGE TERMINAUX ? 
 
 
 theme OKK
 connection/inscription
-    ptite base user
+    ptite base user ?
 
-prevent user go back from home_page
+prevent user go back from home_page OK 
 add terminals
 finir register

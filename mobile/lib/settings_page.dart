@@ -1,6 +1,6 @@
 // ignore_for_file: unnecessary_const, avoid_print, prefer_const_constructors
 
-import 'package:bttp/theme_color.dart';
+import 'theme_color.dart';
 
 import 'main.dart';
 import 'package:flutter/material.dart';

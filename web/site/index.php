@@ -98,6 +98,10 @@ if (isset($_GET['controle']) && isset($_GET['action'])) {
         require('erreur404.tpl');
         $erreur = false;
     }
+    elseif($controle=="marketplace.api" && $action == "marketplace_json") {
+        require('controleur/api/marketplace.api.php');
+        marketplace_json();
+    }
 } else {
     $controle = 'visiteurs';
     $action = 'accueil';

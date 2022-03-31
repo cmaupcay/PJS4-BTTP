@@ -44,7 +44,7 @@ class SocialPage extends StatelessWidget {
                 delay: 500,
                 child: Container(
                   height: 280,
-                  child: Image.asset('images/logo-clair.png'),
+                  child: Image.asset('images/logoTrans.png'),
                 ),
               ),
               DelayedAnimation(
@@ -59,7 +59,7 @@ class SocialPage extends StatelessWidget {
                       Text(
                         "Connectez vous pour commencer",
                         textAlign: TextAlign.center,
-                        style: GoogleFonts.poppins(
+                        style: GoogleFonts.raleway(
                           color: textColorLight,
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
@@ -92,7 +92,7 @@ class SocialPage extends StatelessWidget {
                             SizedBox(width: 10),
                             Text(
                               "CONNEXION",
-                              style: GoogleFonts.poppins(
+                              style: GoogleFonts.raleway(
                                 color: textColorLight,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
@@ -129,7 +129,7 @@ class SocialPage extends StatelessWidget {
                             SizedBox(width: 10),
                             Text(
                               "INSCRIPTION",
-                              style: GoogleFonts.poppins(
+                              style: GoogleFonts.raleway(
                                 color: textColorLight,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
@@ -142,115 +142,6 @@ class SocialPage extends StatelessWidget {
                   ),
                 ),
               ),
-              /*DelayedAnimation(
-              delay: 1500,
-              child: Container(
-                margin: EdgeInsets.symmetric(
-                  vertical: 14,
-                  horizontal: 40,
-                ),
-                child: Column(
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => LoginPage(),
-                          ),
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                        shape: StadiumBorder(),
-                        primary: bars,
-                        padding: EdgeInsets.all(13),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.mail_outline_outlined),
-                          SizedBox(width: 10),
-                          Text(
-                            "EMAIL",
-                            style: GoogleFonts.poppins(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: 20),
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => LoginPage(),
-                          ),
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                        shape: StadiumBorder(),
-                        primary: bars,
-                        padding: EdgeInsets.all(13),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          FaIcon(FontAwesomeIcons.facebook),
-                          SizedBox(width: 10),
-                          Text(
-                            "FACEBOOK",
-                            style: GoogleFonts.poppins(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: 20),
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => LoginPage(),
-                          ),
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                        shape: StadiumBorder(),
-                        primary: Colors.white,
-                        padding: EdgeInsets.all(13),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            'images/logogoogle.png',
-                            height: 20,
-                          ),
-                          SizedBox(width: 10),
-                          Text(
-                            "GOOGLE",
-                            style: GoogleFonts.poppins(
-                              color: Colors.black,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: 20),
-                  ],
-                ),
-              ),
-            ),*/
             ],
           ),
         ),

@@ -154,7 +154,7 @@ class AppBarHome extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: isDarkMode ? darkMode.bar : lightMode.bar,
       title: Text(
         'BTTP',
-        style: GoogleFonts.poppins(
+        style: GoogleFonts.raleway(
           color: isDarkMode ? darkMode.button : lightMode.textColor,
           fontSize: 22,
           fontWeight: FontWeight.w800,
@@ -181,119 +181,6 @@ class AppBarHome extends StatelessWidget implements PreferredSizeWidget {
     );
   }
 }
-/*
-class MyScriptsAppBar extends StatelessWidget implements PreferredSizeWidget {
-  @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
-  @override
-  Widget build(BuildContext context) {
-    return AppBar(
-      automaticallyImplyLeading: false,
-      backgroundColor: isDarkMode ? darkMode.bar : lightMode.bar,
-      title: Text(
-        'BTTP',
-        style: GoogleFonts.poppins(
-          color: isDarkMode ? darkMode.button : lightMode.textColor,
-          fontSize: 22,
-          fontWeight: FontWeight.w800,
-        ),
-      ),
-      actions: [
-        IconButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => SettingsPage(),
-              ),
-            );
-          },
-          icon: Icon(
-            Icons.settings,
-            color: isDarkMode ? darkMode.button : lightMode.textColor,
-            size: 30,
-          ),
-        )
-      ],
-      centerTitle: true,
-    );
-  }
-}
-
-class AddScriptAppBar extends StatelessWidget implements PreferredSizeWidget {
-  @override
-  Size get preferredSize => const Size.fromHeight(100);
-  @override
-  Widget build(BuildContext context) {
-    return AppBar(
-      backgroundColor: isDarkMode ? darkMode.bar : lightMode.bar,
-      title: Text(
-        'Market Place',
-        style: GoogleFonts.poppins(
-          color: isDarkMode ? darkMode.textColor : lightMode.textColor,
-          fontSize: 22,
-          fontWeight: FontWeight.w800,
-        ),
-      ),
-      actions: [
-        IconButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => SettingsPage(),
-              ),
-            );
-          },
-          icon: Icon(
-            Icons.settings,
-            color: isDarkMode ? darkMode.textColor : lightMode.textColor,
-            size: 30,
-          ),
-        )
-      ],
-      centerTitle: true,
-    );
-  }
-}
-
-class MyProfileAppBar extends StatelessWidget implements PreferredSizeWidget {
-  @override
-  Size get preferredSize => const Size.fromHeight(100);
-  @override
-  Widget build(BuildContext context) {
-    return AppBar(
-      automaticallyImplyLeading: false,
-      backgroundColor: isDarkMode ? darkMode.bar : lightMode.bar,
-      title: Text(
-        'Profile',
-        style: GoogleFonts.poppins(
-          color: isDarkMode ? darkMode.button : lightMode.textColor,
-          fontSize: 22,
-          fontWeight: FontWeight.w800,
-        ),
-      ),
-      actions: [
-        IconButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => SettingsPage(),
-              ),
-            );
-          },
-          icon: Icon(
-            Icons.settings,
-            color: isDarkMode ? darkMode.button : lightMode.textColor,
-            size: 30,
-          ),
-        )
-      ],
-      centerTitle: true,
-    );
-  }
-}*/
 
 class MyScripts extends StatelessWidget {
   @override
@@ -387,7 +274,7 @@ class ScriptCard extends StatelessWidget {
               children: [
                 Text(
                   scriptData['title'],
-                  style: GoogleFonts.nunito(
+                  style: GoogleFonts.raleway(
                     color: isDarkMode ? darkMode.button : lightMode.textColor,
                     fontSize: 22,
                     fontWeight: FontWeight.w800,
@@ -403,7 +290,7 @@ class ScriptCard extends StatelessWidget {
               children: [
                 Text(
                   scriptData['terminal'],
-                  style: GoogleFonts.nunito(
+                  style: GoogleFonts.raleway(
                     color: isDarkMode ? darkMode.button : lightMode.textColor,
                     fontSize: 18,
                     fontWeight: FontWeight.w600,
@@ -433,7 +320,7 @@ class ScriptCard extends StatelessWidget {
               children: [
                 Text(
                   scriptData['description'],
-                  style: GoogleFonts.nunito(
+                  style: GoogleFonts.raleway(
                     color: isDarkMode ? darkMode.button : lightMode.textColor,
                     fontSize: 18,
                     fontWeight: FontWeight.w600,
@@ -606,7 +493,7 @@ class MarketCard extends StatelessWidget {
               children: [
                 Text(
                   marketscriptData['title'],
-                  style: GoogleFonts.nunito(
+                  style: GoogleFonts.raleway(
                     color: isDarkMode ? darkMode.button : lightMode.textColor,
                     fontSize: 22,
                     fontWeight: FontWeight.w800,
@@ -683,17 +570,6 @@ class MyProfile extends StatelessWidget {
           },
           child: ListView(
             children: [
-              /*Text(
-                "Edit Profile",
-                style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.w500,
-                  color: isDarkMode ? darkMode.button : lightMode.textColor,
-                ),
-              ),
-              SizedBox(
-                height: 15,
-              ),*/
               Center(
                 child: Stack(
                   children: [
@@ -756,38 +632,19 @@ class MyProfile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text("Pseudo :",
-                      style: TextStyle(
+                      style: GoogleFonts.raleway(
                         fontSize: 18,
                         letterSpacing: 2.2,
                         color: isDarkMode ? darkMode.button : lightMode.bar,
                       )),
                   Text("Likir09",
-                      style: TextStyle(
+                      style: GoogleFonts.raleway(
                         fontSize: 16,
                         letterSpacing: 2.2,
                         color: isDarkMode ? darkMode.button : lightMode.bar,
                       )),
                 ],
               ),
-              /*Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("Clé PGP:",
-                      style: TextStyle(
-                        fontSize: 18,
-                        letterSpacing: 2.2,
-                        color:
-                            isDarkMode ? darkMode.button : lightMode.textColor,
-                      )),
-                  Text("UIBILKHBUAUK9841A8465AAEHJQ",
-                      style: TextStyle(
-                        fontSize: 10,
-                        letterSpacing: 2.2,
-                        color:
-                            isDarkMode ? darkMode.button : lightMode.textColor,
-                      )),
-                ],
-              ),*/
               SizedBox(
                 height: 35,
               ),
@@ -795,7 +652,7 @@ class MyProfile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text("Changer le mot de passe :",
-                      style: TextStyle(
+                      style: GoogleFonts.raleway(
                         fontSize: 18,
                         letterSpacing: 2.2,
                         color: isDarkMode ? darkMode.button : lightMode.bar,
@@ -816,7 +673,7 @@ class MyProfile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text("Déconnexion :",
-                      style: TextStyle(
+                      style: GoogleFonts.raleway(
                         fontSize: 18,
                         letterSpacing: 2.2,
                         color: isDarkMode ? darkMode.button : lightMode.bar,

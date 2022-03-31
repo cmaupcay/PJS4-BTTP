@@ -8,8 +8,51 @@ namespace BTTP
         {
             const bool Session::authentification()
             {
-                // TODO AUTHENTIFICATION
-                // TODO Demande de l'empreinte.
+
+                const std::string mdp = this->contexte->variable(BTTP_SERVEUR_IDENITITE_VAR_MDP).valeur;
+
+                Journal::ecrire(BTTP_SERVEUR_COMPOSANT_SESSIONS_SESSION, "Authentification appareil.");
+
+                const Client::Serveurs::Messages::DemandeEmpreinteCle demande;
+
+                this->connexion()->envoyer(demande.construire());
+
+                Journal::ecrire(BTTP_SERVEUR_COMPOSANT_SESSIONS_SESSION, "En attente de l'empreinte du client.");
+
+                const Protocole::Identite::MessageNonVerifie retour { 
+                    this->connexion()->recevoir(), *this->contexte->identite().get(), mdp
+                };
+                if (retour.clair()[0] == static_cast<char>(Protocole::Messages::Type::ERREUR))
+                {
+                    const Protocole::Messages::Erreur erreur{ retour.clair() };
+                    throw BTTP::Erreur(erreur.nom(), erreur.message(), erreur.code());
+                }
+
+                const std::string empreinte = Client::Serveurs::Messages::ReponseEmpreinteCle(retour.clair()).data();
+
+                Journal::ecrire(BTTP_SERVEUR_COMPOSANT_SESSIONS_SESSION, empreinte);
+
+                //TODO verification empreinte dans la table
+
+                Serveur::Data::Source source {this->contexte};
+
+                std::vector<Serveur::Data::Argument> where;
+                std::vector<Serveur::Data::Argument> select;
+
+                Serveur::Data::Argument arg;
+
+                arg.nom = "*";
+
+                select.push_back(arg);
+
+                const std::string test = source.selectionner("format_script", select, where);
+
+                Journal::ecrire(BTTP_SERVEUR_COMPOSANT_SESSIONS_SESSION, test);
+
+                
+                
+
+
                 // TODO Verification de l'empreinte dans la table.
                 // TODO Si existante, authentification réussie (en cas de fraude, l'attaquant ne pourra pas déchiffrer les messages à moins de posséder la clé privéé).
                 // TODO Si inexistante, authentification par compte (utilisateur/mot de passe).
@@ -45,7 +88,20 @@ namespace BTTP
                     const std::string mdp = this->contexte->variable(BTTP_SERVEUR_IDENITITE_VAR_MDP).valeur;
 
                     Journal::ecrire(BTTP_SERVEUR_COMPOSANT_SESSIONS_SESSION, "En attente du client...");
-                    Protocole::Messages::Demande demande{ this->connexion()->recevoir() };
+                    const std::string question = this->connexion()->recevoir();
+                    Protocole::Messages::Demande demande;
+                    try
+                    {
+                        const Protocole::Identite::MessageNonVerifie demandeNonVerifiee { question, *this->contexte->identite().get(), mdp
+                        };
+
+                        demande.deconstruire(demandeNonVerifiee.clair());
+                    }
+                    catch(const BTTP::Erreur& e)
+                    {
+                        demande.deconstruire(question);
+                    }
+
                     const std::string& champs = demande.champs();
                     if (champs == BTTP_DEMANDE_CLE_PUBLIQUE) // Envoi de la clé publique en clair : ajout du serveur.
                     {
@@ -68,6 +124,7 @@ namespace BTTP
                             return; // TODO Erreur dédiée 
 
                         Journal::ecrire(BTTP_SERVEUR_COMPOSANT_SESSIONS_SESSION, "Client ajouté !");
+
                     }
                     else if (champs == BTTP_DEMANDE_AUTH)
                     {

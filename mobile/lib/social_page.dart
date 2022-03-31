@@ -8,6 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'login_page.dart';
 import 'globale_variable.dart';
+import 'register_page.dart';
 
 class SocialPage extends StatelessWidget {
   @override
@@ -15,8 +16,9 @@ class SocialPage extends StatelessWidget {
     SystemChrome.setPreferredOrientations(
         [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
     return Scaffold(
-      backgroundColor: Color(0xFF000010),
-      appBar: AppBar(
+      backgroundColor: fondLight,
+      /*appBar: AppBar(
+        automaticallyImplyLeading: false,
         elevation: 0,
         backgroundColor: screen.withOpacity(0),
         leading: IconButton(
@@ -29,50 +31,118 @@ class SocialPage extends StatelessWidget {
             Navigator.pop(context);
           },
         ),
-      ),
+      ),*/
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            DelayedAnimation(
-              delay: 500,
-              child: Container(
-                height: 280,
-                child: Image.asset('images/LogoRond.png'),
-              ),
-            ),
-            DelayedAnimation(
-              delay: 1000,
-              child: Container(
-                margin: const EdgeInsets.symmetric(
-                  vertical: 40,
-                  horizontal: 30,
-                ),
-                child: Column(
-                  children: [
-                    Text(
-                      "Les scripts de ouf",
-                      style: GoogleFonts.poppins(
-                        color: Color(0xFF00BFFF),
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      "Venez vous inscrire pour la meilleure app du quartier",
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.poppins(
-                        color: Color(0xFF4169E1),
-                        fontSize: 15,
-                      ),
-                    ),
-                  ],
+        child: Container(
+          margin: EdgeInsets.symmetric(
+            vertical: 60,
+            horizontal: 30,
+          ),
+          child: Column(
+            children: [
+              DelayedAnimation(
+                delay: 500,
+                child: Container(
+                  height: 280,
+                  child: Image.asset('images/logo-clair.png'),
                 ),
               ),
-            ),
-            DelayedAnimation(
+              DelayedAnimation(
+                delay: 1000,
+                child: Container(
+                  margin: const EdgeInsets.symmetric(
+                    vertical: 40,
+                    horizontal: 30,
+                  ),
+                  child: Column(
+                    children: [
+                      Text(
+                        "Connectez vous pour commencer",
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.poppins(
+                          color: textColorLight,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => LoginPage(),
+                            ),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          shape: StadiumBorder(),
+                          primary: barLight,
+                          padding: EdgeInsets.all(13),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.logout_outlined,
+                              color: textColorLight,
+                            ),
+                            SizedBox(width: 10),
+                            Text(
+                              "CONNEXION",
+                              style: GoogleFonts.poppins(
+                                color: textColorLight,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => RegisterPage(),
+                            ),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          shape: StadiumBorder(),
+                          primary: barLight,
+                          padding: EdgeInsets.all(13),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.app_registration_outlined,
+                                color: textColorLight),
+                            SizedBox(width: 10),
+                            Text(
+                              "INSCRIPTION",
+                              style: GoogleFonts.poppins(
+                                color: textColorLight,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              /*DelayedAnimation(
               delay: 1500,
               child: Container(
                 margin: EdgeInsets.symmetric(
@@ -180,8 +250,9 @@ class SocialPage extends StatelessWidget {
                   ],
                 ),
               ),
-            ),
-          ],
+            ),*/
+            ],
+          ),
         ),
       ),
     );

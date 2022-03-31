@@ -4,7 +4,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-bool isDarkMode = true;
+bool isDarkMode = false;
 bool getIsDarkMode() {
   return isDarkMode;
 }
@@ -12,6 +12,13 @@ bool getIsDarkMode() {
 void setIsDarkMode() {
   isDarkMode = !isDarkMode;
 }
+
+var fondLight = const Color(0xFF00A8E8);
+var textColorLight = const Color(0xFF003459);
+var barLight = const Color(0xFFFFFFFF);
+var fondDark = const Color(0xFF1d1d1d);
+var barDark = const Color(0xFF3a3d4b);
+var textColorDark = const Color(0xFF23ebd1);
 
 var DarkGreen = Color(0xFF0cd146);
 var DarkScreen = Color(0xFF070225);

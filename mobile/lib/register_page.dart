@@ -8,7 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'home_page.dart';
 import 'globale_variable.dart';
 
-class LoginPage extends StatelessWidget {
+class RegisterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations(
@@ -34,7 +34,7 @@ class LoginPage extends StatelessWidget {
                     DelayedAnimation(
                       delay: 500,
                       child: Text(
-                        "Connectez-vous",
+                        "Inscrivez-vous",
                         style: GoogleFonts.poppins(
                           color: textColorLight,
                           fontSize: 25,
@@ -43,6 +43,17 @@ class LoginPage extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 22),
+                    DelayedAnimation(
+                      delay: 1000,
+                      child: Text(
+                        "Ne partagez jamais ces informations.",
+                        style: GoogleFonts.poppins(
+                          color: Colors.grey[500],
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -54,7 +65,7 @@ class LoginPage extends StatelessWidget {
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     shape: StadiumBorder(),
-                    primary: barLight,
+                    primary: bars,
                     padding: EdgeInsets.symmetric(
                       horizontal: 125,
                       vertical: 13,

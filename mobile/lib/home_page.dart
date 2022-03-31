@@ -1,7 +1,9 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, use_key_in_widget_constructors, prefer_const_constructors_in_immutables, unnecessary_this, prefer_final_fields, unnecessary_new
 
 import 'package:adaptive_theme/adaptive_theme.dart';
-
+import 'dart:async';
+import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'main.dart';
 import 'package:flutter/material.dart';
 import 'delayed_animation.dart';
@@ -11,6 +13,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'globale_variable.dart';
 import 'settings_page.dart';
 import 'theme_color.dart';
+import 'package:image_picker/image_picker.dart';
 
 ThemeColor lightMode = ThemeColor(
   fond: const Color(0xFF00A8E8),
@@ -557,8 +560,8 @@ class MarketScriptCard extends StatelessWidget {
 }
 
 class MarketCard extends StatelessWidget {
-  final Map MarketscriptData;
-  MarketCard(this.MarketscriptData);
+  final Map marketscriptData;
+  MarketCard(this.marketscriptData);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -586,7 +589,7 @@ class MarketCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  MarketscriptData['title'],
+                  marketscriptData['title'],
                   style: GoogleFonts.nunito(
                     color: isDarkMode ? darkMode.button : lightMode.textColor,
                     fontSize: 22,
@@ -598,7 +601,7 @@ class MarketCard extends StatelessWidget {
                     showDialog(
                       context: context,
                       builder: (BuildContext context) => _buildPopupDialogInfo(
-                          context, MarketscriptData['description']),
+                          context, marketscriptData['description']),
                     );
                   },
                   icon: Icon(
@@ -612,7 +615,7 @@ class MarketCard extends StatelessWidget {
                     showDialog(
                       context: context,
                       builder: (BuildContext context) => _buildPopupDialogInfo(
-                          context, MarketscriptData['description']),
+                          context, marketscriptData['description']),
                     );
                   },
                   icon: Icon(
@@ -664,7 +667,7 @@ class MyProfile extends StatelessWidget {
           },
           child: ListView(
             children: [
-              Text(
+              /*Text(
                 "Edit Profile",
                 style: TextStyle(
                   fontSize: 25,
@@ -674,7 +677,7 @@ class MyProfile extends StatelessWidget {
               ),
               SizedBox(
                 height: 15,
-              ),
+              ),*/
               Center(
                 child: Stack(
                   children: [
@@ -683,8 +686,11 @@ class MyProfile extends StatelessWidget {
                       height: 130,
                       decoration: BoxDecoration(
                           border: Border.all(
-                              width: 4,
-                              color: Theme.of(context).scaffoldBackgroundColor),
+                            width: 4,
+                            color: isDarkMode
+                                ? darkMode.button
+                                : lightMode.textColor,
+                          ),
                           boxShadow: [
                             BoxShadow(
                                 spreadRadius: 2,
@@ -696,7 +702,8 @@ class MyProfile extends StatelessWidget {
                           image: DecorationImage(
                               fit: BoxFit.cover,
                               image: NetworkImage(
-                                "https://yt3.ggpht.com/ytc/AKedOLS-uPKnNFdAC-foMxhkDZjWDleDIJptDrXg_hLYfA=s88-c-k-c0x00ffffff-no-rj",
+                                "https://i.pinimg.com/736x/0f/8b/28/0f8b2870896edcde8f6149fe2733faaf--logo-programmer-coder.jpg",
+                                //"https://yt3.ggpht.com/ytc/AKedOLS-uPKnNFdAC-foMxhkDZjWDleDIJptDrXg_hLYfA=s88-c-k-c0x00ffffff-no-rj",
                               ))),
                     ),
                     Positioned(
@@ -709,7 +716,7 @@ class MyProfile extends StatelessWidget {
                             shape: BoxShape.circle,
                             border: Border.all(
                               width: 4,
-                              color: Theme.of(context).scaffoldBackgroundColor,
+                              color: Colors.white,
                             ),
                             color: isDarkMode
                                 ? darkMode.button
@@ -732,36 +739,90 @@ class MyProfile extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  OutlineButton(
-                    padding: EdgeInsets.symmetric(horizontal: 50),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)),
-                    onPressed: () {},
-                    child: Text("CANCEL",
-                        style: TextStyle(
-                          fontSize: 14,
-                          letterSpacing: 2.2,
-                          color:
-                              isDarkMode ? lightMode.bar : lightMode.textColor,
-                        )),
-                  ),
-                  RaisedButton(
-                    onPressed: () {},
-                    color: Colors.green,
-                    padding: EdgeInsets.symmetric(horizontal: 50),
-                    elevation: 2,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)),
-                    child: Text(
-                      "SAVE",
+                  Text("Pseudo :",
                       style: TextStyle(
-                          fontSize: 14,
-                          letterSpacing: 2.2,
-                          color: Colors.white),
-                    ),
-                  )
+                        fontSize: 18,
+                        letterSpacing: 2.2,
+                        color:
+                            isDarkMode ? darkMode.button : lightMode.textColor,
+                      )),
+                  Text("Likir09",
+                      style: TextStyle(
+                        fontSize: 16,
+                        letterSpacing: 2.2,
+                        color:
+                            isDarkMode ? darkMode.button : lightMode.textColor,
+                      )),
                 ],
-              )
+              ),
+              SizedBox(
+                height: 35,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("Clé PGP:",
+                      style: TextStyle(
+                        fontSize: 18,
+                        letterSpacing: 2.2,
+                        color:
+                            isDarkMode ? darkMode.button : lightMode.textColor,
+                      )),
+                  Text("UIBILKHBUAUK9841A8465AAEHJQ",
+                      style: TextStyle(
+                        fontSize: 10,
+                        letterSpacing: 2.2,
+                        color:
+                            isDarkMode ? darkMode.button : lightMode.textColor,
+                      )),
+                ],
+              ),
+              SizedBox(
+                height: 35,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("Changer le mot de passe :",
+                      style: TextStyle(
+                        fontSize: 18,
+                        letterSpacing: 2.2,
+                        color:
+                            isDarkMode ? darkMode.button : lightMode.textColor,
+                      )),
+                  IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.lock,
+                        color:
+                            isDarkMode ? darkMode.button : lightMode.textColor,
+                        size: 30,
+                      )),
+                ],
+              ),
+              SizedBox(
+                height: 35,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("Déconnexion :",
+                      style: TextStyle(
+                        fontSize: 18,
+                        letterSpacing: 2.2,
+                        color:
+                            isDarkMode ? darkMode.button : lightMode.textColor,
+                      )),
+                  IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.logout_outlined,
+                        color:
+                            isDarkMode ? darkMode.button : lightMode.textColor,
+                        size: 30,
+                      )),
+                ],
+              ),
             ],
           ),
         ),

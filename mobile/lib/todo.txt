@@ -11,3 +11,7 @@ PAGE TERMINAUX
 theme OKK
 connection/inscription
     ptite base user
+
+prevent user go back from home_page
+add terminals
+finir register

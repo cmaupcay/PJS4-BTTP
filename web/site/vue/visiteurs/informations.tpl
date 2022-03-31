@@ -20,17 +20,24 @@
 <div class="container-fluid banner">
 		<div class="row">
 			<div class="col-md-12">
-            <nav class="navbar navbar-md">
-					<a class="navbar-brand" href="?controle=visiteurs&action=accueil"> BTTP </a>
-					<ul class="nav">
+			<nav class="navbar navbar-md">
+				
+				<ul class="nav">
+						<li class="nav-item" style="padding-left:10%; padding-top:0%">
+						<a class="navbar-brand" href="?controle=visiteurs&action=accueil"><img alt="Brand" src="./vue/logo.png" style="width:140px"></a>
+						</li>
+				</ul>
+				
+
+					<ul class="nav" style="padding-right:0%; padding-top:0%">
 						<li class="nav-item">
-							<a class="nav-link" href="?controle=visiteurs&action=produits"> Produits </a>
+							<a class="nav-link" href="?controle=visiteurs&action=produits">Produits</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="?controle=visiteurs&action=marketplace"> Marketplace </a>
-						</li> 
+							<a class="nav-link" href="?controle=visiteurs&action=marketplace">Marketplace</a>
+						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="?controle=visiteurs&action=informations"> Informations </a>
+							<a class="nav-link" href="?controle=visiteurs&action=informations">Informations</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="?controle=visiteurs&action=connexion">Connexion</a>
@@ -38,8 +45,9 @@
 						<li class="nav-item">
 							<a class="nav-link" href="?controle=visiteurs&action=inscription">Inscription</a>
 						</li>
+											
 					</ul>
-			</nav>
+				</nav>
 			</div>
         </div>
 

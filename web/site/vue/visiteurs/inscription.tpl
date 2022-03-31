@@ -22,7 +22,7 @@
 <body>
 
 <div class="container-fluid banner" style="background-color:#003459">
-    <div><a href="?controle=visiteurs&action=accueil" class="nav-link text-uppercase font-weight-bold" style="color:#f7f7f7"> BTTP </a></div>
+    <div><a href="?controle=visiteurs&action=accueil" class="nav-link text-uppercase font-weight-bold"><img alt="Brand" src="./vue/logo.png" style="width:140px"></a></div>
 
     <div class="login-form">
         <br><br>

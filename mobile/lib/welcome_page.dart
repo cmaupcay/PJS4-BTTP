@@ -1,5 +1,7 @@
 // ignore_for_file: file_names, prefer_const_constructors, sized_box_for_whitespace
 
+import 'package:bttp/home_page.dart';
+
 import 'main.dart';
 import 'package:flutter/material.dart';
 import 'delayed_animation.dart';
@@ -14,7 +16,7 @@ class WelcomePage extends StatelessWidget {
     SystemChrome.setPreferredOrientations(
         [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
     return Scaffold(
-      backgroundColor: Color(0xFF000010),
+      backgroundColor: fondLight,
       body: SingleChildScrollView(
         child: Container(
           margin: EdgeInsets.symmetric(
@@ -24,17 +26,12 @@ class WelcomePage extends StatelessWidget {
           child: Column(
             children: [
               DelayedAnimation(
-                delay: 500,
-                child: Container(
-                  height: 170,
-                  child: Image.asset('images/logo.jpg'),
-                ),
-              ),
-              DelayedAnimation(
                 delay: 1000,
                 child: Container(
+                  padding: EdgeInsets.all(13),
+                  color: fondLight,
                   height: 400,
-                  child: Image.asset('images/LogoRond.png'),
+                  child: Image.asset('images/logo-clair.png'),
                 ),
               ),
               DelayedAnimation(
@@ -48,7 +45,7 @@ class WelcomePage extends StatelessWidget {
                     "Découvrez la meilleure Application de gestion de script: BTTP",
                     textAlign: TextAlign.center,
                     style: GoogleFonts.poppins(
-                      color: Colors.grey[500],
+                      color: textColorLight,
                       fontSize: 16,
                     ),
                   ),
@@ -60,11 +57,16 @@ class WelcomePage extends StatelessWidget {
                   width: double.infinity,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: bars,
+                      primary: barLight,
                       shape: StadiumBorder(),
                       padding: EdgeInsets.all(13),
                     ),
-                    child: Text('COMMENCER'),
+                    child: Text(
+                      'COMMENCER',
+                      style: TextStyle(
+                        color: textColorLight,
+                      ),
+                    ),
                     onPressed: () {
                       Navigator.push(
                         context,

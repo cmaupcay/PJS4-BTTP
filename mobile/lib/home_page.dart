@@ -560,8 +560,8 @@ class MarketScriptCard extends StatelessWidget {
 }
 
 class MarketCard extends StatelessWidget {
-  final Map MarketscriptData;
-  MarketCard(this.MarketscriptData);
+  final Map marketscriptData;
+  MarketCard(this.marketscriptData);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -589,7 +589,7 @@ class MarketCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  MarketscriptData['title'],
+                  marketscriptData['title'],
                   style: GoogleFonts.nunito(
                     color: isDarkMode ? darkMode.button : lightMode.textColor,
                     fontSize: 22,
@@ -601,7 +601,7 @@ class MarketCard extends StatelessWidget {
                     showDialog(
                       context: context,
                       builder: (BuildContext context) => _buildPopupDialogInfo(
-                          context, MarketscriptData['description']),
+                          context, marketscriptData['description']),
                     );
                   },
                   icon: Icon(
@@ -615,7 +615,7 @@ class MarketCard extends StatelessWidget {
                     showDialog(
                       context: context,
                       builder: (BuildContext context) => _buildPopupDialogInfo(
-                          context, MarketscriptData['description']),
+                          context, marketscriptData['description']),
                     );
                   },
                   icon: Icon(
@@ -686,8 +686,11 @@ class MyProfile extends StatelessWidget {
                       height: 130,
                       decoration: BoxDecoration(
                           border: Border.all(
-                              width: 4,
-                              color: Theme.of(context).scaffoldBackgroundColor),
+                            width: 4,
+                            color: isDarkMode
+                                ? darkMode.button
+                                : lightMode.textColor,
+                          ),
                           boxShadow: [
                             BoxShadow(
                                 spreadRadius: 2,
@@ -699,7 +702,7 @@ class MyProfile extends StatelessWidget {
                           image: DecorationImage(
                               fit: BoxFit.cover,
                               image: NetworkImage(
-                                "https://upload.wikimedia.org/wikipedia/commons/a/a6/Anonymous_emblem.svg",
+                                "https://i.pinimg.com/736x/0f/8b/28/0f8b2870896edcde8f6149fe2733faaf--logo-programmer-coder.jpg",
                                 //"https://yt3.ggpht.com/ytc/AKedOLS-uPKnNFdAC-foMxhkDZjWDleDIJptDrXg_hLYfA=s88-c-k-c0x00ffffff-no-rj",
                               ))),
                     ),
@@ -740,18 +743,20 @@ class MyProfile extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 18,
                         letterSpacing: 2.2,
-                        color: isDarkMode ? lightMode.bar : lightMode.bar,
+                        color:
+                            isDarkMode ? darkMode.button : lightMode.textColor,
                       )),
                   Text("Likir09",
                       style: TextStyle(
                         fontSize: 16,
                         letterSpacing: 2.2,
-                        color: isDarkMode ? lightMode.bar : lightMode.bar,
+                        color:
+                            isDarkMode ? darkMode.button : lightMode.textColor,
                       )),
                 ],
               ),
-              Container(
-                height: 20,
+              SizedBox(
+                height: 35,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -760,43 +765,53 @@ class MyProfile extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 18,
                         letterSpacing: 2.2,
-                        color: isDarkMode ? lightMode.bar : lightMode.bar,
+                        color:
+                            isDarkMode ? darkMode.button : lightMode.textColor,
                       )),
                   Text("UIBILKHBUAUK9841A8465AAEHJQ",
                       style: TextStyle(
                         fontSize: 10,
                         letterSpacing: 2.2,
-                        color: isDarkMode ? lightMode.bar : lightMode.bar,
+                        color:
+                            isDarkMode ? darkMode.button : lightMode.textColor,
                       )),
                 ],
               ),
-              Container(
-                height: 20,
-              ),
-              RaisedButton(
-                onPressed: () {},
-                color: isDarkMode ? darkMode.bar : lightMode.textColor,
-                padding: EdgeInsets.symmetric(horizontal: 50),
-                elevation: 2,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)),
-                child: Text(
-                  "Changer mot de passe",
-                  style: TextStyle(
-                    fontSize: 14,
-                    letterSpacing: 2.2,
-                    color: isDarkMode ? darkMode.button : lightMode.bar,
-                  ),
-                ),
+              SizedBox(
+                height: 35,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Déconection :",
+                  Text("Changer le mot de passe :",
                       style: TextStyle(
                         fontSize: 18,
                         letterSpacing: 2.2,
-                        color: isDarkMode ? lightMode.bar : lightMode.bar,
+                        color:
+                            isDarkMode ? darkMode.button : lightMode.textColor,
+                      )),
+                  IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.lock,
+                        color:
+                            isDarkMode ? darkMode.button : lightMode.textColor,
+                        size: 30,
+                      )),
+                ],
+              ),
+              SizedBox(
+                height: 35,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("Déconnexion :",
+                      style: TextStyle(
+                        fontSize: 18,
+                        letterSpacing: 2.2,
+                        color:
+                            isDarkMode ? darkMode.button : lightMode.textColor,
                       )),
                   IconButton(
                       onPressed: () {},
@@ -808,39 +823,6 @@ class MyProfile extends StatelessWidget {
                       )),
                 ],
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  OutlineButton(
-                    color: isDarkMode ? lightMode.bar : lightMode.textColor,
-                    padding: EdgeInsets.symmetric(horizontal: 50),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)),
-                    onPressed: () {},
-                    child: Text("CANCEL",
-                        style: TextStyle(
-                          fontSize: 14,
-                          letterSpacing: 2.2,
-                          color: isDarkMode ? lightMode.bar : lightMode.bar,
-                        )),
-                  ),
-                  RaisedButton(
-                    onPressed: () {},
-                    color: Colors.green,
-                    padding: EdgeInsets.symmetric(horizontal: 50),
-                    elevation: 2,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)),
-                    child: Text(
-                      "SAVE",
-                      style: TextStyle(
-                          fontSize: 14,
-                          letterSpacing: 2.2,
-                          color: Colors.white),
-                    ),
-                  )
-                ],
-              )
             ],
           ),
         ),

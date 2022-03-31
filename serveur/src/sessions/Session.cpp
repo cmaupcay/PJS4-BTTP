@@ -33,25 +33,7 @@ namespace BTTP
                 Journal::ecrire(BTTP_SERVEUR_COMPOSANT_SESSIONS_SESSION, empreinte);
 
                 //TODO verification empreinte dans la table
-
-                Serveur::Data::Source source {this->contexte};
-
-                std::vector<Serveur::Data::Argument> where;
-                std::vector<Serveur::Data::Argument> select;
-
-                Serveur::Data::Argument arg;
-
-                arg.nom = "*";
-
-                select.push_back(arg);
-
-                const std::string test = source.selectionner("format_script", select, where);
-
-                Journal::ecrire(BTTP_SERVEUR_COMPOSANT_SESSIONS_SESSION, test);
-
-                
-                
-
+        
 
                 // TODO Verification de l'empreinte dans la table.
                 // TODO Si existante, authentification réussie (en cas de fraude, l'attaquant ne pourra pas déchiffrer les messages à moins de posséder la clé privéé).

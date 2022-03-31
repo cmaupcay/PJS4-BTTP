@@ -19,7 +19,7 @@ namespace BTTP
     {
         namespace Data
         {
-            enum Type { TEXTE, NOMBRE };
+            enum class Type { TEXTE, NOMBRE };
 
             struct Argument
             {
@@ -44,9 +44,18 @@ namespace BTTP
                  * @param table table concernée
                  * @param selection éléments à sélectionner
                  * @param conditions conditions de recherche
-                 * @return //TODO à définir
+                 * @return renvoie un vecteur de vecteurs d'arguments (chaque vecteur d'arguments représentant une entrée)
                  */
-                std::string selectionner(std::string table, std::vector<Argument> selection, std::vector<Argument> conditions);
+                const std::vector<std::vector<Argument>> selectionner(const std::string table, const std::vector<Argument>& selection, const std::vector<Argument>& conditions);
+                
+                /**
+                 * @brief Insérer des informations dans la base
+                 * 
+                 * @param table table concernée
+                 * @param selection éléments à insérer
+                 */
+                void inserer(const std::string table, const std::vector<Argument>& selection);
+
                  
             };
         }

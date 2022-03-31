@@ -45,6 +45,7 @@ namespace BTTP
                 const std::unique_ptr<Client::Contexte>& contexte;
                 inline std::unique_ptr<Data::Terminal::Client>& terminal() { return this->_terminal; }
                 inline std::shared_ptr<Client::Connexion>& connexion() { return this->_connexion; }
+                inline std::unique_ptr<Data::Source>& source() { return this->_source; }
                 virtual void lancer() = 0;
 
                 inline void definir_type(const Type type) { this->_type = type; }

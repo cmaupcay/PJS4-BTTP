@@ -15,7 +15,7 @@ if(NOT DEFINED BTTP_IDENTITE_COMMENTAIRE)
     set(BTTP_IDENTITE_COMMENTAIRE "BTTP version ${BTTP_VERSION} via calccrypto/OpenPGP") # Commentaire associé aux clés généré via BTTP
 endif()
 if(NOT DEFINED BTTP_ARMOR)
-    set(BTTP_ARMOR false) # Défini si les identités doivent utiliser le mode structuré (armored)
+    set(BTTP_ARMOR true) # Défini si les identités doivent utiliser le mode structuré (armored)
 endif()
 ## Message
 if(NOT DEFINED BTTP_MESSAGE_SEP)

@@ -63,7 +63,7 @@ namespace BTTP
             {
                 std::ifstream flux = lecture(fichier, dossier, binaire, contexte);
                 std::string contenu = "", ligne = "";
-                while (std::getline(flux, ligne)) contenu += ligne;
+                while (std::getline(flux, ligne)) contenu += ligne += "\n";
                 flux.close();
                 return contenu;
             }

@@ -53,14 +53,21 @@ namespace BTTP
                         Journal::ecrire(BTTP_SERVEUR_COMPOSANT_SESSIONS_SESSION, "Partage de la clé publique au client...");
                         const Client::Serveurs::Messages::ReponseClePublique reponse{ this->contexte->identite()->cle_publique() };
                         this->connexion()->envoyer(reponse.construire());
-                        const Protocole::Identite::MessageNonVerifie confirmation{ 
+                        const Protocole::Identite::MessageNonVerifie retour { 
                             this->connexion()->recevoir(), *this->contexte->identite().get(), mdp
                         };
-                        if (confirmation.clair()[0] == static_cast<char>(Protocole::Messages::Type::ERREUR))
+                        if (retour.clair()[0] == static_cast<char>(Protocole::Messages::Type::ERREUR))
                         {
-                            const Protocole::Messages::Erreur erreur{ confirmation.clair() };
+                            const Protocole::Messages::Erreur erreur{ retour.clair() };
                             throw BTTP::Erreur(erreur.nom(), erreur.message(), erreur.code());
                         }
+
+                        const Protocole::Cle::Publique cle_client = Client::Serveurs::Messages::ReponseClePublique(retour.clair()).cle();
+
+                        if(!retour.verifier(cle_client))
+                            return; // TODO Erreur dédiée 
+
+                        Journal::ecrire(BTTP_SERVEUR_COMPOSANT_SESSIONS_SESSION, "Client ajouté !");
                     }
                     else if (champs == BTTP_DEMANDE_AUTH)
                     {

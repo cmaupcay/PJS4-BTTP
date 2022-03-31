@@ -24,10 +24,13 @@ namespace BTTP
                 // Récéption de la clé publique du serveur (en clair).
                 const Protocole::Cle::Publique cle_serveur = Messages::ReponseClePublique(serveur.connexion().recevoir()).cle();
                 // Envoi d'une confirmation.
-                const Protocole::Messages::Pret reponse;
-                serveur.connexion().envoyer(
-                    identite.chiffrer(reponse.construire(), cle_serveur, mdp)
-                );
+                const Client::Serveurs::Messages::ReponseClePublique reponse { identite.cle_publique() };
+                try 
+                {
+                    const std::string message = identite.chiffrer(reponse.construire(), cle_serveur, mdp); 
+                    serveur.connexion().envoyer(message);
+                }
+                catch (BTTP::Protocole::Erreur::Identite::Chiffrement& e) {}
                 // Enregistrement local des informations du serveur.
                 serveur.modifier_cle(&cle_serveur);
                 Fichiers::ecrire(serveur.serialiser(), serveur.nom(), dossier, false, true, contexte, creer_chemin);

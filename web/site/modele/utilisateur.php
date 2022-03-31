@@ -48,18 +48,20 @@ function getAppareils()
 }
 
 //TODO : changer le mot de passe d'un utilisateur
-function setMdp($pseudo, $mdp)
+function setMdp($mdpActuel, $mdp)
 {
     $RACINE = ".";
     require $RACINE . '/modele/connectBD.php';
 
-    $sql = "UPDATE `utilisateur` SET mdp =:mdp WHERE pseudo=:pseudo";
+    $sql = "UPDATE `utilisateur` SET mdp=:mdp WHERE pseudo=:pseudo AND mdp=:mdpActuel";
     $mdp = hash('sha256', $mdp);
+    $mdpActuel = hash('sha256', $mdpActuel);
 
     try {
         $commande = $pdo->prepare($sql);
         $commande->bindParam(":mdp", $mdp);
-        $commande->bindParam(":pseudo", $pseudo);
+        $commande->bindParam(":mdpActuel", $mdpActuel);
+        $commande->bindParam(":pseudo", $_SESSION["pseudo"]);
         $bool = $commande->execute();
 
         if ($bool)

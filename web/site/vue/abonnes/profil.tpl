@@ -54,8 +54,26 @@
 
                 <p> Consulter la page <a href="?controle=abonnes&action=appareils"; style="color:#00A8E8"> Appareils </a> pour gérer vos terminaux </p>
                 <p> Vous voulez changer de mot de passe ? </p>
-                <input type="text" class="form-control" placeholder="Votre mdp actuel" aria-label="Votre mdp actuel" aria-describedby="basic-addon2" style="border-radius:10px; width:30%">
-                <br>
-                <input type="text" class="form-control" placeholder="Votre nouveau mdp" aria-label="Votre nouveau mdp" aria-describedby="basic-addon2" style="border-radius:10px; width:30%">
-                <br>
-                <button class="btn btn-outline-secondary" type="button" style="background-color:#00A8E8; color:aliceblue; width:10em"> Modifier </button>
+				form
+
+				<form action="?controle=visiteurs&action=changeMdp" method="post" aria-describedby="basic-addon2" style="border-radius:10px; width:30%">
+
+					<div class="form-group">
+						<p><input name="baseMdp" type="text" class="form-control" placeholder="Mot de passe actuel" autocomplete="off"
+								required><br /></p>
+					</div>
+	
+					<div class="form-group">
+						<p><input name="mdpToChange" type="text" class="form-control" placeholder="Nouveau mot de passe" autocomplete="off"
+								required><br /></p>
+					</div>
+	
+					<div class="form-group">
+						<input type="submit" value="Changer mot de passe" class="btn btn-primary btn-block" style="background-color:#00A8E8">
+					</div>
+	
+				</form>
+			</div>
+		</div>
+	</div>
+</body>

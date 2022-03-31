@@ -73,7 +73,7 @@ if (isset($_GET['controle']) && isset($_GET['action'])) {
         mdpOublie();
     } elseif ($controle == "visiteurs" && $action == "changeMdp") {
         require('controleur/utilisateurs/abonnes.php');
-        changeMdp($_POST["pseudoToRescue"], $_POST["mdpToChange"]);
+        changeMdp($_POST["baseMdp"], $_POST["mdpToChange"]);
     }
     //abonnés
     elseif ($controle == "abonnes" && $action == "accueil" && $identifie) { //on rajoute l'identification pour acceder à la page abonné

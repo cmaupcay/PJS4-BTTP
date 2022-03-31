@@ -13,39 +13,36 @@ function inscription()
 {
     require_once('./modele/inscription.php');
 
-    $pseudo = isset($_POST['pseudo']) ? ($_POST['pseudo']) : '';
-    $mdp = isset($_POST['mdp']) ? ($_POST['mdp']) : '';
-    $mdp2 = isset($_POST['mdp2']) ? ($_POST['mdp2']) : '';
-
-
     $msg = "";
 
     if (count($_POST) < 3) {
         require('./vue/visiteurs/inscription.tpl');
     } else {
+        $pseudo = $_POST['pseudoInscription'];
+        $mdp = $_POST['mdpInscription'];
+        $mdp2 = $_POST['mdp2Inscription'];
         if (verif_inscription($pseudo)) {
 
             $msg = "compte déjà existant";
-
-            echo $msg;
-
             require('./vue/visiteurs/inscription.tpl');
+            echo $msg;
         } else if ($mdp != $mdp2) {
 
             $msg = "Resaisissez votre mot de passe";
 
-            echo $msg;
+            
 
             require('./vue/visiteurs/inscription.tpl');
+            echo $msg;
         } else {
 
             insertion_bd($pseudo, $mdp);
 
             require_once('./modele/connexion.php');
 
-            verif_utilisateur($pseudo, $mdp, $resultat);
+            verif_utilisateur($pseudo, $mdp);
 
-            $_SESSION['profil'] = $resultat[0];
+            //$_SESSION['profil'] = $resultat[0];
 
             //require('./controle/connexion.php');
 

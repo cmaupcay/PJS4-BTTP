@@ -15,3 +15,5 @@ connection/inscription
 prevent user go back from home_page OK 
 add terminals
 finir register
+
+CHANGER POLICE BOOTSTRAP raleway OKK

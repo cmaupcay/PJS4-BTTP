@@ -33,6 +33,7 @@ CREATE TABLE bttp.terminal (
     derniere_connexion DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, /* Date et heure de la dernière connexion avec le terminal */
     favori BOOLEAN NOT NULL DEFAULT 0, /* Indique si l'utilisateur a ajouté le terminal à ses favoris */
     meta VARCHAR(512) NOT NULL, /* Meta données du terminal au format JSON */
+    distant BOOLEAN NOT NULL DEFAULT 0;
     PRIMARY KEY(id),
     UNIQUE(cle_publique),
     FOREIGN KEY(id_proprietaire) REFERENCES bttp.utilisateur(id) ON DELETE CASCADE

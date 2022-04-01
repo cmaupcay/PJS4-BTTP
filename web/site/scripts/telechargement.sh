@@ -2,7 +2,7 @@
 
 if [ -z ${1} ]
 then
-	echo "Veuillez préciser une URL"
+	echo "Veuillez préciser une URL."
 	exit -1
 fi
 

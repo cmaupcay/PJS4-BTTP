@@ -7,7 +7,7 @@
  */
 function verif_inscription($pseudo)
 {
-    $RACINE = "C:\wamp64\www\PJS4\web\site";
+    $RACINE = ".";
     require $RACINE . '/modele/connectBD.php';
 
     $sql = "SELECT id FROM `utilisateur` WHERE pseudo=:pseudo";

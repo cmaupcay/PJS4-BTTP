@@ -73,7 +73,7 @@ if (isset($_GET['controle']) && isset($_GET['action'])) {
         mdpOublie();
     } elseif ($controle == "visiteurs" && $action == "changeMdp") {
         require('controleur/utilisateurs/abonnes.php');
-        changeMdp($_POST["pseudoToRescue"], $_POST["mdpToChange"]);
+        changeMdp($_POST["baseMdp"], $_POST["mdpToChange"]);
     }
     //abonnés
     elseif ($controle == "abonnes" && $action == "accueil" && $identifie) { //on rajoute l'identification pour acceder à la page abonné
@@ -94,14 +94,14 @@ if (isset($_GET['controle']) && isset($_GET['action'])) {
     } elseif ($controle == "abonnes" && $action == "informations" && $identifie) {
         require('controleur/utilisateurs/abonnes.php');
         informations();
-    }  else {
+    } elseif($controle=="marketplace.api" && $action == "marketplace_json") {
+        require('controleur/api/marketplace.api.php');
+        marketplace_json();
+    } else {
         require('erreur404.tpl');
         $erreur = false;
     }
-    elseif($controle=="marketplace.api" && $action == "marketplace_json") {
-        require('controleur/api/marketplace.api.php');
-        marketplace_json();
-    }
+
 } else {
     $controle = 'visiteurs';
     $action = 'accueil';

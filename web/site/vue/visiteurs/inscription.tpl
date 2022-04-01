@@ -22,24 +22,25 @@
 <body>
 
 <div class="container-fluid banner" style="background-color:#003459">
-    <div><a href="?controle=visiteurs&action=accueil" class="nav-link text-uppercase font-weight-bold" style="color:#f7f7f7"> BTTP </a></div>
+    <div><a href="?controle=visiteurs&action=accueil" class="nav-link text-uppercase font-weight-bold"><img alt="Brand" src="./vue/logo.png" style="width:140px"></a></div>
 
     <div class="login-form">
         <br><br>
+
         <form action="?controle=visiteurs&action=inscription" method="POST">
             <h2 class="text-center" style="color:#00171F"> Inscription </h2>
 
             <div class="form-group">
-                <p><input name="pseudo" type="text" placeholder="Pseudo" class="form-control" autocomplete="off"
+                <p><input name="pseudoInscription" type="text" placeholder="Pseudo" class="form-control" autocomplete="off"
                         required></p>
             </div>
 
             <div class="form-group">
-                <p><input name="mdp" type="password" placeholder="Mot de passe" class="form-control" autocomplete="off" required>
+                <p><input name="mdpInscription" type="password" placeholder="Mot de passe" class="form-control" autocomplete="off" required>
                 </p>
             </div>
             <div class="form-group">
-                <p><input name="mdp2" type="password" placeholder="Retapez votre mot de passe" class="form-control" autocomplete="off" required>
+                <p><input name="mdp2Inscription" type="password" placeholder="Retapez votre mot de passe" class="form-control" autocomplete="off" required>
                 </p>
             </div>
             

@@ -1,5 +1,6 @@
 #include "../../include/serveurs/Serveur.h"
 
+
 namespace BTTP
 {
     namespace Client
@@ -38,11 +39,6 @@ namespace BTTP
             {
                 // Si la clé du serveur est inconnue ou que l'appareil est déjà authentifié, on arrête là.
                 if (this->_cle == nullptr || this->_auth) return false;
-                // Envoi de la demande d'authentification.
-                Client::Serveurs::Messages::DemandeAuthentification demande_auth;
-                this->_connexion->envoyer(
-                    identite.chiffrer(demande_auth.construire(), *this->_cle, mdp)
-                );
                 // Réception de la demande du nom d'utilisateur.
                 Protocole::Messages::Demande demande{ 
                     identite.dechiffrer(this->_connexion->recevoir(), *this->_cle, mdp)
@@ -90,17 +86,18 @@ namespace BTTP
             {
                 // Si la clé du serveur est inconnue ou que l'appareil est déjà authentifié, on arrête là.
                 if (this->_cle == nullptr || this->_auth) return false;
+                // Envoi de la demande d'authentification.
+                Client::Serveurs::Messages::DemandeAuthentification demande_auth;
+                this->_connexion->envoyer(
+                    identite.chiffrer(demande_auth.construire(), *this->_cle, mdp)
+                );
                 // Réception de la demande de l'empreinte de la clé publique locale.
-                const Protocole::Messages::Demande demande{
-                    identite.chiffrer(this->_connexion->recevoir(), *this->_cle, mdp)
-                };
+                const Protocole::Messages::Demande demande {this->connexion().recevoir()};
                 if (demande.champs() == BTTP_DEMANDE_EMPREINTE_CLE)
                 {
                     // Envoi de la réponse contenant l'empreinte de la clé.
                     const Messages::ReponseEmpreinteCle reponse{ identite.cle_publique() };
-                    this->_connexion->envoyer(
-                        identite.chiffrer(reponse.construire(), *this->_cle, mdp)
-                    );
+                    this->_connexion->envoyer(identite.chiffrer(reponse.construire(), *this->_cle, mdp));
                     // Réception de la confirmation.
                     const std::string confirmation = identite.dechiffrer(
                         this->_connexion->recevoir(), *this->_cle, mdp

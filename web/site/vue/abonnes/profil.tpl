@@ -13,23 +13,19 @@
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
 	<link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="./style.css">
-    <style>
-		.banner {
-			background: #003459;
-			background-position: top;
-			background-size:cover;
-		}
-	</style>
-
   </head>
 
-<body>
+<body style="background-color:#003459">
 	<div class="container-fluid banner">
 		<div class="row">
 			<div class="col-md-12">
 				<nav class="navbar navbar-md">
-					<a class="navbar-brand" href="?controle=abonnes&action=accueil"> BTTP </a>
 					<ul class="nav">
+						<li class="nav-item" style="padding-left:10%; padding-top:0%">
+							<a class="navbar-brand" href="?controle=abonnes&action=accueil"><img alt="Brand" src="./vue/logo.png" style="width:140px"></a>
+						</li>
+					</ul>
+					<ul class="nav" style="padding-right:0%; padding-top:0%">
 						<li class="nav-item">
 							<a class="nav-link" href="?controle=abonnes&action=profil">Profil</a>
 						</li>
@@ -54,12 +50,30 @@
 
         <div class="row" style="padding-top:3%">
             <div class="col-md-12" style="padding-left:10%; padding-right: 10%; margin-left:auto; margin-right:bottom">
-                <p> Pseudo : <?php echo $_SESSION['pseudo']?> </p> <!-- TODO: afficher le nom de la personne connectée -->
+                <p> Pseudo : <?php echo $_SESSION['pseudo']?> </p> 
 
                 <p> Consulter la page <a href="?controle=abonnes&action=appareils"; style="color:#00A8E8"> Appareils </a> pour gérer vos terminaux </p>
                 <p> Vous voulez changer de mot de passe ? </p>
-                <input type="text" class="form-control" placeholder="Votre mdp actuel" aria-label="Votre mdp actuel" aria-describedby="basic-addon2" style="border-radius:10px; width:30%">
-                <br>
-                <input type="text" class="form-control" placeholder="Votre nouveau mdp" aria-label="Votre nouveau mdp" aria-describedby="basic-addon2" style="border-radius:10px; width:30%">
-                <br>
-                <button class="btn btn-outline-secondary" type="button" style="background-color:#00A8E8; color:aliceblue; width:10em"> Modifier </button>
+				form
+
+				<form action="?controle=visiteurs&action=changeMdp" method="post" aria-describedby="basic-addon2" style="border-radius:10px; width:30%">
+
+					<div class="form-group">
+						<p><input name="baseMdp" type="text" class="form-control" placeholder="Mot de passe actuel" autocomplete="off"
+								required><br /></p>
+					</div>
+	
+					<div class="form-group">
+						<p><input name="mdpToChange" type="text" class="form-control" placeholder="Nouveau mot de passe" autocomplete="off"
+								required><br /></p>
+					</div>
+	
+					<div class="form-group">
+						<input type="submit" value="Changer mot de passe" class="btn btn-primary btn-block" style="background-color:#00A8E8">
+					</div>
+	
+				</form>
+			</div>
+		</div>
+	</div>
+</body>

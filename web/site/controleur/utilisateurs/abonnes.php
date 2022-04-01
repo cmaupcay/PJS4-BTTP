@@ -163,9 +163,9 @@ function mdpOublie(){
     require('./vue/abonnes/mdpOublie.tpl');
 }
 
-function changeMdp($pseudoToRescue, $mdpToChange){
+function changeMdp($mdpBase, $mdpToChange){
     require('./modele/utilisateur.php');
-    setMdp($pseudoToRescue, $mdpToChange);
+    setMdp($mdpBase, $mdpToChange);
     
 
     $url = "?controle=visiteurs&action=connexion";

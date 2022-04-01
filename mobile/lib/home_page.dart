@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, use_key_in_widget_constructors, prefer_const_constructors_in_immutables, unnecessary_this, prefer_final_fields, unnecessary_new
 
+import 'package:BTTP/welcome_page.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'dart:async';
 import 'dart:io';
@@ -94,19 +95,19 @@ class HomePageState extends State<HomePage> {
               icon: Icon(
                 Icons.search,
               ),
-              label: 'My Scripts',
+              label: 'Mes scripts',
             ),
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.shopping_cart_outlined,
               ),
-              label: 'Market place',
+              label: 'Marketplace',
             ),
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.account_circle_outlined,
               ),
-              label: 'Profile',
+              label: 'Profil',
             ),
           ],
           onTap: (int index) {
@@ -201,28 +202,28 @@ class MyScripts extends StatelessWidget {
 class FilScript extends StatelessWidget {
   final List scriptList = [
     {
-      'title': 'Script1',
+      'title': 'Eteindre',
       'terminal': 'Terminal 1',
-      'description': "lalalaalalalalalallalalaalalalal",
-      'variables': true,
-    },
-    {
-      'title': 'Script2',
-      'terminal': 'Terminal 3',
-      'description': "lalzelalalaalalalalalalalczczcl",
+      'description': "Permet d'éteindre un terminal à distance",
       'variables': false,
     },
     {
-      'title': 'Script3',
+      'title': 'Téléchargement',
+      'terminal': 'Terminal 1',
+      'description': "Permet de télécharger à partir d'une URL",
+      'variables': true,
+    },
+    {
+      'title': 'Chronomètre',
       'terminal': 'Terminal 2',
-      'description': "lacedcdcalalallalalaalalalalcddl",
+      'description': "Lance un chronomètre sur le terminal ",
       'variables': false,
     },
     {
-      'title': 'Script4',
-      'terminal': 'Terminal 1',
-      'description': "lyj,hkylaalalalalgfvdl",
-      'variables': true,
+      'title': 'GitPush',
+      'terminal': 'Terminal 2',
+      'description': "Permet de push sur GitHub",
+      'variables': false,
     }
   ];
   @override
@@ -301,7 +302,7 @@ class ScriptCard extends StatelessWidget {
                     showDialog(
                       context: context,
                       builder: (BuildContext context) =>
-                          _buildPopupDialog(context),
+                          _buildPopupLaunch(context),
                     );
                   },
                   icon: Icon(
@@ -318,28 +319,34 @@ class ScriptCard extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  scriptData['description'],
-                  style: GoogleFonts.raleway(
-                    color: isDarkMode ? darkMode.button : lightMode.textColor,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600,
+                Flexible(
+                  child: Text(
+                    scriptData['description'],
+                    maxLines: 2,
+                    style: GoogleFonts.raleway(
+                      color: isDarkMode ? darkMode.button : lightMode.textColor,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
-                IconButton(
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) =>
-                          _buildPopupDialog(context),
-                    );
-                  },
-                  icon: Icon(
-                    Icons.add_circle_outline_rounded,
-                    color: isDarkMode ? darkMode.button : lightMode.fond,
-                    size: 30,
+                Visibility(
+                  visible: scriptData['variables'],
+                  child: IconButton(
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) =>
+                            _buildPopupDl(context),
+                      );
+                    },
+                    icon: Icon(
+                      Icons.add_circle_outline_rounded,
+                      color: isDarkMode ? darkMode.button : lightMode.fond,
+                      size: 30,
+                    ),
                   ),
-                )
+                ),
               ],
             ),
           ),
@@ -349,14 +356,42 @@ class ScriptCard extends StatelessWidget {
   }
 }
 
-Widget _buildPopupDialog(BuildContext context) {
+Widget _buildPopupDl(BuildContext context) {
   return new AlertDialog(
-    title: const Text('Popup example'),
+    title: const Text('URL requis'),
+    content: TextField(
+      style: GoogleFonts.raleway(
+        color: textColorLight,
+      ),
+      cursorColor: textColorLight,
+      decoration: InputDecoration(
+        fillColor: Colors.white,
+        filled: true,
+        labelStyle: GoogleFonts.raleway(
+          color: textColorLight,
+        ),
+        labelText: 'URL',
+      ),
+    ),
+    actions: <Widget>[
+      new ElevatedButton(
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+        child: const Text('Fermer'),
+      ),
+    ],
+  );
+}
+
+Widget _buildPopupLaunch(BuildContext context) {
+  return new AlertDialog(
+    title: const Text('Execution script'),
     content: new Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text("Hello"),
+        Text("Script lancé avec succès"),
       ],
     ),
     actions: <Widget>[
@@ -364,7 +399,28 @@ Widget _buildPopupDialog(BuildContext context) {
         onPressed: () {
           Navigator.of(context).pop();
         },
-        child: const Text('Close'),
+        child: const Text('Fermer'),
+      ),
+    ],
+  );
+}
+
+Widget _buildPopupDialog(BuildContext context) {
+  return new AlertDialog(
+    title: const Text('Téléchargement'),
+    content: new Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text("Téléchargement du script lancé"),
+      ],
+    ),
+    actions: <Widget>[
+      new ElevatedButton(
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+        child: const Text('Fermer'),
       ),
     ],
   );
@@ -389,59 +445,54 @@ class MarketScript extends StatelessWidget {
 class MarketScriptCard extends StatelessWidget {
   final List marketScriptList = [
     {
-      'title': 'Script1',
-      'description': "lalalaalalalalalallalalaalalalal",
+      'title': 'Réception',
+      'description': "Permet d'envoyer un fichier du terminal au mobile",
       'variables': true,
     },
     {
-      'title': 'Script2',
-      'description': "lalzelalalaalalalalalalalczczcl",
+      'title': 'Supression',
+      'description': "Permet de supprimer des fichiers sur le terminal",
+      'variables': true,
+    },
+    {
+      'title': 'Impression',
+      'description': "Lance l'impression d'un fichier",
+      'variables': true,
+    },
+    {
+      'title': 'Mot de passe',
+      'description': "Gestionnaire de mots de passes",
+      'variables': true,
+    },
+    {
+      'title': 'Photo',
+      'description': "Utilisation webcam a distance",
       'variables': false,
     },
     {
-      'title': 'Script3',
-      'description': "lacedcdcalalallalalaalalalalcddl",
+      'title': 'Eteindre',
+      'description': "Permet d'éteindre un terminal à distance",
       'variables': false,
     },
     {
-      'title': 'Script4',
-      'description': "lyj,hkylaalalalalgfvdl",
+      'title': 'GitPush',
+      'description': "Permet de push sur GitHub",
+      'variables': false,
+    },
+    {
+      'title': 'GitPull',
+      'description': "Permet de pull sur GitHub",
+      'variables': false,
+    },
+    {
+      'title': 'Téléchargement',
+      'description': "Permet de télécharger à partir d'une URL",
       'variables': true,
     },
     {
-      'title': 'Script5',
-      'description': "lyj,hkylaalalalalgfvdl",
-      'variables': true,
-    },
-    {
-      'title': 'Script6',
-      'description': "lyj,hkylaalalalalgfvdl",
-      'variables': true,
-    },
-    {
-      'title': 'Script7',
-      'description': "lyj,hkylaalalalalgfvdl",
-      'variables': true,
-    },
-    {
-      'title': 'Script8',
-      'description': "lyj,hkylaalalalalgfvdl",
-      'variables': true,
-    },
-    {
-      'title': 'Script9',
-      'description': "lyj,hkylaalalalalgfvdl",
-      'variables': true,
-    },
-    {
-      'title': 'Script10',
-      'description': "lyj,hkylaalalalalgfvdl",
-      'variables': true,
-    },
-    {
-      'title': 'Script11',
-      'description': "lyj,hkylaalalalalgfvdl",
-      'variables': true,
+      'title': 'Chronomètre',
+      'description': "Lance un chronomètre sur le terminal ",
+      'variables': false,
     }
   ];
   @override
@@ -517,8 +568,8 @@ class MarketCard extends StatelessWidget {
                   onPressed: () {
                     showDialog(
                       context: context,
-                      builder: (BuildContext context) => _buildPopupDialogInfo(
-                          context, marketscriptData['description']),
+                      builder: (BuildContext context) =>
+                          _buildPopupDialog(context),
                     );
                   },
                   icon: Icon(
@@ -658,7 +709,13 @@ class MyProfile extends StatelessWidget {
                         color: isDarkMode ? darkMode.button : lightMode.bar,
                       )),
                   IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) =>
+                              _buildPopupDialogMDP(context),
+                        );
+                      },
                       icon: Icon(
                         Icons.lock,
                         color: isDarkMode ? darkMode.button : lightMode.bar,
@@ -679,7 +736,14 @@ class MyProfile extends StatelessWidget {
                         color: isDarkMode ? darkMode.button : lightMode.bar,
                       )),
                   IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => WelcomePage(),
+                          ),
+                        );
+                      },
                       icon: Icon(
                         Icons.logout_outlined,
                         color: isDarkMode ? darkMode.button : lightMode.bar,
@@ -691,6 +755,40 @@ class MyProfile extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildPopupDialogMDP(BuildContext context) {
+    return new AlertDialog(
+      title: const Text('Changer le mot de passe'),
+      content: TextField(
+        style: GoogleFonts.raleway(
+          color: textColorLight,
+        ),
+        cursorColor: textColorLight,
+        decoration: InputDecoration(
+          fillColor: Colors.white,
+          filled: true,
+          labelStyle: GoogleFonts.raleway(
+            color: textColorLight,
+          ),
+          labelText: 'Nouveau mot de passe',
+        ),
+      ),
+      actions: <Widget>[
+        new ElevatedButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child: const Text('Fermer'),
+        ),
+        new ElevatedButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child: const Text('Valider'),
+        ),
+      ],
     );
   }
 }

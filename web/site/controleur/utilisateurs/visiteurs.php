@@ -42,9 +42,9 @@ function inscription()
 
             verif_utilisateur($pseudo, $mdp);
 
-            //$_SESSION['profil'] = $resultat[0];
-
-            //require('./controle/connexion.php');
+            $_SESSION['pseudo'] = $pseudo;
+            $_SESSION['mdp'] = $mdp;
+            
 
             $url = "?controle=abonnes&action=accueil";
 

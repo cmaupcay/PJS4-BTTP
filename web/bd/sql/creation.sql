@@ -4,8 +4,7 @@ DROP TABLE IF EXISTS bttp.script;
 DROP TABLE IF EXISTS bttp.script_publique;
 DROP TABLE IF EXISTS bttp.categorie_script;
 DROP TABLE IF EXISTS bttp.format_script;
-DROP TABLE IF EXISTS bttp.terminal_distant;
-DROP TABLE IF EXISTS bttp.terminal_client;
+DROP TABLE IF EXISTS bttp.terminal;
 DROP TABLE IF EXISTS bttp.utilisateur;
 /* Suppression de la base existante */
 DROP DATABASE IF EXISTS bttp;
@@ -33,6 +32,7 @@ CREATE TABLE bttp.terminal (
     derniere_connexion DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, /* Date et heure de la dernière connexion avec le terminal */
     favori BOOLEAN NOT NULL DEFAULT 0, /* Indique si l'utilisateur a ajouté le terminal à ses favoris */
     meta VARCHAR(512) NOT NULL, /* Meta données du terminal au format JSON */
+    distant BOOLEAN NOT NULL DEFAULT 0,
     PRIMARY KEY(id),
     UNIQUE(cle_publique),
     FOREIGN KEY(id_proprietaire) REFERENCES bttp.utilisateur(id) ON DELETE CASCADE

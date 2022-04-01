@@ -30,10 +30,79 @@ namespace BTTP
 
                 const std::string empreinte = Client::Serveurs::Messages::ReponseEmpreinteCle(retour.clair()).data();
 
-                Journal::ecrire(BTTP_SERVEUR_COMPOSANT_SESSIONS_SESSION, empreinte);
+                std::vector<std::vector<Data::Argument>> rep;
 
-                //TODO verification empreinte dans la table
-        
+                std::vector<Data::Argument> select;
+                std::vector <Data::Argument> where;
+
+                Data::Argument arg;
+
+                arg.nom = "*";
+
+                Data::Argument arg2;
+
+                arg2.nom = "empreinte_cle_publique";
+                arg2.type = Data::Type::TEXTE;  
+                arg2.valeur = empreinte;
+
+                select.push_back(arg);
+                where.push_back(arg2);
+
+                if(this->source().get()->selectionner("terminal", select, where).size() == 0)
+                
+                {
+
+                    Journal::ecrire(BTTP_SERVEUR_COMPOSANT_SESSIONS_SESSION, "Nouvel utilisateur");
+
+                    const Protocole::Messages::Erreur erreur;
+
+                    this->connexion()->envoyer(erreur.construire());
+
+                    const Client::Serveurs::Messages::DemandeClePublique demandeCle;
+
+                    Journal::ecrire(BTTP_SERVEUR_COMPOSANT_SESSIONS_SESSION, "Demande clé publique");
+
+                    this->connexion()->envoyer(demandeCle.construire());
+
+                    const Protocole::Identite::MessageNonVerifie demandeNonVerifiee { this->connexion()->recevoir(), *this->contexte->identite().get(), mdp};
+                    
+                    Journal::ecrire(BTTP_SERVEUR_COMPOSANT_SESSIONS_SESSION, "Clé publique reçue");
+
+                    /*
+
+                    if (demandeNonVerifiee.clair()[0] == static_cast<char>(Protocole::Messages::Type::ERREUR))
+                    {
+                        const Protocole::Messages::Erreur erreur{ demandeNonVerifiee.clair() };
+                        throw BTTP::Erreur(erreur.nom(), erreur.message(), erreur.code());
+                    }            
+
+                    // Reception de la clé publique du client
+                    const Protocole::Cle::Publique cle = Client::Serveurs::Messages::ReponseClePublique(demandeNonVerifiee.clair()).cle();
+
+                    if(!demandeNonVerifiee.verifier(cle))
+                        return false;
+            
+
+                    // à partir de maintenant tous les échanges seront chiffrés et vérifiés
+                    const Protocole::Messages::Pret confirmation;
+
+                    this->connexion()->envoyer(this->contexte->identite()->chiffrer(confirmation.construire(), cle, mdp));
+                    /*
+                    const Client::Serveurs::Messages::DemandeUtilisateur demandeUtilisateur;
+
+                    //this->connexion()->envoyer(this->contexte->identite()->chiffrer(demandeUtilisateur.construire(), cle, mdp));
+
+                    //const Client::Serveurs::Messages::ReponseUtilisateur reponseUtilisateur { this->contexte->identite()->dechiffrer(this->connexion()->recevoir(), cle, mdp) };
+
+                    //std::string utilisateur = reponseUtilisateur.data();
+
+                    //Journal::ecrire(BTTP_SERVEUR_COMPOSANT_SESSIONS_SESSION, "Utilisateur : " + utilisateur);
+                    */
+                    
+                }
+
+
+
 
                 // TODO Verification de l'empreinte dans la table.
                 // TODO Si existante, authentification réussie (en cas de fraude, l'attaquant ne pourra pas déchiffrer les messages à moins de posséder la clé privéé).

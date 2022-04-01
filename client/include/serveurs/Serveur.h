@@ -7,6 +7,7 @@
 #include "messages/ReponseEmpreinteCle.h"
 #include "messages/ReponseUtilisateur.h"
 #include "messages/ReponseMotDePasse.h"
+#include "messages/ReponseClePublique.h"
 
 namespace BTTP
 {

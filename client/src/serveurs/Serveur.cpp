@@ -39,42 +39,60 @@ namespace BTTP
             {
                 // Si la clé du serveur est inconnue ou que l'appareil est déjà authentifié, on arrête là.
                 if (this->_cle == nullptr || this->_auth) return false;
-                // Réception de la demande du nom d'utilisateur.
-                Protocole::Messages::Demande demande{ 
-                    identite.dechiffrer(this->_connexion->recevoir(), *this->_cle, mdp)
-                };
-                if (demande.champs() == BTTP_DEMANDE_UTILISATEUR)
+
+                // Réception de la demande de clé publique
+                Protocole::Messages::Demande demandeCle { this->_connexion->recevoir()};
+
+                if(demandeCle.champs() == BTTP_DEMANDE_CLE_PUBLIQUE)
                 {
-                    // Envoi de la réponse contenant l'empreinte de la clé.
-                    const Messages::ReponseUtilisateur reponse{ utilisateur };
-                    this->_connexion->envoyer(
-                        identite.chiffrer(reponse.construire(), *this->_cle, mdp)
-                    );
+                    // Envoi de la réponse contenant la clé publique
+                    const Messages::ReponseClePublique reponseCle { identite.cle_publique() };
+                    this->_connexion->envoyer(identite.chiffrer(reponseCle.construire(), *this->_cle, mdp));
+
                     std::string confirmation = identite.dechiffrer(
-                        this->_connexion->recevoir(), *this->_cle, mdp
+                            this->_connexion->recevoir(), *this->_cle, mdp
                     );
-                    if (confirmation[0] == static_cast<char>(Protocole::Messages::Type::PRET))
+
+                    if(confirmation[0] == static_cast<char>(Protocole::Messages::Type::PRET))
                     {
-                        // Réception de la demande de mot de passe.
-                        demande.deconstruire(
-                            identite.dechiffrer(this->_connexion->recevoir(), *this->_cle ,mdp)
-                        );
-                        if (demande.champs() == BTTP_DEMANDE_MOT_DE_PASSE 
-                        && Messages::DemandeMotDePasse::extraire_utilisateur(&demande) == utilisateur)
+                        // Réception de la demande du nom d'utilisateur.
+                        Protocole::Messages::Demande demande{ 
+                            identite.dechiffrer(this->_connexion->recevoir(), *this->_cle, mdp)
+                        };
+                        if (demande.champs() == BTTP_DEMANDE_UTILISATEUR)
                         {
-                            // Envoi de la réponse contenant le mot de passe de l'utilisateur.
-                            const Messages::ReponseMotDePasse reponse_mdp{ mdp_utilisateur };
+                            // Envoi de la réponse contenant le pseudo de l'utilisateur
+                            const Messages::ReponseUtilisateur reponse{ utilisateur };
                             this->_connexion->envoyer(
-                                identite.chiffrer(reponse_mdp.construire(), *this->_cle, mdp)
+                                identite.chiffrer(reponse.construire(), *this->_cle, mdp)
                             );
-                            // Réception de la confirmation.
                             confirmation = identite.dechiffrer(
                                 this->_connexion->recevoir(), *this->_cle, mdp
                             );
                             if (confirmation[0] == static_cast<char>(Protocole::Messages::Type::PRET))
                             {
-                                this->_auth = true;
-                                return true;
+                                // Réception de la demande de mot de passe.
+                                demande.deconstruire(
+                                    identite.dechiffrer(this->_connexion->recevoir(), *this->_cle ,mdp)
+                                );
+                                if (demande.champs() == BTTP_DEMANDE_MOT_DE_PASSE 
+                                && Messages::DemandeMotDePasse::extraire_utilisateur(&demande) == utilisateur)
+                                {
+                                    // Envoi de la réponse contenant le mot de passe de l'utilisateur.
+                                    const Messages::ReponseMotDePasse reponse_mdp{ mdp_utilisateur };
+                                    this->_connexion->envoyer(
+                                        identite.chiffrer(reponse_mdp.construire(), *this->_cle, mdp)
+                                    );
+                                    // Réception de la confirmation.
+                                    confirmation = identite.dechiffrer(
+                                        this->_connexion->recevoir(), *this->_cle, mdp
+                                    );
+                                    if (confirmation[0] == static_cast<char>(Protocole::Messages::Type::PRET))
+                                    {
+                                        this->_auth = true;
+                                        return true;
+                                    }
+                                }
                             }
                         }
                     }
@@ -99,14 +117,19 @@ namespace BTTP
                     const Messages::ReponseEmpreinteCle reponse{ identite.cle_publique() };
                     this->_connexion->envoyer(identite.chiffrer(reponse.construire(), *this->_cle, mdp));
                     // Réception de la confirmation.
-                    const std::string confirmation = identite.dechiffrer(
-                        this->_connexion->recevoir(), *this->_cle, mdp
-                    );
-                    if (confirmation[0] == static_cast<char>(Protocole::Messages::Type::PRET))
+                    
+                    std::string confirmation = this->connexion().recevoir(); 
+
+                    if(confirmation[0] == static_cast<char>(Protocole::Messages::Type::PRET))
                     {
+
                         this->_auth = true;
+
                         return true;
+
                     }
+
+
                 }
                 return false;
             }

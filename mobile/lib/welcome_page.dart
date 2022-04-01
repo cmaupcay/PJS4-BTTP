@@ -42,7 +42,7 @@ class WelcomePage extends StatelessWidget {
                     bottom: 20,
                   ),
                   child: Text(
-                    "Découvrez la meilleure Application de gestion de script: BTTP",
+                    "Découvrez BTTP, un système d’inter opérabilité mobile - PC qui vous permet, à partir de votre smartphone, d’exécuter des scripts sur votre PC de destination à distance. ",
                     textAlign: TextAlign.center,
                     style: GoogleFonts.raleway(
                       color: textColorLight,

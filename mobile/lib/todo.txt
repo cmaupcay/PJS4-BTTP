@@ -18,3 +18,9 @@ finir register
 
 CHANGER POLICE BOOTSTRAP raleway OKK
 requete
+dl url 
+chronomètre temps écoulé depuis ouverture d'un terminal 
+push github
+éteindre pc
+
+

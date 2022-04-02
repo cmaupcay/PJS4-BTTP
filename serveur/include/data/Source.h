@@ -10,8 +10,8 @@
 #define BTTP_DATA_SQL_BASE "bttp"
 #define BTTP_DATA_SQL_HOTE "localhost"
 #define BTTP_DATA_SQL_PORT 3306
-#define BTTP_DATA_SQL_UTILISATEUR "root" // TODO Idenitifiant
-#define BTTP_DATA_SQL_MDP "" // TODO Mot de passe (voir comment le masquer eventuellement, ou le demander au demarrage ?)
+#define BTTP_DATA_SQL_UTILISATEUR "root"
+#define BTTP_DATA_SQL_MDP "" 
 
 namespace BTTP
 {

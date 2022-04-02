@@ -4,6 +4,8 @@
 #include "Gestionnaire.h"
 #include "../data/terminal/Distant.h"
 #include "../data/Source.h"
+#include "../data/Hash.h"
+
 #define BTTP_SERVEUR_COMPOSANT_SESSIONS_SESSION BTTP_SERVEUR_COMPOSANT_SESSIONS "Session"
 
 namespace BTTP

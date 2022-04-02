@@ -107,14 +107,14 @@ namespace BTTP
 
                     Journal::ecrire(BTTP_SERVEUR_COMPOSANT_SESSIONS_SESSION, "Identifiants récupérés");
 
-                    std::string mdpHash;
+                    std::string mdpHash = Data::Hash::sha256(mdpUtilisateur);
 
                     std::vector<Data::Argument> selection;
                     std::vector<Data::Argument> conditions;
 
                     selection.push_back(Data::Argument {"id", "", Data::Type::NOMBRE});
                     conditions.push_back(Data::Argument {"pseudo", utilisateur, Data::Type::TEXTE});
-                    conditions.push_back(Data::Argument {"mdp", mdpUtilisateur, Data::Type::TEXTE});
+                    conditions.push_back(Data::Argument {"mdp", mdpHash, Data::Type::TEXTE});
 
                     const std::vector<std::vector<Data::Argument>> resultat = this->source()->selectionner("utilisateur", selection, conditions);
 

@@ -12,7 +12,7 @@ include(${CMAKE_CURRENT_LIST_DIR}/../client/CMakeLists.txt)
 # CONSTANTES
 set(BTTP_SERVEUR ${BTTP}-srv) # Nom du projet CMake
 set(BTTP_SERVEUR_VERSION 0.0.2) # Version du serveur
-set(BTTP_SERVEUR_DEP ${BTTP_CLIENT_LIB} mysqlcppconn) # Dépendances
+set(BTTP_SERVEUR_DEP ${BTTP_CLIENT_LIB} mysqlcppconn crypto) # Dépendances
 set(BTTP_SERVEUR_RACINE ${CMAKE_CURRENT_LIST_DIR}/include/Racine.h) # En-tête racine (fichier de configuration)
 set(BTTP_SERVEUR_MAIN ${CMAKE_CURRENT_LIST_DIR}/src/bttp-srv.cpp)
 

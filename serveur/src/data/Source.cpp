@@ -144,7 +144,7 @@ namespace BTTP
 
                 }
 
-                declaration->execute();
+                declaration->execute(); // TODO Erreur si false renvoyé
 
 
             }

@@ -19,36 +19,26 @@ namespace BTTP
 
                 Journal::ecrire(BTTP_SERVEUR_COMPOSANT_SESSIONS_SESSION, "En attente de l'empreinte du client.");
 
-                const Protocole::Identite::MessageNonVerifie retour { 
+                const Protocole::Identite::MessageNonVerifie retourEmpreinte { 
                     this->connexion()->recevoir(), *this->contexte->identite().get(), mdp
                 };
-                if (retour.clair()[0] == static_cast<char>(Protocole::Messages::Type::ERREUR))
+                if (retourEmpreinte.clair()[0] == static_cast<char>(Protocole::Messages::Type::ERREUR))
                 {
-                    const Protocole::Messages::Erreur erreur{ retour.clair() };
+                    const Protocole::Messages::Erreur erreur{ retourEmpreinte.clair() };
                     throw BTTP::Erreur(erreur.nom(), erreur.message(), erreur.code());
                 }
 
-                const std::string empreinte = Client::Serveurs::Messages::ReponseEmpreinteCle(retour.clair()).data();
+                const std::string empreinte = Client::Serveurs::Messages::ReponseEmpreinteCle(retourEmpreinte.clair()).data();
 
                 std::vector<std::vector<Data::Argument>> rep;
 
                 std::vector<Data::Argument> select;
                 std::vector <Data::Argument> where;
 
-                Data::Argument arg;
+                select.push_back(Data::Argument {"*"});
+                where.push_back(Data::Argument {"empreinte_cle_publique", empreinte, Data::Type::TEXTE});
 
-                arg.nom = "*";
-
-                Data::Argument arg2;
-
-                arg2.nom = "empreinte_cle_publique";
-                arg2.type = Data::Type::TEXTE;  
-                arg2.valeur = empreinte;
-
-                select.push_back(arg);
-                where.push_back(arg2);
-
-                if(this->source().get()->selectionner("terminal", select, where).size() == 0)
+                if(this->source()->selectionner("terminal", select, where).size() == 0)
                 
                 {
 
@@ -58,23 +48,25 @@ namespace BTTP
 
                     this->connexion()->envoyer(erreur.construire());
 
+                    const Protocole::Identite::MessageNonVerifie pret { 
+                        this->connexion()->recevoir(), *this->contexte->identite().get(), mdp
+                    };
+                    
+                    if (pret.clair()[0] == static_cast<char>(Protocole::Messages::Type::ERREUR))
+                    {
+                        const Protocole::Messages::Erreur erreur{ pret.clair() };
+                        throw BTTP::Erreur(erreur.nom(), erreur.message(), erreur.code());
+                    }            
+
                     const Client::Serveurs::Messages::DemandeClePublique demandeCle;
 
-                    Journal::ecrire(BTTP_SERVEUR_COMPOSANT_SESSIONS_SESSION, "Demande clé publique");
-
                     this->connexion()->envoyer(demandeCle.construire());
+
+                    Journal::ecrire(BTTP_SERVEUR_COMPOSANT_SESSIONS_SESSION, "Demande clé publique");
 
                     const Protocole::Identite::MessageNonVerifie demandeNonVerifiee { this->connexion()->recevoir(), *this->contexte->identite().get(), mdp};
                     
                     Journal::ecrire(BTTP_SERVEUR_COMPOSANT_SESSIONS_SESSION, "Clé publique reçue");
-
-                    /*
-
-                    if (demandeNonVerifiee.clair()[0] == static_cast<char>(Protocole::Messages::Type::ERREUR))
-                    {
-                        const Protocole::Messages::Erreur erreur{ demandeNonVerifiee.clair() };
-                        throw BTTP::Erreur(erreur.nom(), erreur.message(), erreur.code());
-                    }            
 
                     // Reception de la clé publique du client
                     const Protocole::Cle::Publique cle = Client::Serveurs::Messages::ReponseClePublique(demandeNonVerifiee.clair()).cle();
@@ -82,32 +74,99 @@ namespace BTTP
                     if(!demandeNonVerifiee.verifier(cle))
                         return false;
             
-
                     // à partir de maintenant tous les échanges seront chiffrés et vérifiés
                     const Protocole::Messages::Pret confirmation;
-
                     this->connexion()->envoyer(this->contexte->identite()->chiffrer(confirmation.construire(), cle, mdp));
-                    /*
+    
+                    // envoi de la demande de l'utilisateur
                     const Client::Serveurs::Messages::DemandeUtilisateur demandeUtilisateur;
+                    this->connexion()->envoyer(this->contexte->identite()->chiffrer(demandeUtilisateur.construire(), cle, mdp));
+                    
+                    // Reception de l'utilisateur
+                    const Client::Serveurs::Messages::ReponseUtilisateur reponseUtilisateur { this->contexte->identite()->dechiffrer(this->connexion()->recevoir(), cle, mdp) };
 
-                    //this->connexion()->envoyer(this->contexte->identite()->chiffrer(demandeUtilisateur.construire(), cle, mdp));
+                    Protocole::Messages::Reponse reponse;
 
-                    //const Client::Serveurs::Messages::ReponseUtilisateur reponseUtilisateur { this->contexte->identite()->dechiffrer(this->connexion()->recevoir(), cle, mdp) };
+                    reponse.deconstruire(reponseUtilisateur.data());
 
-                    //std::string utilisateur = reponseUtilisateur.data();
+                    const std::string utilisateur = reponse.data();
 
-                    //Journal::ecrire(BTTP_SERVEUR_COMPOSANT_SESSIONS_SESSION, "Utilisateur : " + utilisateur);
-                    */
+                    // Envoi de la confirmation
+                    this->connexion()->envoyer(this->contexte->identite()->chiffrer(confirmation.construire(), cle, mdp));
+
+                    // Envoi de la demande de mot de passe
+                    const Client::Serveurs::Messages::DemandeMotDePasse demandeMDP { utilisateur };
+                    this->connexion()->envoyer(this->contexte->identite()->chiffrer(demandeMDP.construire(), cle, mdp));
+
+                    // Reception du mot de passe
+                    const Client::Serveurs::Messages::ReponseMotDePasse reponseMDP { this->contexte->identite()->dechiffrer(this->connexion()->recevoir(), cle, mdp)};
+
+                    reponse.deconstruire(reponseMDP.data());
+
+                    const std::string mdpUtilisateur = reponse.data();
+
+                    Journal::ecrire(BTTP_SERVEUR_COMPOSANT_SESSIONS_SESSION, "Identifiants récupérés");
+
+                    std::string mdpHash;
+
+                    std::vector<Data::Argument> selection;
+                    std::vector<Data::Argument> conditions;
+
+                    selection.push_back(Data::Argument {"id", "", Data::Type::NOMBRE});
+                    conditions.push_back(Data::Argument {"pseudo", utilisateur, Data::Type::TEXTE});
+                    conditions.push_back(Data::Argument {"mdp", mdpUtilisateur, Data::Type::TEXTE});
+
+                    const std::vector<std::vector<Data::Argument>> resultat = this->source()->selectionner("utilisateur", selection, conditions);
+
+                    if(resultat.size() > 0)
+                        this->connexion()->envoyer(this->contexte->identite()->chiffrer(confirmation.construire(), cle, mdp));
+                    else
+                    {
+                        Protocole::Messages::Erreur erreur;
+
+                        this->connexion()->envoyer(this->contexte->identite()->chiffrer(erreur.construire(), cle, mdp));
+                        return false;
+
+                    }
+
+                    std::vector<Data::Argument> selectionInser;
+
+                    selectionInser.push_back(Data::Argument {"cle_publique", cle.exporter(), Data::Type::TEXTE});
+                    selectionInser.push_back(Data::Argument {"empreinte_cle_publique", cle.empreinte(), Data::Type::TEXTE});
+                    selectionInser.push_back(Data::Argument {"nom", "terminal 1", Data::Type::TEXTE});
+                    selectionInser.push_back(Data::Argument {"disponible", "1", Data::Type::NOMBRE});
+                    selectionInser.push_back(Data::Argument {"id_proprietaire", resultat.at(0).at(0).valeur, Data::Type::NOMBRE});
+                    selectionInser.push_back(Data::Argument {"meta", "informations additionnelles", Data::Type::TEXTE});
+
+                    this->source()->inserer("terminal", selectionInser);
+
+                    Journal::ecrire(BTTP_SERVEUR_COMPOSANT_SESSIONS_SESSION, "Insertion du terminal effectuée");
+
+                    return true;
                     
                 }
+                else
+                {
+                    Journal::ecrire(BTTP_SERVEUR_COMPOSANT_SESSIONS_SESSION, "Appareil connu.");
+                    std::vector<Data::Argument> selection;
+                    std::vector<Data::Argument> conditions;
 
+                    selection.push_back(Data::Argument {"cle_publique", "", Data::Type::TEXTE});
+                    conditions.push_back(Data::Argument {"empreinte_cle_publique", empreinte, Data::Type::TEXTE});
 
+                    // On récupère la clé publique associée à l'empreinte
+                    Protocole::Cle::Publique cle {this->source()->selectionner("terminal", selection, conditions).at(0).at(0).valeur};
+                    
+                    // On vérifie si le message provient bien de celui qu'il prétend être
+                    if(!retourEmpreinte.verifier(cle))
+                        return false;
 
+                    Journal::ecrire(BTTP_SERVEUR_COMPOSANT_SESSIONS_SESSION, "Appareil vérifié.");
 
-                // TODO Verification de l'empreinte dans la table.
-                // TODO Si existante, authentification réussie (en cas de fraude, l'attaquant ne pourra pas déchiffrer les messages à moins de posséder la clé privéé).
-                // TODO Si inexistante, authentification par compte (utilisateur/mot de passe).
-                // TODO Ajout en base.
+                    return true; 
+
+                }
+
                 return false;
             }
 

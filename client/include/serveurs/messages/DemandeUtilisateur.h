@@ -18,7 +18,7 @@ namespace BTTP
                 {
                 public:
                     DemandeUtilisateur()
-                        : Protocole::Messages::Demande(BTTP_DEMANDE_UTILISATEUR)
+                        : Protocole::Messages::Demande(BTTP_DEMANDE_UTILISATEUR, {})
                     {}
                 };
             }

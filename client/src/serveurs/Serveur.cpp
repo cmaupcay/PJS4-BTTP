@@ -40,6 +40,11 @@ namespace BTTP
                 // Si la clé du serveur est inconnue ou que l'appareil est déjà authentifié, on arrête là.
                 if (this->_cle == nullptr || this->_auth) return false;
 
+                Protocole::Messages::Pret pret;
+
+                // Envoi au serveur qu'il est prêt
+                this->_connexion->envoyer(identite.chiffrer(pret.construire(), *this->_cle, mdp));
+
                 // Réception de la demande de clé publique
                 Protocole::Messages::Demande demandeCle { this->_connexion->recevoir()};
 

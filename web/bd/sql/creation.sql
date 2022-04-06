@@ -23,7 +23,7 @@ CREATE TABLE bttp.utilisateur (
 
 CREATE TABLE bttp.terminal (
     id INT AUTO_INCREMENT, /* Identifiant numérique unique du terminal */
-    cle_publique VARCHAR(1024) NOT NULL, /* Clé publique propre au terminal */
+    cle_publique VARCHAR(4096) NOT NULL, /* Clé publique propre au terminal */
     empreinte_cle_publique VARCHAR(64) NOT NULL, /* Empreinte (long KeyID) de la clé publique. */
     nom VARCHAR(64) NOT NULL, /* Nom du terminal */
     disponible BOOLEAN NOT NULL DEFAULT 0, /* Indique si le terminal est disponible pour une transaction */
